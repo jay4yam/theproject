@@ -10,11 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
+    // Recupère le premier segment de l'url ete definis une valeur par défaut ici le 'FR'
+    $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
+
+    //Applique la valeur de la variable langue 'locale' au site
+    App::setLocale( $locale );
+
+    //Affiche la home page
+    Route::get('/', 'HomeController@index')->name('home');
+});
