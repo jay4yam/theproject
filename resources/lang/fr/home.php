@@ -34,7 +34,7 @@ return [
     'supercopter_partenaires' => 'Sélection des compagnies',
     'supercopter_partenaires_text' => 'Nous ne sélection que les entreprises disposant d\'une bonne réputation avec des avis positifs.',
 
-    'supercopter_pricing' => 'Meilleurs prix garanti',
+    'supercopter_pricing' => 'Meilleurs prix garantis',
     'supercopter_pricing_text' => 'Nous vous garantissons un accueil et un confort VIP et une sécurité optimale à un prix abordable.',
 
 

@@ -189,7 +189,7 @@
                             <div class="col-md-7">
                                 <div class="modal-body-column-content">
                                     <div class="team-member">
-                                        <div class="team-member-img-wrap d-md-none"><img class="rounded-circle img-responsive center-block" src="images/users/user-01-100x100.jpg" width="100" height="100" alt=""></div>
+                                        <div class="team-member-img-wrap d-md-none"><img class="rounded-circle img-responsive center-block" src="/images/users/user-01-100x100.jpg" width="100" height="100" alt=""></div>
                                         <div class="team-member-title text-small text-ubold text-uppercase text-spacing-200 text-black">James Smith</div>
                                         <div class="team-member-description text-spacing-300 font-italic text-uppercase text-silver-chalice">Taxi driver & traveler</div>
                                         <div class="team-member-scroll-section">

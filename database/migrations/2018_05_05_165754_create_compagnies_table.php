@@ -26,6 +26,8 @@ class CreateCompagniesTable extends Migration
             $table->text('baseline');
             $table->text('intro');
             $table->text('presentation');
+            $table->string('logo');
+            $table->string('background_image');
             $table->timestamps();
         });
     }

@@ -19,6 +19,8 @@ class Compagnie extends Model
         'num_licence',
         'baseline',
         'intro',
-        'presentation'
+        'presentation',
+        'logo',
+        'background_image'
     ];
 }

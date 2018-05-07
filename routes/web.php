@@ -12,8 +12,6 @@
 */
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-
 Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     // Recupère le premier segment de l'url ete definis une valeur par défaut ici le 'FR'
     $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
@@ -23,4 +21,10 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
 
     //Affiche la home page
     Route::get('/', 'HomeController@index')->name('home');
+});
+
+Route::group(['prefix' => '/fr/admin/', 'namespace' => 'Back'], function( ) {
+
+    //Affiche la home page
+    Route::resource('/compagny', 'CompagnyController');
 });
