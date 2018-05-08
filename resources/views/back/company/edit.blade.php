@@ -1,5 +1,9 @@
 @extends('layouts.back')
 
+@section('dedicated_css')
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <!-- Destinations-->
     <section class="section-80 bg-wild-wand">
@@ -12,19 +16,20 @@
                             <!-- RD Search Form-->
                             <h1 class="admin">Finalisez l'insertion</h1>
                         </div>
-                        <div class="box-search-body text-left">
+                        <div class="box-search-body nopt text-left">
 
                             {{ Form::model($compagnie, ['route' => ['compagny.update', $compagnie->id], 'files' => true, 'method' => 'PATCH', 'class' => 'createform']) }}
                             <div class="row">
+                                <!-- 1er col -->
                                 <div class="col-md-6">
 
-                                <div class="form-group {!! $errors->has('raison_sociale') ? 'has-error' : '' !!}">
+                                <div class="form-group flex-column {!! $errors->has('raison_sociale') ? 'has-error' : '' !!}">
                                 {{ Form::label('raison_sociale', 'RAISON SOCIALE :') }}
                                 {{ Form::text('raison_sociale', $compagnie->raison_sociale, ['class' => 'form-control']) }}
                                 {!! $errors->first('raison_sociale', '<small class="help-block">:message</small>') !!}
                             </div>
 
-                                <div class="form-group {!! $errors->has('adresse') ? 'has-error' : '' !!}">
+                                <div class="form-group flex-column {!! $errors->has('adresse') ? 'has-error' : '' !!}">
                                 {{ Form::label('adresse', 'ADRESSE :') }}
                                 {{ Form::text('adresse', $compagnie->adresse, ['class' => 'form-control']) }}
                                 {!! $errors->first('adresse', '<small class="help-block">:message</small>') !!}
@@ -60,12 +65,12 @@
 
                                 <div class="form-group ptb-10">
                                 <div class="form-1-column  {!! $errors->has('mail_resa') ? 'has-error' : '' !!}">
-                                    {{ Form::label('mail_resa', 'EMAIL UTILISE POUR LES RESERVATIONS :') }}
+                                    {{ Form::label('mail_resa', 'EMAIL RESERVATIONS :') }}
                                     {{ Form::text('mail_resa', $compagnie->mail_resa, ['class' => 'form-control']) }}
                                     {!! $errors->first('mail_resa', '<small class="help-block">:message</small>') !!}
                                 </div>
                                 <div class="form-2-column">
-                                    <p class="pt-45">C'est cette adresse e-mail qui sera toujours utilisée pour les réservations</p>
+                                    <p class="marginAuto"><small>C'est cette adresse e-mail qui sera toujours utilisée pour les réservations</small></p>
                                 </div>
                             </div>
                                 <div class="clearfix"></div>
@@ -77,51 +82,65 @@
                                     {!! $errors->first('num_licence', '<small class="help-block">:message</small>') !!}
                                 </div>
                                 <div class="form-2-column">
-                                    <p class="pt-45">
-                                        Numéro de licence obligatoire, il sera vérifié par nos équipes.
+                                    <p class="marginAuto">
+                                        <small>Numéro de licence obligatoire, il sera vérifié par nos équipes.</small>
                                     </p>
                                 </div>
                             </div>
                                 <div class="clearfix"></div>
 
                             </div>
-
+                                <!-- 2em col -->
                                 <div class="col-md-6">
-                                    <div class="form-group {!! $errors->has('baseline') ? 'has-error' : '' !!}">
+                                    <div class="form-group flex-column {!! $errors->has('baseline') ? 'has-error' : '' !!}">
                                         {{ Form::label('baseline', 'BASELINE  :') }}
                                         {{ Form::text('baseline', $compagnie->baseline, ['class' => 'form-control']) }}
                                         {!! $errors->first('baseline', '<small class="help-block">:message</small>') !!}
                                     </div>
 
-                                    <div class="form-group {!! $errors->has('intro') ? 'has-error' : '' !!}">
+                                    <div class="form-group flex-column {!! $errors->has('intro') ? 'has-error' : '' !!}">
                                         {{ Form::label('intro', 'INTRO  :') }}
                                         {{ Form::text('intro', $compagnie->intro, ['class' => 'form-control']) }}
                                         {!! $errors->first('intro', '<small class="help-block">:message</small>') !!}
                                     </div>
 
-                                    <div class="form-group {!! $errors->has('presentation') ? 'has-error' : '' !!}">
+                                    <div class="form-group flex-column {!! $errors->has('presentation') ? 'has-error' : '' !!}">
                                         {{ Form::label('presentation', 'PRESENTATION  :') }}
-                                        {{ Form::textarea('presentation', $compagnie->presentation, ['class' => 'form-control']) }}
+                                        {{ Form::textarea('presentation', $compagnie->presentation, ['class' => 'form-control', 'id' => 'wysiwyg']) }}
                                         {!! $errors->first('presentation', '<small class="help-block">:message</small>') !!}
                                     </div>
+                                </div>
 
-                                    <div class="form-group {!! $errors->has('logo') ? 'has-error' : '' !!}">
-                                        {{ Form::label('logo', 'LOGO  :') }}
-                                        {{ Form::file('logo', ['class' => 'form-control']) }}
-                                        {!! $errors->first('logo', '<small class="help-block">:message</small>') !!}
-                                    </div>
+                                <!-- Row logo & background -->
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <!-- col logo -->
+                                        <div class="col-md-6">
+                                            <img id="image" src="/storage/{{ @$compagnie->logo }}" height="130px">
+                                            <div class="form-group flex-column {!! $errors->has('logo') ? 'has-error' : '' !!}">
+                                                {{ Form::label('logo', 'LOGO  :') }}
+                                                {{ Form::file('logo', ['class' => 'form-control']) }}
+                                                {!! $errors->first('logo', '<small class="help-block">:message</small>') !!}
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group {!! $errors->has('logo') ? 'has-error' : '' !!}">
-                                        {{ Form::label('background_image', 'ARRIERE PLAN :') }}
-                                        {{ Form::file('background_image', ['class' => 'form-control']) }}
-                                        {!! $errors->first('background_image', '<small class="help-block">:message</small>') !!}
+                                        <!-- col background-image -->
+                                        <div class="col-md-6">
+                                            <img id="image2" src="/storage/{{ @$compagnie->background_image }}" height="130px">
+                                            <div class="form-group flex-column {!! $errors->has('logo') ? 'has-error' : '' !!}">
+                                                {{ Form::label('background_image', 'ARRIERE PLAN :') }}
+                                                {{ Form::file('background_image', ['class' => 'form-control']) }}
+                                                {!! $errors->first('background_image', '<small class="help-block">:message</small>') !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                            <div class="form-group text-center pt-45">
+                            <div class="form-group align-center pt-45">
                                 <button class="button button-primary" title="enregistrer" type="submit">
-                                    Finalisez l'inscription
+                                    Enregistrer
                                 </button>
                             </div>
                             {{ Form::close() }}
@@ -131,4 +150,26 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('dedicated_js')
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=bc7n096vwltba48ltvrnae4ya1bijl4g9yduphn5lp9kl2o9"></script>
+    <script>
+        $(document).ready(function (){
+            tinymce.init({
+                selector: 'textarea',
+                height: 200,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor textcolor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code help wordcount'
+                ],
+                toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                    '//www.tinymce.com/css/codepen.min.css']
+            });
+        });
+    </script>
 @endsection

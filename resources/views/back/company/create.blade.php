@@ -15,13 +15,13 @@
                         <div class="box-search-body text-left">
                             {{ Form::open(['route' => [ 'compagny.store'] , 'class' => 'createform']) }}
 
-                            <div class="form-group {!! $errors->has('raison_sociale') ? 'has-error' : '' !!}">
+                            <div class="form-group flex-column {!! $errors->has('raison_sociale') ? 'has-error' : '' !!}">
                                 {{ Form::label('raison_sociale', 'RAISON SOCIALE :') }}
                                 {{ Form::text('raison_sociale', null, ['class' => 'form-control']) }}
                                 {!! $errors->first('raison_sociale', '<small class="help-block">:message</small>') !!}
                             </div>
 
-                            <div class="form-group {!! $errors->has('adresse') ? 'has-error' : '' !!}">
+                            <div class="form-group flex-column {!! $errors->has('adresse') ? 'has-error' : '' !!}">
                                 {{ Form::label('adresse', 'ADRESSE :') }}
                                 {{ Form::text('adresse', null, ['class' => 'form-control']) }}
                                 {!! $errors->first('adresse', '<small class="help-block">:message</small>') !!}
@@ -39,7 +39,7 @@
                                 {!! $errors->first('ville', '<small class="help-block">:message</small>') !!}
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
+
                             <div class="form-group ptb-10">
                                 <div class="form-1-column  {!! $errors->has('telephone') ? 'has-error' : '' !!}">
                                     {{ Form::label('telephone', 'TELEPHONE :') }}
@@ -52,7 +52,7 @@
                                     {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
+
                             <div class="form-group ptb-10">
                                 <div class="form-1-column  {!! $errors->has('mail_resa') ? 'has-error' : '' !!}">
                                     {{ Form::label('mail_resa', 'EMAIL UTILISE POUR LES RESERVATIONS :') }}
@@ -60,10 +60,10 @@
                                     {!! $errors->first('mail_resa', '<small class="help-block">:message</small>') !!}
                                 </div>
                                 <div class="form-2-column">
-                                    <p class="pt-45">C'est cette adresse e-mail qui sera toujours utilisée pour les réservations</p>
+                                    <p class="marginAuto">C'est cette adresse e-mail qui sera toujours utilisée pour les réservations</p>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
+
                             <div class="form-group">
                                 <div class="form-1-column  {!! $errors->has('num_licence') ? 'has-error' : '' !!}">
                                     {{ Form::label('num_licence', 'NUMERO DE LICENCE :') }}
@@ -71,14 +71,13 @@
                                     {!! $errors->first('num_licence', '<small class="help-block">:message</small>') !!}
                                 </div>
                                 <div class="form-2-column">
-                                    <p class="pt-45">
+                                    <p class="marginAuto">
                                         Numéro de licence obligatoire, il sera vérifié par nos équipes.
                                     </p>
                                 </div>
                             </div>
 
-                            <div class="clearfix"></div>
-                            <div class="form-group text-center pt-45">
+                            <div class="form-group align-center pt-45">
                                 <button class="button button-primary" title="enregistrer" type="submit">
                                     Enregistrer
                                 </button>

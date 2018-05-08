@@ -55,7 +55,7 @@
                             <!-- RD Navbar Nav-->
                             <ul class="rd-navbar-nav">
                                 <li class="active">
-                                    <a href="{{ url('/') }}">Home</a>
+                                    <a href="{{ url('/fr/') }}">Home</a>
                                 </li>
                                 <li><a href="tours-grid.html">Tours</a>
                                     <!-- RD Navbar Dropdown-->

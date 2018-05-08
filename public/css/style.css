@@ -9936,7 +9936,7 @@ hr {
 
 img {
   display: inline-block;
-  height: auto;
+  /*height: auto;*/
   max-width: 100%; }
 
 .img-semi-transparent-inverse {
@@ -20349,6 +20349,17 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 
 
 /* MES AJOUTS DE CSS */
+.flash-message{
+  position: absolute;
+  width: 78%;
+  height: 60px;
+  top: 5.0%;
+  left: 11%;
+  z-index: 9999;
+  margin: 0 auto;
+}
+.form-group{display: flex;}
+.flex-column{ flex-direction: column;}
 h1.admin{
   color: #FFFFFF;
   font-size: 24px;
@@ -20359,19 +20370,25 @@ h1.admin{
 
 .ptb-10{  padding: 10px 0;  }
 .pt-45{ padding-top: 45px; }
+.marginAuto{ margin: auto 0;}
 
 
 a.white{color: #FFFFFF;}
 
+.align-center{
+  justify-content: center;
+  align-items: center;
+}
+
 .form-1-column{
   width: 50%;
-  float: left;
   padding: 0 10px 0 0;
 }
 
 .form-2-column{
   width: 50%;
-  float: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .img-back{
@@ -20381,3 +20398,10 @@ a.white{color: #FFFFFF;}
 .createform input{
   background-color: #f3f3f3;
 }
+
+.note-editable{
+  background-color: #f3f3f3!important;
+}
+
+.nopt{
+  padding: 1px 40px !important; }

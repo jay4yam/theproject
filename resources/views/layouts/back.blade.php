@@ -14,9 +14,13 @@
     <link rel="icon" href="{{ asset('/images/favicon.ico') }}" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i">
-    <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <!-- dedicated Css for a specific view -->
+    @yield('dedicated_css')
 
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -29,6 +33,8 @@
 <body>
 <!-- ALL PAGES -->
 <div class="page text-center">
+    @include('flash.flash')
+
     <!-- AllPages Header-->
     <header class="page-header">
         <!-- RD Navbar-->
@@ -165,8 +171,11 @@
             </nav>
         </div>
     </header>
+
     <!-- Yield -->
-@yield('content')
+    @yield('content')
+
+
 
 
     <!-- Footer-->
@@ -196,10 +205,19 @@
     </footer>
 </div>
 
-<!-- Java script-->
-
+<!-- Javascript-->
 <script src="{{ asset('js/core.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<!-- modal flash message -->
+<script>
+    $(document).ready(function () {
+        $('#flash-overlay-modal').modal();
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    });
+</script>
+<!-- dedicated Javascript for a specific view -->
+@yield('dedicated_js')
 </body>
 </html>

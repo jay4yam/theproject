@@ -33,7 +33,18 @@ class CompagnyController extends Controller
      */
     public function index()
     {
-        $allCompagnies = $this->companyRepository->getAll();
+        //on essaye de récuperer toutes les compagnies
+        try {
+
+            $allCompagnies = $this->companyRepository->getAll();
+
+        }catch (\Exception $exception){
+
+            //si il y a une exception, redirige page précedente avec un message d'erreur
+            flash()->error($exception->getMessage());
+
+            return back();
+        }
         return view ('back.company.index', compact('allCompagnies'));
     }
 
@@ -53,7 +64,19 @@ class CompagnyController extends Controller
      */
     public function store(CreateCompanyStep1Request $request)
     {
-        $compagnie = $this->companyRepository->store($request);
+        //on essaye d'enregistrer une nouvelle compagnie
+        try {
+            $compagnie = $this->companyRepository->store($request);
+
+        }catch (\Exception $exception){
+
+            //si il y a une exception on redirige vers la page précédente avec un message d'erreur
+            flash()->error($exception->getMessage());
+
+            return back()->withInput();
+        }
+
+        flash()->success('Compagnie crée avec succès');
 
         return redirect()->route('compagny.edit', ['compagnie' => $compagnie->id]);
     }
@@ -65,8 +88,16 @@ class CompagnyController extends Controller
      */
     public function edit($id)
     {
-        $compagnie = $this->companyRepository->getById($id);
+        //On essaye de recuperer une compagnie via son id
+        try {
+            $compagnie = $this->companyRepository->getById($id);
 
+        }catch (\Exception $exception) {
+            //Si il y une exception on redirige vers la page précédente avec un message d'erreur
+            flash()->error($exception->getMessage());
+
+            return back();
+        }
         return view('back.company.edit', compact('compagnie'));
     }
 
@@ -78,7 +109,20 @@ class CompagnyController extends Controller
      */
     public function update(CreateCompanyStep2Request $request,$id)
     {
-        $this->companyRepository->update($request, $id);
+        //On essaye de mettre à jour le model
+        try {
+
+            $this->companyRepository->update($request, $id);
+
+        }catch (\Exception $exception){
+            //si il y a une exception on retourne à la page précédente avec un message d'erreur
+            flash()->error($exception->getMessage());
+
+            return back()->withInput();
+        }
+
+        //si on est là, c'est que l'update est OK, on renvois un message success
+        flash()->success('Enregistrement effectué avec succes');
 
         return redirect()->route('compagny.index');
     }

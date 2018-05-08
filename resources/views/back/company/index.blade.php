@@ -1,11 +1,14 @@
 @extends('layouts.back')
 
+@section('dedicated_css')
+@endsection
+
 @section('content')
     <!-- Destinations-->
     <section class="section-80 bg-wild-wand">
         <div class="container container-custom">
             <div class="row justify-content-sm-center">
-                <div class="col-md-10 col-lg-12">
+                <div class="col-md-12 col-lg-12">
                     <!-- Box-->
                     <div class="box box-search bg-default d-block">
                         <div class="box-search-wrap">
@@ -19,7 +22,7 @@
                             </h1>
                         </div>
                         <div class="box-search-body text-left">
-                            <table class="table">
+                            <table class="table table-striped table-responsive-sm">
                                 <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -33,7 +36,7 @@
                                 <tbody>
                                     @foreach($allCompagnies as $compagny)
                                         <tr>
-                                            <td>{{ $compagny->id }}</td>
+                                            <td scope="row">{{ $compagny->id }}</td>
                                             <td>
                                                 <img class="img-back img-responsive" src="/storage/{{ $compagny->logo }}">
                                             </td>
