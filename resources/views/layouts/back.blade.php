@@ -64,9 +64,13 @@
                             <li>
                                 <a href="{{ url('/') }}">Dashboard</a>
                             </li>
-                            <li><a href="/{{ \App::getLocale() }}/admin/compagny">Compagnies</a>
+                            <li><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>
+                                <ul class="rd-navbar-dropdown">
+                                    <li><a href="/{{ App::getLocale() }}/admin/compagnies">Liste</a></li>
+                                    <li><a href="/{{ App::getLocale() }}/admin/compagnies/create">Ajouter</a></li>
+                                </ul>
                             </li>
-                            <li><a href="about.html">About</a>
+                            <li><a href="about.html">Utilisateurs</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="our-team.html">Our Team</a></li>
@@ -174,8 +178,6 @@
 
     <!-- Yield -->
     @yield('content')
-
-
 
 
     <!-- Footer-->

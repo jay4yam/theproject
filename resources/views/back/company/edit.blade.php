@@ -18,7 +18,7 @@
                         </div>
                         <div class="box-search-body nopt text-left">
 
-                            {{ Form::model($compagnie, ['route' => ['compagny.update', $compagnie->id], 'files' => true, 'method' => 'PATCH', 'class' => 'createform']) }}
+                            {{ Form::model($compagnie, ['route' => ['compagnies.update', $compagnie->id], 'files' => true, 'method' => 'PATCH', 'class' => 'createform']) }}
                             <div class="row">
                                 <!-- 1er col -->
                                 <div class="col-md-6">

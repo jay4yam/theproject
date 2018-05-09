@@ -13,7 +13,7 @@
                             <h1 class="admin">Créer une compagnie</h1>
                         </div>
                         <div class="box-search-body text-left">
-                            {{ Form::open(['route' => [ 'compagny.store'] , 'class' => 'createform']) }}
+                            {{ Form::open(['route' => [ 'compagnies.store'] , 'class' => 'createform']) }}
 
                             <div class="form-group flex-column {!! $errors->has('raison_sociale') ? 'has-error' : '' !!}">
                                 {{ Form::label('raison_sociale', 'RAISON SOCIALE :') }}

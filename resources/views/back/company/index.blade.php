@@ -14,7 +14,7 @@
                         <div class="box-search-wrap">
                             <!-- RD Search Form-->
                             <h1 class="admin">Liste des compagnies
-                                <a class="white" href="{{ route('compagny.create') }}" title="ajouter une compagnie">
+                                <a class="white" href="{{ route('compagnies.create') }}" title="ajouter une compagnie">
                                 <span class="float-right">
                                     <i class="fas fa-plus-square"></i>
                                 </span>
@@ -41,7 +41,7 @@
                                                 <img class="img-back img-responsive" src="/storage/{{ $compagny->logo }}">
                                             </td>
                                             <td>
-                                                <a href="{{ url()->route('compagny.edit', ['compagnie' => $compagny->id]) }}">
+                                                <a href="{{ url()->route('compagnies.edit', ['compagnie' => $compagny->id]) }}">
                                                     {{ $compagny->raison_sociale }}
                                                 </a>
                                             </td>

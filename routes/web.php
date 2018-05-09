@@ -23,8 +23,11 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     Route::get('/', 'HomeController@index')->name('home');
 });
 
-Route::group(['prefix' => '/fr/admin/', 'namespace' => 'Back'], function( ) {
+Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back'], function( ) {
 
-    //Affiche la home page
-    Route::resource('/compagny', 'CompagnyController');
+    //Listing des routes pour 'CRUD' sur les "Compagnies"
+    Route::resource('/compagnies', 'CompagnyController');
+
+    //Listing des routes pour 'CRUD' sur les "Utilisateurs"
+    Route::resource('/users', 'CompagnyController');
 });

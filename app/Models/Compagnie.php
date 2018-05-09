@@ -23,4 +23,13 @@ class Compagnie extends Model
         'logo',
         'background_image'
     ];
+
+    /**
+     * Relation N:N de la table compagnie vers la table user via la table pivot 'compagnies_users'
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'compagnies_users', 'user_id', 'compagny_id');
+    }
 }
