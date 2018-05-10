@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Profile
+ *
+ * @property-read \App\Models\User $user
+ * @mixin \Eloquent
+ */
 class Profile extends Model
 {
     /**

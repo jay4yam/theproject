@@ -1,4 +1,4 @@
-@extends('layouts.back')
+@extends('layouts.back', ['title' => 'Editer/Mettre à jour une compagnie aérienne'])
 
 @section('dedicated_css')
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">

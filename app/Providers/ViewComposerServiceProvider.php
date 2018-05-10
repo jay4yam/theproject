@@ -15,6 +15,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('partials._alternate_href_langue', 'App\Http\ViewComposers\AlternateHrefLangueComposer');
+        View::composer('partials._compagnies_select', 'App\Http\ViewComposers\CompagniesSelectComposer');
     }
 
     /**

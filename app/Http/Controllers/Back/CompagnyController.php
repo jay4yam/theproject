@@ -78,7 +78,7 @@ class CompagnyController extends Controller
 
         flash()->success('Compagnie crée avec succès');
 
-        return redirect()->route('compagny.edit', ['compagnie' => $compagnie->id]);
+        return redirect()->route('compagnies.edit', ['compagnie' => $compagnie->id]);
     }
 
     /**
@@ -124,6 +124,6 @@ class CompagnyController extends Controller
         //si on est là, c'est que l'update est OK, on renvois un message success
         flash()->success('Enregistrement effectué avec succes');
 
-        return redirect()->route('compagny.index');
+        return redirect()->route('compagnies.index');
     }
 }

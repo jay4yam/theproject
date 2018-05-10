@@ -23,11 +23,13 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     Route::get('/', 'HomeController@index')->name('home');
 });
 
+//Route regroupant tous les controller présent dans l'admin
+//Grace à l'ajout du "namespace', on est pas obligé de préfixer le controller avec 'Back' +'/Controller'
 Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back'], function( ) {
 
     //Listing des routes pour 'CRUD' sur les "Compagnies"
     Route::resource('/compagnies', 'CompagnyController');
 
     //Listing des routes pour 'CRUD' sur les "Utilisateurs"
-    Route::resource('/users', 'CompagnyController');
+    Route::resource('/users', 'UserController');
 });

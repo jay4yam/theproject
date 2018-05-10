@@ -65,18 +65,17 @@
                                 <a href="{{ url('/') }}">Dashboard</a>
                             </li>
                             <li><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>
+                                <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="/{{ App::getLocale() }}/admin/compagnies">Liste</a></li>
                                     <li><a href="/{{ App::getLocale() }}/admin/compagnies/create">Ajouter</a></li>
                                 </ul>
                             </li>
-                            <li><a href="about.html">Utilisateurs</a>
+                            <li><a href="/{{ App::getLocale() }}/admin/users">Utilisateurs</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
-                                    <li><a href="our-team.html">Our Team</a></li>
-                                    <li><a href="careers.html">Careers</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="testimonials.html">Testimonials</a></li>
+                                    <li><a href="/{{ App::getLocale() }}/admin/users">Liste</a></li>
+                                    <li><a href="/{{ App::getLocale() }}/admin/users/create">Ajouter</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Pages</a>
@@ -216,7 +215,7 @@
 <script>
     $(document).ready(function () {
         $('#flash-overlay-modal').modal();
-        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        //$('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     });
 </script>
 <!-- dedicated Javascript for a specific view -->

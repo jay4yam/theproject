@@ -1,4 +1,4 @@
-@extends('layouts.back')
+@extends('layouts.back', ['title' => 'Créer une nouvelle compagnie aérienne'])
 
 @section('content')
     <!-- Destinations-->

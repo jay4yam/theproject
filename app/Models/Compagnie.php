@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Compagnie
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @mixin \Eloquent
+ */
 class Compagnie extends Model
 {
     protected $table = 'compagnies';

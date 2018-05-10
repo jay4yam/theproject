@@ -1,4 +1,4 @@
-@extends('layouts.back', ['title' => 'Listing de toutes les compagnies aérienne'])
+@extends('layouts.back', ['title' => 'Listing de toutes les utilisateurs'])
 
 @section('dedicated_css')
 @endsection
@@ -13,8 +13,8 @@
                     <div class="box box-search bg-default d-block">
                         <div class="box-search-wrap">
                             <!-- RD Search Form-->
-                            <h1 class="admin">Liste des compagnies
-                                <a class="white" href="{{ route('compagnies.create') }}" title="ajouter une compagnie">
+                            <h1 class="admin">Liste des utilisateurs
+                                <a class="white" href="{{ route('users.create') }}" title="ajouter un utilisateur">
                                 <span class="float-right">
                                     <i class="fas fa-plus-square"></i>
                                 </span>
@@ -26,37 +26,38 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#id</th>
-                                    <th scope="col">Logo</th>
-                                    <th scope="col">Compagnie</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Tel</th>
+                                    <th scope="col">Telephone</th>
+                                    <th scope="col">Ville</th>
+                                    <th scope="col">Pays</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($allCompagnies as $compagny)
-                                        <tr>
-                                            <td scope="row">{{ $compagny->id }}</td>
-                                            <td>
-                                                <img class="img-back img-responsive" src="/storage/{{ $compagny->logo }}">
-                                            </td>
-                                            <td>
-                                                <a href="{{ url()->route('compagnies.edit', ['compagnie' => $compagny->id]) }}">
-                                                    {{ $compagny->raison_sociale }}
-                                                </a>
-                                            </td>
-                                            <td>{{ $compagny->email }}</td>
-                                            <td>{{ $compagny->telephone }}</td>
-                                            <td> options </td>
-                                        </tr>
-                                    @endforeach
+                                @foreach($allUsers as $user)
+                                    <tr>
+                                        <td scope="row">{{ $user->id }}</td>
+                                        <td>
+                                            <a href="{{ url()->route('users.edit', ['id' => $user->id]) }}">{{ $user->email }}</a>
+                                        </td>
+                                        <td> {{ $user->profile->phoneNumber }}</td>
+                                        <td> {{ $user->profile->city }}</td>
+                                        <td> {{ $user->profile->country }}</td>
+                                        <td>
+                                            {{ $user->role }}
+                                        </td>
+                                        <td> options </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
+                            {{ $allUsers->links() }}
                         </div>
                         <div class="box-terms-bottom ptb-10">
                             <button class="button button-primary" type="submit">
                                 <i class="fas fa-plus-square"></i>
-                                Ajouter une compagnie
+                                Ajouter un utilisateur
                             </button>
                         </div>
                     </div>

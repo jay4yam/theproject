@@ -361,7 +361,7 @@
 
 		/**
 		 * isValidated
-		 * @description  check if all elemnts pass validation
+		 * @description  check if all elements pass validation
 		 */
 		function isValidated(elements, captcha) {
 			var results, errors = 0;
@@ -1112,7 +1112,6 @@
 				notCarouselItems.push(plugins.lightGalleryItem[z]);
 			}
 		}
-
 		plugins.lightGalleryItem = notCarouselItems;
 
 		/**
@@ -1224,6 +1223,7 @@
 		 * Select2
 		 * @description Enables select2 plugin
 		 */
+		/*
 		if (plugins.selectFilter.length) {
 			var i;
 			for (i = 0; i < plugins.selectFilter.length; i++) {
@@ -1234,6 +1234,7 @@
 				}).next().addClass(select.attr("class").match(/(input-sm)|(input-lg)|($)/i).toString().replace(new RegExp(",", 'g'), " "));
 			}
 		}
+		*/
 
 		/**
 		 * Custom Waypoints

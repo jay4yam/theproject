@@ -16,8 +16,8 @@ class CreateCompagniesUsersTable extends Migration
         Schema::create('compagnies_users', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('compagnies');
+            $table->integer('compagny_id')->unsigned();
+            $table->foreign('compagny_id')->references('id')->on('compagnies');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -33,10 +33,10 @@ class CreateCompagniesUsersTable extends Migration
     public function down()
     {
         Schema::table('compagnies_users', function (Blueprint $table){
-            $table->dropForeign('compagnies_users_company_id_foreign');
+            $table->dropForeign('compagnies_users_compagny_id_foreign');
             $table->dropForeign('compagnies_users_user_id_foreign');
 
-            $table->dropColumn('company_id');
+            $table->dropColumn('compagny_id');
             $table->dropColumn('user_id');
 
         });

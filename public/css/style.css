@@ -20395,7 +20395,7 @@ a.white{color: #FFFFFF;}
   height: 30px;
 }
 
-.createform input{
+.createform input, .createform select{
   background-color: #f3f3f3;
 }
 
@@ -20405,3 +20405,33 @@ a.white{color: #FFFFFF;}
 
 .nopt{
   padding: 1px 40px !important; }
+
+#compagnies_bloc{
+  display: none;
+}
+
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #ff9f1c;
+  border-color: #ff9f1c;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #ff9f1c;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+  color: #ff9f1c;
+  text-decoration: none;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
