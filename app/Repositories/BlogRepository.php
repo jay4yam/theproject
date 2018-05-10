@@ -31,4 +31,13 @@ class BlogRepository
     {
 
     }
+
+    /**
+     * Retourne les articles paginés par 10 ordonnés par date
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getAll()
+    {
+        return $this->blog->with('user', 'categories')->orderBy('created_at', 'DESC')->paginate(10);
+    }
 }

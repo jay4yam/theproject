@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Compagnie;
+use App\Models\Blog;
 
-class CompagniesTableSeeder extends Seeder
+class BlogsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class CompagniesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Compagnie::class, 20)->create();
+        factory(Blog::class, 20)->create();
     }
 }

@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Repositories\BlogRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
+    protected $blogRepository;
+
+    /**
+     * BlogController constructor.
+     * @param BlogRepository $blogRepository
+     */
+    public function __construct(BlogRepository $blogRepository)
+    {
+        $this->blogRepository = $blogRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $allBlogArticles = $this->blogRepository->getAll();
+
+        return view('back.blog.index', compact('allBlogArticles'));
     }
 
     /**

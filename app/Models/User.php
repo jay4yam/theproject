@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Compagnie::class, 'compagnies_users', 'user_id', 'compagny_id');
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

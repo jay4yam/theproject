@@ -55,7 +55,7 @@
                             <!-- RD Navbar Nav-->
                             <ul class="rd-navbar-nav">
                                 <li class="active">
-                                    <a href="{{ url('/fr/') }}">Home</a>
+                                    <a href="/{{ App::getLocale() }}">Home</a>
                                 </li>
                                 <li><a href="tours-grid.html">Tours</a>
                                     <!-- RD Navbar Dropdown-->
@@ -65,6 +65,9 @@
                                         <li><a href="tours-list.html">Tours List</a></li>
                                         <li><a href="tours-single.html">Tours Single</a></li>
                                     </ul>
+                                </li>
+                                <li>
+                                    <a href="/{{ App::getLocale() }}/blog">Blog</a>
                                 </li>
                                 <li><a href="about.html">About</a>
                                     <!-- RD Navbar Dropdown-->
@@ -113,30 +116,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                                <li><a href="gallery-cobbles.html">Gallery</a>
-                                    <!-- RD Navbar Dropdown-->
-                                    <ul class="rd-navbar-dropdown">
-                                        <li><a href="gallery-cobbles.html">Gallery Cobbles</a></li>
-                                        <li><a href="gallery-fullwidth.html">Gallery Fullwidth</a></li>
-                                        <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                        <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog-grid.html">Blog</a>
-                                    <!-- RD Navbar Dropdown-->
-                                    <ul class="rd-navbar-dropdown">
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar</a></li>
-                                        <li><a href="blog-list.html">Blog List</a></li>
-                                        <li><a href="blog-list-sidebar-left.html">Blog List Sidebar</a></li>
-                                        <li><a href="blog-list-variant-2.html">Blog List v2</a></li>
-                                        <li><a href="blog-list-variant-2-sidebar-left.html">Blog List v2 Sidebar</a></li>
-                                        <li><a href="blog-masonry.html">Blog Masonry</a></li>
-                                        <li><a href="blog-modern.html">Blog Modern</a></li>
-                                        <li><a href="blog-single-post.html">Blog Single Post</a></li>
-                                        <li><a href="blog-single-post-sidebar-left.html">Blog Single Post Sidebar</a></li>
-                                    </ul>
                                 </li>
                                 <li><a href="contacts.html">Contacts</a>
                                     <!-- RD Navbar Dropdown-->

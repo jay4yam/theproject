@@ -78,7 +78,14 @@
                                     <li><a href="/{{ App::getLocale() }}/admin/users/create">Ajouter</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{{ route('blogs.index') }}">Blogs</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-navbar-dropdown">
+                                    <li><a href="{{ route('blogs.index') }}">Liste</a></li>
+                                    <li><a href="{{ route('blogs.create') }}">Ajouter</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
                                 <!-- RD Navbar Megamenu-->
                                 <div class="rd-navbar-megamenu">
                                     <div class="row">

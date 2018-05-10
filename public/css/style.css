@@ -20435,3 +20435,16 @@ a.white{color: #FFFFFF;}
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
+
+.xx-small{
+  font-size: 8px;
+  color: #000000;
+}
+
+.paginate{
+  padding-top: 50px;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}

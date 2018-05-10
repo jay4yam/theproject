@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="{{ asset('/js/html5shiv.min.js')}}"></script>
@@ -65,14 +67,10 @@
                                     <li><a href="tours-single.html">Tours Single</a></li>
                                 </ul>
                             </li>
-                            <li><a href="about.html">About</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="our-team.html">Our Team</a></li>
-                                    <li><a href="careers.html">Careers</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="testimonials.html">Testimonials</a></li>
-                                </ul>
+                            <li>
+                                <a href="/{{ App::getLocale() }}/blog">
+                                    Blog
+                                </a>
                             </li>
                             <li><a href="#">Pages</a>
                                 <!-- RD Navbar Megamenu-->
@@ -112,30 +110,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li><a href="gallery-cobbles.html">Gallery</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="gallery-cobbles.html">Gallery Cobbles</a></li>
-                                    <li><a href="gallery-fullwidth.html">Gallery Fullwidth</a></li>
-                                    <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                    <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog-grid.html">Blog</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar</a></li>
-                                    <li><a href="blog-list.html">Blog List</a></li>
-                                    <li><a href="blog-list-sidebar-left.html">Blog List Sidebar</a></li>
-                                    <li><a href="blog-list-variant-2.html">Blog List v2</a></li>
-                                    <li><a href="blog-list-variant-2-sidebar-left.html">Blog List v2 Sidebar</a></li>
-                                    <li><a href="blog-masonry.html">Blog Masonry</a></li>
-                                    <li><a href="blog-modern.html">Blog Modern</a></li>
-                                    <li><a href="blog-single-post.html">Blog Single Post</a></li>
-                                    <li><a href="blog-single-post-sidebar-left.html">Blog Single Post Sidebar</a></li>
-                                </ul>
                             </li>
                             <li><a href="contacts.html">Contacts</a>
                                 <!-- RD Navbar Dropdown-->

@@ -12,8 +12,17 @@ class Blog extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'id','title','intro','slug','content','main_image','is_public'
+        'title','intro','slug','content','main_image','is_public'
     ];
+
+    /**
+     * Relation N:1 vers la table user (1 article à un seul propriétaire user')
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     /**
      * Relation N:N de la table 'blogs' à la table 'categories'

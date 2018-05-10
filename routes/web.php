@@ -21,6 +21,9 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
 
     //Affiche la home page
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/blog', 'BlogController@index')->name('blog.index');
+    Route::get('/blog/cat/{id}/{categorie}', 'BlogController@categorie')->name('blog.categorie');
+    Route::get('/blog/{id}/{slug}', 'BlogController@show')->name('blog.show');
 });
 
 //Route regroupant tous les controller présent dans l'admin
@@ -32,4 +35,8 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back'], function( ) {
 
     //Listing des routes pour 'CRUD' sur les "Utilisateurs"
     Route::resource('/users', 'UserController');
+
+    //Listing des resource pour 'CRUD' blog
+    Route::resource('/blogs', 'BlogController');
+
 });
