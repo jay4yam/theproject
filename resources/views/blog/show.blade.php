@@ -4,7 +4,7 @@
                             ])
 
 @section('content')
-    <section class="section parallax-container bg-black section-height-mac" data-parallax-img="{{ Storage::url($article->main_image) }}">
+    <section class="section parallax-container bg-black section-height-mac" data-parallax-img="/storage/blog/{{ $article->main_image }}">
         <div class="parallax-content">
             <div class="bg-overlay-darker">
                 <div class="container section-34 section-md-60 section-lg-115">

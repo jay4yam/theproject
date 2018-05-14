@@ -20516,3 +20516,9 @@ a.roll {
   display: none;
 }
 
+.img-block{
+  width: 870px;
+  height: 340px;
+  overflow: hidden;
+}
+

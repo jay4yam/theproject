@@ -71,7 +71,7 @@
                                     <div class="image-container">
                                         <a href="#" class="roll" data-toggle="modal" data-target="#imageModal">
                                             <span>Modifier</span>
-                                            <img src="{{ Storage::url($article->main_image) }}" class="img-responsive"/>
+                                            <img src="/storage/blog/{{ $article->main_image }}" class="img-responsive"/>
                                         </a>
                                     </div>
 
@@ -140,8 +140,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @php $img = \Image::make('storage/'.$article->main_image); @endphp
-                    <img src="{{ Storage::url($article->main_image) }}" class="img-responsive">
+                    @php $img = \Image::make('storage/blog/'.$article->main_image); @endphp
+                    <img src="/storage/blog/{{ $article->main_image }}" class="img-responsive">
                     <span class="img-size-info">
                         name: <strong>{{ $article->main_image }}</strong><br>
                         width: <strong>{{ @$img->width() }}.px</strong> |

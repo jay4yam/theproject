@@ -7,7 +7,7 @@
             <div class="post-box post-box-wide post-blog-left text-left">
                 <div class="post-box-img-wrap">
                     <a href="/{{ App::getLocale() }}/blog/{{ $article->id }}/{{ str_slug($article->title) }}">
-                        <img src="/storage/{{ $article->main_image }}" width="270" height="315" alt=""/>
+                        <img src="/storage/blog/thumbnails/{{ $article->main_image }}" width="270" height="315" alt=""/>
                     </a>
                 </div>
                 <div class="post-box-caption">
@@ -61,7 +61,7 @@
                 <div class="post-box d-block text-left">
                     <div class="post-box-img-wrap">
                         <a href="/{{ App::getLocale() }}/blog/{{ $article->id }}/{{ str_slug($article->title) }}">
-                            <img src="{{ Storage::url($article->main_image) }}" width="270" height="240" alt="">
+                            <img src="/storage/blog/thumbnails/{{ $article->main_image }}" width="270" height="240" alt="">
                         </a>
                     </div>
                     <div class="post-box-caption">
@@ -95,9 +95,9 @@
     @php $temp2 =0; @endphp
     @foreach($allArticles as $article)
         <div class="post-box post-box-wide d-block text-left wow bounceInUp" data-wow-delay="{{ $temp2 }}s">
-            <div class="post-box-img-wrap">
+            <div class="post-box-img-wrap img-block">
                 <a href="/{{ App::getLocale() }}/blog/{{ $article->id }}/{{ str_slug($article->title) }}">
-                    <img src="{{ Storage::url($article->main_image) }}" width="1170" height="440" alt="">
+                    <img src="/storage/blog/{{ $article->main_image }}" width="1170" alt="{{ $article->slug }}">
                 </a>
             </div>
             <div class="post-box-caption">

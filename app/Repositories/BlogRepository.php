@@ -138,23 +138,30 @@ class BlogRepository
         //test si il y une image dans la requete
         if($request->file('main_image'))
         {
-            //on upload le fichier
-            $path = $request->file('main_image')->store('public/blog');
+            //on essaye d'upload le fichier
+            try {
+                $path = $request->file('main_image')->store('public/blog');
+            }catch (\Exception $exception){
+                //si exception : message d'erreur
+                throw new \Exception($exception->getMessage());
+            }
 
-            //split la chaine en tableau
+            //split la chaîne en tableau
             $array = explode('/', $path);
 
-            //recupere l'image qui vient d'etre uploadee
-            $imgThumbNail = \Image::make('storage/'.$array[1].'/'.$array[2]);
+            try {
+                //recupere l'image qui vient d'etre uploadee
+                $imgThumbNailList = \Image::make('storage/' . $array[1] . '/' . $array[2]);
+                //redimensionne l'image
+                $imgThumbNailList->fit(275);
+                //defini le chemin du fichier
+                $pathList = 'storage/blog/thumbnails/' . $array[2];
+                //sauv. le nouveau thumbnail
+                $imgThumbNailList->save($pathList);
 
-            //redimensionne l'image
-            $imgThumbNail->fit(275);
-
-            //defini le chemin du fichier
-            $path2 = 'storage/blog/thumbnails/'.$array[2];
-
-            //sauv. le nouveau thumbnail
-            $imgThumbNail->save($path2);
+            }catch (\Exception $exception){
+                throw new \Exception($exception->getMessage());
+            }
 
             //il faut supprimer /public/ de la chaine path, sinon on a une erreur dans le front
             //donc finalement on ne renvois que le nom du fichier
