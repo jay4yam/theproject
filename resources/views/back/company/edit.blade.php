@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Editer/Mettre à jour une compagnie aérienne'])
+@extends('layouts.back', [
+                            'title' => 'Editer/Mettre à jour une compagnie aérienne',
+                            'compagnyCssActive' => 'active'
+                            ])
 
 @section('dedicated_css')
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
@@ -126,7 +129,7 @@
 
                                         <!-- col background-image -->
                                         <div class="col-md-6">
-                                            <img id="image2" src="/storage/{{ @$compagnie->background_image }}" height="130px">
+                                            <img id="image2" src="{{ Storage::url($compagnie->background_image) }}" height="130px">
                                             <div class="form-group flex-column {!! $errors->has('logo') ? 'has-error' : '' !!}">
                                                 {{ Form::label('background_image', 'ARRIERE PLAN :') }}
                                                 {{ Form::file('background_image', ['class' => 'form-control']) }}

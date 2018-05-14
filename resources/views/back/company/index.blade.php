@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Listing de toutes les compagnies aérienne'])
+@extends('layouts.back', [
+                        'title' => 'Listing de toutes les compagnies aérienne',
+                        'compagnyCssActive' => 'active'
+                        ])
 
 @section('dedicated_css')
 @endsection

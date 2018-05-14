@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
+    <!-- dedicated Css for a specific view -->
+    @yield('dedicated_css')
+
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="{{ asset('/js/html5shiv.min.js')}}"></script>
@@ -29,6 +32,7 @@
 <body>
 <!-- ALL PAGES -->
 <div class="page text-center">
+@include('flash.flash')
     <!-- AllPages Header-->
     <header class="page-header">
         <!-- RD Navbar-->
@@ -67,7 +71,7 @@
                                     <li><a href="tours-single.html">Tours Single</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="{{ @$activeBlogCss }}">
                                 <a href="/{{ App::getLocale() }}/blog">
                                     Blog
                                 </a>
@@ -111,15 +115,11 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="contacts.html">Contacts</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="contacts.html">Contacts</a></li>
-                                    <li><a href="contacts-variant-2.html">Contacts v2</a></li>
-                                </ul>
+                            <li class="{{ @$activeContactCss }}">
+                                <a href="/{{ App::getLocale() }}/contact">Contact</a>
                             </li>
                             @guest
-                                <li class="active"><a href="{{ route('login') }}">Login</a></li>
+                                <li class="{{ @$activeLoginCss }}"><a href="{{ route('login') }}">Login</a></li>
                                 @else
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -137,7 +137,7 @@
                                             </form>
                                         </div>
                                     </li>
-                                    @endguest
+                            @endguest
                         </ul>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                                     </div>
                                     <!-- List Inline-->
                                     <ul class="list-inline list-primary list-inline-13">
-                                        <li class="text-center"><a class="icon fa fa-facebook-f text-black" href="#"></a></li>
+                                        <li class="text-center"><a class="icon fa fa-facebook text-black" href="#"></a></li>
                                         <li class="text-center"><a class="icon fa fa-twitter text-black" href="#"></a></li>
                                         <li class="text-center"><a class="icon fa fa-youtube text-black" href="#"></a></li>
                                         <li class="text-center"><a class="icon fa fa-linkedin text-black" href="#"></a></li>
@@ -199,7 +199,7 @@
                             <p class="text-big text-black">{{ __('home.footerfollowUs') }}</p>
                             <!-- List Inline-->
                             <ul class="list-inline">
-                                <li class="text-center"><a class="icon icon-square icon-filled-gallery fa fa-facebook-f text-gray" href="#"></a></li>
+                                <li class="text-center"><a class="icon icon-square icon-filled-gallery fa fa-facebook text-gray" href="#"></a></li>
                                 <li class="text-center"><a class="icon icon-square icon-filled-gallery fa fa-twitter text-gray" href="#"></a></li>
                                 <li class="text-center"><a class="icon icon-square icon-filled-gallery fa fa-youtube text-gray" href="#"></a></li>
                                 <li class="text-center"><a class="icon icon-square icon-filled-gallery fa fa-linkedin text-gray" href="#"></a></li>
@@ -302,7 +302,7 @@
                                             </a>
                                         </p>
                                         <p class="d-block text-small">
-                                            <a class="text-gray" href="{{ $_SERVER['HTTP_HOST'] }}">
+                                            <a class="text-gray" href="{{ url(App::getLocale().'/') }}">
                                                     <span class="unit align-items-center flex-row unit-spacing-xs">
                                                         <span class="unit-left">
                                                             <img class="img-responsive center-block" src="/images/icons/icon-05-19x19.png" width="19" height="19" alt="">
@@ -348,5 +348,8 @@
 <!-- Java script-->
 <script src="{{ asset('js/core.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+
+<!-- dedicated Javascript for a specific view -->
+@yield('dedicated_js')
 </body>
 </html>

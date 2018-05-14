@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Editer le profil de l\'utilisateur'])
+@extends('layouts.back', [
+                            'title' => 'Editer le profil de l\'utilisateur',
+                            'userCssActive' => 'active'
+                          ])
 
 @section('content')
     <!-- Destinations-->

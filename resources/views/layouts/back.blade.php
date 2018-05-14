@@ -64,99 +64,29 @@
                             <li>
                                 <a href="{{ url('/') }}">Dashboard</a>
                             </li>
-                            <li><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>
+                            <li class="{{ @$compagnyCssActive }}"><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="/{{ App::getLocale() }}/admin/compagnies">Liste</a></li>
                                     <li><a href="/{{ App::getLocale() }}/admin/compagnies/create">Ajouter</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/{{ App::getLocale() }}/admin/users">Utilisateurs</a>
+                            <li class="{{ @$userCssActive }}"><a href="/{{ App::getLocale() }}/admin/users">Utilisateurs</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="/{{ App::getLocale() }}/admin/users">Liste</a></li>
                                     <li><a href="/{{ App::getLocale() }}/admin/users/create">Ajouter</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('blogs.index') }}">Blogs</a>
+                            <li class="{{ @$blogCssActive }}"><a href="{{ route('blogs.index') }}">Blogs</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="{{ route('blogs.index') }}">Liste</a></li>
                                     <li><a href="{{ route('blogs.create') }}">Ajouter</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Blog</a>
-                                <!-- RD Navbar Megamenu-->
-                                <div class="rd-navbar-megamenu">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <p class="rd-megamenu-header text-big text-black text-ubold">Pages 1</p>
-                                            <ul class="rd-megamenu-list">
-                                                <li><a href="press.html">Press</a></li>
-                                                <li><a href="services.html">Services</a></li>
-                                                <li><a href="pricing.html">Pricing</a></li>
-                                                <li><a href="destinations.html">Destinations</a></li>
-                                                <li><a href="signup.html">Sign Up</a></li>
-                                                <li><a href="signup-variant-2.html">Sign Up v2</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <p class="rd-megamenu-header text-big text-black text-ubold">Pages 2</p>
-                                            <ul class="rd-megamenu-list">
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="forgot-password.html">Forgot Password</a></li>
-                                                <li><a href="privacy.html">Privacy Policy</a></li>
-                                                <li><a href="terms-of-use.html">Terms Of Use</a></li>
-                                                <li><a href="sitemap.html">Sitemap</a></li>
-                                                <li><a href="search-results.html">Search Results</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <p class="rd-megamenu-header text-big text-black text-ubold">Pages 3</p>
-                                            <ul class="rd-megamenu-list">
-                                                <li><a href="404.html">404</a></li>
-                                                <li><a href="503.html">503</a></li>
-                                                <li><a href="comingsoon.html">Coming Soon</a></li>
-                                                <li><a href="maintenance.html">Maintenance</a></li>
-                                                <li><a href="underconstruction.html">Under Construction</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li><a href="gallery-cobbles.html">Gallery</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="gallery-cobbles.html">Gallery Cobbles</a></li>
-                                    <li><a href="gallery-fullwidth.html">Gallery Fullwidth</a></li>
-                                    <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                    <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog-grid.html">Blog</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar</a></li>
-                                    <li><a href="blog-list.html">Blog List</a></li>
-                                    <li><a href="blog-list-sidebar-left.html">Blog List Sidebar</a></li>
-                                    <li><a href="blog-list-variant-2.html">Blog List v2</a></li>
-                                    <li><a href="blog-list-variant-2-sidebar-left.html">Blog List v2 Sidebar</a></li>
-                                    <li><a href="blog-masonry.html">Blog Masonry</a></li>
-                                    <li><a href="blog-modern.html">Blog Modern</a></li>
-                                    <li><a href="blog-single-post.html">Blog Single Post</a></li>
-                                    <li><a href="blog-single-post-sidebar-left.html">Blog Single Post Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contacts.html">Contacts</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="contacts.html">Contacts</a></li>
-                                    <li><a href="contacts-variant-2.html">Contacts v2</a></li>
-                                </ul>
-                            </li>
                             @guest
-                                <li class="active"><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
                                 @else
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -174,7 +104,7 @@
                                             </form>
                                         </div>
                                     </li>
-                                    @endguest
+                            @endguest
                         </ul>
                     </div>
                 </div>

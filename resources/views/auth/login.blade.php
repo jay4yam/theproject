@@ -1,4 +1,7 @@
-@extends('layouts.other')
+@extends('layouts.other', [
+                            'title' => ' Connectez-vous à la plateforme easyCopter',
+                            'activeLoginCss' => 'active'
+                            ])
 
 @section('content')
 
@@ -13,9 +16,9 @@
                         <div class="box box-lg d-block bg-default inset-xl-left-60 inset-xl-right-60">
                             <h5 class="text-ubold text-md-left">Déjà inscrit</h5>
                             <form method="POST" action="{{ route('login') }}">
+                                {{ Form::open(['route' => ['login']]) }}
                                 <div class="form-wrap form-wrap-xs">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="votre email" required autofocus>
-
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -24,7 +27,6 @@
                                 </div>
                                 <div class="form-wrap form-wrap-xs form-offset-bottom-none">
                                     <input id="password" type="password" placeholder="mot de passe" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -46,7 +48,7 @@
                                 <div class="form-button">
                                     <button class="button button-block button-icon button-icon-right button-primary" type="submit"><span>log in</span><span class="icon icon-xxs mdi mdi-chevron-right" style="float:none; margin-top: -1px;"></span></button>
                                 </div>
-                            </form>
+                            {{ Form::close() }}
                             <p class="text-extra-small">Vous n'avez pas de compte ?<br> <a class="text-primary" href="{{ url('/register') }}">Créer un compte</a> Maintenant !</p>
                             <div class="section-hidden section-hidden-2">
                                 <p class="divider-both-lines text-extra-small">Utilisez votre réseau social préféré</p>

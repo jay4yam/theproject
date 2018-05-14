@@ -1,5 +1,5 @@
 @extends('layouts.back', [
-                        'title' => 'Edition d\'article - Mettez à jour votre article du blog',
+                        'title' => 'Ajouter un article',
                         'blogCssActive' => 'active'
                         ])
 
@@ -16,7 +16,7 @@
                     <div class="box box-search bg-default d-block">
                         <div class="box-search-wrap">
                             <!-- RD Search Form-->
-                            <h1 class="admin">Modifier - Mettre à jour un article
+                            <h1 class="admin">Enregistrer un nouvel article
                                 <a class="white" href="{{ route('blogs.create') }}" title="ajouter un article">
                                 <span class="float-right">
                                     <i class="fas fa-plus-square"></i>
@@ -25,35 +25,35 @@
                             </h1>
                         </div>
                         <div class="box-search-body text-left">
-                            {{ Form::model($article, ['route' => ['blogs.update', $article->id], 'files' => true, 'method' => 'PATCH', 'class' => 'createform']) }}
+                            {{ Form::open(['route' => ['blogs.store'], 'files' => true, 'method' => 'POST', 'class' => 'createform']) }}
                             <div class="row">
                                 <!-- 1ere col -->
                                 <div class="col-md-8 col-xs-12">
                                     <!-- title -->
                                     <div class="form-group flex-column {!! $errors->has('title') ? 'has-error' : '' !!}">
                                         {{ Form::label('title', 'TITRE :') }}
-                                        {{ Form::text('title', $article->title, ['class' => 'form-control']) }}
+                                        {{ Form::text('title', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('title', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <!-- slug -->
                                     <div class="form-group flex-column {!! $errors->has('slug') ? 'has-error' : '' !!}">
                                         {{ Form::label('slug', 'URL REWRITING :') }}
-                                        {{ Form::text('slug', $article->slug, ['class' => 'form-control']) }}
+                                        {{ Form::text('slug', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('slug', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <!-- intro -->
                                     <div class="form-group flex-column {!! $errors->has('intro') ? 'has-error' : '' !!}">
                                         {{ Form::label('intro', 'INTRO :') }}
-                                        {{ Form::textarea('intro', $article->intro, ['class' => 'form-control']) }}
+                                        {{ Form::textarea('intro', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('intro', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <!-- content -->
                                     <div class="form-group flex-column {!! $errors->has('contentArticle') ? 'has-error' : '' !!}">
                                         {{ Form::label('contentArticle', 'CONTENU :') }}
-                                        {{ Form::textarea('contentArticle', $article->content, ['class' => 'form-control']) }}
+                                        {{ Form::textarea('contentArticle', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('contentArticle', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>
@@ -61,18 +61,11 @@
                                 <!-- 2eme col -->
                                 <div class="col-md-4 col-xs-12">
                                     <!-- auteur -->
-                                    <div class="form-group flex-column {!! $errors->has('user') ? 'has-error' : '' !!}">
-                                        {{ Form::label('title', 'AUTEUR :') }}
-                                        {{ Form::text('title', $article->user->profile->firstName, ['class' => 'form-control',  'disabled' => 'disabled']) }}
-                                        {!! $errors->first('title', '<small class="help-block">:message</small>') !!}
-                                    </div>
-
-                                    <!-- main_image container -->
-                                    <div class="image-container">
-                                        <a href="#" class="roll" data-toggle="modal" data-target="#imageModal">
-                                            <span>Modifier</span>
-                                            <img src="{{ Storage::url($article->main_image) }}" class="img-responsive"/>
-                                        </a>
+                                    <div class="form-group flex-column {!! $errors->has('user_id') ? 'has-error' : '' !!}">
+                                        {{ Form::label('user_id', 'AUTEUR :') }}
+                                        {{ Form::hidden('user_id', \Auth::user()->id) }}
+                                        {{ Form::text('userid', \Auth::user()->id, ['class' => 'form-control',  'disabled' => 'disabled']) }}
+                                        {!! $errors->first('user_id', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <!-- main_image upload -->
@@ -85,7 +78,7 @@
                                     <!-- is_public -->
                                     <div class="form-group flex-column {!! $errors->has('is_public') ? 'has-error' : '' !!}">
                                         {{ Form::label('is_public', 'ARTICLE PUBLIC :', ['class' => 'switch']) }}
-                                        {{ Form::select('is_public', [ true => 'public', false => 'privé'], $article->is_public, ['class' => 'form-control',]) }}
+                                        {{ Form::select('is_public', [ true => 'public', false => 'privé'], false, ['placeholder' => 'Mode Public/Privé', 'class' => 'form-control',]) }}
                                         {!! $errors->first('is_public', '<small class="help-block">:message</small>') !!}
                                     </div>
 
@@ -93,22 +86,12 @@
                                     <div class="form-group flex-column {!! $errors->has('categorie') ? 'has-error' : '' !!}">
                                         {{ Form::label('categorie', 'CATEGORIES :', ['class' => 'switch']) }}
                                         <ul>
-                                        @php $checked = ''; @endphp
-                                        @foreach($allCats as $catId => $catName)
-                                            @php
-                                                $article->categories->each(function ($u) use(&$checked, $catName){
-                                                if($catName == $u->title){
-                                                    $checked = 'checked';
-
-                                                    return $checked;
-                                                }
-                                                return $checked;
-                                                });
-                                            @endphp
-                                            <li>{{ $catName }}
-                                                <input @php echo $checked @endphp type="checkbox" name="categorie[]" value="{{ $catId }}" id="cat-{{ $catId }}" class="chk-cat">
-                                            </li>
-                                        @endforeach
+                                            @php $checked = ''; @endphp
+                                            @foreach($allCats as $catId => $catName)
+                                                <li>{{ $catName }}
+                                                    <input type="checkbox" name="categorie[]" value="{{ $catId }}" id="cat-{{ $catId }}" class="chk-cat">
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
 
@@ -116,7 +99,7 @@
                                     <div class="box-terms-bottom ptb-10">
                                         <button class="btn btn-success" type="submit">
                                             <i class="fas fa-save"></i>
-                                            Mettre a jour cet article
+                                            Ajouter un article
                                         </button>
                                     </div>
                                 </div>
@@ -128,34 +111,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificateur d'image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @php $img = \Image::make('storage/'.$article->main_image); @endphp
-                    <img src="{{ Storage::url($article->main_image) }}" class="img-responsive">
-                    <span class="img-size-info">
-                        name: <strong>{{ $article->main_image }}</strong><br>
-                        width: <strong>{{ @$img->width() }}.px</strong> |
-                        height: <strong>{{ @$img->height() }}.px</strong> |
-                        size: <strong>{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('dedicated_js')
@@ -179,11 +134,11 @@
 
             //lors du changement de la valeur de 'title' on slugify le nouveau 'title' et met à jour l'input slug
             $('#title').on('change', function () {
-               var title  = $(this).val();
-               
-               var slug = slugify(title);
+                var title  = $(this).val();
 
-               $('#slug').val(slug);
+                var slug = slugify(title);
+
+                $('#slug').val(slug);
             });
         });
 

@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Listing de tous les articles du blog'])
+@extends('layouts.back', [
+                            'title' => 'Listing de tous les articles du blog',
+                            'blogCssActive' => 'active'
+                            ])
 
 @section('dedicated_css')
 @endsection

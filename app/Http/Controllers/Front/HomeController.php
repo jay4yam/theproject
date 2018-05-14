@@ -16,4 +16,13 @@ class HomeController extends Controller
     {
         return view('index');
     }
+
+    /**
+     * Affiche la page contact
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function contact()
+    {
+        return view('contact');
+    }
 }

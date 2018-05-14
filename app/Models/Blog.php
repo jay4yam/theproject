@@ -12,8 +12,18 @@ class Blog extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'title','intro','slug','content','main_image','is_public'
+        'title','intro','slug','content','main_image','is_public', 'user_id'
     ];
+
+    /**
+     * Récupère les articles "visibles"
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsPublic($query)
+    {
+        return $query->where('is_public', true);
+    }
 
     /**
      * Relation N:1 vers la table user (1 article à un seul propriétaire user')
@@ -31,5 +41,14 @@ class Blog extends Model
     public function categories()
     {
         return $this->belongsToMany(Categories::class, 'blogs_categories', 'blog_id', 'categorie_id');
+    }
+
+    /**
+     * Relation vers la table comments
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comments::class, 'commentable');
     }
 }

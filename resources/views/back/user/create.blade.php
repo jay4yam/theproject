@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Créer un nouvel utilisateur'])
+@extends('layouts.back', [
+                            'title' => 'Créer un nouvel utilisateur',
+                            'userCssActive' => 'active'
+                            ])
 
 @section('content')
     <!-- Destinations-->

@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Créer une nouvelle compagnie aérienne'])
+@extends('layouts.back', [
+                            'title' => 'Créer une nouvelle compagnie aérienne',
+                            'compagnyCssActive' => 'active'
+                            ])
 
 @section('content')
     <!-- Destinations-->

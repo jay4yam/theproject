@@ -12,8 +12,6 @@ $factory->define(Blog::class, function (Faker $faker) {
         'content' => $faker->paragraph(5),
         'main_image' => 'images/backgrounds/background-22-1920x900.jpg',
         'is_public' => $faker->boolean($chanceOfGettingTrue=50),
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        },
+        'user_id' => '1',
     ];
 });

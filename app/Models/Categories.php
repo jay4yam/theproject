@@ -18,4 +18,13 @@ class Categories extends Model
     {
         return$this->belongsToMany(Blog::class, 'blogs_categories', 'categorie_id', 'blog_id');
     }
+
+    /**
+     * Relation many/many vers la table blogs en filtrant sur les "articles" où 'is_public' est à 'true"
+     * @return mixed
+     */
+    public function postsPublished()
+    {
+        return $this->belongsToMany(Blog::class, 'blogs_categories','categorie_id', 'blog_id')->isPublic();
+    }
 }

@@ -8,6 +8,7 @@
 namespace App\Repositories;
 
 use App\Models\Compagnie;
+use Illuminate\Http\Request;
 
 class CompanyRepository
 {
@@ -48,7 +49,7 @@ class CompanyRepository
      * @param $request
      * @return Compagnie
      */
-    public function store($request)
+    public function store(Request $request)
     {
         $compagnie = new Compagnie();
 
@@ -86,7 +87,7 @@ class CompanyRepository
      * @param $request
      * @param $id
      */
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
         $compagnie = $this->getById($id);
 
@@ -100,7 +101,7 @@ class CompanyRepository
      * @param $compagnie
      * @param $request
      */
-    private function uploadFile($compagnie, $request)
+    private function uploadFile($compagnie, Request $request)
     {
         //si il y a un logo
         if($request->hasFile('logo')){
@@ -127,5 +128,4 @@ class CompanyRepository
         }
     }
 
-    //TODO : Resize images
 }

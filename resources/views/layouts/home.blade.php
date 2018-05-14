@@ -179,7 +179,7 @@
                                         </div>
                                         <!-- List Inline-->
                                         <ul class="list-inline list-primary list-inline-13">
-                                            <li class="text-center"><a class="icon fa fa-facebook-f text-black" href="#"></a></li>
+                                            <li class="text-center"><a class="icon fa fa-facebook text-black" href="#"></a></li>
                                             <li class="text-center"><a class="icon fa fa-twitter text-black" href="#"></a></li>
                                             <li class="text-center"><a class="icon fa fa-youtube text-black" href="#"></a></li>
                                             <li class="text-center"><a class="icon fa fa-linkedin text-black" href="#"></a></li>
@@ -309,7 +309,7 @@
                                                 </a>
                                             </p>
                                             <p class="d-block text-small">
-                                                <a class="text-gray" href="{{ $_SERVER['HTTP_HOST'] }}">
+                                                <a class="text-gray" href="{{ url(App::getLocale().'/') }}">
                                                     <span class="unit align-items-center flex-row unit-spacing-xs">
                                                         <span class="unit-left">
                                                             <img class="img-responsive center-block" src="/images/icons/icon-05-19x19.png" width="19" height="19" alt="">

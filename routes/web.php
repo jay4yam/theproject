@@ -21,14 +21,21 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
 
     //Affiche la home page
     Route::get('/', 'HomeController@index')->name('home');
+
+    //Affichage des différentes pages de blog
     Route::get('/blog', 'BlogController@index')->name('blog.index');
     Route::get('/blog/cat/{id}/{categorie}', 'BlogController@categorie')->name('blog.categorie');
     Route::get('/blog/{id}/{slug}', 'BlogController@show')->name('blog.show');
+
+    //Affichage de la page contact
+    Route::get('/contact', 'HomeController@contact')->name('contact');
+
+    Route::post('/add-comment', 'CommentController@addComment')->name('comment.add');
 });
 
 //Route regroupant tous les controller présent dans l'admin
 //Grace à l'ajout du "namespace', on est pas obligé de préfixer le controller avec 'Back' +'/Controller'
-Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back'], function( ) {
+Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'auth'], function( ) {
 
     //Listing des routes pour 'CRUD' sur les "Compagnies"
     Route::resource('/compagnies', 'CompagnyController');

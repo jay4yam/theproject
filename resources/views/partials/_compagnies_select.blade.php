@@ -1,7 +1,7 @@
 @php
     $select = null;
- if(count($user->compagnie)) {
-    $select = $user->compagnie()->first()->pivot->compagny_id;
+ if(count(@$user->compagnie)) {
+    $select = @$user->compagnie()->first()->pivot->compagny_id;
 }
 @endphp
 <div id="compagnies_bloc" class="form-group flex-column {!! $errors->has('compagnie') ? 'has-error' : '' !!}">

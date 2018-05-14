@@ -1,4 +1,7 @@
-@extends('layouts.back', ['title' => 'Listing de toutes les utilisateurs'])
+@extends('layouts.back', [
+                        'title' => 'Listing de toutes les utilisateurs',
+                        'userCssActive' => 'active'
+                        ])
 
 @section('dedicated_css')
 @endsection

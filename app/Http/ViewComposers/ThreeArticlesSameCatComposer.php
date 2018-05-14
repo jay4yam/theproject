@@ -27,10 +27,10 @@ class ThreeArticlesSameCatComposer
         $this->blog = $blog;
     }
 
-    public function get3lastArticles()
+    public function get3lastArticles($id)
     {
-        $value = \Cache::remember('last3articles', 100, function (){
-            return $this->blog->orderBy('created_at', 'desc')->with('user')->limit(3)->get();
+        $value = \Cache::remember('last3articles', 100, function () use ($id){
+            return $this->blog->isPublic()->where('id', '!=', $id)->orderBy('created_at', 'desc')->with('user')->limit(3)->get();
         });
 
         return $value;
@@ -44,6 +44,10 @@ class ThreeArticlesSameCatComposer
      */
     public function compose(View $view)
     {
-        $view->with('articles', $this->get3lastArticles() );
+        $path = app('request')->path();
+
+        $array = explode('/', $path);
+
+        $view->with('articles', $this->get3lastArticles($array[2]) );
     }
 }

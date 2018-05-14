@@ -1,7 +1,10 @@
-@extends('layouts.other', ['title' => ' On va vous donner envie de voler avec nous | Blog easyCopter'])
+@extends('layouts.other', [
+                            'title' => ' On va vous donner envie de voler avec nous | Blog easyCopter',
+                            'activeBlogCss' => 'active'
+                            ])
 
 @section('content')
-    <section class="section parallax-container bg-black section-height-mac" data-parallax-img="/{{ $article->main_image }}">
+    <section class="section parallax-container bg-black section-height-mac" data-parallax-img="{{ Storage::url($article->main_image) }}">
         <div class="parallax-content">
             <div class="bg-overlay-darker">
                 <div class="container section-34 section-md-60 section-lg-115">
@@ -22,7 +25,7 @@
                             <i class="far fa-list-alt"></i>
                             <span class="inset-left-10">
                                 @foreach($article->categories as $item)
-                                    <a href="#">
+                                    <a href="{{ route('blog.categorie', ['locale' => App::getLocale(), 'id' => $item->id, 'categorie' => str_slug($item->title)]) }}">
                                         {{ @$item->title ? $item->title : 'defaut' }}
                                     </a>
                                 @endforeach
@@ -79,95 +82,77 @@
                     <div class="row row-30 justify-content-sm-center justify-content-md-start justify-content-lg-center">
                         @include('partials._three_articles_same_cat')
                     </div>
+
+                    <!-- Commentaire -->
                     <div class="row justify-content-sm-center text-left">
                         <div class="col-12">
                             <hr class="hr bg-alto">
                             <!-- Box-->
                             <div class="box box-lg box-single-comments bg-default d-block inset-xl-right-60">
-                                <h4 class="text-ubold">42 Comments</h4>
-                                <!-- Unit-->
+                                <h4 class="text-ubold">{{ $article->comments()->count() }} Comments</h4>
+                                <!-- form -->
                                 <div class="unit unit-wide flex-column flex-sm-row unit-spacing-sm">
-                                    <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-01-40x40.jpg" width="40" height="40" alt=""></div>
+                                    <div class="unit-left">
+                                        <img class="img-responsive rounded-circle" src="/images/users/user-01-40x40.jpg" width="40" height="40" alt="">
+                                    </div>
                                     <div class="unit-body">
-                                        <form class="rd-mailform form-comment">
+                                        @if(Auth::check())
+                                        {{ Form::open(['url' => App::getLocale().'/add-comment', 'locale' => App::getLocale(), 'method' => 'post', 'class' => 'form-comment' ]) }}
                                             <div class="form-wrap form-wrap-xs">
-                                                <label class="form-label" for="comment">Enter your comment ...</label>
-                                                <input class="form-input inset-right-50" id="comment" type="text" name="comment">
+                                                <label class="form-label rd-input-label" for="content">Enter your comment ...</label>
+                                                <input class="form-input inset-right-50" id="content" type="text" name="content">
                                             </div>
-                                            <button type="submit"><img class="img-responsive center-block img-semi-transparent-inverse" src="images/icons/icon-19-19x19.png" width="19" height="19" alt=""></button>
-                                        </form>
+                                            <button type="submit">
+                                                <img class="img-responsive center-block img-semi-transparent-inverse" src="/images/icons/icon-19-19x19.png" width="19" height="19" alt="">
+                                            </button>
+                                        {{ Form::close() }}
+                                        @else
+                                            <span>You need to be connected to comment</span>
+                                        @endif
                                     </div>
                                 </div>
-                                <!-- Unit-->
-                                <div class="post-comment unit flex-column flex-sm-row unit-spacing-sm">
-                                    <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-01-40x40.jpg" width="40" height="40" alt=""></div>
-                                    <div class="unit-body">
-                                        <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">John Davis</a></p>
-                                        <p class="text-extra-small-10 text-silver-chalice">JUNE 21 2016 at 17:02</p>
-                                        <p class="text-small text-silver-chalice font-italic">Only been to Dubai on a stopover and wish I had more time. Many people say is “fake” and hides the true reality of the country. Maybe. But I mainly found to be a futuristic “made-from-scratch” urban development project right in the middle of the desert which is fascinating!</p><a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a>
-                                    </div>
-                                </div>
-                                <!-- Unit-->
-                                <div class="post-comment unit flex-column flex-sm-row unit-spacing-sm">
-                                    <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-02-40x40.jpg" width="40" height="40" alt=""></div>
-                                    <div class="unit-body">
-                                        <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">Ann Smith</a></p>
-                                        <p class="text-extra-small-10 text-silver-chalice">JUNE 20, 2016 at 10:42</p>
-                                        <p class="text-small text-silver-chalice font-italic">Fascinating. I was there recently for a conference (at the Atlantis–very nice!). Maybe because it was an international conference, I didn’t see much drinking at all. None during the day. There was a buffet dinner in the hotel disco and alcohol was served but the vast majority of attendees didn’t drink. I met lots of expats living in Dubai who also didn’t drink. I found everything to be exceedingly expensive. I wandered around the mall and didn’t buy a thing because it was all twice as expensive as Europe and it was quite odd. <a class="button-more text-ubold text-big text-gray pull-right" href="#">...</a></p>
-                                    </div>
-                                </div>
-                                <div class="post-comment-inner inset-left-20 inset-sm-left-50 inset-md-left-80 inset-xl-left-115">
-                                    <!-- Unit-->
-                                    <div class="post-comment">
-                                        <div class="unit flex-column flex-sm-row unit-spacing-sm">
-                                            <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-01-30x30.jpg" width="30" height="30" alt=""></div>
-                                            <div class="unit-body">
-                                                <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">John Davis</a></p>
-                                                <p class="text-extra-small-10 text-silver-chalice">JUNE 20, 2016 at 12:37</p>
-                                                <p class="text-small text-silver-chalice font-italic">Dubai is definitely one of the most expensive cities in UAE, but there are some advantages in visiting it as well. If you are looking for something more European, you can visit Abu Dhabi.</p><a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a>
-                                            </div>
+
+                                <!-- liste des commentaires-->
+                                @foreach($article->comments->where('reply_to', null)->load('user') as $comment)
+                                    <div class="post-comment unit flex-column flex-sm-row unit-spacing-sm">
+                                        <div class="unit-left">
+                                            <img class="img-responsive rounded-circle" src="/images/users/user-01-40x40.jpg" width="40" height="40" alt="">
+                                        </div>
+                                        <div class="unit-body">
+                                            <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">{{ $comment->user->email }}</a></p>
+                                            <p class="text-extra-small-10 text-silver-chalice">{{ $comment->created_at->format('d M Y à h:m') }}</p>
+                                            <p class="text-small text-silver-chalice font-italic">
+                                                {{  $comment->content }}
+                                                @if($comment->getRepliedComments($comment->id)->count())
+                                                <a class="button-more text-ubold text-big text-gray pull-right" href="#" id="showcomment-{{ $comment->id }}">...</a>
+                                                @endif
+                                            </p>
+                                            <a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a>
                                         </div>
                                     </div>
-                                    <!-- Unit-->
-                                    <div class="post-comment">
-                                        <div class="unit flex-column flex-sm-row unit-spacing-sm">
-                                            <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-02-30x30.jpg" width="30" height="30" alt=""></div>
-                                            <div class="unit-body">
-                                                <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">Ann Smith</a></p>
-                                                <p class="text-extra-small-10 text-silver-chalice">JUNE 20, 2016 at 12:39</p>
-                                                <p class="text-small text-silver-chalice font-italic">Thanks, I will consider visiting Abu Dhabi, it might be an interesting experience.</p><a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="inset-xl-right-305">
-                                        <!-- Unit-->
-                                        <div class="unit unit-wide flex-column flex-sm-row unit-xs-spacing-sm">
-                                            <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-01-30x30.jpg" width="30" height="30" alt=""></div>
-                                            <div class="unit-body">
-                                                <form class="rd-mailform form-comment form-comment-comment-inner">
-                                                    <div class="form-wrap form-wrap-xxs">
-                                                        <label class="form-label" for="comment-inner">Enter your comment ...</label>
-                                                        <input class="form-input inset-right-30" id="comment-inner" type="text" name="comment-inner">
+                                    @if($comment->getRepliedComments($comment->id)->count())
+                                        <div id="repliedComment-{{ $comment->id }}" class="obfuscated post-comment-inner inset-left-20 inset-sm-left-50 inset-md-left-80 inset-xl-left-115">
+                                        @foreach($comment->getRepliedComments($comment->id)->load('user') as $reply)
+                                            <!-- reply -->
+                                            <div class="post-comment">
+                                                <div class="unit flex-column flex-sm-row unit-spacing-sm">
+                                                    <div class="unit-left">
+                                                        <img class="img-responsive rounded-circle" src="/images/users/user-01-30x30.jpg" width="30" height="30" alt="">
                                                     </div>
-                                                    <button type="submit"><img class="img-responsive center-block img-semi-transparent-inverse" src="images/icons/icon-21-10x10.png" width="10" height="10" alt=""></button>
-                                                </form>
+                                                    <div class="unit-body">
+                                                        <p class="text-small text-ubold"><a class="text-black" href="#">{{ $reply->user->email }}</a></p>
+                                                        <p class="text-extra-small-10 text-silver-chalice">{{ $comment->created_at->format('d M Y à h:m') }}</p>
+                                                        <p class="text-small text-silver-chalice font-italic">
+                                                            {{ $reply->content }}
+                                                        </p>
+                                                        <a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        @endforeach
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- Unit-->
-                                <div class="post-comment unit flex-column flex-sm-row unit-spacing-sm">
-                                    <div class="unit-left"><img class="img-responsive rounded-circle" src="images/users/user-03-40x40.jpg" width="40" height="40" alt=""></div>
-                                    <div class="unit-body">
-                                        <p class="text-small text-ubold"><a class="text-black" href="testimonials.html">Kent Fleming</a></p>
-                                        <p class="text-extra-small-10 text-silver-chalice">JUNE 18, 2016 at 21:19</p>
-                                        <p class="text-small text-silver-chalice font-italic">Although many people said Dubai is artificial, I still really want to go there and Dubai is absolutely on my list. I’m sure Dubai has got something interesting. Yes, a lot of tourists say it’s fake and has a pseudo-European style but I believe Dubai hides more than it shows during the first visit. Thanks for the inspiring post! it was a pleasure to read some interesting and unknown facts about the city which is #1 on my “must travel” list. <a class="button-more text-ubold text-big text-gray pull-right" href="#">...</a></p>
-                                        <ul class="list-inline post-box-meta list-inline-dashed list-inline-dashed-xs text-extra-small-10 text-silver-chalice">
-                                            <li class="p text-uppercase"><a class="button-link text-extra-small text-primary text-uppercase" href="#"><img src="images/icons/icon-20-14x11.png" width="14" height="11" alt=""><span class="text-middle inset-left-10">8 replies</span></a></li>
-                                            <li class="text-bottom p text-uppercase"><a class="button-link text-extra-small text-primary text-uppercase" href="#">REPLY</a></li>
-                                        </ul><a class="button button-img button-img-left button-primary" href="#" style="padding-top: 5px;padding-bottom: 5px;"><span class="button-img-wrap"><img src="images/icons/icon-17-16x15-light.png" width="16" height="15" alt=""></span><span>VIEW NEXT 35 COMMENTS</span></a>
-                                    </div>
-                                </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -178,4 +163,18 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('dedicated_js')
+    <script>
+        $(document).ready(function () {
+            $('a[id^="showcomment-"]').on('click', function (e) {
+                e.preventDefault();
+                var name = $(this).attr('id');
+                var array = name.split('-');
+
+                $('#repliedComment-'+array[1]).toggle();
+            });
+        })
+    </script>
 @endsection

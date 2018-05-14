@@ -42,24 +42,88 @@
                                 <div class="pull-right">
                                     <!-- List Inline-->
                                     <ul class="list-inline list-primary-filled text-center list-top-panel">
-                                        <li><a class="shadow-drop-lg" href="blog-list.html"><span class="icon icon-sm icon-square mdi mdi-view-stream"></span></a></li>
-                                        <li class="active"><a class="shadow-drop-lg" href="blog-list-variant-2.html"><span class="icon icon-sm icon-square mdi mdi-format-list-bulleted"></span></a></li>
-                                        <li><a class="shadow-drop-lg" href="blog-grid.html"><span class="icon icon-sm icon-square mdi mdi-view-module"></span></a></li>
+                                        <li>
+                                            <a class="shadow-drop-lg" href="#" id="show-big-list">
+                                                <span class="icon icon-sm icon-square mdi mdi-view-stream"></span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a class="shadow-drop-lg" href="#" id="show-list">
+                                                <span class="icon icon-sm icon-square mdi mdi-format-list-bulleted"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="shadow-drop-lg" href="#" id="show-grid">
+                                                <span class="icon icon-sm icon-square mdi mdi-view-module"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-30 row-offset-1 justify-content-sm-center justify-content-md-between">
-                        @foreach($categories->blogs as $article)
-                            @include('partials._blog_article')
-                        @endforeach
+
+                    @include('partials._blog_article', ['allArticles' => $categories->blogs])
+
                     </div>
-                </div>
 
                 <!-- Debut Aside container -->
                 @include('partials._blog_aside')
             </div>
         </div>
     </section>
+@endsection
+
+@section('dedicated_js')
+    <script>
+        $(document).ready(function () {
+            // click sur le bouton show grid
+            $('#show-grid').on('click', function (e) {
+                e.preventDefault();
+                //On affiche les articles contenant la class 'grid-a-view'
+                $('.grid-a-view').fadeIn();
+                //On masque les deux autres types d'articles
+                $('.big-list-view').fadeOut();
+                $('.list-a-view').fadeOut();
+
+                //On supprime la class 'active' des 2 autres boutons
+                $('#show-list').parent('li').removeClass('active');
+                $('#show-big-list').parent('li').removeClass('active');
+                //On ajoute la class 'active' sur le bouton
+                $('#show-grid').parent('li').addClass('active');
+            });
+
+            // click sur le bouton show big-list
+            $('#show-big-list').on('click', function (e) {
+                e.preventDefault();
+                //On affiche les articles contenant la class 'big-list-view'
+                $('.big-list-view').fadeIn();
+                //On masque les deux autres types d'articles
+                $('.grid-a-view').fadeOut();
+                $('.list-a-view').fadeOut();
+
+                //On supprime la class 'active' des 2 autres boutons
+                $('#show-list').parent('li').removeClass('active');
+                $('#show-grid').parent('li').removeClass('active');
+                //On ajoute la class 'active' sur le bouton
+                $('#show-big-list').parent('li').addClass('active');
+            });
+
+            // click sur le bouton show list
+            $('#show-list').on('click', function (e) {
+                e.preventDefault();
+                //On affiche les articles contenant la class 'list-a-view'
+                $('.list-a-view').fadeIn();
+                //On masque les deux autres types d'articles
+                $('.big-list-view').fadeOut();
+                $('.grid-a-view').fadeOut();
+
+                //On supprime la class 'active' des 2 autres boutons
+                $('#show-big-list').parent('li').removeClass('active');
+                $('#show-grid').parent('li').removeClass('active');
+                //On ajoute la class 'active' sur le bouton
+                $('#show-list').parent('li').addClass('active');
+            });
+        });
+    </script>
 @endsection
