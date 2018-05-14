@@ -52,6 +52,7 @@ class BlogRepository
     /**
      * Gère l'insertion d'un nouvel article
      * @param Request $request
+     * @return int article
      */
     public function store(Request $request)
     {
@@ -63,6 +64,7 @@ class BlogRepository
     /**
      * @param Blog $article
      * @param Request $request
+     * @return aritcle id
      */
     private function save(Blog $article, Request $request)
     {
@@ -151,7 +153,7 @@ class BlogRepository
 
             try {
                 //recupere l'image qui vient d'etre uploadee
-                $imgThumbNailList = \Image::make('storage/' . $array[1] . '/' . $array[2]);
+                $imgThumbNailList = Image::make('storage/' . $array[1] . '/' . $array[2]);
                 //redimensionne l'image
                 $imgThumbNailList->fit(275);
                 //defini le chemin du fichier

@@ -19,11 +19,20 @@ class Comments extends Model
         return $this->morphTo();
     }
 
+    /**
+     * Relation 1:n vers la table user (1 commentaire appartient à un utilisateur)
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Retourne la liste des reply d'un commentaire
+     * @param $id
+     * @return mixed
+     */
     public function GetRepliedComments($id)
     {
         $val = \Cache::remember('reply-to-'.$id, 20, function () use ($id){
