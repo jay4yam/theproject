@@ -1,4 +1,6 @@
-@extends('layouts.home')
+@extends('layouts.home', [
+                            'title' => 'Vols en Hélicoptère en France et dans le monde',
+                            'activeHomeCss' => 'active'])
 
 @section('content')
     <!-- Swiper-->

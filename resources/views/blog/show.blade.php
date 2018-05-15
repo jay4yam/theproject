@@ -1,5 +1,5 @@
 @extends('layouts.other', [
-                            'title' => ' On va vous donner envie de voler avec nous | Blog easyCopter',
+                            'title' => $article->title,
                             'activeBlogCss' => 'active'
                             ])
 

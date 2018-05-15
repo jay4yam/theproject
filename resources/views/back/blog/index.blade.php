@@ -33,6 +33,7 @@
                                     <th scope="col">Visible</th>
                                     <th scope="col">Crée le</th>
                                     <th scope="col">Crée par</th>
+                                    <th scope="col">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>

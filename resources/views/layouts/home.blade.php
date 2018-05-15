@@ -117,12 +117,8 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="contacts.html">Contacts</a>
-                                    <!-- RD Navbar Dropdown-->
-                                    <ul class="rd-navbar-dropdown">
-                                        <li><a href="contacts.html">Contacts</a></li>
-                                        <li><a href="contacts-variant-2.html">Contacts v2</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="{{ url(App::getLocale().'/contact') }}">contact</a>
                                 </li>
                                 @guest
                                     <li><a href="{{ route('login') }}">Login</a></li>

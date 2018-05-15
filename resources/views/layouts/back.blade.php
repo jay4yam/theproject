@@ -85,6 +85,9 @@
                                     <li><a href="{{ route('blogs.create') }}">Ajouter</a></li>
                                 </ul>
                             </li>
+                            <li class="{{ @$blogCommentActive }}">
+                                <a href="{{ route('comments.index') }}">Commentaires</a>
+                            </li>
                             @guest
                                 <li><a href="{{ route('login') }}">Login</a></li>
                                 @else

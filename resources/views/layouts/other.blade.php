@@ -59,8 +59,8 @@
                     <div class="rd-navbar-nav-wrap">
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
-                            <li>
-                                <a href="{{ url('/') }}">Home</a>
+                            <li class="{{ @$activeHomeCss }}">
+                                <a href="{{ url(App::getLocale().'/') }}">Home</a>
                             </li>
                             <li><a href="tours-grid.html">Tours</a>
                                 <!-- RD Navbar Dropdown-->
