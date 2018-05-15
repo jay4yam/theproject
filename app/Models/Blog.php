@@ -51,4 +51,9 @@ class Blog extends Model
     {
         return $this->morphMany(Comments::class, 'commentable');
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }
