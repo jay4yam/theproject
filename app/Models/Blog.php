@@ -52,8 +52,12 @@ class Blog extends Model
         return $this->morphMany(Comments::class, 'commentable');
     }
 
+    /**
+     * Liens entre la table "blogs" et la table "tags"
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable', 'taggable', 'taggable_id');
     }
 }

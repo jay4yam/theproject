@@ -11,6 +11,6 @@ class Tag extends Model
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function blogs(){
-        return $this->morphedByMany(Blog::class, 'taggable');
+        return $this->morphedByMany(Blog::class, 'taggable', 'taggable', 'taggable_id');
     }
 }

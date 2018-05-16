@@ -88,7 +88,7 @@ class BlogController extends Controller
      */
     public function show($locale, $id, $slug)
     {
-        $article = $this->blog->with('user', 'categories', 'comments')->where('id', $id)->firstOrFail();
+        $article = $this->blog->with('user', 'categories', 'comments', 'tags')->where('id', $id)->firstOrFail();
 
         return view('blog.show', compact('article'));
     }
