@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Tag;
+use \App\Models\Blog;
 
 class TagsTableSeeder extends Seeder
 {
@@ -16,11 +17,11 @@ class TagsTableSeeder extends Seeder
 
         for($i = 1; $i < 21; $i++)
         {
-            DB::table('taggable')->insert(
+            DB::table('taggables')->insert(
                 [
                     'tag_id' => $i,
-                    'taggable_id' => $i,
-                    'taggable_type' => 'App/Models/Tag',
+                    'taggable_id' => 1,
+                    'taggable_type' => Blog::class,
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now(),
                 ]);

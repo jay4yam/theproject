@@ -26,6 +26,7 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     Route::get('/blog', 'BlogController@index')->name('blog.index');
     Route::get('/blog/cat/{id}/{categorie}', 'BlogController@categorie')->name('blog.categorie');
     Route::get('/blog/{id}/{slug}', 'BlogController@show')->name('blog.show');
+    Route::get('/tag/{id}', 'BlogController@filterByTag')->name('blog.tag');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');

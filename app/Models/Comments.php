@@ -41,4 +41,5 @@ class Comments extends Model
 
         return $val;
     }
+
 }

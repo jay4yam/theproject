@@ -58,6 +58,6 @@ class Blog extends Model
      */
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable', 'taggable', 'taggable_id');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

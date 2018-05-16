@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Models\Blog;
 use App\Models\Categories;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 
 class BlogController extends Controller
 {
@@ -80,6 +81,29 @@ class BlogController extends Controller
     }
 
     /**
+     * Retourne la vue filtrée par tag
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filterByTag($locale, $id)
+    {
+        try {
+
+            $allArticles = $this->blog->whereHas('tags', function ($query) use ($id) {
+                $query->where('taggables.taggable_id', '=', $id);
+            })->paginate(6);
+
+        }catch (\Exception $exception){
+
+            flash()->error($exception->getMessage());
+
+            return redirect()->route('blog.index', ['locale' => \App::getLocale()]);
+        }
+
+        return view('blog.index', compact('allArticles'));
+    }
+
+    /**
      * Affiche un article
      * @param $locale
      * @param $id
@@ -88,8 +112,17 @@ class BlogController extends Controller
      */
     public function show($locale, $id, $slug)
     {
-        $article = $this->blog->with('user', 'categories', 'comments', 'tags')->where('id', $id)->firstOrFail();
+        //On essaye de récupère l'article
+        try {
 
+            $article = $this->blog->with('user', 'categories', 'comments', 'tags')->where('id', $id)->firstOrFail();
+
+        }catch (\Exception $exception){
+
+            flash()->error($exception->getMessage());
+
+            return redirect()->route('blog.index', ['locale' => \App::getLocale()]);
+        }
         return view('blog.show', compact('article'));
     }
 }
