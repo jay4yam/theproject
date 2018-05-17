@@ -15,9 +15,9 @@ class CreateVillesTable extends Migration
     {
         Schema::create('villes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('latitude')->nullable();
-            $table->string('longitude')->nullabel();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
 
