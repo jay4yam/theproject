@@ -46,6 +46,7 @@
                     <div class="box box-lg box-single-post bg-default d-block">
                         {!! $article->content !!}
 
+                        <!-- social links -->
                         <div class="d-inline-block inset-md-left-10">
                             <!-- List Inline-->
                             <ul class="list-inline list-inline-modern list-inline-11 bg-wild-wand">
@@ -78,6 +79,7 @@
                         </div>
                     </div>
                     <hr class="hr bg-alto">
+
                     <!-- 3 Recent Posts-->
                     <div class="row row-30 justify-content-sm-center justify-content-md-start justify-content-lg-center">
                         @include('partials._three_articles_same_cat')
@@ -92,15 +94,14 @@
                                 <h4 class="text-ubold">{{ $article->comments()->count() }} Comments</h4>
                                 <!-- form -->
                                 <div class="unit unit-wide flex-column flex-sm-row unit-spacing-sm">
-                                    <div class="unit-left">
-                                        <img class="img-responsive rounded-circle" src="/images/users/user-01-40x40.jpg" width="40" height="40" alt="">
-                                    </div>
                                     <div class="unit-body">
                                         @if(Auth::check())
                                         {{ Form::open(['url' => App::getLocale().'/add-comment', 'locale' => App::getLocale(), 'method' => 'post', 'class' => 'form-comment' ]) }}
+                                            {{ Form::hidden('commentable_id', $article->id) }}
+                                            {{ Form::hidden('user_id', Auth::user()->id) }}
                                             <div class="form-wrap form-wrap-xs">
-                                                <label class="form-label rd-input-label" for="content">Enter your comment ...</label>
-                                                <input class="form-input inset-right-50" id="content" type="text" name="content">
+                                                <label class="form-label rd-input-label" for="contentComment">Enter your comment ...</label>
+                                                <input class="form-input inset-right-50" id="contentComment" type="text" name="contentComment">
                                             </div>
                                             <button type="submit">
                                                 <img class="img-responsive center-block img-semi-transparent-inverse" src="/images/icons/icon-19-19x19.png" width="19" height="19" alt="">
@@ -113,7 +114,7 @@
                                 </div>
 
                                 <!-- liste des commentaires-->
-                                @foreach($article->comments->where('reply_to', null)->load('user') as $comment)
+                                @foreach($article->comments()->orderBy('created_at', 'desc')->where('reply_to', null)->with('user')->get() as $comment)
                                     <div class="post-comment unit flex-column flex-sm-row unit-spacing-sm">
                                         <div class="unit-left">
                                             <img class="img-responsive rounded-circle" src="/images/users/user-01-40x40.jpg" width="40" height="40" alt="">
@@ -165,13 +166,13 @@
                         <div class="blog-aside-item">
                             <p class="text-black text-ubold text-uppercase text-spacing-200">{{ __('blog.blog_search') }}</p>
                             <!-- RD Search Form-->
-                            <form class="form-blog-search form-blog-search-type-2 form-search rd-search" action="search-results.html" method="GET">
+                            {{ Form::open(['route' => ['blog.search', App::getLocale()], 'method' => 'get','class' => 'form-blog-search form-blog-search-type-2 form-search rd-search']) }}
                                 <button class="form-search-submit" type="submit"><span class="fa fa-search"></span></button>
                                 <div class="form-wrap form-wrap-xs">
                                     <label class="form-label form-search-label form-label-sm" for="blog-sidebar-form-search-widget">{{ __('blog.blog_request') }}</label>
-                                    <input class="form-search-input input-sm form-input input-sm" id="blog-sidebar-form-search-widget" type="text" name="s" autocomplete="off">
+                                    <input class="form-search-input input-sm form-input input-sm" id="blog-sidebar-form-search-widget" type="text" name="q" autocomplete="off">
                                 </div>
-                            </form>
+                            {{ Form::close() }}
                         </div>
                         <hr class="hr bg-gallery">
                         <div class="blog-aside-item">

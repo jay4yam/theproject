@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Models\Blog;
 use App\Models\Categories;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
@@ -124,5 +124,16 @@ class BlogController extends Controller
             return redirect()->route('blog.index', ['locale' => \App::getLocale()]);
         }
         return view('blog.show', compact('article'));
+    }
+
+    /**
+     * @param $locale
+     * @param Request $request
+     */
+    public function search($locale, Request $request)
+    {
+        $allArticles = Blog::with(['categories', 'user'])->where('title', 'like', '%'.$request->q.'%')->paginate(6);
+
+        return view('blog.index', compact('allArticles'));
     }
 }

@@ -27,11 +27,14 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     Route::get('/blog/cat/{id}/{categorie}', 'BlogController@categorie')->name('blog.categorie');
     Route::get('/blog/{id}/{slug}', 'BlogController@show')->name('blog.show');
     Route::get('/tag/{id}', 'BlogController@filterByTag')->name('blog.tag');
+    Route::get('/blog/search', 'BlogController@search')->name('blog.search');
+    //Ajoute un commentaire
+    Route::post('/add-comment', 'CommentController@addComment')->name('comment.add');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');
 
-    Route::post('/add-comment', 'CommentController@addComment')->name('comment.add');
+
 });
 
 //Route regroupant tous les controller présent dans l'admin

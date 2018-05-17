@@ -26,10 +26,10 @@
                                 </div>
                                 <div class="pull-right shadow-drop-xs d-inline-block select-xs">
                                     <!--Select 2-->
-                                    <select class="form-input select-filter" data-minimum-results-for-search="Infinity" data-constraints="@Required">
-                                        <option value="2">{{ __('blog.blog_newest') }}</option>
-                                        <option value="3">{{ __('blog.blog_eldest') }}</option>
-                                    </select>
+                                    <select class="form-input select-filter form-control-has-validation form-control-last-child select2-hidden-accessible" data-minimum-results-for-search="Infinity" data-constraints="@Required" id="regula-generated-764271" tabindex="-1" aria-hidden="true">
+                                        <option value="2">Popularity</option>
+                                        <option value="3">Newest</option>
+                                    </select><span class="select2 select2-container select2-container--bootstrap select2-container--focus" dir="ltr" style="width: 120px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-regula-generated-764271-container"><span class="select2-selection__rendered" id="select2-regula-generated-764271-container" title="Popularity">Popularity</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><span class="form-validation"></span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -40,7 +40,7 @@
                                     <p class="text-extra-small text-uppercase text-black">{{ __('blog.blog_vue') }}</p>
                                 </div>
                                 <div class="pull-right">
-                                    <!-- List Inline-->
+                                    <!-- Format d'affichage de la page et des articles -->
                                     <ul class="list-inline list-primary-filled text-center list-top-panel">
                                         <li>
                                             <a class="shadow-drop-lg" href="#" id="show-big-list">
@@ -78,13 +78,13 @@
                         <div class="blog-aside-item">
                             <p class="text-black text-ubold text-uppercase text-spacing-200">{{ __('blog.blog_search') }}</p>
                             <!-- RD Search Form-->
-                            <form class="form-blog-search form-blog-search-type-2 form-search rd-search" action="search-results.html" method="GET">
-                                <button class="form-search-submit" type="submit"><span class="fa fa-search"></span></button>
-                                <div class="form-wrap form-wrap-xs">
-                                    <label class="form-label form-search-label form-label-sm" for="blog-sidebar-form-search-widget">{{ __('blog.blog_request') }}</label>
-                                    <input class="form-search-input input-sm form-input input-sm" id="blog-sidebar-form-search-widget" type="text" name="s" autocomplete="off">
-                                </div>
-                            </form>
+                            {{ Form::open(['route' => ['blog.search', App::getLocale()], 'method' => 'get','class' => 'form-blog-search form-blog-search-type-2 form-search rd-search']) }}
+                            <button class="form-search-submit" type="submit"><span class="fa fa-search"></span></button>
+                            <div class="form-wrap form-wrap-xs">
+                                <label class="form-label form-search-label form-label-sm" for="blog-sidebar-form-search-widget">{{ __('blog.blog_request') }}</label>
+                                <input class="form-search-input input-sm form-input input-sm" id="blog-sidebar-form-search-widget" type="text" name="q" autocomplete="off">
+                            </div>
+                            {{ Form::close() }}
                         </div>
                         <hr class="hr bg-gallery">
                         <div class="blog-aside-item">
