@@ -18,4 +18,13 @@ class Ville extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    /**
+     * Relation 1:1 vers entre la table 'villes' et la table 'voyages' (1 ville appartient à 1 voyage)
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function voyage()
+    {
+        return $this->belongsTo(Voyage::class);
+    }
 }

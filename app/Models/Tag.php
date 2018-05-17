@@ -18,4 +18,13 @@ class Tag extends Model
     {
         return $this->morphedByMany(Blog::class, 'taggable');
     }
+
+    /**
+     * Relation many to many morph entre les tables tags et voyages
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function voyages()
+    {
+        return $this->morphedByMany(Voyage::class, 'taggable');
+    }
 }
