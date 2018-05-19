@@ -20522,3 +20522,27 @@ a.roll {
   overflow: hidden;
 }
 
+#list-view{
+  display: none;
+}
+
+#discounted{
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-top: 80px solid #ff9f1c;
+  position: absolute;
+  z-index: 995;
+  top: 0;
+  right: 15px;
+}
+
+#discounted_price{
+  position: absolute;
+  top: 10px;
+  font-size: 22px;
+  color: black;
+  font-weight: bolder;
+  z-index: 996;
+  right: 30px;
+}

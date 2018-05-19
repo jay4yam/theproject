@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
             //BlogsCategoriesTableSeeder::class,
             //CommentBlogSeeder::class,
             //TagsTableSeeder::class,
-            RegionsSeeder::class,
-            VillesSeeder::class
+            //RegionsSeeder::class,
+            //VillesSeeder::class,
+            VoyagesSeeder::class,
         ]);
     }
 }

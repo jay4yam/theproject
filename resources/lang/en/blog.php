@@ -14,7 +14,7 @@ return [
     'blog_our_blog' => 'Blog EasyCopter',
     'blog_sub_title' => 'Make you want to fly with us ...',
     'blog_search' => 'Search',
-    'blog_request' => 'Entre your request',
+    'blog_request' => 'Enter your request',
     'blog_eldest' => 'Eldest',
     'blog_newest' => 'Newest',
     'blog_sort_by' => 'Sort By:',

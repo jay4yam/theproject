@@ -62,14 +62,8 @@
                             <li class="{{ @$activeHomeCss }}">
                                 <a href="{{ url(App::getLocale().'/') }}">Home</a>
                             </li>
-                            <li><a href="tours-grid.html">Tours</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="tours-grid.html">Tours Grid</a></li>
-                                    <li><a href="tours-grid-variant-2.html">Tours Grid v2</a></li>
-                                    <li><a href="tours-list.html">Tours List</a></li>
-                                    <li><a href="tours-single.html">Tours Single</a></li>
-                                </ul>
+                            <li class="{{ @$activeVoyageCss }}">
+                                <a href="/{{ App::getLocale() }}/voyages">Voyages</a>
                             </li>
                             <li class="{{ @$activeBlogCss }}">
                                 <a href="/{{ App::getLocale() }}/blog">

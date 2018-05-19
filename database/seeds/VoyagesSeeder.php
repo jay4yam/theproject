@@ -12,6 +12,6 @@ class VoyagesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Voyage::class, 10);
+        factory(Voyage::class, 10)->create();
     }
 }

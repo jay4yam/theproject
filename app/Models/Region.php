@@ -16,6 +16,18 @@ class Region extends Model
      */
     public function villes()
     {
-        return $this->hasMany(Ville::class);
+        return $this->hasMany(Ville::class, 'region_id', 'id');
     }
+
+    public function voyages()
+    {
+        return $this->hasManyThrough(
+            Voyage::class,
+            Ville::class,
+            'id',
+            'id'
+        );
+    }
+
+
 }

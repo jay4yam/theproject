@@ -22,7 +22,9 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     //Affiche la home page
     Route::get('/', 'HomeController@index')->name('home');
 
-    //Affichage des différentes pages de blog
+    /**
+     * Affichage des différentes pages du blog
+     */
     Route::get('/blog', 'BlogController@index')->name('blog.index');
     Route::get('/blog/cat/{id}/{categorie}', 'BlogController@categorie')->name('blog.categorie');
     Route::get('/blog/{id}/{slug}', 'BlogController@show')->name('blog.show');
@@ -30,6 +32,13 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     Route::get('/blog/search', 'BlogController@search')->name('blog.search');
     //Ajoute un commentaire
     Route::post('/add-comment', 'CommentController@addComment')->name('comment.add');
+
+
+    /**
+     * Affichage des pages voyages
+     */
+    Route::get('/voyages', 'VoyageController@allVoyages')->name('voyage.index');
+    Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('voyage.show');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');

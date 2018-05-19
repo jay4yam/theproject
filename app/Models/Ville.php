@@ -21,10 +21,10 @@ class Ville extends Model
 
     /**
      * Relation 1:1 vers entre la table 'villes' et la table 'voyages' (1 ville appartient à 1 voyage)
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function voyage()
+    public function voyages()
     {
-        return $this->belongsTo(Voyage::class);
+        return $this->hasMany(Voyage::class, 'ville_id', 'id');
     }
 }

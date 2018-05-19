@@ -17,9 +17,13 @@ class CreateVoyagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('subtitle');
+            $table->text('intro');
             $table->text('description');
             $table->string('main_photo');
             $table->double('price');
+            $table->double('discount_price')->nullable();
+            $table->boolean('is_discounted')->default(0);
+            $table->boolean('is_public')->default(0);
             $table->string('duree_du_vol');
             $table->timestamps();
         });

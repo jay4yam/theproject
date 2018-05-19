@@ -1,4 +1,7 @@
-@extends('layouts.other', ['title' => 'Blog easyCopter | On va vous donner envie de voler avec nous'])
+@extends('layouts.other', [
+                    'title' => 'Blog easyCopter | On va vous donner envie de voler avec nous',
+                    'activeBlogCss' => 'active'
+                    ])
 
 @section('content')
     <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/images/backgrounds/background-10-1920x900.jpg">
