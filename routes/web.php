@@ -61,4 +61,7 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 
     //Listing des resource pour 'CRUD' blog
     Route::resource('/comments', 'CommentController');
+
+    //Listing des resource pour 'CRUD' un voyage
+    Route::resource('/voyages', 'VoyageController');
 });

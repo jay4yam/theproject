@@ -83,10 +83,16 @@
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="{{ route('blogs.index') }}">Liste</a></li>
                                     <li><a href="{{ route('blogs.create') }}">Ajouter</a></li>
+                                    <li class="{{ @$blogCommentActive }}">
+                                        <a href="{{ route('comments.index') }}">Commentaires</a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li class="{{ @$blogCommentActive }}">
-                                <a href="{{ route('comments.index') }}">Commentaires</a>
+                            <li class="{{ @$voyageCssActive }}"><a href="{{ route('voyages.index') }}">Voyages</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-navbar-dropdown">
+                                    <li><a href="{{ route('voyages.create') }}">Ajouter</a></li>
+                                </ul>
                             </li>
                             @guest
                                 <li><a href="{{ route('login') }}">Login</a></li>

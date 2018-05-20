@@ -5,7 +5,7 @@
             <div class="box-offer box-offer-xs">
                 <div class="box-offer-img-wrap">
                     <a href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                        <img class="img-responsive center-block" src="/images/offers/box-offer-01-270x240.jpg" width="270" height="240" alt="">
+                        <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="270" height="240" alt="">
                     </a>
                 </div>
                 <div class="box-offer-caption text-left">
@@ -46,7 +46,7 @@
         <div class="box-offer box-offer-sm box-offer-left">
             <div class="box-offer-img-wrap">
                 <a href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                    <img class="img-responsive center-block" src="/images/offers/box-offer-01-270x280.jpg" width="270" height="280" alt="">
+                    <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="270" height="280" alt="">
                 </a>
             </div>
             <div class="box-offer-caption text-left">

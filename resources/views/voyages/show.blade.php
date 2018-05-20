@@ -4,7 +4,7 @@
                             ])
 
 @section('content')
-    <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/images/backgrounds/background-39-1920x900.jpg">
+    <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/storage/voyages{{ $voyage->main_photo }}">
         <div class="parallax-content">
             <div class="container">
                 <div class="row justify-content-sm-center align-items-sm-center section-34 section-md-top-145 section-md-bottom-100 section-lg-top-100 section-cover">

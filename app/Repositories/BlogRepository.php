@@ -131,9 +131,10 @@ class BlogRepository
 
     /**
      * Gère l'upload le fichier image
-     * @param $request
+     * @param Request $request
      * @param Blog $article
-     * @return mixed|string
+     * @return mixed
+     * @throws \Exception
      */
     private function uploadMainImage(Request $request, Blog $article)
     {

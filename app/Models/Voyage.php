@@ -10,6 +10,11 @@ class Voyage extends Model
 
     protected $fillable = ['title', 'subtitle', 'intro',  'description', 'main_photo', 'price', 'discount_price', 'is_discounted', 'is_public','duree_du_vol', 'ville_id'];
 
+    public function scopeIsPublic($query)
+    {
+        return $query->where('is_public', '=', 1);
+    }
+
     /**
      * Relation 1:1 entre la table 'voyages' et la table 'villes' (1 voyage à une ville)
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

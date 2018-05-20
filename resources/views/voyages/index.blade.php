@@ -79,7 +79,11 @@
                             <!-- RD Search Form-->
                             <form class="rd-mailform">
                                 <div class="form-blog-search">
-                                    <button class="form-search-submit"><span><img class="img-responsive center-block" src="/images/icons/icon-34-16x21.png" width="16" height="21" alt=""></span></button>
+                                    <button class="form-search-submit">
+                                        <span>
+                                            <img class="img-responsive center-block" src="/images/icons/icon-34-16x21.png" width="16" height="21" alt="">
+                                        </span>
+                                    </button>
                                     <div class="form-wrap form-wrap-xs">
                                         <label class="form-label form-search-label form-label-sm" for="tours-destination">Your Destination</label>
                                         <input class="form-search-input input-sm form-input" id="tours-destination" type="text">
