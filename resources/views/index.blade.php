@@ -54,127 +54,38 @@
             <h3>{{ __('home.h3circuits') }}</h3>
             <p>{{ __('home.pcircuits') }}</p>
             <div class="row row-30 justify-content-sm-center">
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow fadeInLeft" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-01-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">Turkey</a></div>
+                <!-- Box Offer-->
+                @foreach($last6articles as $voyage)
+                    <div class="col-md-5 col-lg-4">
+                        <div class="box-offer wow fadeInUp" data-wow-delay=".2s">
+                            <div class="box-offer-img-wrap">
+                                <a href="{{ url()->route('front.voyage.show', ['locale' => App::getLocale(), 'id' => $voyage->id, 'slug' => str_slug($voyage->title)]) }}">
+                                    <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="370" height="310" alt="">
+                                </a>
                             </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$2,000</div>
+                            <div class="box-offer-caption text-left">
+                                <div class="pull-left">
+                                    <div class="box-offer-title text-ubold">
+                                        <a class="text-black" href="{{ url()->route('front.voyage.show', ['locale' => App::getLocale(), 'id' => $voyage->id, 'slug' => str_slug($voyage->title)]) }}" title="{{ $voyage->title }}">
+                                            {{ str_limit($voyage->title, 26) }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="box-offer-price text-black">{{ $voyage->price }} €</div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!-- List Inline-->
+                                <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
+                                    <li>{{ $voyage->region->first()->name }}</li>
+                                    <li>{{ $voyage->ville->name }}</li>
+                                    <li>{{ $voyage->duree_du_vol }} .min</li>
+                                </ul>
                             </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>Istanbul, Antalya, Ephesus</li>
-                                <li>8 days</li>
-                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow bounceIn" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-02-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">Spain</a></div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$3,000</div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>Madrid, Andalucia, Barcelona</li>
-                                <li>9 days</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow fadeInRight" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-03-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">United Kingdom</a></div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$5,000</div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>England, Scotland, Wales</li>
-                                <li>13 days</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow fadeInLeft" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-04-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">Eastern Europe</a></div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$2,500</div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>Slovenia, Hungary, Poland</li>
-                                <li>10 days</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow bounceIn" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-05-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">Italy</a></div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$2,700</div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>Rome, Milan, Venice</li>
-                                <li>7 days</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <!-- Box Offer-->
-                    <div class="box-offer wow fadeInRight" data-wow-delay=".2s">
-                        <div class="box-offer-img-wrap"><a href="tours-single.html"><img class="img-responsive center-block" src="/images/offers/box-offer-06-370x310.jpg" width="370" height="310" alt=""></a></div>
-                        <div class="box-offer-caption text-left">
-                            <div class="pull-left">
-                                <div class="box-offer-title text-ubold"><a class="text-black" href="tours-single.html">Swiss Alps</a></div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="box-offer-price text-black">$5,100</div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-13 list-inline-marked text-silver-chalice text-small">
-                                <li>Zurich, Geneve, Luzern</li>
-                                <li>13 days</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div><a class="button button-primary" href="tours-grid.html">{{ __('home.actioncircuits') }}</a>
+                @endforeach
+            </div><a class="button button-primary" href="{{ url()->route('front.voyage.index', ['locale' => App::getLocale()]) }}">{{ __('home.actioncircuits') }}</a>
         </div>
     </section>
     <!-- Why SunTravel-->

@@ -25,4 +25,8 @@ return [
         'price' => 'Prix',
         'location' => 'Lieux',
         'book.this.flight' => 'Réservez ce vol',
+        'voir' => 'voir',
+        'search' => 'Recherche',
+        'destination' => 'Votre Destination',
+        'price_range' => 'Filtrer par prix'
     ];

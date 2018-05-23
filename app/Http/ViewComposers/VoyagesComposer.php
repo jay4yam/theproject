@@ -25,8 +25,9 @@ class VoyagesComposer
     protected $voyage;
 
     /**
-     * VilleListComposer constructor.
+     * VoyagesComposer constructor.
      * @param Ville $ville
+     * @param Voyage $voyage
      */
     public function __construct(Ville $ville, Voyage $voyage)
     {
@@ -60,11 +61,20 @@ class VoyagesComposer
      */
     public function getVilles()
     {
-        $villes = \Cache::remember('villes', 10, function (){
-            return $this->ville->pluck('name', 'id');
+        //init. un tableau
+        $array = [];
+
+        $value = \Cache::remember('ville_count_voyage', 10, function () use(&$array){
+            //itère sur les voyages public groupés par ville
+            $this->voyage->isPublic()->with('ville')->get(['id', 'ville_id'])->groupBy('ville_id')->each(function ($items) use (&$array) {
+                    foreach ($items as $item) {
+                        $array [$item->ville->name] = ['id' => $item->id, 'count' => $items->count()];
+                    }
+                });
+            return $array;
         });
 
-        return $villes;
+        return $value;
     }
 
     /**

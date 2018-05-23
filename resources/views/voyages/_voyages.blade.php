@@ -4,15 +4,15 @@
         <div class="col-md-6 col-lg-4">
             <div class="box-offer box-offer-xs">
                 <div class="box-offer-img-wrap">
-                    <a href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                        <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="270" height="240" alt="">
+                    <a href="{{ route('front.voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
+                        <img class="img-responsive center-block" src="/storage/voyages/thumbnails/{{ $voyage->main_photo }}" width="270" height="240" alt="">
                     </a>
                 </div>
                 <div class="box-offer-caption text-left">
-                    <div class="pull-left">
+                    <div class="">
                         <div class="box-offer-title text-ubold">
-                            <a class="text-black" href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                                {{ $voyage->title }}
+                            <a class="text-black text-center" href="{{ route('front.voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
+                                {{ str_limit($voyage->title,27) }}
                             </a>
                         </div>
                     </div>
@@ -20,16 +20,20 @@
                         @if($voyage->is_discounted)
                         <div id="discounted"></div>
                         <div id="discounted_price">{{ number_format($voyage->discount_price, 0, ',', ' ') }} €</div>
-                        <div class="box-offer-price text-primary text-strike">{{ number_format($voyage->price, 2, ',', ' ') }} €</div>
-                        @else
-                            <div class="box-offer-price text-primary">{{ number_format($voyage->price, 2, ',', ' ') }} €</div>
                         @endif
                     </div>
                     <div class="clearfix"></div>
                     <!-- List Inline-->
-                    <ul class="list-inline list-inline-13 list-inline-marked list-inline-marked-offset-inverse-top text-silver-chalice text-extra-small">
+                    <ul class="text-center list-inline list-inline-13 list-inline-marked list-inline-marked-offset-inverse-top text-silver-chalice text-extra-small">
                         <li>{{ @$voyage->region->first()->name }}</li>
                         <li>{{ $voyage->ville->name }}</li>
+                        <li>
+                            @if($voyage->is_discounted)
+                                <div class="box-offer-price text-primary text-strike">{{ number_format($voyage->price, 2, ',', ' ') }} €</div>
+                            @else
+                                <div class="box-offer-price text-primary">{{ number_format($voyage->price, 2, ',', ' ') }} €</div>
+                            @endif
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,8 +49,8 @@
         <!-- Box Offer-->
         <div class="box-offer box-offer-sm box-offer-left">
             <div class="box-offer-img-wrap">
-                <a href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                    <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="270" height="280" alt="">
+                <a href="{{ route('front.voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
+                    <img class="img-responsive center-block" src="/storage/voyages/thumbnails/{{ $voyage->main_photo }}" width="270" height="280" alt="">
                 </a>
             </div>
             <div class="box-offer-caption text-left">
@@ -54,7 +58,7 @@
                     <div class="box-offer-caption-inner-left">
                         <p class="text-extra-small text-silver-chalice"></p>
                         <div class="box-offer-title text-ubold">
-                            <a class="text-black" href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
+                            <a class="text-black" href="{{ route('front.voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
                                 {{ $voyage->title }}
                             </a>
                         </div>
@@ -76,7 +80,7 @@
                             </ul>
                         @else
                             <ul class="list-inline inset-right-5">
-                                <li class="box-offer-price text-black text-ubold text-primary text-middle">{{ number_format($voyage->discount_price, 2, ',', ' ') }} €</li>
+                                <li class="box-offer-price text-black text-ubold text-primary text-middle">{{ number_format($voyage->price, 2, ',', ' ') }} €</li>
                             </ul>
                         @endif
                     </div>
@@ -85,12 +89,12 @@
                 <div class="box-offer-caption-inner-wrap box-offer-caption-inner-wrap-bottom">
                     <div class="box-offer-caption-inner-left box-offer-description">
                         <p class="text-small text-silver-chalice">
-                            {{ $voyage->intro }}
+                            {!!  str_limit($voyage->intro,140)  !!}
                         </p>
                     </div>
                     <div class="box-offer-caption-inner-right text-xl-right">
-                        <a class="button button-width-110 button-primary" href="{{ route('voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
-                            VIEW MORE
+                        <a class="button button-width-110 button-primary" href="{{ route('front.voyage.show', ['id' => $voyage->id, 'locale' => App::getLocale(), 'slug' => str_slug($voyage->title)]) }}">
+                           {{ __('voyage.voir') }}
                         </a>
                     </div>
                 </div>

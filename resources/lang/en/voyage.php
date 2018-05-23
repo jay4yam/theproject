@@ -25,4 +25,8 @@ return [
     'price' => 'Price',
     'location' => 'Location',
     'book.this.flight' => 'Book this flight',
+    'voir' => 'view more',
+    'search' => 'Search',
+    'destination' => 'Your Destination',
+    'price_range' => 'Price Range',
 ];

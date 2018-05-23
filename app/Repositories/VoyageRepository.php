@@ -91,11 +91,16 @@ class VoyageRepository
         $voyage->price = $request->price;
         $voyage->is_discounted = $request->is_discounted;
         $voyage->discount_price = $request->is_discounted ? $request->discount_price: 0;
-        $voyage->main_photo = $this->uploadMainImage($request, $voyage);
+        $voyage->main_photo = 'default.jpg';
         $voyage->duree_du_vol = $request->duree_du_vol;
         $voyage->ville_id = $request->ville_id;
 
         $voyage->save();
+
+        if($request->has('main_photo')) {
+            $voyage->main_photo = $this->uploadMainImage($request, $voyage);
+            $voyage->save();
+        }
     }
 
     /**
@@ -149,9 +154,12 @@ class VoyageRepository
                 //recupere l'image qui vient d'etre uploadee
                 $imgThumbNailList = Image::make('storage/' . $array[1] . '/' . $array[2] . '/' . $array[3]);
                 //redimensionne l'image
-                $imgThumbNailList->fit(240);
+                $imgThumbNailList->fit(270,240);
+
                 //defini le chemin du fichier
-                $pathList = 'storage/voyages/thumbnails/' . $array[3];
+                mkdir('storage/voyages/thumbnails/' . $array[2]);
+                $pathList = 'storage/voyages/thumbnails/' . $array[2] . '/' . $array[3];
+
                 //sauv. le nouveau thumbnail
                 $imgThumbNailList->save($pathList);
 

@@ -64,6 +64,12 @@
                             <li>
                                 <a href="{{ url('/') }}">Dashboard</a>
                             </li>
+                            <li class="{{ @$voyageCssActive }}"><a href="{{ route('voyages.index') }}">Voyages</a>
+                                <!-- RD Navbar Dropdown-->
+                                <ul class="rd-navbar-dropdown">
+                                    <li><a href="{{ route('voyages.create') }}">Ajouter</a></li>
+                                </ul>
+                            </li>
                             <li class="{{ @$compagnyCssActive }}"><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
@@ -86,12 +92,6 @@
                                     <li class="{{ @$blogCommentActive }}">
                                         <a href="{{ route('comments.index') }}">Commentaires</a>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="{{ @$voyageCssActive }}"><a href="{{ route('voyages.index') }}">Voyages</a>
-                                <!-- RD Navbar Dropdown-->
-                                <ul class="rd-navbar-dropdown">
-                                    <li><a href="{{ route('voyages.create') }}">Ajouter</a></li>
                                 </ul>
                             </li>
                             @guest

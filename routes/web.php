@@ -37,8 +37,8 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
     /**
      * Affichage des pages voyages
      */
-    Route::get('/voyages', 'VoyageController@allVoyages')->name('voyage.index');
-    Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('voyage.show');
+    Route::get('/voyages', 'VoyageController@allVoyages')->name('front.voyage.index');
+    Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('front.voyage.show');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');

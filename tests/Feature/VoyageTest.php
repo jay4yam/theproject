@@ -4,14 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Voyage;
-use App\Repositories\VoyageRepository;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class HomeTest extends TestCase
+class VoyageTest extends TestCase
 {
-
     /**
      * A basic test example.
      *
@@ -23,33 +21,30 @@ class HomeTest extends TestCase
     }
 
     /**
-     * Test acces sur la home page
+     * Test acces sur la page voyage
      */
     public function testAccess()
     {
-        $response = $this->get('/'.\App::getLocale());
+        $response = $this->get('/'.\App::getLocale().'/voyages');
 
         $response->assertStatus(200);
     }
 
     /**
-     * Test l'accès à la home page en étant logge
+     * Test accès voyage en étant logge
      */
     public function testAccessLogged()
     {
         $user = factory(User::class)->make();
 
-        $response = $this->actingAs($user)->get('/'.\App::getLocale());
+        $response = $this->actingAs($user)->get('/'.\App::getLocale().'/voyages');
 
         $response->assertStatus(200);
     }
 
-    /**
-     * Test l'affiage de la home avec les produits
-     */
-    public function testHomeProducts()
-    {
 
+    public function testVoyagesIndexWithProduct()
+    {
         $products = factory(Voyage::class,10)->make();
 
         $response = $this->get('/'.\App::getLocale(), compact('products'));
