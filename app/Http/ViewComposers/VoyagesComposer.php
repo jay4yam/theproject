@@ -68,7 +68,7 @@ class VoyagesComposer
             //itère sur les voyages public groupés par ville
             $this->voyage->isPublic()->with('ville')->get(['id', 'ville_id'])->groupBy('ville_id')->each(function ($items) use (&$array) {
                     foreach ($items as $item) {
-                        $array [$item->ville->name] = ['id' => $item->id, 'count' => $items->count()];
+                        $array [$item->ville->name] = ['id' => $item->ville_id, 'count' => $items->count()];
                     }
                 });
             return $array;

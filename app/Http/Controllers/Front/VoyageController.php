@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Repositories\VoyageRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class VoyageController extends Controller
 {
@@ -51,6 +52,7 @@ class VoyageController extends Controller
     public function showVoyage($locale, $id, $lug)
     {
         try {
+
             $voyage = \Cache::remember('voyage' . $id, 10, function () use ($id) {
                 return $this->voyageRepository->getById($id);
             });
@@ -58,6 +60,7 @@ class VoyageController extends Controller
             $voyagesInRegion = \Cache::remember('voyageInRegion' . $id, 10, function () use ($voyage) {
                 return $this->voyageRepository->getVoyagesInRegion($voyage);
             });
+
         }catch (\Exception $exception){
 
             flash()->error($exception->getMessage());
@@ -66,5 +69,16 @@ class VoyageController extends Controller
         }
 
         return view('voyages.show', compact('voyage', 'voyagesInRegion'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filterVille(Request $request)
+    {
+        $allVoyages = $this->voyageRepository->getVoyagesByCity($request);
+
+        return view('voyages.index', compact('allVoyages'));
     }
 }

@@ -28,5 +28,6 @@ return [
         'voir' => 'voir',
         'search' => 'Recherche',
         'destination' => 'Votre Destination',
-        'price_range' => 'Filtrer par prix'
+        'price_range' => 'Filtrer par prix',
+        'filter' =>  'filtrer'
     ];

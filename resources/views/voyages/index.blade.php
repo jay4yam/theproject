@@ -46,12 +46,12 @@
                                     <!-- List view type -->
                                     <ul class="list-inline list-primary-filled text-center list-top-panel">
                                         <li>
-                                            <a class="shadow-drop-lg" href="#" id="show-list">
+                                            <a class="shadow-drop-lg" href="{{ url()->current() . '?' . http_build_query(['view' => 'list']) }}" id="show-list">
                                                 <span class="icon icon-sm icon-square mdi mdi-format-list-bulleted"></span>
                                             </a>
                                         </li>
                                         <li class="active">
-                                            <a class="shadow-drop-lg" href="#" id="show-grid">
+                                            <a class="shadow-drop-lg" href="{{ url()->current() . '?' . http_build_query(['view' => 'grid']) }}" id="show-grid">
                                                 <span class="icon icon-sm icon-square mdi mdi-view-module"></span>
                                             </a>
                                         </li>
@@ -65,7 +65,7 @@
 
                     <!-- Classic Pagination-->
                     <div class="paginate" align="center">
-                    {{ $allVoyages->links() }}
+                    {{ $allVoyages->appends(request()->input())->links() }}
                     </div>
                     <!-- Classic Pagination-->
                 </div>
@@ -80,30 +80,40 @@
 
 @section('dedicated_js')
     <script>
-        $(document).ready(function () {
 
-            $('#show-list').on('click', function (e) {
-                e.preventDefault();
+        testParam();
 
-                //aafiche ou masque le div correspondant
-                $('#grid-view').fadeOut();
-                $('#list-view').fadeIn();
+        function urlParam(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+                return null;
+            }
+            else{
+                return decodeURI(results[1]) || 0;
+            }
+        };
+
+        function testParam() {
+            if( urlParam('view') === 'list'){
+                //affiche ou masque le div correspondant
+                $('#grid-view').hide();
+                $('#list-view').show();
 
                 $('#show-grid').parent('li').removeClass('active');
-                $(this).parent('li').addClass('active');
-            });
+                $('#show-list').parent('li').addClass('active');
+            }
 
-            $('#show-grid').on('click', function (e) {
-                e.preventDefault();
-
-                //aafiche ou masque le div correspondant
-                $('#grid-view').fadeIn();
-                $('#list-view').fadeOut();
+            if( urlParam('view') === 'grid'){
+                //affiche ou masque le div correspondant
+                $('#list-view').hide();
+                $('#grid-view').show();
 
                 $('#show-list').parent('li').removeClass('active');
-                $(this).parent('li').addClass('active');
-            });
+                $('#show-grid').parent('li').addClass('active');
+            }
 
-        });
+        }
+
+        testParam();
     </script>
 @endsection

@@ -12,7 +12,7 @@
 */
 Auth::routes();
 
-Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
+Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'locale'], function( ) {
     // Recupère le premier segment de l'url ete definis une valeur par défaut ici le 'FR'
     $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
 
@@ -39,6 +39,8 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front'], function( ) {
      */
     Route::get('/voyages', 'VoyageController@allVoyages')->name('front.voyage.index');
     Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('front.voyage.show');
+    //vue filtre par ville
+    Route::get('/voyages/ville', 'VoyageController@filterVille')->name('front.voyage.ville');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');

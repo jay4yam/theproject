@@ -28,17 +28,19 @@
         <div class="blog-aside-item">
             <p class="text-black text-ubold text-uppercase text-spacing-200">Villes</p>
             <!-- List-->
+            {{ Form::open(['route' => ['front.voyage.ville'], 'method' => 'get']) }}
             <ul class="list list-1 list-checkbox text-left">
                 @foreach($villes as $ville => $value)
                     <li>
                         <label class="checkbox-inline checkbox-inline-left">
-                            <input class="checkbox-custom" name="remember" value="{{ $value['id'] }}" type="checkbox">
+                            <input class="checkbox-custom" name="ville[]" value="{{ $value['id'] }}" type="checkbox">
                             <span class="text-small">{{ $ville }} ({{ $value['count'] }})</span>
                         </label>
                     </li>
                 @endforeach
             </ul>
-            <a class="button button-primary button-width-110" href="#">Search</a>
+            <button class="button button-primary button-width-110" type="submit">{{ __('voyage.filter') }}</button>
+            {{ Form::close() }}
         </div>
     </aside>
 </div>

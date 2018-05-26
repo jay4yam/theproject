@@ -174,4 +174,18 @@ class VoyageRepository
 
         return $voyage->main_photo;
     }
+
+    /**
+     * Retourne la liste des voyages filtrés par ville
+     * @param Request $request
+     * @return mixed
+     */
+    public function getVoyagesByCity(Request $request)
+    {
+        $ville = $request->ville;
+
+        $voyages = $this->voyage->isPublic()->with('ville', 'region')->whereIn('ville_id', $ville)->paginate(9);
+
+        return $voyages;
+    }
 }
