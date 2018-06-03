@@ -12,7 +12,7 @@ return [
     */
 
     'blog_main_title' => 'Blog EasyCopter',
-    'blog_sub_title' => 'Vous donner envie de voler avec nous...',
+    'blog_sub_title' => 'Vous donnez envie de voler avec nous...',
     'blog_search' => 'Recherche',
     'blog_request' => 'Recherche',
     'blog_eldest' => 'plus ancien',

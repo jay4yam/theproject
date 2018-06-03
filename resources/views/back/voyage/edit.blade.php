@@ -2,6 +2,9 @@
                             'title' => 'Editer le voyage',
                             'voyageCssActive' => 'active'
                           ])
+@section('dedicated_css')
+    <link rel="stylesheet" href="{{ asset('/css/dropzone.css') }}">
+@endsection
 
 @section('content')
     <!-- Destinations-->
@@ -103,6 +106,26 @@
                                 </button>
                             </div>
                             {{ Form::close() }}
+
+                            <!-- DROPzone.js-->
+                            <div class="row">
+                                <h5 class="h5-slider">Photos du Slider</h5>
+                                <div class="col-md-6">
+                                    {{ Form::open(['route' => 'voyages.upload.miniature', 'class'=>'dropzone']) }}
+                                    {{ Form::hidden('voyage_id', $voyage->id) }}
+                                    {{ Form::close() }}
+                                </div>
+                                <div class="col-md-6">
+                                    @if(is_dir('storage/voyages/'.$voyage->id.'/min'))
+                                        @foreach(File::allFiles('storage/voyages/'.$voyage->id.'/min') as $file)
+                                            <div class="img-min">
+                                                <a href="#" class="delete-img" data-target="/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}">x remove</a>
+                                                <img src="/storage/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}" class="img-responsive" width="100px">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,6 +163,7 @@
 @endsection
 
 @section('dedicated_js')
+    <script src="{{ asset('/js/dropzone.js') }}"></script>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=bc7n096vwltba48ltvrnae4ya1bijl4g9yduphn5lp9kl2o9"></script>
     <script>
         $(document).ready(function (){
@@ -166,6 +190,33 @@
 
                 $('#slug').val(slug);
             });
+
+            //Supression d'une image du slider
+            var removeImageSlider = $('.delete-img');
+            removeImageSlider.on('click', function (e) {
+                //recupere l'objet clicker
+                var that = $(this);
+                //supprime l'effet du lien
+                e.preventDefault();
+                //affiche un message de confirmation avant suppression
+                var confirmation = confirm('Voulez vous vraiment supprimer cette image ?');
+                //si confirmation OK
+                if(confirmation) {
+                    //recupere le fichier à supprimer
+                    var data = removeImageSlider.data('target');
+                    //effectue une requete ajax pour supression
+                    $.ajax({
+                        type: 'get',
+                        url: "/fr/admin/delete-miniature",
+                        data: {file: data},
+                        success: function (event, data) {
+                            //si la suppression est un succès on supprime l'image et son div parent
+                            var div = that.parent('div');
+                            div.hide();
+                        }
+                    });
+                }
+            })
         });
 
         function slugify(str) {

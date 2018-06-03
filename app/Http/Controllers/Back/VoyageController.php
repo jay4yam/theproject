@@ -109,4 +109,37 @@ class VoyageController extends Controller
         return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($id)]);
     }
 
+    /**
+     * Gestion de l'iupload d'image via dropzone.js
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function uploadMiniature(Request $request)
+    {
+        if($request->file('file')) {
+            //on essaye d'upload le fichier
+            try {
+                $request->file('file')->store('public/voyages/' . $request->voyage_id . '/min');
+            } catch (\Exception $exception) {
+                //si exception : message d'erreur
+                throw new \Exception($exception->getMessage());
+            }
+            return response('success');
+        }
+    }
+
+    public function deleteMiniature(Request $request)
+    {
+        if($request->has('file')){
+            try{
+                unlink ( 'storage'.$request->file );
+            }catch (\Exception $exception){
+                return response(['error' => $exception->getMessage() ]);
+            }
+            return response(['success']);
+        }
+
+        return response(['error' => 'aucun fichier valide']);
+    }
 }

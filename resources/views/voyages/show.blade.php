@@ -80,24 +80,21 @@
     <!-- Slider Images -->
     <section>
         <div class="owl-carousel owl-carusel-inset-bottom owl-nav-type-3 owl-dots-primary" data-lightgallery="group" data-items="1" data-md-items="2" data-lg-items="3" data-xl-items="5" data-stage-padding="20" data-loop="true" data-margin="6" data-mouse-drag="false" data-dots="true" data-nav="true">
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-04-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-01-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
+            <!-- Thumbnail Rayen-->
+            @if(is_dir('storage/voyages/'.$voyage->id.'/min'))
+                @foreach(File::allFiles('storage/voyages/'.$voyage->id.'/min') as $file)
+                <div class="owl-item">
+                <a class="thumbnail-rayen" data-lightgallery="item" href="/storage/voyages/{{$voyage->id}}/min/{{ $file->getFilename() }}">
+                    <span class="figure">
+                        <img class="img-responsive center-block" width="370" height="310" src="/storage/voyages/{{$voyage->id}}/min/{{ $file->getFilename() }}" alt="">
+                        <span class="figcaption">
+                            <span class="icon icon-xl fa fa-search-plus text-white"></span>
+                        </span>
+                    </span>
+                </a>
             </div>
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-05-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-02-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
-            </div>
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-06-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-03-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
-            </div>
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-07-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-04-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
-            </div>
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-08-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-05-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
-            </div>
-            <div class="owl-item">
-                <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="/images/gallery/portfolio-09-1170x700_original.jpg"><span class="figure"><img class="img-responsive center-block" width="370" height="310" src="/images/offers/box-offer-06-370x310.jpg" alt=""><span class="figcaption"><span class="icon icon-xl fa fa-search-plus text-white"></span></span></span></a>
-            </div>
+                @endforeach
+            @endif
         </div>
     </section>
 

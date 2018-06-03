@@ -30,7 +30,7 @@ class VoyageController extends Controller
     {
         try {
 
-            $allVoyages = $this->voyageRepository->allVoyages();
+            $allVoyages = $this->voyageRepository->allPublicVoyages();
 
         }catch (\Exception $exception){
 
@@ -78,6 +78,13 @@ class VoyageController extends Controller
     public function filterVille(Request $request)
     {
         $allVoyages = $this->voyageRepository->getVoyagesByCity($request);
+
+        return view('voyages.index', compact('allVoyages'));
+    }
+
+    public function filterPrice(Request $request)
+    {
+        $allVoyages = $this->voyageRepository->getVoyagesByPrice($request);
 
         return view('voyages.index', compact('allVoyages'));
     }

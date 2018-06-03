@@ -35,9 +35,18 @@ class VoyageRepository
      * Renvois la liste des voyages
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function allVoyages()
+    public function allPublicVoyages()
     {
         return $this->voyage->isPublic()->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
+    }
+
+    /**
+     * Renvois la liste des voyages
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function allVoyages()
+    {
+        return $this->voyage->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
     }
 
     /**
@@ -157,7 +166,11 @@ class VoyageRepository
                 $imgThumbNailList->fit(270,240);
 
                 //defini le chemin du fichier
-                mkdir('storage/voyages/thumbnails/' . $array[2]);
+                if( ! is_dir('storage/voyages/thumbnails/' . $array[2]))
+                {
+                    mkdir('storage/voyages/thumbnails/' . $array[2]);
+                }
+
                 $pathList = 'storage/voyages/thumbnails/' . $array[2] . '/' . $array[3];
 
                 //sauv. le nouveau thumbnail
@@ -187,5 +200,17 @@ class VoyageRepository
         $voyages = $this->voyage->isPublic()->with('ville', 'region')->whereIn('ville_id', $ville)->paginate(9);
 
         return $voyages;
+    }
+
+    /**
+     * Renvois la liste des voyages classés par prix
+     * @param Request $request
+     * @return mixed
+     */
+    public function getVoyagesByPrice(Request $request)
+    {
+        $priceArray = [ $request->price_min, $request->price_max ];
+
+        return $this->voyage->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
     }
 }

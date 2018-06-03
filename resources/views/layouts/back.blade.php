@@ -62,7 +62,7 @@
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
                             <li>
-                                <a href="{{ url('/') }}">Dashboard</a>
+                                <a href="{{ url()->route('back.index') }}">Dashboard</a>
                             </li>
                             <li class="{{ @$voyageCssActive }}"><a href="{{ route('voyages.index') }}">Voyages</a>
                                 <!-- RD Navbar Dropdown-->

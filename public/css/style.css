@@ -8024,8 +8024,8 @@ a.button-more {
 .form-input {
   display: block;
   width: 100%;
-  height: 50px;
-  padding: 9px 20px;
+  height: 35px;
+  padding: 0px 20px;
   font-size: 16px;
   line-height: 1.5;
   color: #888;
@@ -20549,4 +20549,94 @@ a.roll {
 
 .shadow{
   text-shadow: 2px 2px 3px #000000;
+}
+
+.ui-menu{
+  position: relative;
+  top: -1127px;
+  left: 165px;
+  background-color: #FFF;
+  width: 200px;
+  z-index: 9999;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+.spinner{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: none;
+}
+
+.mini-cart{
+  position: absolute;
+  background-color: #ff9f1c;
+  color: #FFFFFF;
+  top: 180px;
+  right: 15px;
+  border-radius: 5% 0% 0% 5%;
+  padding: 8px;
+  display: none;
+  font-size: 27px;
+  cursor:pointer;
+}
+
+.mini-cart a{
+  color: #FFFFFF;
+}
+.over{display: none !important;}
+
+.mini-cart:hover .defaut{
+  display: none;
+}
+.mini-cart:hover .over{
+  display: block!important;
+}
+
+.box-offer:hover .mini-cart{
+  display: block;
+}
+
+.box-offer .icon-square{
+  height:45px;
+  width:45px;
+}
+
+.form-select-cart{
+  height: 48px;
+  width: 100%;
+  background-color: #FFF;
+  border-color: #CCC;
+}
+
+.img-min{
+  float: left;
+  padding: 10px 0;
+}
+
+
+.delete-img{
+  position: relative;
+  color: red;
+  font-size: 9px;
+  bottom: 40px;
+  right: -50px;
+  visibility: hidden;
+}
+.delete-img:hover{
+  color:red;
+  text-decoration: underline;
+}
+
+.img-min:hover .delete-img{
+  visibility: visible;
+}
+
+.h5-slider{
+  width: 100%;
+  padding: 15px;
+  background-color: #000;
+  color: #FFF;
+  margin: 15px;
 }
