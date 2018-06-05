@@ -13,7 +13,7 @@
                         <div class="col-md-7">
                             <div class="modal-body-column-content">
                                 <h6>Programmer votre vol avec EasyCopter</h6>
-                                {{ Form::open(['route' => ['add.to.cart.voyage'], 'method' => 'post']) }}
+                                {{ Form::open(['route' => ['add.to.cart.voyage'], 'method' => 'post', 'id' => 'formSubmitCart']) }}
                                 {{ Form::hidden('voyage_id', null, ['id' => 'voyage_id']) }}
                                 <table class="table-cart">
                                     <thead>
@@ -28,12 +28,12 @@
                                             {{ Form::select('nb_passager', ['1', '2', '3', '4', '5'], null, ['class' => 'form-select-cart']) }}
                                         </td>
                                         <td>
-                                            {{ Form::date('date_souhaiter', now(), ['class' => 'form-control']) }}
+                                            {{ Form::date('date_souhaitee', now(), ['class' => 'form-control']) }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="padding:  20px 0;">
-                                            {{ Form::submit('Acheter', ['class' => 'btn button-primary']) }}
+                                            {{ Form::submit('Acheter', ['class' => 'btn button-primary', 'id' => 'buttonToSubmit']) }}
                                         </td>
                                     </tr>
                                     </tbody>

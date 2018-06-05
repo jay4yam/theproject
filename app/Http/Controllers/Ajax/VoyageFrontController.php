@@ -64,10 +64,15 @@ class VoyageFrontController extends Controller
     }
 
     /**
-     *
+     * Gère l'ajout d'un voyage au panier avec les variables : nb voyageur, jour depart souhaité, et le voyageID
+     * @param Request $request
+     * @return string
      */
     public function addVoyageToCart(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        //1. Enregistrer le panier en session
+
+        return response()->json(['success' => true]);
     }
 }

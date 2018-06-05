@@ -370,32 +370,9 @@
 
 
 @section('dedicated_js')
+    <script src="{{ asset('js/cart.js') }}"></script>
     <script>
-        //Ajout au panier en ajax
-        var cart = $('.add-to-cart');
-        cart.on('click', function () {
-            var that = $(this);
-            var id = that.data('content');
-
-            $.ajax({
-                'type': 'get',
-                'url' : '/ajax/voyage-info/',
-                'data': { id:id },
-                'beforeSend':function () {
-                    var ZeModal = $('#voyage-info-container');
-                    ZeModal.html('<img src="/images/spinner.gif">');
-                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/\')');
-                },
-                'success':function (data) {
-                    $('#voyage_id').val(data.voyage.id)
-                    var modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
-                    var ZeModal = $('#voyage-info-container');
-                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
-                    ZeModal.html(modal);
-
-
-                }
-            })
-        });
+        cartJs.AddToCart();
+        cartJs.ResponseAfterSubmit();
     </script>
 @endsection

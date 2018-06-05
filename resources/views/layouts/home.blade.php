@@ -141,6 +141,8 @@
             </div>
         </header>
 
+        @include('partials._user_menu')
+
         <!-- Yield -->
         @yield('content')
 

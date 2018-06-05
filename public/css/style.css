@@ -20658,3 +20658,32 @@ a.roll {
 .pt100{
   padding-top: 100px;
 }
+
+
+.user-menu-container{
+  position: fixed;
+  right: 0px;
+  top: 150px;
+  width: 50px;
+  height: 50px;
+  background-color: #FFF;
+  z-index: 9999;
+  border-radius: 25px 0 0 25px;
+  box-shadow: 0px 4px 6px #989898;
+}
+
+.user-picto{
+  width: 40px;
+  height: 40px;
+  background-color: #FD9E32;
+  border-radius: 100%;
+  font-size: 20px;
+  font-style: normal;
+  color: #ffffff;
+  margin: 5px;
+  padding-top: 1%;
+}
+
+.user-menu-container + .user-picto:hover {
+  width: 150px;
+}
