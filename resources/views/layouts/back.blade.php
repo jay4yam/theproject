@@ -68,6 +68,8 @@
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">
                                     <li><a href="{{ route('voyages.create') }}">Ajouter</a></li>
+                                    <li><a href="{{ url()->route('regions.index') }}">Region</a></li>
+                                    <li><a href="{{ url()->route('villes.index') }}">Villes</a></li>
                                 </ul>
                             </li>
                             <li class="{{ @$compagnyCssActive }}"><a href="/{{ \App::getLocale() }}/admin/compagnies">Compagnies</a>

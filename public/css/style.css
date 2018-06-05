@@ -19629,7 +19629,7 @@ a.pswp__share--download:hover {
     color: #000;
     background: #eee; }
   .modal.modal-custom .modal-body-column-content {
-    padding: 40px 30px 50px; }
+    padding: 40px 30px 30px; }
     .modal.modal-custom .modal-body-column-content div > p {
       position: relative;
       z-index: 1; }
@@ -20573,13 +20573,15 @@ a.roll {
   position: absolute;
   background-color: #ff9f1c;
   color: #FFFFFF;
-  top: 180px;
   right: 15px;
   border-radius: 5% 0% 0% 5%;
-  padding: 8px;
+  padding: 5px;
   display: none;
   font-size: 27px;
   cursor:pointer;
+}
+#grid-view .mini-cart{
+  top:180px;
 }
 
 .mini-cart a{
@@ -20599,13 +20601,17 @@ a.roll {
 }
 
 .box-offer .icon-square{
-  height:45px;
-  width:45px;
+  height:40px;
+  width:40px;
+}
+
+.top250{
+  top:250px;
 }
 
 .form-select-cart{
   height: 48px;
-  width: 100%;
+  width: 100px;
   background-color: #FFF;
   border-color: #CCC;
 }
@@ -20639,4 +20645,16 @@ a.roll {
   background-color: #000;
   color: #FFF;
   margin: 15px;
+}
+
+.img-bg-voyage{
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  height: 300px;
+}
+
+.img-bg-voyage h6{ color:#FFFFFF;}
+
+.pt100{
+  padding-top: 100px;
 }

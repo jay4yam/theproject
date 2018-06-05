@@ -71,9 +71,14 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
     Route::resource('/voyages', 'VoyageController');
     Route::post('/voyages/miniatures', 'VoyageController@uploadMiniature')->name('voyages.upload.miniature');
     Route::get('/delete-miniature','VoyageController@deleteMiniature' );
+
+    Route::resource('villes', 'VilleController');
+    Route::resource('regions', 'RegionController');
 });
 
 
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::get('/voyage-get-list-voyage', 'VoyageFrontController@getVoyagesListForAutocomplete');
+    Route::get('/voyage-info', 'VoyageFrontController@getVoyagesInfoForCart');
+    Route::post('/add-voyage-to-cart', 'VoyageFrontController@addVoyageToCart')->name('add.to.cart.voyage');
 });

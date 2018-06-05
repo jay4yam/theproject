@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 <div class="mini-cart icon-square">
-                    <a href="#" data-toggle="modal" data-target="#cart">
+                    <a href="#" class="add-to-cart" data-toggle="modal" data-content="{{ $voyage->id }}" data-target="#modal-cart">
                         <i class="fas fa-shopping-cart defaut"></i>
                         <i class="fas fa-cart-arrow-down over"></i>
                     </a>
@@ -103,59 +103,16 @@
                            {{ __('voyage.voir') }}
                         </a>
                     </div>
+                    <div class="mini-cart icon-square">
+                        <a href="#" class="add-to-cart" data-toggle="modal" data-content="{{ $voyage->id }}" data-target="#modal-cart">
+                            <i class="fas fa-shopping-cart defaut"></i>
+                            <i class="fas fa-cart-arrow-down over"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
     @endforeach
-</div>
-
-<!-- MODAL PANIER -->
-<div class="modal modal-custom fade text-center show" id="cart" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row justify-content-sm-center align-items-sm-center">
-                        <div class="col-md-5 bg-image bg-image-1"></div>
-                        <div class="col-md-7">
-                            <div class="modal-body-column-content">
-                                <h5>Programmer votre vol</h5>
-                                <h6>avec EasyCopter</h6>
-                                {{ Form::open() }}
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Nb Passagers</th>
-                                            <th>Date du voyage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            {{ Form::select('num_of_adult_people', [1,2,3,4,5,6], 'nombre de personne', ['class' => 'form-select-cart'] ) }}
-                                        </td>
-                                        <td>
-                                            {{ Form::date('date_voyage', now(), ['class' => 'form-control']) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="padding:  20px 0;">
-                                            {{ Form::button('Acheter', ['class' => 'button button-primary button-width-110']) }}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                {{ Form::close() }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

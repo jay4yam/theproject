@@ -22,7 +22,10 @@ class VoyageFrontController extends Controller
         $this->voyage = $voyage;
     }
 
-
+    /**
+     * Retourne un tableau qui permet de gèrer l'autocompletion de la barre de recherche dans voyage._aside
+     * @return array
+     */
     public function getVoyagesListForAutocomplete()
     {
         $voyages = $this->voyage->isPublic()->with('ville', 'region')->distinct('ville_id')->get(['ville_id']);
@@ -39,5 +42,32 @@ class VoyageFrontController extends Controller
         }
 
         return $array;
+    }
+
+    /**
+     * Retourne les infos d'un voyage
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function getVoyagesInfoForCart(Request $request)
+    {
+        try {
+            $voyageId = $request->id;
+
+            $voyage = $this->voyage->findOrFail($voyageId);
+
+        }catch (\Exception $exception){
+            return response(['fail' => $exception->getMessage()]);
+        }
+
+        return response()->json(['success' => true, 'voyage' => $voyage]);
+    }
+
+    /**
+     *
+     */
+    public function addVoyageToCart(Request $request)
+    {
+        dd($request->all());
     }
 }

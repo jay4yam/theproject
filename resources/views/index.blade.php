@@ -60,7 +60,13 @@
                         <div class="box-offer wow fadeInUp" data-wow-delay=".2s">
                             <div class="box-offer-img-wrap">
                                 <a href="{{ url()->route('front.voyage.show', ['locale' => App::getLocale(), 'id' => $voyage->id, 'slug' => str_slug($voyage->title)]) }}">
-                                    <img class="img-responsive center-block" src="/storage/voyages/{{ $voyage->main_photo }}" width="370" height="310" alt="">
+                                    <img class="img-responsive center-block" src="/storage/voyages/thumbnails/{{ $voyage->main_photo }}" width="370" height="310" alt="">
+                                </a>
+                            </div>
+                            <div class="mini-cart icon-square top250">
+                                <a href="#" class="add-to-cart" data-toggle="modal" data-content="{{ $voyage->id }}" data-target="#modal-cart">
+                                    <i class="fas fa-shopping-cart defaut"></i>
+                                    <i class="fas fa-cart-arrow-down over"></i>
                                 </a>
                             </div>
                             <div class="box-offer-caption text-left">
@@ -88,6 +94,7 @@
             </div><a class="button button-primary" href="{{ url()->route('front.voyage.index', ['locale' => App::getLocale()]) }}">{{ __('home.actioncircuits') }}</a>
         </div>
     </section>
+
     <!-- Why SunTravel-->
     <section class="section parallax-container bg-black wow fadeIn" data-parallax-img="/images/backgrounds/background-05-1920x900.jpg" data-wow-delay=".2s">
         <div class="parallax-content">
@@ -358,4 +365,37 @@
         </div>
     </section>
 
+    @include('partials._modal-add-to-cart')
+@endsection
+
+
+@section('dedicated_js')
+    <script>
+        //Ajout au panier en ajax
+        var cart = $('.add-to-cart');
+        cart.on('click', function () {
+            var that = $(this);
+            var id = that.data('content');
+
+            $.ajax({
+                'type': 'get',
+                'url' : '/ajax/voyage-info/',
+                'data': { id:id },
+                'beforeSend':function () {
+                    var ZeModal = $('#voyage-info-container');
+                    ZeModal.html('<img src="/images/spinner.gif">');
+                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/\')');
+                },
+                'success':function (data) {
+                    $('#voyage_id').val(data.voyage.id)
+                    var modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
+                    var ZeModal = $('#voyage-info-container');
+                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
+                    ZeModal.html(modal);
+
+
+                }
+            })
+        });
+    </script>
 @endsection

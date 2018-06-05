@@ -4,16 +4,31 @@
                 ])
 
 @section('content')
-    <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/images/backgrounds/background-38-1920x900.jpg">
+    @if(request('ville'))
+        @php $ville = \App\Models\Ville::findOrFail(request('ville')) @endphp
+        <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/storage/{{ $ville->first()->main_photo }}">
         <div class="parallax-content">
             <div class="bg-overlay-darker">
                 <div class="container section-34 section-md-100 section-lg-top-170 section-lg-bottom-165">
-                    <h1 class="d-none d-lg-inline-block">{{ __('voyage.h1') }}</h1>
-                    <h6 class="font-italic">{{ __('voyage.h6') }}</h6>
+                    <h1 class="d-none d-lg-inline-block">{{ $ville->first()->name }} - {{ $ville->first()->title }}</h1>
+                    <h6 class="font-italic">{{ $ville->first()->subtitle }}</h6>
+                    <p>{{ $ville->first()->description }}</p>
                 </div>
             </div>
         </div>
     </section>
+    @else
+        <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/images/backgrounds/background-38-1920x900.jpg">
+            <div class="parallax-content">
+                <div class="bg-overlay-darker">
+                    <div class="container section-34 section-md-100 section-lg-top-170 section-lg-bottom-165">
+                        <h1 class="d-none d-lg-inline-block">{{ __('voyage.h1') }}</h1>
+                        <h6 class="font-italic">{{ __('voyage.h6') }}</h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- Tours Grid Variant 2-->
     <section class="section-80 section-md-bottom-70 bg-wild-wand">
@@ -76,13 +91,18 @@
             </div>
         </div>
     </section>
+
+    <!-- MODAL PANIER -->
+    @include('partials._modal-add-to-cart')
+
 @endsection
 
 @section('dedicated_js')
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
     <script>
-
-        testParam();
-
         function urlParam(name){
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             if (results==null){
@@ -91,7 +111,7 @@
             else{
                 return decodeURI(results[1]) || 0;
             }
-        };
+        }
 
         function testParam() {
             if( urlParam('view') === 'list'){
@@ -115,5 +135,125 @@
         }
 
         testParam();
+
+        $(document).ready(function () {
+
+            function split( val ) {
+                return val.split( /,\s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+
+            //Autocomplete en ajax
+            $('#tours-destination').autocomplete({
+                minLength: 0,
+                //la source est une url qui renvois la liste des voyage
+                source: function (request, response) {
+                    //utilisation d'une requête ajax pour recup la liste
+                    $.ajax({
+                        url: '/ajax/voyage-get-list-voyage',
+                        dataType: 'json',
+                        //recupère la liste via la variable 'data' qui est un tableau
+                        success: function (data) {
+                            //il faut utiliser la fonction native $.map pour itérer sur le tableau
+                            var array = $.map(data, function (item) {
+                                return {
+                                    label: item.label,
+                                    value: item.value
+                                };
+                            });
+
+                            //traitement de la réponse pour avoir le multi select
+                            response( $.ui.autocomplete.filter(array, extractLast( request.term ) ) );
+                        }
+                    });
+                },
+                //affiche le spinner lors de la recherche
+                search: function( event, ui ) {
+                    $('.spinner').show();
+                },
+                //masque le spinner lors de la fin de la recherche
+                response: function(event, ui) {
+                    $('.spinner').hide();
+                },
+                //
+                focus: function(event, ui) {
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    var terms = split( this.value );
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push( ui.item.value );
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push( "" );
+                    this.value = terms.join( ", " );
+
+                    //récupère la valeur ville_id
+                    var ville_id = ui.item.value.split('-')[0];
+
+                    //cree in input hidden qui sera ajouter au form pour le submit
+                    var input = '<input class="checkbox-custom" id="ville_id" name="ville[]" value="'+ ville_id+'" type="hidden">';
+
+                    //ajoute l'input au form
+                    $('#ajaxsearch').append(input);
+
+                    return false;
+                }
+            }).on('keydown', function( event ) {
+                // si dans l'input l'utilisateur tape sur "enter", on soumet automatiquement le formulaire
+                if ( event.keyCode === $.ui.keyCode.ENTER){
+                    $('#ajaxsearch').submit();
+                }
+            });
+
+            //Slider
+            $( function() {
+                $('.slider').slider({
+                    range: true,
+                    animate: "fast",
+                    min: <?php echo $minPrice ?> ,
+                    max: <?php echo $maxPrice ?> ,
+                    values: [ <?php echo $minPrice ?>, <?php echo $maxPrice ?> ],
+                    slide: function( event, ui ) {
+                        $( "#amount" ).val(  ui.values[ 0 ] + " € - " + ui.values[ 1 ] + " €" );
+                    },
+                    change: function( event, ui ) {
+                        $('#price_min').val(ui.values[0]);
+                        $('#price_max').val(ui.values[1]);
+                    }
+                });
+            } );
+
+            //Ajout au panier en ajax
+            var cart = $('.add-to-cart');
+            cart.on('click', function () {
+                var that = $(this);
+                var id = that.data('content');
+
+                $.ajax({
+                    'type': 'get',
+                    'url' : '/ajax/voyage-info/',
+                    'data': { id:id },
+                    'beforeSend':function () {
+                        var ZeModal = $('#voyage-info-container');
+                        ZeModal.html('<img src="/images/spinner.gif">');
+                        ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/\')');
+                    },
+                    'success':function (data) {
+                        $('#voyage_id').val(data.voyage.id)
+                        var modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
+                        var ZeModal = $('#voyage-info-container');
+                        ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
+                        ZeModal.html(modal);
+
+
+                    }
+                })
+            });
+        });
     </script>
 @endsection

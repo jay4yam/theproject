@@ -1,10 +1,7 @@
 @extends('layouts.back', [
-                        'title' => 'Edition d\'article - Mettez à jour votre article du blog',
+                        'title' => 'Edition de l\' article - Mettez à jour votre article',
                         'blogCssActive' => 'active'
                         ])
-
-@section('dedicated_css')
-@endsection
 
 @section('content')
     <!-- Destinations-->
