@@ -8,6 +8,8 @@
 p {
   margin-bottom: 0; }
 
+i{ font-style: normal;}
+
 blockquote {
   padding: 12px 24px;
   font-size: 20px; }
@@ -20669,10 +20671,13 @@ a.roll {
   background-color: #FFF;
   z-index: 9999;
   border-radius: 25px 0 0 25px;
-  box-shadow: 0px 4px 6px #989898;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: width 1s; /* Safari */
+  transition: width 1s;
 }
 
-.user-picto{
+.user-picto, .user-cart{
+  float: left;
   width: 40px;
   height: 40px;
   background-color: #FD9E32;
@@ -20684,6 +20689,34 @@ a.roll {
   padding-top: 1%;
 }
 
-.user-menu-container + .user-picto:hover {
-  width: 150px;
+.user-menu-container:hover{
+  width: 150px!important;
+}
+
+.user-menu-container:hover > .user-login{
+  opacity: 1;
+  height: auto;
+}
+
+.user-login{
+  transition: opacity 1s ease-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  padding-top: 13px;
+}
+
+
+.user-menu-cart{
+  position: fixed;
+  right: 0px;
+  top: 220px;
+  width: 50px;
+  height: 50px;
+  background-color: #FFF;
+  z-index: 9999;
+  border-radius: 25px 0 0 25px;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: width 1s; /* Safari */
+  transition: width 1s;
 }

@@ -138,6 +138,10 @@
             </nav>
         </div>
     </header>
+
+    <!-- User Menu & user Cart -->
+    @include('partials._user_menu')
+
     <!-- Yield -->
     @yield('content')
 
