@@ -20793,3 +20793,35 @@ a.roll {
 #cartmodalglobal .container{
   padding:20px 40px;
 }
+
+.reassurance-cart{
+  clear: both;
+  display: flex;
+  flex-direction: row;
+}
+
+.reassurance-cart ul{
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+.reassurance-cart li{
+  margin: 0px 20px;
+}
+
+.updatevoyageur{
+  width: 50%;
+  height: 30px;
+}
+
+#cart-spinner{
+  margin: 0 10px;
+  float: left;
+  display: none;
+}
+
+.title-cart h5{
+  height: 50px;
+  padding: 6px 10px;
+  float: left;
+}

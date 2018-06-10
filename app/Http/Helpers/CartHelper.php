@@ -85,16 +85,47 @@ class CartHelper
         }
     }
 
+    /**
+     * Supprime un voyage du panier
+     * @param Request $request
+     * @throws \Exception
+     */
     public static function deleteVoyageFromCart(Request $request)
     {
         try {
-
+            //essaye de supprimer l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
             session()->pull('cart.'.$request->indexArrayofSessionCart);
 
         }catch (\Exception $exception){
 
             throw  new \Exception($exception->getMessage());
         }
+    }
+
+
+    public static function updateQuantity(Request $request)
+    {
+        try {
+            //recupere le tableau 'cart' en session
+            $cartArray = session()->get('cart');
+
+            //supprime le 'cart' du panier
+            session()->pull('cart.' . $request->sessionArray);
+
+            //récupère le cart en fonction de la cleé
+            $cart = $cartArray[$request->sessionArray];
+
+            //modifie le nombre de voyageur
+            $cart->nbVoyageur = $request->newQuantity;
+
+            //recalcule le montant final
+            $cart->finalPrice = $cart->calculateFinalePrice($request->newQuantity, $cart->prixUnitaire);
+
+        }catch (\Exception $exception){
+            throw new \Exception($exception->getMessage());
+        }
+
+        session()->push('cart', $cart);
     }
 
 }

@@ -367,13 +367,3 @@
 
     @include('partials._modal-add-to-cart')
 @endsection
-
-
-@section('dedicated_js')
-    <script src="{{ asset('js/cart.js') }}"></script>
-    <script>
-        cartJs.AddToCart();
-        cartJs.ResponseAfterSubmit();
-        cartJs.ShowVoyageDetails();
-    </script>
-@endsection

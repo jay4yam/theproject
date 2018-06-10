@@ -290,7 +290,13 @@
 <!-- Java script-->
 <script src="{{ asset('js/core.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
-
+<script src="{{ asset('js/cart.js') }}"></script>
+<script>
+    cartJs.AddToCart();
+    cartJs.ResponseAfterSubmit();
+    cartJs.RemoveFromCart();
+    cartJs.UpdateQuantity();
+</script>
 <!-- dedicated Javascript for a specific view -->
 @yield('dedicated_js')
 </body>

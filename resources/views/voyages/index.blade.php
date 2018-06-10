@@ -228,12 +228,6 @@
                     }
                 });
             } );
-
-
         });
-
-        cartJs.AddToCart();
-        cartJs.ResponseAfterSubmit();
-        cartJs.RemoveFromCart();
     </script>
 @endsection

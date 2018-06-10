@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <h1 class="d-none d-lg-inline-block shadow">{{ $voyage->title }}</h1>
                         <h6 class="font-italic shadow">{{ $voyage->subtitle }}</h6>
-                        <a class="button button-primary" href="pricing.html">
+                        <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="11" data-target="#modal-cart">
                             {{ __('voyage.acheter') }}
                         </a>
                     </div>
@@ -187,7 +187,9 @@
         <div class="container">
             <h3>{{ __('voyage.book.this.flight') }}</h3>
             <p class="text-small text-spacing-200 font-italic">{{ number_format($voyage->price, 2, ',', ' ') }} €</p>
-            <a class="button button-primary" href="pricing.html">{{ __('voyage.acheter') }}</a>
+            <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="11" data-target="#modal-cart">
+                {{ __('voyage.acheter') }}
+            </a>
         </div>
     </section>
 
@@ -209,4 +211,6 @@
             </div>
         </div>
     </section>
+
+    @include('partials._modal-add-to-cart')
 @endsection

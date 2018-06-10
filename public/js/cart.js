@@ -104,11 +104,11 @@ var cartJs = {
                        tr += '<img src="/storage/voyages/thumbnails/'+ data.voyage.main_photo +'" height="50"></td>';
                        tr += '<td>'+ data.voyage.title+'</td>';
                        tr += '<td>'+ dateDeDepart +'</td>';
-                       tr += '<td>'+ numOfVoyagers +'</td>';
-                       tr += '<td>'+ individualPrice +' €</td>';
-                       tr += '<td>'+ numOfVoyagers * individualPrice +' €</td>';
+                       tr += '<td><input type="number" class="updatevoyageur" value="'+ numOfVoyagers +'" data-target="'+ data.cart.cle +'"></td>';
+                       tr += '<td id="individualPrice-'+ data.cart.cle +'">'+ individualPrice +' €</td>';
+                       tr += '<td id="finalPrice-'+ data.cart.cle +'">'+ numOfVoyagers * individualPrice +' €</td>';
                        tr += '<td>';
-                       tr += '<a href="#" data-target="'+ data.cart.num +'" class="deletefromcart">';
+                       tr += '<a href="#" data-target="'+ data.cart.cle +'" class="deletefromcart">';
                        tr += '<i class="fas fa-trash"></i></a>';
                        tr += '</td></tr>';
 
@@ -124,7 +124,7 @@ var cartJs = {
         })
     },
 
-    //Gère la suppérsion d'un voyage du panier
+    //Gère la suppréssion d'un voyage du panier
     RemoveFromCart:function () {
 
         //au click sur le bouton delete dans une des lignes 'tr' du tableau
@@ -134,14 +134,18 @@ var cartJs = {
             // Récupère la ligne entiere
             var item = $(this)[0].closest('tr');
             //Récupère la valeur qui correspond au nombre d'item dans la session cart
-            var sessionArrayNum = $(this).attr('data-target') - 1;
+            var sessionArrayNum = $(this).attr('data-target');
 
             //Requête ajax de suppréssion d'article dans le panier
             $.ajax({
                 url:'/ajax/removefromcart',
                 data:{'indexArrayofSessionCart':sessionArrayNum},
-                type: 'get'
+                type: 'get',
+                beforeSend:function(){
+                    $('#cart-spinner').show();
+                }
             }).done(function (data) {
+                $('#cart-spinner').hide();
                 //efface la ligne du tableau carttable
                 item.remove();
                 // change le nombre de voyage
@@ -155,5 +159,47 @@ var cartJs = {
                 }
             })
         })
+    },
+
+    //UpdateQuantity
+    UpdateQuantity:function () {
+        var button = $('.updatevoyageur');
+        var finalPrice = $('#finalPrice');
+
+        $(document).on('change', '.updatevoyageur', function () {
+            var that = $(this);
+            var sessionArrayNum = that.attr('data-target');
+            var newQuantity = that.val();
+            var individualString = $('#individualPrice-'+sessionArrayNum).html();
+            var individualPrice = individualString.split(' ');
+
+            $.ajax({
+                type:'get',
+                url: '/ajax/update-quantity',
+                data: { 'sessionArray':sessionArrayNum, 'newQuantity':newQuantity },
+                beforeSend:function(){
+                    $('#cart-spinner').show();
+                }
+            }).success(function () {
+                $('#cart-spinner').hide();
+                var tdFinalePrice = $('#finalPrice-'+sessionArrayNum);
+                tdFinalePrice.html( newQuantity * individualPrice[0] +' €');
+                var newFinalPrice = cartJs.UpdatePrice();
+                finalPrice.html(newFinalPrice+' €');
+            })
+        });
+
+    },
+
+    UpdatePrice:function () {
+        var tdPrices = $("td[id*='finalPrice-']");
+        var finalPrice = 0;
+        tdPrices.each(function (event, item) {
+            var htmlValue = $(item).html();
+            var arrayValue = htmlValue.split(' ');
+            var value = arrayValue[0];
+            finalPrice += parseFloat(value);
+        });
+        return finalPrice;
     }
 };
