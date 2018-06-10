@@ -79,6 +79,7 @@ var cartJs = {
             var _token = $('input[name="_token"]').val();
             var individualPrice = $('#individual_price').val();
             var table = $('#carttable');
+            var finalPrice = $('#finalPrice');
 
             $.ajax({
                 type:'POST',
@@ -119,6 +120,9 @@ var cartJs = {
                        //si il en a, on ajoute la nouvelle ligne à la fin
                    $('#carttable tbody tr:last').after(tr);
                    }
+
+                   var newFinalPrice = cartJs.UpdatePrice();
+                   finalPrice.html(newFinalPrice+' €');
                }
             });
         })
@@ -126,7 +130,6 @@ var cartJs = {
 
     //Gère la suppréssion d'un voyage du panier
     RemoveFromCart:function () {
-
         //au click sur le bouton delete dans une des lignes 'tr' du tableau
         $(document).on('click', '.deletefromcart' , function (e) {
             //empeche la propagation
@@ -161,7 +164,7 @@ var cartJs = {
         })
     },
 
-    //UpdateQuantity
+    //Gère les events du changement de quantité de voyageur pour un vol
     UpdateQuantity:function () {
         var button = $('.updatevoyageur');
         var finalPrice = $('#finalPrice');
@@ -191,6 +194,7 @@ var cartJs = {
 
     },
 
+    //fonction privee qui calcul et modifie le prix final
     UpdatePrice:function () {
         var tdPrices = $("td[id*='finalPrice-']");
         var finalPrice = 0;
