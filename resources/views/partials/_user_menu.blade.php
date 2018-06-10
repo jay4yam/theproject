@@ -13,11 +13,26 @@
 </div>
 
 <!-- user cart -->
-<div class="user-menu-cart">
+@php
+    $visibility = 'none';
+    $cart = [];
+    //session()->forget('cart');
+@endphp
+@if( session()->has('cart'))
+    @php
+        $visibility = 'block';
+        $cart = session()->get('cart');
+    @endphp
+@endif
+<div class="user-menu-cart" style="display: {{ $visibility }}">
     <div class="user-cart">
         <i class="fas fa-shopping-cart"></i>
+        <div class="voyage-counter" style="display: {{ $visibility }}">{{ count($cart) }}</div>
     </div>
-    <div class="user-cart-content">
-
+    <div class="user-cart-title">
+        <a href="#" id="details" data-toggle="modal" data-content="11" data-target="#cartmodalglobal">{{ count($cart) }} - voyage(s)</a>
+    </div>
+    <div class="close-cart">
+        <i class="fas fa-times-circle"></i>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ajax;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\CartHelper;
 
 class VoyageFrontController extends Controller
 {
@@ -64,15 +65,15 @@ class VoyageFrontController extends Controller
     }
 
     /**
-     * Gère l'ajout d'un voyage au panier avec les variables : nb voyageur, jour depart souhaité, et le voyageID
      * @param Request $request
-     * @return string
+     * @return \Illuminate\Http\JsonResponse
      */
     public function addVoyageToCart(Request $request)
     {
-        //dd($request->all());
-        //1. Enregistrer le panier en session
+        $cart = new CartHelper($request);
+        $cart->saveToSession();
+        $cart->saveToCookie();
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'numOfVoyage' => count( session()->get('cart'))]);
     }
 }

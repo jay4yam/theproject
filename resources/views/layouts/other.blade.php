@@ -112,26 +112,6 @@
                             <li class="{{ @$activeContactCss }}">
                                 <a href="/{{ App::getLocale() }}/contact">Contact</a>
                             </li>
-                            @guest
-                                <li class="{{ @$activeLoginCss }}"><a href="{{ route('login') }}">Login</a></li>
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{ Auth::user()->name }} <span class="caret"></span>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
-                            @endguest
                         </ul>
                     </div>
                 </div>
@@ -145,44 +125,8 @@
     <!-- Yield -->
     @yield('content')
 
-    <!-- Modal-->
-    <div class="modal modal-custom modal-team-member fade text-md-left" id="teamMember" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row row-30 justify-content-sm-center align-items-sm-center">
-                            <div class="col-md-5">
-                                <div class="bg-image bg-image-2"></div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="modal-body-column-content">
-                                    <div class="team-member">
-                                        <div class="team-member-img-wrap d-md-none"><img class="rounded-circle img-responsive center-block" src="/images/users/user-01-100x100.jpg" width="100" height="100" alt=""></div>
-                                        <div class="team-member-title text-small text-ubold text-uppercase text-spacing-200 text-black">James Smith</div>
-                                        <div class="team-member-description text-spacing-300 font-italic text-uppercase text-silver-chalice">Taxi driver & traveler</div>
-                                        <div class="team-member-scroll-section">
-                                            <p class="text-small font-italic text-silver-chalice text-left">I’d like to send you a sincere "thank you" for all of your assistance during my recent trip to Colorado. It was invaluable to me and I realize and appreciate it greatly. Your professionalism and efficiency were comforting and reassuring in any weather and environment. Moreover, none of the additional services I ordered at this traveling agency has been a failure yet. Everyone in the team of SunTravel knows how to do their work, and I think that’s why they are still among the leaders of traveling business. Every suggestion your staff made was excellent, as you considered my travel budget, time constraints, and personal likes and dislikes. I would definitely work with your agency again, especially with Kent, as he made my trip easy and stress-free. It was a real delight to work with you.</p>
-                                        </div>
-                                    </div>
-                                    <!-- List Inline-->
-                                    <ul class="list-inline list-primary list-inline-13">
-                                        <li class="text-center"><a class="icon fa fa-facebook text-black" href="#"></a></li>
-                                        <li class="text-center"><a class="icon fa fa-twitter text-black" href="#"></a></li>
-                                        <li class="text-center"><a class="icon fa fa-youtube text-black" href="#"></a></li>
-                                        <li class="text-center"><a class="icon fa fa-linkedin text-black" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Modal cart -->
+    @include('partials._modalcartfinal')
 
     <!-- Footer-->
     <footer class="page-footer footer-default section-top-80 section-bottom-34 section-lg-bottom-15 text-md-left">

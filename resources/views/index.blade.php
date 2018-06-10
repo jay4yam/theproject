@@ -374,5 +374,6 @@
     <script>
         cartJs.AddToCart();
         cartJs.ResponseAfterSubmit();
+        cartJs.ShowVoyageDetails();
     </script>
 @endsection

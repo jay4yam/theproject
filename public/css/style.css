@@ -1070,6 +1070,16 @@ address {
     color: #dd4b39;
     background-color: #fff; }
 
+.button-success {
+  color: #fff;
+  background-color: #20c997;
+  border-color: #20c997; }
+.button-success:hover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
 .button-xs {
   padding: 9px 20px;
   font-size: 10px;
@@ -20657,6 +20667,11 @@ a.roll {
 
 .img-bg-voyage h6{ color:#FFFFFF;}
 
+#buttonToSubmit{
+  display: none;
+  border-radius: 8px;
+}
+
 .pt100{
   padding-top: 100px;
 }
@@ -20709,14 +20724,57 @@ a.roll {
 
 .user-menu-cart{
   position: fixed;
-  right: 0px;
+  right: -100px;
   top: 220px;
-  width: 50px;
+  width: 150px;
   height: 50px;
   background-color: #FFF;
   z-index: 9999;
   border-radius: 25px 0 0 25px;
   box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transition: width 1s; /* Safari */
-  transition: width 1s;
+  -webkit-transition: right 1s; /* Safari */
+  transition: right 1s;
+}
+
+.user-menu-cart:hover{
+  right: 0px;
+}
+
+.voyage-counter{
+  background-color: red;
+  border-radius: 100px;
+  font-size: 9px;
+  width: 20px;
+  height: 20px;
+  padding-top: 4px;
+  position: absolute;
+  top: 0px;
+  left: 30px;
+}
+
+.user-cart-title {
+  width: 60%;
+  overflow: hidden;
+  padding-top: 13px;
+  float: left;
+}
+
+.close-cart{
+  color: #000;
+  display: none;
+  float: right;
+  padding: 10px;
+}
+
+#details:active .user-menu-cart{
+  width: 300px;
+  color: red;
+}
+
+.pt-10{
+  padding:10px;
+}
+
+.mg-20{
+  margin: 20px;
 }

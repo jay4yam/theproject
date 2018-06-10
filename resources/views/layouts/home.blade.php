@@ -166,6 +166,9 @@
             </div>
         </div>
 
+        <!-- Modal cart -->
+        @include('partials._modalcartfinal')
+
         <!-- Footer-->
         <footer class="page-footer footer-default section-top-80 section-bottom-34 section-lg-bottom-15 text-md-left">
             <div class="container">

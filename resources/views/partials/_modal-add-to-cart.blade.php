@@ -15,6 +15,7 @@
                                 <h6>Programmer votre vol avec EasyCopter</h6>
                                 {{ Form::open(['route' => ['add.to.cart.voyage'], 'method' => 'post', 'id' => 'formSubmitCart']) }}
                                 {{ Form::hidden('voyage_id', null, ['id' => 'voyage_id']) }}
+                                {{ Form::hidden('voyage_individual_price', null, ['id' => 'individual_price']) }}
                                 <table class="table-cart">
                                     <thead>
                                     <tr>
