@@ -81,4 +81,5 @@ Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::get('/voyage-get-list-voyage', 'VoyageFrontController@getVoyagesListForAutocomplete');
     Route::get('/voyage-info', 'VoyageFrontController@getVoyagesInfoForCart');
     Route::post('/add-voyage-to-cart', 'VoyageFrontController@addVoyageToCart')->name('add.to.cart.voyage');
+    Route::get('/removefromcart','VoyageFrontController@removeFromCart');
 });

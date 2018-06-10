@@ -20778,3 +20778,18 @@ a.roll {
 .mg-20{
   margin: 20px;
 }
+
+#carttable{
+  width: 90%;
+  text-align: center;
+  font-size: 11px;
+  margin: 0 auto;
+}
+
+#carttable tr, #carttable th, #carttable thead, #carttable tbody, #carttable td{
+  border: 1px solid #E6E6E6;
+}
+
+#cartmodalglobal .container{
+  padding:20px 40px;
+}

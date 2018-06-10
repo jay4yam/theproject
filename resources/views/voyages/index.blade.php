@@ -234,6 +234,6 @@
 
         cartJs.AddToCart();
         cartJs.ResponseAfterSubmit();
-        cartJs.ShowVoyageDetails();
+        cartJs.RemoveFromCart();
     </script>
 @endsection

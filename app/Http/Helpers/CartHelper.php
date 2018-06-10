@@ -85,9 +85,16 @@ class CartHelper
         }
     }
 
-    public function deleteVoyageFromCart()
+    public static function deleteVoyageFromCart(Request $request)
     {
-        session()->pull('cart', $this);
+        try {
+
+            session()->pull('cart.'.$request->indexArrayofSessionCart);
+
+        }catch (\Exception $exception){
+
+            throw  new \Exception($exception->getMessage());
+        }
     }
 
 }

@@ -19,7 +19,7 @@
                 <div class="container">
                     <div class="title-cart"><h5>Panier</h5></div>
                     <div class="content-cart">
-                        <table style="text-align: center">
+                        <table id="carttable" style="text-align: center">
                             <thead>
                                 <tr>
                                 <th>voyage</th>
@@ -28,26 +28,40 @@
                                 <th>Nb Voyageur</th>
                                 <th>Prix Unitaire</th>
                                 <th>Prix Final</th>
+                                <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @php $finalPrice = 0; @endphp
-                                @foreach($carts as $cart)
+                                @php
+                                    $finalPrice = 0;
+                                    $iterator = 1;
+                                @endphp
+                                @foreach(@$carts as $cart)
                                 <tr>
-                                    <td><img src="/storage/voyages/thumbnails/{{ $cart->getVoyage()->main_photo }}" height="70"></td>
-                                    <td>{{ $cart->getVoyage()->title }}</td>
-                                    <td>{{ $cart->getDate() }}</td>
-                                    <td>{{ $cart->getNbVoyageur() }}</td>
-                                    <td>{{ $cart->getUnitPrice() }} €</td>
-                                    <td>{{ $cart->getFinalPrice() }} €</td>
+                                    <td><img src="/storage/voyages/thumbnails/{{ @$cart->getVoyage()->main_photo }}" height="50"></td>
+                                    <td>{{ @$cart->getVoyage()->title }}</td>
+                                    <td>{{ @$cart->getDate() }}</td>
+                                    <td>{{ @$cart->getNbVoyageur() }}</td>
+                                    <td>{{ @$cart->getUnitPrice() }} €</td>
+                                    <td>{{ @$cart->getFinalPrice() }} €</td>
+                                    <td data-target="">
+                                        <a href="#" data-target="{{ $iterator }}" class="deletefromcart">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
                                 </tr>
-                                @php $finalPrice += $cart->getFinalPrice(); @endphp
+                                @php
+                                    $finalPrice += @$cart->getFinalPrice();
+                                    $iterator++;
+                                @endphp
                             @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5" style="text-align: right">Prix Total TTC</td>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Prix Total TTC</td>
                                     <td><b>{{ $finalPrice }} €</b></td>
+                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>

@@ -70,10 +70,37 @@ class VoyageFrontController extends Controller
      */
     public function addVoyageToCart(Request $request)
     {
-        $cart = new CartHelper($request);
-        $cart->saveToSession();
-        $cart->saveToCookie();
+        try {
+            $voyageId = $request->voyageId;
 
-        return response()->json(['success' => true, 'numOfVoyage' => count( session()->get('cart'))]);
+            $voyage = $this->voyage->findOrFail($voyageId);
+
+            $cart = new CartHelper($request);
+
+            $cart->saveToSession();
+
+            $num = count( session()->get('cart'));
+
+            $cart->saveToCookie();
+
+        }catch (\Exception $exception){
+            return response()->json(['fail' => true, 'message' => $exception->getMessage() ]);
+        }
+
+        return response()->json(['success' => true, 'cart' => ['num' => $num] ,'voyage' => $voyage, 'numOfVoyage' => count( session()->get('cart'))]);
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        try {
+
+            CartHelper::deleteVoyageFromCart($request);
+
+        }catch (\Exception $exception){
+
+            return response()->json(['fail' => true, 'message' => $exception->getMessage() ]);
+        }
+
+        return response()->json(['success' => true, 'numOfVoyage' => count(session()->get('cart')) ]);
     }
 }
