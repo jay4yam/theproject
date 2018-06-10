@@ -160,7 +160,11 @@ var cartJs = {
                     //efface le panier de la page
                     $('.user-menu-cart').fadeOut();
                 }
-            })
+
+                var finalPrice = $('#finalPrice');
+                var newFinalPrice = cartJs.UpdatePrice();
+                finalPrice.html(newFinalPrice+' €');
+            });
         })
     },
 
