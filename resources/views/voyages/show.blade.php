@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <h1 class="d-none d-lg-inline-block shadow">{{ $voyage->title }}</h1>
                         <h6 class="font-italic shadow">{{ $voyage->subtitle }}</h6>
-                        <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="11" data-target="#modal-cart">
+                        <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="{{ $voyage->id }}" data-target="#modal-cart">
                             {{ __('voyage.acheter') }}
                         </a>
                     </div>
@@ -187,7 +187,7 @@
         <div class="container">
             <h3>{{ __('voyage.book.this.flight') }}</h3>
             <p class="text-small text-spacing-200 font-italic">{{ number_format($voyage->price, 2, ',', ' ') }} €</p>
-            <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="11" data-target="#modal-cart">
+            <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="{{ $voyage->id }}" data-target="#modal-cart">
                 {{ __('voyage.acheter') }}
             </a>
         </div>
@@ -200,9 +200,13 @@
             <div class="owl-carousel owl-carousel-sm owl-navs-offset-0 owl-dots-primary owl-nav-alabaster list-inline-dashed-vertival" data-items="1" data-md-items="2" data-stage-padding="5" data-loop="false" data-margin="30" data-mouse-drag="false" data-dots="true" data-nav="true">
                 @foreach($voyagesInRegion as $voy)
                 <div class="owl-item">
-                    <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">{{ $voy->title }}</p>
+                    <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">
+                        <a href="{{ route('front.voyage.show', ['id' => $voy->id, 'slug' => str_slug($voy->title)]) }}">
+                        {{ $voy->title }}
+                        </a>
+                    </p>
                     <p class="text-big text-ubold text-uppercase">
-                        <a class="text-black" href="tours-single.html">
+                        <a class="text-black" href="#">
                             {{ $voy->ville->name }}
                         </a>
                     </p>

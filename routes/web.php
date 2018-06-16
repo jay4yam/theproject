@@ -46,6 +46,8 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');
 
+    //Affichage de la page cart-step-1
+    Route::get('/cart/step-1','CartController@showStep1')->name('cart.step1');
 
 });
 

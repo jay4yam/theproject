@@ -121,6 +121,11 @@ class VoyageFrontController extends Controller
         return response()->json(['success' => true, 'numOfVoyage' => count(session()->get('cart')) ]);
     }
 
+    /**
+     * Response à la Mise à jour de la quantité d'un voyage par l'utilisateur
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateQuantity(Request $request)
     {
         try{

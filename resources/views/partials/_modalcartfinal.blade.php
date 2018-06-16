@@ -41,7 +41,7 @@
                                 @endphp
                                 @foreach(@$carts as $cle => $cart)
                                 <tr>
-                                    <td><img src="/storage/voyages/thumbnails/{{ @$cart->getVoyage()->main_photo }}" height="50"></td>
+                                    <td><img src="/storage/voyages/thumbnails/{{ @$cart->getVoyage()->main_photo }}" width="50"></td>
                                     <td>{{ @$cart->getVoyage()->title }}</td>
                                     <td>{{ @$cart->getDate() }}</td>
                                     <td>{{ Form::number('',  @$cart->getNbVoyageur(), ['class' => 'updatevoyageur', 'data-target' => $cle] ) }}</td>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="action">
                         <a href="#" class="button button-google-plus mg-20 pull-left" data-dismiss="modal" aria-label="Close">Continuer mon shopping</a>
-                        <a href="#" class="button button-success mg-20 pull-right">Finaliser votre commande</a>
+                        <a href="{{ route('cart.step1', ['locale' => App::getLocale()]) }}" class="button button-success mg-20 pull-right">Finaliser votre commande</a>
                     </div>
                 </div>
             </div>
