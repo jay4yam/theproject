@@ -1,4 +1,4 @@
-@extends('layouts.other')
+@extends('layouts.other', ['title' => 'Finaliser votre commande'])
 
 @section('content')
     <!--
@@ -18,30 +18,35 @@
             <div class="box box-insets-off bg-default d-xl-block">
                 <div class="recap-panier box-inner">
                     <div class="row">
-                        <div class="col-md-7">
+                        <!-- Formulaire -->
+                        <div class="col-md-6">
                             <h5>Vos informations</h5>
                             <fieldset>
                                 {{ Form::open() }}
-                                <div class="form-group">
-                                    <div>
-                                        {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'nom']) }}
-                                    </div>
-                                    <div>
-                                        {{ Form::text('firstname', null, ['class' => 'form-control', 'placeholder' => 'prenom']) }}
-                                    </div>
+
+                                <div class="form-inline">
+                                    {{ Form::text('name', null, ['class' => 'form-control marginform', 'placeholder' => 'nom']) }}
+                                    {{ Form::text('firstname', null, ['class' => 'form-control marginform', 'placeholder' => 'prenom']) }}
                                 </div>
-                                <div class="form-group">
-                                    <div>
-                                        {{ Form::text('telephone', null, ['class' => 'form-control', 'placeholder' => 'telephone']) }}
-                                    </div>
-                                    <div>
-                                        {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'email']) }}
-                                    </div>
+                                <div class="form-inline">
+                                    {{ Form::text('telephone', null, ['class' => 'form-control marginform', 'placeholder' => 'telephone']) }}
+                                    {{ Form::email('email', null, ['class' => 'form-control marginform', 'placeholder' => 'email']) }}
+                                </div>
+                                <div class="form-inline-item">
+                                    {{ Form::text('adresse', null, ['class' => 'form-control marginform w97', 'placeholder' => 'Adresse']) }}
+                                </div>
+                                <div class="form-inline">
+                                    {{ Form::text('code_postal', null, ['class' => 'form-control marginform', 'placeholder' => 'Code postal']) }}
+                                    {{ Form::text('ville', null, ['class' => 'form-control marginform', 'placeholder' => 'Ville']) }}
+                                </div>
+                                <div class="col-xs-12">
+                                    {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'btn btn-success']) }}
                                 </div>
                                 {{ Form::close() }}
                             </fieldset>
                         </div>
-                        <div class="col-md-5">
+                        <!-- Recap panier -->
+                        <div class="col-md-6">
                         <h5>Vos vols ou voyages</h5>
                             <table id="carttable" class="table table-hover table-sm" style="text-align: center">
                                 <thead class="thead-dark">
