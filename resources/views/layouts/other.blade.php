@@ -242,7 +242,7 @@
                             <p class="text-extra-small"><a class="text-gray" href="terms-of-use.html">{{ __('home.termsOfUse') }}</a></p>
                         </li>
                         <li>
-                            <p class="text-extra-small"><a class="text-gray" href="contacts.html">{{ __('home.contact') }}</a></p>
+                            <p class="text-extra-small"><a class="text-gray" href="{{ url()->route('contact', ['locale' => App::getLocale()]) }}">{{ __('home.contact') }}</a></p>
                         </li>
                     </ul>
                 </div>

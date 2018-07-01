@@ -40,7 +40,7 @@
                                     {{ Form::text('ville', null, ['class' => 'form-control marginform', 'placeholder' => 'Ville']) }}
                                 </div>
                                 <div class="col-xs-12">
-                                    {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'btn btn-success']) }}
+                                    {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
                                 </div>
                                 {{ Form::close() }}
                             </fieldset>

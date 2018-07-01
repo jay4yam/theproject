@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RegionController extends Controller
 {
+    public $regionRepository;
+
+    public function __construct(RegionRepository $regionRepository)
+    {
+        $this->regionRepository = $regionRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        $allRegions = $this->regionRepository->getAll();
+
+        return view('back.region.index', compact('allRegions'));
     }
 
     /**
