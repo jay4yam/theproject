@@ -49,6 +49,8 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     //Affichage de la page cart-step-1
     Route::get('/cart/step-1','CartController@showStep1')->name('cart.step1');
 
+    Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+
 });
 
 //Route regroupant tous les controller présent dans l'admin

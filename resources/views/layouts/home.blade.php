@@ -189,44 +189,8 @@
                                 </ul>
                                 <!-- Button trigger modal-->
                                 <button class="button button-primary" type="button" data-toggle="modal" data-target="#subscribe" style="min-width:160px;">{{ __('home.subscribe') }}</button>
-                                <!-- Modal-->
-                                <div class="modal modal-custom fade text-center" id="subscribe" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="container">
-                                                    <div class="row justify-content-sm-center align-items-sm-center">
-                                                        <div class="col-md-6 bg-image bg-image-1"></div>
-                                                        <div class="col-md-6">
-                                                            <div class="modal-body-column-content">
-                                                                <h5 class="text-ubold">{{ __('home.subscribenewletter') }}   </h5>
-                                                                <p class="font-italic text-small text-black">{{ __('home.subscribeGetOff') }} <span class="text-ubold">{{ __('home.getOff') }}</span> {{ __('home.firsttour') }}</p>
-                                                                <!-- RD Mailform-->
-                                                                <form class="rd-mailform rd-mailform-subscribe" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-                                                                    <div class="form-wrap form-wrap-xs">
-                                                                        <label class="form-label" for="contact-email">{{ __('home.labelEmailNewsletter') }}</label>
-                                                                        <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
-                                                                    </div>
-                                                                    <button class="button button-primary button-block" type="submit">{{ __('home.subscribeAction') }}</button>
-                                                                </form>
-                                                                <!-- List Inline-->
-                                                                <ul class="list-inline list-primary list-inline-13">
-                                                                    <li class="text-center"><a class="icon fa fa-facebook-f text-black" href="#"></a></li>
-                                                                    <li class="text-center"><a class="icon fa fa-twitter text-black" href="#"></a></li>
-                                                                    <li class="text-center"><a class="icon fa fa-youtube text-black" href="#"></a></li>
-                                                                    <li class="text-center"><a class="icon fa fa-linkedin text-black" href="#"></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Modal newsletter -->
+                                @include('partials._newslettermodal')
                             </div>
                             <div class="col-sm-8 col-md-12 col-lg-6 order-lg-2">
                                 <p class="text-big text-black">{{ __('home.contactus') }}</p>
