@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\VilleCreateRequest;
+use App\Http\Requests\VilleUpdateRequest;
 use App\Repositories\VilleRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,7 +50,7 @@ class VilleController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.ville.create');
     }
 
     /**
@@ -57,9 +59,19 @@ class VilleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VilleCreateRequest $request)
     {
-        //
+        try {
+            $this->villeRepository->store($request);
+        }catch (\Exception $exception){
+            flash()->error($exception->getMessage());
+
+            return back()->withInput();
+        }
+
+        flash()->success('ville crée avec succès');
+
+        return redirect()->route('villes.index');
     }
 
 
@@ -92,7 +104,7 @@ class VilleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VilleUpdateRequest $request, $id)
     {
         try{
 

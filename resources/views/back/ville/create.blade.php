@@ -1,5 +1,5 @@
 @extends('layouts.back', [
-                        'title' => 'Edition de la ville - Mettez à jour votre ville',
+                        'title' => 'Ajouter une nouvelle ville',
                         'blogCssActive' => 'active'
                         ])
 
@@ -13,7 +13,7 @@
                     <div class="box box-search bg-default d-block">
                         <div class="box-search-wrap">
                             <!-- RD Search Form-->
-                            <h1 class="admin">Modifier - Mettre à jour une ville
+                            <h1 class="admin">Ajouter une ville
                                 <a class="white" href="{{ route('villes.create') }}" title="ajouter une ville">
                                 <span class="float-right">
                                     <i class="fas fa-plus-square"></i>
@@ -22,32 +22,32 @@
                             </h1>
                         </div>
                         <div class="box-search-body text-left">
-                            {{ Form::model($ville, ['route' => ['villes.update', $ville->id], 'files' => true, 'method' => 'PATCH', 'class' => 'createform']) }}
+                            {{ Form::open(['route' => ['villes.store'], 'files' => true, 'method' => 'POST', 'class' => 'createform']) }}
                             <div class="row">
                                 <!-- 1ere col -->
                                 <div class="col-md-8 col-xs-12">
                                     <!-- title -->
                                     <div class="form-group flex-column {!! $errors->has('name') ? 'has-error' : '' !!}">
                                         {{ Form::label('name', 'NOM DE LA VILLE :') }}
-                                        {{ Form::text('name', $ville->name, ['class' => 'form-control']) }}
+                                        {{ Form::text('name', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <div class="form-group flex-column {!! $errors->has('title') ? 'has-error' : '' !!}">
                                         {{ Form::label('title', 'TITRE :') }}
-                                        {{ Form::text('title', $ville->title, ['class' => 'form-control']) }}
+                                        {{ Form::text('title', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('title', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <div class="form-group flex-column {!! $errors->has('subtitle') ? 'has-error' : '' !!}">
                                         {{ Form::label('subtitle', 'SOUS-TITRE :') }}
-                                        {{ Form::text('subtitle', $ville->subtitle, ['class' => 'form-control']) }}
+                                        {{ Form::text('subtitle', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('subtitle', '<small class="help-block">:message</small>') !!}
                                     </div>
 
                                     <div class="form-group flex-column {!! $errors->has('description') ? 'has-error' : '' !!}">
                                         {{ Form::label('description', 'DESCRIPTION :') }}
-                                        {{ Form::textarea('description', $ville->description, ['class' => 'form-control']) }}
+                                        {{ Form::textarea('description', null, ['class' => 'form-control']) }}
                                         {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>
@@ -56,16 +56,8 @@
                                 <div class="col-md-4 col-xs-12">
                                     <div class="form-group flex-column {!! $errors->has('region_id') ? 'has-error' : '' !!}">
                                         {{ Form::label('region_id', 'REGION :') }}
-                                        {{ Form::select('region_id', \App\Models\Region::pluck('name', 'id'), $ville->region_id, ['class' => 'form-control',]) }}
+                                        {{ Form::select('region_id', \App\Models\Region::pluck('name', 'id'), null, ['class' => 'form-control',]) }}
                                         {!! $errors->first('region_id', '<small class="help-block">:message</small>') !!}
-                                    </div>
-
-                                    <!-- main_image container -->
-                                    <div class="image-container">
-                                        <a href="#" class="roll" data-toggle="modal" data-target="#imageModal">
-                                            <span>Modifier</span>
-                                            <img src="/storage/{{ $ville->main_photo }}" class="img-responsive"/>
-                                        </a>
                                     </div>
 
                                     <!-- main_image upload -->
@@ -81,7 +73,7 @@
                                 <div class="box-terms-bottom ptb-10">
                                     <button class="btn btn-success" type="submit">
                                         <i class="fas fa-save"></i>
-                                        Mettre a jour cette ville
+                                        Créer cette nouvelle ville
                                     </button>
                                 </div>
                             </div>
@@ -92,34 +84,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificateur d'image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @php //$img = \Image::make('storage/blog/'.$article->main_image); @endphp
-                    <img src="/storage/villes/{{ $ville->id }}/{{ $ville->main_photo }}" class="img-responsive">
-                    <span class="img-size-info">
-                        name: <strong>{{ $ville->main_photo }}</strong><br>
-                        width: <strong>@{{ @$img->width() }}.px</strong> |
-                        height: <strong>@{{ @$img->height() }}.px</strong> |
-                        size: <strong>@{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 

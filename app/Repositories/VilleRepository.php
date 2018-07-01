@@ -47,6 +47,29 @@ class VilleRepository
         return $this->ville->paginate(9);
     }
 
+    public function store(Request $request)
+    {
+        $ville = new Ville();
+
+        $this->save($ville, $request);
+    }
+
+    private function save(Ville $ville, Request $request)
+    {
+        $ville->name = $request->name;
+        $ville->title = $request->title;
+        $ville->subtitle = $request->subtitle;
+        $ville->description = $request->description;
+
+        if($request->has('main_photo')){
+            $ville->main_photo = $this->uploadMainImage($request, $ville);
+        }
+
+        $ville->region_id = $request->region_id;
+
+        $ville->save();
+    }
+
     /**
      * Met à jour une ville
      * @param Request $request
@@ -64,6 +87,8 @@ class VilleRepository
         if($request->has('main_photo')){
             $ville->main_photo = $this->uploadMainImage($request, $ville);
         }
+
+        $ville->region_id = $request->region_id;
 
         $ville->save();
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\VoyageCreateRequest;
+use App\Http\Requests\VoyageUpdateRequest;
 use App\Repositories\VoyageRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -66,10 +68,10 @@ class VoyageController extends Controller
 
     /**
      * request pour ajout d'un nouveau voyage
-     * @param Request $request
+     * @param VoyageCreateRequest $request
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(VoyageCreateRequest $request)
     {
         try {
             $this->voyageRepository->store($request);
@@ -91,7 +93,7 @@ class VoyageController extends Controller
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(VoyageUpdateRequest $request, $id)
     {
         try {
 
@@ -127,8 +129,14 @@ class VoyageController extends Controller
             }
             return response('success');
         }
+        return response('no-file');
     }
 
+    /**
+     * Supprime une image miniature
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function deleteMiniature(Request $request)
     {
         if($request->has('file')){

@@ -52,6 +52,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $allVilles->links() }}
                         </div>
                         <div class="box-terms-bottom ptb-10">
                             <button class="button button-primary" type="submit">

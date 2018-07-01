@@ -20859,3 +20859,10 @@ a.roll {
 .w97{
   width: 97%;
 }
+
+.description-voyage{
+  padding: 20px 10px 0;
+  text-align: initial;
+  font-size: 13px;
+  color: #AAA;
+}

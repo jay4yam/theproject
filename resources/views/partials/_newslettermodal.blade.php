@@ -13,7 +13,7 @@
                                 <h5 class="text-ubold">{{ __('home.subscribenewletter') }}   </h5>
                                 <p class="font-italic text-small text-black">{{ __('home.subscribeGetOff') }} <span class="text-ubold">{{ __('home.getOff') }}</span> {{ __('home.firsttour') }}</p>
                                 <!-- RD Mailform-->
-                                {{ Form::open(['route' => 'newsletter.subscribe']) }}
+                                {{ Form::open(['url' => App::getLocale().'/newsletter-subscribe']) }}
                                 <div class="form-wrap form-wrap-xs">
                                     <label class="form-label" for="contact-email">{{ __('home.labelEmailNewsletter') }}</label>
                                     <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">

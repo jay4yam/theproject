@@ -10,9 +10,9 @@
         <div class="parallax-content">
             <div class="bg-overlay-darker">
                 <div class="container section-34 section-md-100 section-lg-top-170 section-lg-bottom-165">
-                    <h1 class="d-none d-lg-inline-block">{{ $ville->first()->name }} - {{ $ville->first()->title }}</h1>
+                    <h1 class="d-none d-lg-inline-block">{{ $ville->first()->name }}</h1>
+                    <h2>{{ $ville->first()->title }}</h2>
                     <h6 class="font-italic">{{ $ville->first()->subtitle }}</h6>
-                    <p>{{ $ville->first()->description }}</p>
                 </div>
             </div>
         </div>
@@ -89,6 +89,11 @@
                 @include('voyages._aside')
                 <!-- fin Aside -->
             </div>
+            @if(request('ville'))
+                <div class="description-voyage">
+                    <p>{!! $ville->first()->description  !!}</p>
+                </div>
+            @endif
         </div>
     </section>
 
