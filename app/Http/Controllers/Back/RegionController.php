@@ -57,7 +57,9 @@ class RegionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $region = $this->regionRepository->getById($id);
+
+        return view('back.region.edit', compact('region'));
     }
 
     /**
@@ -69,7 +71,19 @@ class RegionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->regionRepository->update($request, $id);
+
+        }catch (\Exception $exception){
+
+            flash()->error($exception->getMessage());
+
+            return back()->withInput();
+        }
+
+        flash()->success('region mise à jour avec succès');
+
+        return redirect()->route('regions.index');
     }
 
     /**
