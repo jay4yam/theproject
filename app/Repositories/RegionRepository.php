@@ -38,6 +38,37 @@ class RegionRepository
         return $this->region->findOrFail($id);
     }
 
+    /**
+     * @param Request $request
+     */
+    public function store(Request $request)
+    {
+        $region = new Region();
+
+        $this->save($region, $request);
+    }
+
+    /**
+     * @param Region $region
+     * @param Request $request
+     */
+    private function save(Region $region, Request $request)
+    {
+        $region->name = $request->name;
+        $region->title = $request->title;
+        $region->subtitle = $request->subtitle;
+        $region->description = $request->description;
+
+        $region->save();
+
+        if($request->has('main_photo')) {
+
+            $region->main_photo = $this->uploadMainImage($request, $region);
+
+            $region->save();
+        }
+    }
+
     public function update(Request $request, $id)
     {
         $region = $this->getById($id);

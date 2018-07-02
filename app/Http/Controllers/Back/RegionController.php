@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\UpdateRegionRequest;
 use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,7 +35,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.region.create');
     }
 
     /**
@@ -45,9 +46,21 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try{
 
+            $this->regionRepository->store($request);
+
+        }catch (\Exception $exception){
+
+            flash()->error($exception->getMessage());
+
+            return back()->withInput();
+        }
+
+        flash()->success('region crée avec succès');
+
+        return redirect()->route('regions.index');
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +82,7 @@ class RegionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRegionRequest $request, $id)
     {
         try {
             $this->regionRepository->update($request, $id);
