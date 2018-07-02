@@ -47,7 +47,7 @@
                         </div>
                         <!-- Recap panier -->
                         <div class="col-md-6">
-                        <h5>Vos vols ou voyages</h5>
+                            <h5>Vos vols ou voyages</h5>
                             <table id="carttable" class="table table-hover table-sm" style="text-align: center">
                                 <thead class="thead-dark">
                                 <tr>
@@ -95,6 +95,22 @@
                                 </tr>
                                 </tfoot>
                             </table>
+                            <div class="col-md-12 pt-50">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <i class="fab fa-cc-visa fa-2x"></i>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <i class="fab fa-cc-mastercard fa-2x"></i>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <i class="fab fa-cc-paypal fa-2x"></i>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <i class="far fa-lock fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

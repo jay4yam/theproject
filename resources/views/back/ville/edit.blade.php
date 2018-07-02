@@ -104,13 +104,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @php //$img = \Image::make('storage/blog/'.$article->main_image); @endphp
-                    <img src="/storage/villes/{{ $ville->id }}/{{ $ville->main_photo }}" class="img-responsive">
+                    @php $img = \Image::make('storage/'.$ville->main_photo); @endphp
+                    <img src="/storage/{{ $ville->main_photo }}" class="img-responsive">
                     <span class="img-size-info">
                         name: <strong>{{ $ville->main_photo }}</strong><br>
-                        width: <strong>@{{ @$img->width() }}.px</strong> |
-                        height: <strong>@{{ @$img->height() }}.px</strong> |
-                        size: <strong>@{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
+                        width: <strong>{{ @$img->width() }}.px</strong> |
+                        height: <strong>{{ @$img->height() }}.px</strong> |
+                        size: <strong>{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
                     </span>
                 </div>
                 <div class="modal-footer">
