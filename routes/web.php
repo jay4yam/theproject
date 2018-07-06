@@ -12,15 +12,15 @@
 */
 Auth::routes();
 
+//Affiche la home page
+Route::get('/', 'Front\HomeController@index')->name('home');
+
 Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'locale'], function( ) {
     // Recupère le premier segment de l'url ete definis une valeur par défaut ici le 'FR'
     $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
 
     //Applique la valeur de la variable langue 'locale' au site
     App::setLocale( $locale );
-
-    //Affiche la home page
-    Route::get('/', 'HomeController@index')->name('home');
 
     /**
      * Affichage des différentes pages du blog
