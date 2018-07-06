@@ -20870,3 +20870,15 @@ a.roll {
 .pt-50{
   padding-top: 50px;
 }
+
+.padding-top-20{ padding-top: 20px}
+
+.create-lang{
+  font-size: 14px;
+  background-color: #EEEEEE;
+}
+
+.create-lang ol{
+  list-style-type: lower-roman;
+  padding-left: 30px;
+}

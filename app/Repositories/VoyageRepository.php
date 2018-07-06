@@ -37,7 +37,7 @@ class VoyageRepository
      */
     public function allPublicVoyages()
     {
-        return $this->voyage->isPublic()->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
+        return $this->voyage->localize()->isPublic()->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
     }
 
     /**
@@ -46,17 +46,31 @@ class VoyageRepository
      */
     public function allVoyages()
     {
-        return $this->voyage->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
+        return $this->voyage->localize()->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
     }
 
-    /**
-     * Retourne un objet voyage par son id
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
-     */
     public function getById($id)
     {
         return $this->voyage->findOrFail($id)->load('ville', 'region');
+    }
+
+    /**
+     * Retourne un voyage dans toutes ses langues
+     * @param $id
+     * @return array
+     */
+    public function getAllVoyageLanguageById($id)
+    {
+        //1. init un tableau voyages
+        $arrayVoyage = array();
+        $this->voyage->where('parent_id', '=', $id)
+                                ->orWhere('id', '=', $id)
+                                ->each(function ($voyage) use(&$arrayVoyage){
+                                    //dd($voyage);
+                                    return $arrayVoyage[$voyage->locale] = $voyage->load('ville', 'region');
+                                });
+        return $arrayVoyage;
+        //return $this->voyage->findOrFail($id)->load('ville', 'region');
     }
 
     /**
@@ -92,6 +106,8 @@ class VoyageRepository
      */
     private function save(Voyage $voyage, Request $request)
     {
+        $voyage->locale = $request->localize;
+        $voyage->parent_id = 0;
         $voyage->title = $request->title;
         $voyage->subtitle = $request->subtitle;
         $voyage->intro = $request->intro;
@@ -110,6 +126,31 @@ class VoyageRepository
             $voyage->main_photo = $this->uploadMainImage($request, $voyage);
             $voyage->save();
         }
+
+        $this->copyForOtherLanguage($voyage);
+    }
+
+    /**
+     * Crée une copie du voyage inséré en base pour chaque langues disponibles
+     * @param Voyage $voyage
+     */
+    private function copyForOtherLanguage(Voyage $voyage)
+    {
+        //1. recupère toutes les langues disponibles sur la plateforme
+        $arrayLanguage = \Config::get('language');
+
+        //2. supprime la langue du voyage passé en paramètre
+        unset($arrayLanguage[$voyage->locale]);
+
+        //3. Itère sur la liste des langues pour créer une copie du voyage passé en paramètre
+        foreach($arrayLanguage as $locale => $value)
+        {
+            $voyageCopy = $voyage->replicate();
+            $voyageCopy->locale = $locale;
+            $voyageCopy->parent_id = $voyage->id;
+            $voyageCopy->is_public = false;
+            $voyageCopy->save();
+        }
     }
 
     /**
@@ -119,8 +160,11 @@ class VoyageRepository
      */
     public function update(Request $request, $id)
     {
-        $voyage = $this->getById($id);
+        $voyage = $this->voyage->findOrFail($id);
 
+        if($voyage->parent_id != 0){
+            $voyage->parent_id = $request->parent_id;
+        }
         $voyage->title = $request->title;
         $voyage->subtitle = $request->subtitle;
         $voyage->intro = $request->intro;

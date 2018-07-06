@@ -52,9 +52,10 @@ class VoyageController extends Controller
      */
     public function edit($id)
     {
-        $voyage = $this->voyageRepository->getById($id);
+        //1. recupère le voyage et toutes les langues via l'id du voyage principale
+        $voyages = $this->voyageRepository->getAllVoyageLanguageById($id);
 
-        return view('back.voyage.edit', compact('voyage'));
+        return view('back.voyage.edit', compact('voyages'));
     }
 
     /**
@@ -96,7 +97,6 @@ class VoyageController extends Controller
     public function update(VoyageUpdateRequest $request, $id)
     {
         try {
-
             $this->voyageRepository->update($request, $id);
 
         }catch (\Exception $exception){
@@ -107,6 +107,11 @@ class VoyageController extends Controller
         }
 
         flash()->success('Voyage mis à jour avec succès');
+
+        //si le parent_id est différents alors il faut rediriger vers la page parente
+        if($request->parent_id != $id){
+            return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($request->parent_id)]);
+        }
 
         return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($id)]);
     }
