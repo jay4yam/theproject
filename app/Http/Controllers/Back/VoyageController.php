@@ -75,7 +75,9 @@ class VoyageController extends Controller
     public function store(VoyageCreateRequest $request)
     {
         try {
+
             $this->voyageRepository->store($request);
+
         }catch (\Exception $exception){
 
             flash()->error($exception->getMessage());

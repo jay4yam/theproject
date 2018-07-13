@@ -33,7 +33,7 @@ class last6product4homeComposer
      */
     private function getLast6voyages()
     {
-        return $this->voyage->isPublic()->with('ville', 'region')->orderBy('created_at', 'desc')->limit(6)->get();
+        return $this->voyage->localize()->isPublic()->with('ville', 'region')->orderBy('created_at', 'desc')->limit(6)->get();
     }
 
     /**

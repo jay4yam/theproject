@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Models\Voyage;
+use App\Traits\LanguageModifyer;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
@@ -17,6 +18,9 @@ use Intervention\Image\Facades\Image;
 
 class VoyageRepository
 {
+
+    use LanguageModifyer;
+
     /**
      * @var Voyage
      */
@@ -127,30 +131,8 @@ class VoyageRepository
             $voyage->save();
         }
 
+        //Utilisation de la methode copyForOtherLanguage du Trait LanguageModifyer
         $this->copyForOtherLanguage($voyage);
-    }
-
-    /**
-     * Crée une copie du voyage inséré en base pour chaque langues disponibles
-     * @param Voyage $voyage
-     */
-    private function copyForOtherLanguage(Voyage $voyage)
-    {
-        //1. recupère toutes les langues disponibles sur la plateforme
-        $arrayLanguage = \Config::get('language');
-
-        //2. supprime la langue du voyage passé en paramètre
-        unset($arrayLanguage[$voyage->locale]);
-
-        //3. Itère sur la liste des langues pour créer une copie du voyage passé en paramètre
-        foreach($arrayLanguage as $locale => $value)
-        {
-            $voyageCopy = $voyage->replicate();
-            $voyageCopy->locale = $locale;
-            $voyageCopy->parent_id = $voyage->id;
-            $voyageCopy->is_public = false;
-            $voyageCopy->save();
-        }
     }
 
     /**
@@ -241,7 +223,7 @@ class VoyageRepository
     {
         $ville = $request->ville;
 
-        $voyages = $this->voyage->isPublic()->with('ville', 'region')->whereIn('ville_id', $ville)->paginate(9);
+        $voyages = $this->voyage->localize()->isPublic()->with('ville', 'region')->whereIn('ville_id', $ville)->paginate(9);
 
         return $voyages;
     }
@@ -255,6 +237,6 @@ class VoyageRepository
     {
         $priceArray = [ $request->price_min, $request->price_max ];
 
-        return $this->voyage->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
+        return $this->voyage->localize()->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
     }
 }
