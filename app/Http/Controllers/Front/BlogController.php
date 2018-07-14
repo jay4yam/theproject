@@ -39,7 +39,7 @@ class BlogController extends Controller
         //On essaye de recupérer la liste des articles du blog en mode pagination
         try {
 
-            $allArticles = $this->blog->isPublic()->with('user', 'categories')->orderBy('created_at', 'desc')->paginate(6);
+            $allArticles = $this->blog->localize()->isPublic()->with('user', 'categories')->orderBy('created_at', 'desc')->paginate(6);
 
         }catch (\Exception $exception){
             //si il y a une exception on affiche un message d'erreur

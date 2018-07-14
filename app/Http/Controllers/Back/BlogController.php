@@ -54,9 +54,8 @@ class BlogController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param BlogUpdateRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(BlogUpdateRequest $request)
     {
@@ -86,7 +85,9 @@ class BlogController extends Controller
     {
         //on essaye de récupérer un article via son id
         try {
-            $article = $this->blogRepository->getById($id);
+
+            $articles = $this->blogRepository->getAllArticleLanguageById($id);
+
         }catch (\Exception $exception){
 
             //si il y a une exception on renvois un message d'erreur
@@ -96,7 +97,7 @@ class BlogController extends Controller
             return back();
         }
 
-        return view('back.blog.edit', compact('article'));
+        return view('back.blog.edit', compact('articles'));
     }
 
     /**

@@ -26,6 +26,7 @@
                         </div>
                         <div class="box-search-body text-left">
                             {{ Form::open(['route' => ['blogs.store'], 'files' => true, 'method' => 'POST', 'class' => 'createform']) }}
+                            {{ Form::hidden('localize', \App::getLocale()) }}
                             <div class="row">
                                 <!-- 1ere col -->
                                 <div class="col-md-8 col-xs-12">

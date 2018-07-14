@@ -12,8 +12,18 @@ class Blog extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'title','intro','slug','content','main_image','is_public', 'user_id'
+        'locale', 'parent_id','title','intro','slug','content','main_image','is_public', 'user_id'
     ];
+
+    /**
+     * Retourne les articles en fonction de la valeur de la variable locale
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLocalize($query)
+    {
+        return $query->where('locale', '=', \App::getLocale());
+    }
 
     /**
      * Récupère les articles "visibles"

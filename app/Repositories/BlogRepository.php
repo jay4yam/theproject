@@ -10,12 +10,15 @@ namespace App\Repositories;
 
 
 use App\Models\Blog;
+use App\Traits\LanguageModifyer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use \Intervention\Image\Facades\Image;
 
 class BlogRepository
 {
+    use LanguageModifyer;
+
     /**
      * @var Blog
      */
@@ -41,6 +44,23 @@ class BlogRepository
     }
 
     /**
+     * Retourne un voyage dans toutes ses langues
+     * @param $id
+     * @return array
+     */
+    public function getAllArticleLanguageById($id)
+    {
+        //1. init un tableau voyages
+        $arrayArticle = array();
+        $this->blog->where('parent_id', '=', $id)
+                    ->orWhere('id', '=', $id)
+                    ->each(function ($blog) use(&$arrayArticle){
+                        return $arrayArticle[$blog->locale] = $blog->load('user', 'categories');
+                    });
+        return $arrayArticle;
+    }
+
+    /**
      * Retourne les articles paginés par 10 ordonnés par date
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
@@ -52,7 +72,7 @@ class BlogRepository
     /**
      * Gère l'insertion d'un nouvel article
      * @param Request $request
-     * @return int article
+     * @return int id
      */
     public function store(Request $request)
     {
@@ -64,13 +84,15 @@ class BlogRepository
     /**
      * @param Blog $article
      * @param Request $request
-     * @return aritcle id
+     * @return int id
      */
     private function save(Blog $article, Request $request)
     {
         \DB::transaction(function () use($request, $article){
 
             $article->user_id = $request->user_id;
+            $article->locale = $request->localize;
+            $article->parent_id = 0;
             $article->title = $request->title;
             $article->slug = $request->slug;
             $article->intro = $request->intro;
@@ -84,6 +106,8 @@ class BlogRepository
 
             //Gère la synchro de l'article avec
             $this->updateCategories($request, $article);
+
+            $this->copyForOtherLanguage($article);
         });
 
         return $article->id;

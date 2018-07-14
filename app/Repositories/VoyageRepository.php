@@ -59,7 +59,7 @@ class VoyageRepository
     }
 
     /**
-     * Retourne un voyage dans toutes ses langues
+     * Retourne un article dans toutes ses langues
      * @param $id
      * @return array
      */
@@ -68,11 +68,10 @@ class VoyageRepository
         //1. init un tableau voyages
         $arrayVoyage = array();
         $this->voyage->where('parent_id', '=', $id)
-                                ->orWhere('id', '=', $id)
-                                ->each(function ($voyage) use(&$arrayVoyage){
-                                    //dd($voyage);
-                                    return $arrayVoyage[$voyage->locale] = $voyage->load('ville', 'region');
-                                });
+                     ->orWhere('id', '=', $id)
+                     ->each(function ($voyage) use(&$arrayVoyage){
+                         return $arrayVoyage[$voyage->locale] = $voyage->load('ville', 'region');
+                    });
         return $arrayVoyage;
         //return $this->voyage->findOrFail($id)->load('ville', 'region');
     }
