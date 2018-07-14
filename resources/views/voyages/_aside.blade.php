@@ -40,7 +40,7 @@
         </div>
         <hr class="hr bg-gallery">
         <div class="blog-aside-item">
-            <p class="text-black text-ubold text-uppercase text-spacing-200">Villes</p>
+            <p class="text-black text-ubold text-uppercase text-spacing-200">{{ __('voyage.ville') }}</p>
             <!-- List-->
             {{ Form::open(['route' => ['front.voyage.ville'], 'method' => 'get']) }}
             <ul class="list list-1 list-checkbox text-left">
@@ -48,7 +48,7 @@
                     <li>
                         <label class="checkbox-inline checkbox-inline-left">
                             <input class="checkbox-custom" name="ville[]" value="{{ $value['id'] }}" type="checkbox">
-                            <span class="text-small">{{ $ville }} ({{ $value['count'] }})</span>
+                            <span class="text-small">{{ $ville }} - {{ $value['region'] }} ({{ $value['count'] }})</span>
                         </label>
                     </li>
                 @endforeach

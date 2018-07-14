@@ -66,9 +66,9 @@ class VoyagesComposer
 
         $value = \Cache::remember('ville_count_voyage', 10, function () use(&$array){
             //itère sur les voyages public groupés par ville
-            $this->voyage->isPublic()->with('ville')->get(['id', 'ville_id'])->groupBy('ville_id')->each(function ($items) use (&$array) {
+            $this->voyage->isPublic()->with('ville', 'region')->get(['id', 'ville_id'])->groupBy('ville_id')->each(function ($items) use (&$array) {
                     foreach ($items as $item) {
-                        $array [$item->ville->name] = ['id' => $item->ville_id, 'count' => $items->count()];
+                        $array [$item->ville->name] = ['id' => $item->ville_id, 'count' => $items->count(), 'region' => $item->region->first()->name];
                     }
                 });
             return $array;

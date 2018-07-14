@@ -18,6 +18,7 @@ return [
     'sort_by' => 'Sort By:',
     'vue' => 'view:',
     'par' => 'by',
+    'ville' => 'Cities',
     'lire_plus' => 'Read more',
     'acheter' => 'Buy',
     'compagnie' => 'Compagny',
