@@ -43,31 +43,33 @@
                                             {{ Form::hidden('localize', $cleLang) }}
                                             {{ Form::hidden('parent_id', $voyage->parent_id) }}
                                         <div class="row">
+                                            <!-- 1ere col -->
                                             <div class="col-md-8">
                                                 <div class="form-group flex-column {!! $errors->has('title') ? 'has-error' : '' !!}">
                                                 {{ Form::label('title', 'TITLE :') }}
                                                 {{ Form::text('title', $voyage->title, ['class' => 'form-control']) }}
                                                 {!! $errors->first('title', '<small class="help-block">:message</small>') !!}
-                                            </div>
+                                                </div>
 
                                                 <div class="form-group flex-column {!! $errors->has('subtitle') ? 'has-error' : '' !!}">
                                                 {{ Form::label('subtitle', 'SUBTITLE :') }}
                                                 {{ Form::text('subtitle', $voyage->subtitle, ['class' => 'form-control']) }}
                                                 {!! $errors->first('subtitle', '<small class="help-block">:message</small>') !!}
-                                            </div>
+                                                </div>
 
                                                 <div class="form-group flex-column {!! $errors->has('intro') ? 'has-error' : '' !!}">
                                                 {{ Form::label('intro', 'INTRO :') }}
                                                 {{ Form::textarea('intro',  $voyage->intro, ['placeholder' => 'Selectionner le role de l\'utilisateur', 'class' => 'form-control']) }}
                                                 {!! $errors->first('intro', '<small class="help-block">:message</small>') !!}
-                                            </div>
+                                                </div>
 
                                                 <div class="form-group flex-column {!! $errors->has('description') ? 'has-error' : '' !!}">
                                                 {{ Form::label('description', 'DESCRIPTION :') }}
                                                 {{ Form::textarea('description',  $voyage->description, ['class' => 'form-control']) }}
                                                 {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
+                                                </div>
                                             </div>
-                                            </div>
+                                            <!-- 2eme col -->
                                             <div class="col-md-4">
                                                 <div class="form-group flex-column {!! $errors->has('is_public') ? 'has-error' : '' !!}">
                                                     {{ Form::label('is_public', 'EST VISIBLE :') }}
@@ -118,7 +120,6 @@
                                                     {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), @$voyage->ville->id ,['class' => 'form-control',]) }}
                                                     {!! $errors->first('ville_id', '<small class="help-block">:message</small>') !!}
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div class="form-group align-center pt-45">
@@ -153,6 +154,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 

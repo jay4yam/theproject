@@ -65,6 +65,10 @@ class Voyage extends Model
         );
     }
 
+    /**
+     * Relation morph avec la table seo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function seo()
     {
         return $this->morphMany(Seo::class, 'seotable');

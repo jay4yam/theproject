@@ -96,6 +96,9 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="{{ @$seoCssActive }}">
+                                <a href="{{ route('seo.index') }}">SEO</a>
+                            </li>
                             @guest
                                 <li><a href="{{ route('login') }}">Login</a></li>
                                 @else

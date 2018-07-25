@@ -9,6 +9,8 @@ class Seo extends Model
 
     protected $table = 'seotable';
 
+    protected $fillable = ['locale', 'title', 'meta_robots', 'meta_description', 'canonical'];
+
     /**
      * Get all of the owning seo  models.
      */

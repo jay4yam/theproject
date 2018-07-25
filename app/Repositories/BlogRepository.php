@@ -124,8 +124,12 @@ class BlogRepository
 
         \DB::transaction(function () use($request, $id, $article){
 
+            if($article->parent_id != 0){
+                $article->parent_id = $request->parent_id;
+            }
+
             $article->title = $request->title;
-            $article->slug = $request->slug;
+            $article->slug = str_slug($request->title);
             $article->intro = $request->intro;
             $article->content = $request->contentArticle;
             $article->is_public = $request->is_public;

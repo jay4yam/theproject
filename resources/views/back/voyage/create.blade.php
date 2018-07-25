@@ -19,6 +19,7 @@
                                 {{ Form::open(['route' => ['voyages.store'] , 'files' => true, 'method' => 'POST', 'class' => 'createform']) }}
                                 {{ Form::hidden('localize', App::getLocale()) }}
                                 <div class="row">
+                                    <!-- 1ere col -->
                                     <div class="col-md-8">
                                         <div class="form-group flex-column {!! $errors->has('title') ? 'has-error' : '' !!}">
                                             {{ Form::label('title', 'TITLE :') }}
@@ -44,12 +45,14 @@
                                             {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
+                                    <!-- 2eme col -->
                                     <div class="col-md-4">
                                         <div class="form-group flex-column {!! $errors->has('is_public') ? 'has-error' : '' !!}">
                                             {{ Form::label('is_public', 'EST VISIBLE :') }}
                                             {{ Form::select('is_public', [false => 'non', true => 'oui'], '' ,['value' => old('is_public'),'class' => 'form-control',]) }}
                                             {!! $errors->first('is_public', '<small class="help-block">:message</small>') !!}
                                         </div>
+
                                         <div class="form-group flex-column {!! $errors->has('price') ? 'has-error' : '' !!}">
                                             {{ Form::label('price', 'PRICE :') }}
                                             {{ Form::text('price', null, ['value'=> old('price'), 'class' => 'form-control']) }}
@@ -61,12 +64,12 @@
                                             {{ Form::select('is_discounted', [false => 'non', true => 'oui'], '',['value'=> old('is_discounted'), 'class' => 'form-control',]) }}
                                             {!! $errors->first('is_discounted', '<small class="help-block">:message</small>') !!}
                                         </div>
+
                                         <div class="form-group flex-column {!! $errors->has('discount_price') ? 'has-error' : '' !!}">
                                             {{ Form::label('discount_price', 'PRIX AVEC REMISE :') }}
                                             {{ Form::text('discount_price', null ,['value'=> old('discount_price'), 'class' => 'form-control',]) }}
                                             {!! $errors->first('discount_price', '<small class="help-block">:message</small>') !!}
                                         </div>
-
 
                                         <!-- main_image container -->
                                         <div class="image-container">
@@ -94,7 +97,6 @@
                                             {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), '' ,['value'=> old('ville_id') , 'class' => 'form-control',]) }}
                                             {!! $errors->first('ville_id', '<small class="help-block">:message</small>') !!}
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="form-group align-center pt-45">

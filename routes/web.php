@@ -21,7 +21,9 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     //Applique la valeur de la variable langue 'locale' au site
     App::setLocale( $locale );
 
-    //Affiche la home page
+    /**
+     * Affiche la home page
+     */
     Route::get('/', 'HomeController@index')->name('home');
 
     /**
@@ -55,8 +57,10 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
 
 });
 
-//Route regroupant tous les controller présent dans l'admin
-//Grace à l'ajout du "namespace', on est pas obligé de préfixer le controller avec 'Back' +'/Controller'
+/**
+ * Route regroupant tous les controller présent dans l'admin
+ * Grace à l'ajout du "namespace', on est pas obligé de préfixer le controller avec 'Back' +'/Controller'
+ */
 Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'auth'], function( ) {
 
     Route::get('/', 'AdminController@index')->name('back.index');
@@ -80,9 +84,13 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 
     Route::resource('villes', 'VilleController');
     Route::resource('regions', 'RegionController');
+
+    Route::resource('seo', 'SeoController');
 });
 
-
+/**
+ * Routes des requêtes en AJAX
+ */
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::get('/voyage-get-list-voyage', 'VoyageFrontController@getVoyagesListForAutocomplete');
     Route::get('/voyage-info', 'VoyageFrontController@getVoyagesInfoForCart');
