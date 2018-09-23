@@ -49,30 +49,15 @@
     </section>
 
     <!-- Tour Program-->
-    <section class="section-70 section-md-bottom-80">
+    <section class="section-70 section-md-bottom-80 programme-voyage">
         <div class="container">
             <h3>Tour Program</h3>
             <p>Here is what’s included in the program of this tour</p>
-            <!-- Owl Carousel-->
-            <div class="owl-carousel owl-dots-primary owl-dots-lg-reveal owl-navs-lg-veil text-left" data-items="1" data-md-items="2" data-lg-items="3" data-stage-padding="5" data-loop="false" data-margin="30" data-mouse-drag="false" data-dots="true" data-nav="true">
-                <div class="owl-item">
-                    <div class="box-program">
-                        <!-- Unit-->
-                        <div class="unit flex-row unit-spacing-sm">
-                            <div class="unit-left text-center">
-                                <h3 class="text-ubold text-primary line-height-1">1-3</h3>
-                                <p class="text-extra-small text-spacing-1000 text-black text-uppercase line-height-1 inset-left-10">day</p>
-                            </div>
-                            <div class="unit-body">
-                                <p class="text-small text-ubold text-uppercase text-black">Berlin, Warsaw, krakow</p>
-                            </div>
-                        </div>
-                        <div class="box-program-content inset-left-10 inset-right-10">
-                            <hr class="hr bg-gallery">
-                            <p class="text-small text-silver-chalice">Start your Eastern Europe trip from Berlin - one of the most attractive European cities. Head out to Warsaw - the capital of Poland, where you’ll be able to take a guided tour through the city’s places of interests and museums.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="intro">
+                {!!  $voyage->intro  !!}
+            </div>
+            <div class="description">
+                {!! $voyage->description !!}
             </div>
         </div>
     </section>
@@ -86,7 +71,7 @@
                 <div class="owl-item">
                 <a class="thumbnail-rayen" data-lightgallery="item" href="/storage/voyages/{{$voyage->id}}/min/{{ $file->getFilename() }}">
                     <span class="figure">
-                        <img class="img-responsive center-block" width="370" height="310" src="/storage/voyages/{{$voyage->id}}/min/{{ $file->getFilename() }}" alt="">
+                        <img class="img-responsive center-block" width="310" src="/storage/voyages/{{$voyage->id}}/min/{{ $file->getFilename() }}" alt="">
                         <span class="figcaption">
                             <span class="icon icon-xl fa fa-search-plus text-white"></span>
                         </span>

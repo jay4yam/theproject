@@ -20885,3 +20885,5 @@ a.roll {
 
 .langues-list li{  display: inline; padding-left: 5px;  border-left: 1px solid black; }
 .langues-list li:first-child{ border-left: none; }
+
+.programme-voyage .intro, .programme-voyage .description {     padding: 1.5rem;  text-align: justify;}
