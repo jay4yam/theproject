@@ -29,7 +29,7 @@
                                 @endforeach
                             </ul>
                             <div class="tab-content padding-top-20" id="myTabContent">
-                                @php $j = 1; @endphp
+                                @php $j = 1; $original_voyage_id = 0; @endphp
                                 @foreach(Config::get('language') as $cleLang => $lang)
                                     @php
                                         if(!array_key_exists($cleLang, $voyages))
@@ -128,28 +128,29 @@
                                             </button>
                                         </div>
                                         {{ Form::close() }}
+
+                                    <!-- DROPzone.js-->
+                                        <div class="row">
+                                            <h5 class="h5-slider">Photos du Slider</h5>
+                                            <div class="col-md-6">
+                                                {{ Form::open(['route' => 'voyages.upload.miniature', 'class'=>'dropzone']) }}
+                                                {{ Form::hidden('voyage_id', $voyage->id) }}
+                                                {{ Form::close() }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if(is_dir('storage/voyages/'.$voyage->id.'/min'))
+                                                    @foreach(File::allFiles('storage/voyages/'.$voyage->id.'/min') as $file)
+                                                        <div class="img-min">
+                                                            <a href="#" class="delete-img" data-target="/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}">x remove</a>
+                                                            <img src="/storage/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}" class="img-responsive" width="100px">
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     @php $j ++; @endphp
                                 @endforeach
-                            <!-- DROPzone.js-->
-                            <div class="row">
-                                <h5 class="h5-slider">Photos du Slider</h5>
-                                <div class="col-md-6">
-                                    {{ Form::open(['route' => 'voyages.upload.miniature', 'class'=>'dropzone']) }}
-                                    {{ Form::hidden('voyage_id', $voyage->id) }}
-                                    {{ Form::close() }}
-                                </div>
-                                <div class="col-md-6">
-                                    @if(is_dir('storage/voyages/'.$voyage->id.'/min'))
-                                        @foreach(File::allFiles('storage/voyages/'.$voyage->id.'/min') as $file)
-                                            <div class="img-min">
-                                                <a href="#" class="delete-img" data-target="/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}">x remove</a>
-                                                <img src="/storage/voyages/{{ $voyage->id }}/min/{{ $file->getFilename() }}" class="img-responsive" width="100px">
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
