@@ -111,11 +111,33 @@ class VoyageController extends Controller
         flash()->success('Voyage mis à jour avec succès');
 
         //si le parent_id est différents alors il faut rediriger vers la page parente
-        if($request->parent_id != $id){
-            return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($request->parent_id)]);
+        if($request->parent_id != $id && $request->parent_id !=0){
+            return redirect()->route('voyages.edit', ['id' => $this->voyageRepository->getById($request->parent_id)]);
         }
 
-        return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($id)]);
+        return redirect()->route('voyages.edit', ['id' => $this->voyageRepository->getById($id)]);
+    }
+
+    /**
+     * Supprime un voyage de la base, (supprime aussi tous les voyages fils dans toutes les langues
+     * @param $id
+     * @return $this|string
+     */
+    public function destroy($id)
+    {
+        try {
+
+            $this->voyageRepository->delete($id);
+
+        }catch (\Exception $exception){
+
+            flash()->error($exception->getMessage());
+
+            return back();
+        }
+            flash()->error('voyage supprimé');
+
+        return back();
     }
 
     /**

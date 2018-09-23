@@ -59,7 +59,7 @@ class VoyageRepository
     }
 
     /**
-     * Retourne un article dans toutes ses langues
+     * Retourne un voyage dans toutes ses langues
      * @param $id
      * @return array
      */
@@ -159,6 +159,16 @@ class VoyageRepository
         $voyage->ville_id = $request->ville_id;
 
         $voyage->save();
+    }
+
+    public function delete($id)
+    {
+        $voyages = $this->getAllVoyageLanguageById($id);
+
+        foreach ($voyages as $voyage)
+        {
+            $voyage->delete();
+        }
     }
 
     /**

@@ -46,7 +46,20 @@
                                         </td>
                                         <td> {{ $voyage->ville->name }}</td>
                                         <td> {{ $voyage->price }} €</td>
-                                        <td> options </td>
+                                        <td>
+                                            <a href="{{ url()->route('voyages.edit', ['id' => $voyage->id]) }}">
+                                                <button class="btn btn-info pull-left">
+                                                    <i class="fas fa-edit"></i></i>
+                                                </button>
+                                            </a>
+                                            <form class='delete' action="{{ route('voyages.destroy', ['voyage' => $voyage->id]) }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button class="btn btn-danger pull-right">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
