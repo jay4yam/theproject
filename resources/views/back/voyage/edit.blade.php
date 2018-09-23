@@ -169,7 +169,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @php $img = \Image::make('/storage/voyages/'.$voyage->main_photo); @endphp
+                    @php $img = \Image::make('storage/voyages/'.$voyage->main_photo); @endphp
                     <img src="/storage/voyages/{{ $voyage->main_photo }}" class="img-responsive">
                     <span class="img-size-info">
                         name: <strong>{{ $voyage->main_photo }}</strong><br>
