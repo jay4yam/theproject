@@ -34,7 +34,8 @@
                 <p class="text-black text-ubold text-uppercase text-spacing-200">{{ __('voyage.price_range') }}</p>
                 <!-- slider -->
                 <div class="slider"></div>
-                <input type="text" id="amount" readonly style="padding-top:10px; border:0; color:#f6931f; font-weight:bold;" value="{{ $minPrice }} € - {{ $maxPrice }} €">
+                <input type="text" id="amount" readonly style="padding-top:10px; border:0; color:#f6931f; font-weight:bold;"
+                       value="{{ request('price_min') ? request('price_min') : $minPrice }} € - {{ request('price_max') ? request('price_max') : $maxPrice }} €">
                 <button class="button button-primary button-width-110" type="submit">{{ __('voyage.filter') }}</button>
             {{ Form::close() }}
         </div>

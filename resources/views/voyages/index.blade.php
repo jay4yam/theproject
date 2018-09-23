@@ -147,6 +147,7 @@
             function split( val ) {
                 return val.split( /,\s*/ );
             }
+
             function extractLast( term ) {
                 return split( term ).pop();
             }
@@ -221,9 +222,9 @@
                 $('.slider').slider({
                     range: true,
                     animate: "fast",
-                    min: <?php echo $minPrice ?> ,
-                    max: <?php echo $maxPrice ?> ,
-                    values: [ <?php echo $minPrice ?>, <?php echo $maxPrice ?> ],
+                    min: <?php echo $minPrice; ?> ,
+                    max: <?php echo $maxPrice; ?> ,
+                    values: [ <?php echo request('price_min') ? request('price_min') : $minPrice; ?>, <?php echo request('price_max') ? request('price_max') : $maxPrice; ?> ],
                     slide: function( event, ui ) {
                         $( "#amount" ).val(  ui.values[ 0 ] + " € - " + ui.values[ 1 ] + " €" );
                     },
