@@ -173,9 +173,9 @@
                     <img src="/storage/voyages/{{ $voyage->main_photo }}" class="img-responsive">
                     <span class="img-size-info">
                         name: <strong>{{ $voyage->main_photo }}</strong><br>
-                        width: <strong>@{{ @$img->width() }}.px</strong> |
-                        height: <strong>@{{ @$img->height() }}.px</strong> |
-                        size: <strong>@{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
+                        width: <strong>{{ @$img->width() }}.px</strong> |
+                        height: <strong>{{ @$img->height() }}.px</strong> |
+                        size: <strong>{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
                     </span>
                 </div>
                 <div class="modal-footer">
