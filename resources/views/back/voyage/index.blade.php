@@ -30,6 +30,7 @@
                                 <tr>
                                     <th scope="col">#id</th>
                                     <th scope="col">Titre</th>
+                                    <th scope="col">Langues</th>
                                     <th scope="col">Ville</th>
                                     <th scope="col">Prix</th>
                                     <th scope="col">Options</th>
@@ -43,6 +44,13 @@
                                             <a href="{{ url()->route('voyages.edit', ['id' => $voyage->id]) }}">
                                                 {{ $voyage->title }}
                                             </a>
+                                        </td>
+                                        <td>
+                                            <ul class="langues-list">
+                                            @foreach($voyage->langues() as $cle => $valeur)
+                                               <li>{{ @$valeur['locale'] }}</li>
+                                            @endforeach
+                                            </ul>
                                         </td>
                                         <td> {{ $voyage->ville->name }}</td>
                                         <td> {{ $voyage->price }} €</td>

@@ -20882,3 +20882,6 @@ a.roll {
   list-style-type: lower-roman;
   padding-left: 30px;
 }
+
+.langues-list li{  display: inline; padding-left: 5px;  border-left: 1px solid black; }
+.langues-list li:first-child{ border-left: none; }

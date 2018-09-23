@@ -32,6 +32,20 @@ class Voyage extends Model
     }
 
     /**
+     * Retourne les voyages disposant d'une langue
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLangues($query)
+    {
+        //1. cherche les row qui ont le même id que l'objet voyage
+        $voyagesLangues = $query->where('parent_id', '=', $this->id);
+
+        //2. retourne le résultat sous forme de tableau
+        return $voyagesLangues->get(['locale'])->toArray();
+    }
+
+    /**
      * Relation 1:1 entre la table 'voyages' et la table 'villes' (1 voyage à une ville)
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
