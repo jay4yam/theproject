@@ -82,7 +82,7 @@
                                                 <!-- auteur -->
                                                 <div class="form-group flex-column {!! $errors->has('user') ? 'has-error' : '' !!}">
                                                     {{ Form::label('title', 'AUTEUR :') }}
-                                                    {{ Form::text('title', $article->user->profile->firstName, ['class' => 'form-control',  'disabled' => 'disabled']) }}
+                                                    {{ Form::text('title', $article->user->profile->first()->firstName, ['class' => 'form-control',  'disabled' => 'disabled']) }}
                                                     {!! $errors->first('title', '<small class="help-block">:message</small>') !!}
                                                 </div>
 
