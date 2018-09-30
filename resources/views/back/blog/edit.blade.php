@@ -80,6 +80,7 @@
                                             <!-- 2eme col -->
                                             <div class="col-md-4 col-xs-12">
                                                 <!-- auteur -->
+                                                {{ var_dump($article->user->profile->firstName) }}
                                                 <div class="form-group flex-column {!! $errors->has('user') ? 'has-error' : '' !!}">
                                                     {{ Form::label('title', 'AUTEUR :') }}
                                                     {{ Form::text('title', $article->user->profile->firstName, ['class' => 'form-control',  'disabled' => 'disabled']) }}
