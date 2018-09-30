@@ -80,7 +80,10 @@
                                             <!-- 2eme col -->
                                             <div class="col-md-4 col-xs-12">
                                                 <!-- auteur -->
-                                                {{ $article->user->profile->firstName }}
+                                                @php
+                                                    $article = \App\Models\Blog::with('user')->find(21);
+                                                    echo $article->user->profile->firstName;
+                                                @endphp
                                                 <div class="form-group flex-column {!! $errors->has('user') ? 'has-error' : '' !!}">
                                                     {{ Form::label('title', 'AUTEUR :') }}
                                                     {{ Form::text('title', '', ['class' => 'form-control',  'disabled' => 'disabled']) }}
