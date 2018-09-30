@@ -152,34 +152,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificateur d'image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @php $img = \Image::make('storage/blog/'.$article->main_image); @endphp
-                    <img src="/storage/blog/{{ $article->main_image }}" class="img-responsive">
-                    <span class="img-size-info">
-                        name: <strong>{{ $article->main_image }}</strong><br>
-                        width: <strong>{{ @$img->width() }}.px</strong> |
-                        height: <strong>{{ @$img->height() }}.px</strong> |
-                        size: <strong>{{ round( (@$img->filesize() / 1000), 0, PHP_ROUND_HALF_UP) }}.ko </strong>
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('dedicated_js')
