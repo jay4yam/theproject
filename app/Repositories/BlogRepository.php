@@ -50,7 +50,7 @@ class BlogRepository
      */
     public function getAllArticleLanguageById($id)
     {
-        //1. init un tableau voyages
+        //1. init un tableau d'articles
         $arrayArticle = array();
         $this->blog->where('parent_id', '=', $id)
                     ->orWhere('id', '=', $id)
