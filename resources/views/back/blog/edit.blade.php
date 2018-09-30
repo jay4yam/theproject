@@ -37,7 +37,7 @@
                                     @php
                                         if(!array_key_exists($cleLang, $articles))
                                         {
-                                            $articles[$cleLang] = new \App\Models\Voyage();
+                                            $articles[$cleLang] = new \App\Models\Blog();
                                         }
                                         $article = $articles[$cleLang];
                                     @endphp
