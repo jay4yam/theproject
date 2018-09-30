@@ -28,7 +28,11 @@
                     <div class="row row-40 justify-content-sm-center list-inline-dashed-vertival">
                         <div class="col-sm-6 col-md-5 col-lg-3">
                             <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">{{ __('voyage.compagnie') }}</p>
-                            <p class="text-big text-ubold text-black text-uppercase">//TODO afficher la compagnie</p>
+                            @foreach($voyage->compagnies as $compagnie)
+                            <p class="text-big text-ubold text-black text-uppercase">
+                                {{ $compagnie->raison_sociale }}
+                            </p>
+                            @endforeach
                         </div>
                         <div class="col-sm-6 col-md-5 col-lg-3">
                             <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">{{ __('voyage.duration') }}</p>
@@ -186,13 +190,13 @@
                 @foreach($voyagesInRegion as $voy)
                 <div class="owl-item">
                     <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">
-                        <a href="{{ route('front.voyage.show', ['id' => $voy->id, 'slug' => str_slug($voy->title)]) }}">
-                        {{ $voy->title }}
+                        <a class="text-black" href="#">
+                            {{ $voy->ville->name }}
                         </a>
                     </p>
                     <p class="text-big text-ubold text-uppercase">
-                        <a class="text-black" href="#">
-                            {{ $voy->ville->name }}
+                        <a href="{{ route('front.voyage.show', ['id' => $voy->id, 'slug' => str_slug($voy->title)]) }}">
+                            {{ $voy->title }}
                         </a>
                     </p>
                 </div>

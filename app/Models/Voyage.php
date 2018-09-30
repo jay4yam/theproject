@@ -87,4 +87,13 @@ class Voyage extends Model
     {
         return $this->morphMany(Seo::class, 'seotable');
     }
+
+    /**
+     * Relation N:N de la table compagnies vers la table voyages via la table 'compagnies_voyages'
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function compagnies()
+    {
+        return $this->belongsToMany(Compagnie::class, 'compagnies_voyages', 'compagnies_id',  'voyages_id');
+    }
 }

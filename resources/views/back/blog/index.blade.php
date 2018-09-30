@@ -52,7 +52,7 @@
                                             {!! $article->is_public ? '<i class="fas fa-eye"></i> oui': '<i class="fas fa-eye-slash"></i> non' !!}
                                         </td>
                                         <td>{{ $article->created_at->format('d M Y') }}</td>
-                                        <td>{{ $article->user->profile->firstName    }}</td>
+                                        <td>{{ $article->user->profile->firstName }}</td>
                                         <td> options </td>
                                     </tr>
                                 @endforeach

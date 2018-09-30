@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Models\Voyage;
 use App\Traits\LanguageModifyer;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
@@ -50,12 +51,16 @@ class VoyageRepository
      */
     public function allVoyages()
     {
-        return $this->voyage->localize()->with('ville', 'region')->orderBy('created_at', 'desc')->paginate(9);
+        return $this->voyage->localize()->with('ville', 'region', 'compagnies')->orderBy('created_at', 'desc')->paginate(9);
     }
 
+    /**
+     * @param $id
+     * @return Model
+     */
     public function getById($id)
     {
-        return $this->voyage->findOrFail($id)->load('ville', 'region');
+        return $this->voyage->findOrFail($id)->load('ville', 'region', 'compagnies');
     }
 
     /**

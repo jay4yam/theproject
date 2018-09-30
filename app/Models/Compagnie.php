@@ -38,4 +38,13 @@ class Compagnie extends Model
     {
         return $this->belongsToMany(User::class, 'compagnies_users', 'user_id', 'compagny_id');
     }
+
+    /**
+     * Relation N:N de la table compagnies vers la table voyages via la table 'compagnies_voyages'
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function voyages()
+    {
+        return $this->belongsToMany(Voyage::class, 'compagnies_voyages', 'voyages_id', 'compagnies_id');
+    }
 }

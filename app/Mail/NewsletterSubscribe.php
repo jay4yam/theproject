@@ -15,10 +15,11 @@ class NewsletterSubscribe extends Mailable
 
     public $email;
     public $coupon;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * NewsletterSubscribe constructor.
+     * @param Newsletter $email
+     * @param CouponCode $coupon
      */
     public function __construct(Newsletter $email, CouponCode $coupon)
     {
