@@ -36,6 +36,9 @@ class CartHelper
     }
 
     protected $userIp;
+    public function getUserIp(){
+        return $this->userIp;
+    }
 
     protected $finalPrice;
     public function getFinalPrice(){

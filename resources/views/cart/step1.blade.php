@@ -113,6 +113,11 @@
                                     <td colspan="2"></td>
                                     <td colspan="2" style="text-align: right">Prix Total TTC</td>
                                     <td id="finalPrice"><b>{{ $finalPrice }} €</b></td>
+                                    {{ Form::hidden('finalPrice', $finalPrice) }}
+                                    {{ Form::hidden('nbVoyageur', $cart->getNbVoyageur()) }}
+                                    {{ Form::hidden('voyage', $cart->getVoyage()->title) }}
+                                    {{ Form::hidden('date', $cart->getDate()) }}
+                                    {{ Form::hidden('ip', $cart->getUserIp()) }}
                                     <td></td>
                                 </tr>
                                 </tfoot>
