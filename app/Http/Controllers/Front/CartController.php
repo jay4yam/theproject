@@ -26,7 +26,7 @@ class CartController extends Controller
             Stripe::setApiKey('sk_test_2H3k1N7NOdjh4oA76TvqRRTa');
 
             $token = $request->stripeToken;
-            dd(floatval($request->finalPrice));
+
             $charge = Charge::create([
                 'amount' => floatval($request->finalPrice),
                 'currency' => 'eur',
