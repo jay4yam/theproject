@@ -36,6 +36,6 @@ class CartController extends Controller
         }catch (\Exception $exception){
             return back()->with('message', $exception->getMessage());
         }
-        return back()->with('message', 'Paiement accpété');
+        return back()->with('message', 'Paiement accepté');
     }
 }
