@@ -28,7 +28,7 @@ class CartController extends Controller
             $token = $request->stripeToken;
 
             $charge = Charge::create([
-                'amount' => $request->finalPrice,
+                'amount' => floatval($request->finalPrice),
                 'currency' => 'eur',
                 'description' => $request->voyage,
                 'source' => $token,
