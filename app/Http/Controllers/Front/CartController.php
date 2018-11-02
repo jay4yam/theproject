@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Stripe\Charge;
 use Stripe\Stripe;
 
 class CartController extends Controller
@@ -21,7 +22,20 @@ class CartController extends Controller
 
     public function charge(Request $request)
     {
+        try {
+            Stripe::setApiKey('sk_test_2H3k1N7NOdjh4oA76TvqRRTa');
 
-        dd($request->all());
+            $token = $request->stripeToken;
+
+            $charge = Charge::create([
+                'amount' => $request->finalPrice,
+                'currency' => 'eur',
+                'description' => $request->voyage,
+                'source' => $token,
+            ]);
+        }catch (\Exception $exception){
+            return back()->with('message', $exception->getMessage());
+        }
+        return back()->with('message', 'Paiement accpété');
     }
 }
