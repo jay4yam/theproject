@@ -159,9 +159,7 @@
 @endsection
 
 @section('dedicated_js')
-    <script src="https://js.stripe.com/v2/"></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://checkout.stripe.com/checkout.js"></script>
     <script>
         window.onload = function() {
             // Create a Stripe client.
