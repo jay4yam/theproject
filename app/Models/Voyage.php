@@ -94,6 +94,6 @@ class Voyage extends Model
      */
     public function compagnies()
     {
-        return $this->belongsToMany(Compagnie::class, 'compagnies_voyages', 'compagnies_id',  'voyages_id');
+        return $this->belongsToMany(Compagnie::class, 'compagnies_voyages', 'voyages_id',  'compagnies_id');
     }
 }

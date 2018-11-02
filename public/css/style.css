@@ -20833,7 +20833,7 @@ a.roll {
 .cart-parallax{
   padding: 30px 0;
 }
-.recap-panier{ padding: 30px 45px 75px 65px; }
+.recap-panier{ padding: 55px; }
 .recap-panier h5{
   text-align: left;
   padding: 10px 0 10px 50px;
@@ -20867,10 +20867,9 @@ a.roll {
   color: #AAA;
 }
 
-.pt-50{
-  padding-top: 50px;
-}
-
+.pt-10{ padding-top: 10px;}
+.pt-50{ padding-top: 50px;}
+.pt-20{ padding-top: 20px;}
 .padding-top-20{ padding-top: 20px}
 
 .create-lang{

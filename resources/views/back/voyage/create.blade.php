@@ -97,6 +97,12 @@
                                             {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), '' ,['value'=> old('ville_id') , 'class' => 'form-control',]) }}
                                             {!! $errors->first('ville_id', '<small class="help-block">:message</small>') !!}
                                         </div>
+
+                                        <div class="form-group flex-column {!! $errors->has('compagny_id') ? 'has-error' : '' !!}">
+                                            {{ Form::label('compagny_id', 'COMPAGNIE :') }}
+                                            {{ Form::select('compagny_id', \App\Models\Compagnie::pluck('raison_sociale','id'), '' ,['value'=> old('compagny_id') , 'class' => 'form-control',]) }}
+                                            {!! $errors->first('compagny_id', '<small class="help-block">:message</small>') !!}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group align-center pt-45">

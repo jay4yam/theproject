@@ -44,13 +44,12 @@
         <div class="container">
             <div class="box box-insets-off bg-default d-xl-block">
                 <div class="recap-panier box-inner">
+                    {{ Form::open(['route' => 'cart.charge']) }}
                     <div class="row">
                         <!-- Formulaire -->
                         <div class="col-md-6">
                             <h5>Vos informations</h5>
                             <fieldset>
-                                {{ Form::open() }}
-
                                 <div class="form-inline">
                                     {{ Form::text('name', null, ['class' => 'form-control marginform', 'placeholder' => 'nom']) }}
                                     {{ Form::text('firstname', null, ['class' => 'form-control marginform', 'placeholder' => 'prenom']) }}
@@ -66,10 +65,6 @@
                                     {{ Form::text('code_postal', null, ['class' => 'form-control marginform', 'placeholder' => 'Code postal']) }}
                                     {{ Form::text('ville', null, ['class' => 'form-control marginform', 'placeholder' => 'Ville']) }}
                                 </div>
-                                <div class="col-xs-12">
-                                    {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
-                                </div>
-                                {{ Form::close() }}
                             </fieldset>
                         </div>
                         <!-- Recap panier -->
@@ -123,23 +118,18 @@
                                 </tfoot>
                             </table>
                             <div class="cart-form">
-                                <form action="/charge" method="post" id="payment-form">
-                                    <div class="form-row">
-                                        <label for="card-element">
-                                            Credit or debit card
-                                        </label>
-                                        <div id="card-element" class="form-control">
-                                            <!-- A Stripe Element will be inserted here. -->
-                                        </div>
-
-                                        <!-- Used to display Element errors. -->
-                                        <div id="card-errors" role="alert"></div>
+                                <div class="form-row">
+                                    <label for="card-element">
+                                        Credit or debit card
+                                    </label>
+                                    <div id="card-element" class="form-control">
+                                        <!-- A Stripe Element will be inserted here. -->
                                     </div>
-
-                                    <button class="button button-cart">Submit Payment</button>
-                                </form>
+                                    <!-- Used to display Element errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
                             </div>
-                            <div class="col-md-12 pt-50">
+                            <div class="col-md-12 pt-10">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <i class="fab fa-cc-visa fa-2x"></i>
@@ -156,7 +146,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 text-center pt-20">
+                            {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
+                        </div>
                     </div>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

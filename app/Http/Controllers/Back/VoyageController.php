@@ -92,7 +92,7 @@ class VoyageController extends Controller
 
     /**
      * Request user pour maj 'voyage'
-     * @param Request $request
+     * @param VoyageUpdateRequest $request
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */

@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Compagnie;
 use App\Models\Voyage;
 use App\Traits\LanguageModifyer;
 use Illuminate\Database\Eloquent\Model;
@@ -164,6 +165,10 @@ class VoyageRepository
         $voyage->ville_id = $request->ville_id;
 
         $voyage->save();
+
+        $compagnie = Compagnie::findOrFail($request->compagny_id);
+
+        $voyage->compagnies()->update(['compagnies_id' => $compagnie->id]);
     }
 
     public function delete($id)

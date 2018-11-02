@@ -17,4 +17,9 @@ class CartController extends Controller
 
         return view('cart.step1', compact('carts'));
     }
+
+    public function charge(Request $request)
+    {
+        dd($request);
+    }
 }
