@@ -44,7 +44,7 @@
         <div class="container">
             <div class="box box-insets-off bg-default d-xl-block">
                 <div class="recap-panier box-inner">
-                    {{ Form::open(['route' => 'cart.charge']) }}
+                    {{ Form::open(['route' => 'cart.charge', 'id' => 'payment-form']) }}
                     <div class="row">
                         <!-- Formulaire -->
                         <div class="col-md-6">
