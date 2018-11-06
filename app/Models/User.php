@@ -45,6 +45,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Relation 1:1 vers la table customers
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'user_id', 'id');
+    }
+
+    /**
      * Relation N:N de la table compagnie vers la table user via la table pivot 'compagnies_users'
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -53,13 +62,30 @@ class User extends Authenticatable
         return $this->belongsToMany(Compagnie::class, 'compagnies_users', 'user_id', 'compagny_id');
     }
 
+    /**
+     * Relation 1:n vers la table blogs
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function blogs()
     {
         return $this->hasMany(Blog::class);
     }
 
+    /**
+     * Relation 1:n vers la table comments
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function comments()
     {
         return $this->hasMany(Comments::class);
+    }
+
+    /**
+     * Relation 1:n vers la table orders
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

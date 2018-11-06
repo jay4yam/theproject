@@ -53,6 +53,7 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     //Affichage de la page cart-step-1
     Route::get('/cart/step-1','CartController@showStep1')->name('cart.step1');
     Route::post('/charge', 'CartController@charge')->name('cart.charge');
+    Route::get('/thank', 'CartController@thank')->name('cart.thank');
 
     Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 
@@ -97,7 +98,7 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::get('/voyage-get-list-voyage', 'VoyageFrontController@getVoyagesListForAutocomplete');
     Route::get('/voyage-info', 'VoyageFrontController@getVoyagesInfoForCart');
-    Route::post('/add-voyage-to-cart', 'VoyageFrontController@addVoyageToCart')->name('add.to.cart.voyage');
-    Route::get('/removefromcart','VoyageFrontController@removeFromCart');
-    Route::get('/update-quantity', 'VoyageFrontController@updateQuantity' );
+    Route::post('/add-voyage-to-cart', 'CartController@addVoyageToCart')->name('add.to.cart.voyage');
+    Route::get('/removefromcart','CartController@removeFromCart');
+    Route::get('/update-quantity', 'CartController@updateQuantity' );
 });

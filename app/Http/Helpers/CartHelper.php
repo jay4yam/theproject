@@ -49,10 +49,12 @@ class CartHelper
     {
         $this->voyage = Voyage::findOrFail($request->voyageId);
         $this->nbVoyageur = $request->numOfVoyagers;
-        $this->date = $request->dateDeDepart;
+        $this->date = strtotime($request->dateDeDepart);
         $this->prixUnitaire = $request->individualPrice;
         $this->userIp = \Request::ip();
         $this->finalPrice = $this->calculateFinalePrice($request->numOfVoyagers, $request->individualPrice);
+        $this->saveToSession();
+        $this->saveToCookie();
     }
 
 
@@ -81,7 +83,7 @@ class CartHelper
     {
         try{
 
-        cookie()->make('cart', serialize($this), 3600);
+            cookie()->make('cart', serialize($this), 3600);
 
         }catch (\Exception $exception){
             throw new \Exception($exception->getMessage());
@@ -95,14 +97,8 @@ class CartHelper
      */
     public static function deleteVoyageFromCart(Request $request)
     {
-        try {
             //essaye de supprimer l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
             session()->pull('cart.'.$request->indexArrayofSessionCart);
-
-        }catch (\Exception $exception){
-
-            throw  new \Exception($exception->getMessage());
-        }
     }
 
 

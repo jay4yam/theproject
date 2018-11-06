@@ -91,7 +91,7 @@
                                         <td><img src="/storage/voyages/thumbnails/{{ @$cart->getVoyage()->main_photo }}" width="50"></td>
                                         <td>
                                             {{ @$cart->getVoyage()->title }}<br>
-                                            {{ @$cart->getDate() }}
+                                            le {{ date( "d M Y", strtotime( $cart->getDate() ) ) }}
                                         </td>
                                         <td>{{ Form::number('',  @$cart->getNbVoyageur(), ['class' => 'updatevoyageur', 'data-target' => $cle] ) }}</td>
                                         <td id="individualPrice-{{$cle}}">{{ @$cart->getUnitPrice() }} €</td>
@@ -136,16 +136,16 @@
                             </div>
                             <div class="col-md-12 pt-10">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-xs-3">
                                         <i class="fab fa-cc-visa fa-2x"></i>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-xs-3">
                                         <i class="fab fa-cc-mastercard fa-2x"></i>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-xs-3">
                                         <i class="fab fa-cc-paypal fa-2x"></i>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-xs-3">
                                         <i class="far fa-lock fa-2x"></i>
                                     </div>
                                 </div>
