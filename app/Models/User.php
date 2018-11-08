@@ -46,11 +46,11 @@ class User extends Authenticatable
 
     /**
      * Relation 1:1 vers la table customers
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function customer()
+    public function mainOrders()
     {
-        return $this->hasOne(Customer::class, 'user_id', 'id');
+        return $this->hasMany(MainOrder::class, 'user_id', 'id');
     }
 
     /**
@@ -78,14 +78,5 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comments::class);
-    }
-
-    /**
-     * Relation 1:n vers la table orders
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
     }
 }

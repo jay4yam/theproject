@@ -1,12 +1,11 @@
 <!-- Modal cart -->
 @php
     $carts = [];
+if( session()->has('cart') ){
+    $carts = session()->get('cart');
+}
 @endphp
-@if( session()->has('cart'))
-    @php
-        $carts = session()->get('cart');
-    @endphp
-@endif
+
 <div class="modal modal-custom fade text-md-left" id="cartmodalglobal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -43,7 +42,7 @@
                                 <tr>
                                     <td><img src="/storage/voyages/thumbnails/{{ @$cart->getVoyage()->main_photo }}" width="50"></td>
                                     <td>{{ @$cart->getVoyage()->title }}</td>
-                                    <td>{{ @$cart->getDate() }}</td>
+                                    <td>{{ $cart->getDate() }}</td>
                                     <td>{{ Form::number('',  @$cart->getNbVoyageur(), ['class' => 'updatevoyageur', 'data-target' => $cle] ) }}</td>
                                     <td id="individualPrice-{{$cle}}">{{ @$cart->getUnitPrice() }} €</td>
                                     <td id="finalPrice-{{$cle}}">{{ @$cart->getFinalPrice() }} €</td>

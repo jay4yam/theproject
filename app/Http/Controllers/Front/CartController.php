@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Http\Requests\ChargeRequest;
+use App\Models\ItemOrder;
+use App\Models\MainOrder;
 use App\Models\Order;
 use App\Models\Profile;
 use App\Models\User;
@@ -10,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Ramsey\Uuid\Uuid;
 use Stripe\ApiResource;
 use Stripe\Charge;
 use Stripe\Customer;
@@ -17,9 +21,6 @@ use Stripe\Stripe;
 
 class CartController extends Controller
 {
-
-
-
     /**
      * Affiche la premiere étape du panier
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -28,15 +29,15 @@ class CartController extends Controller
     {
         $carts = session()->get('cart');
 
-        $value = Cookie::get('cart');
-
-        dd($value);
-
         return view('cart.step1', compact('carts'));
     }
 
-
-    public function charge(Request $request)
+    /**
+     * Gère le click sur le bouton validation paiement
+     * @param ChargeRequest $request
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
+    public function charge(ChargeRequest $request)
     {
         Stripe::setApiKey('sk_test_2H3k1N7NOdjh4oA76TvqRRTa');
 
@@ -51,7 +52,7 @@ class CartController extends Controller
             $charge = $this->createChargeOnStripe($customerStripe, $request);
 
             //Enregistre la commande dans la table commande
-            $order = $this->createOrder($user, $charge, $request);
+            $order = $this->createOrder($customerStripe, $user, $charge);
 
         }catch (\Exception $exception){
             return $exception->getMessage();
@@ -84,8 +85,7 @@ class CartController extends Controller
      */
     private function createEasyCopterCustomer($stripeCustomer, Request $request)
     {
-        $user = new User();
-        \DB::transaction(function () use ($stripeCustomer, $request){
+        \DB::transaction(function () use ($stripeCustomer, $request, &$user){
 
             //Tentative de création d'un utilisateur
             try {
@@ -116,19 +116,6 @@ class CartController extends Controller
             }catch (\Exception $exception) {
                 print ($exception->getMessage());
             }
-
-            //Tentative de création d'un Customer
-            try {
-                $customer = easyCopterUser::make([
-                    'stripe_customer_id' => $stripeCustomer->id,
-                ]);
-
-                $user->customer()->save($customer);
-
-            }catch (\Exception $exception){
-                print ($exception->getMessage());
-            }
-
         });
         return $user;
     }
@@ -155,17 +142,49 @@ class CartController extends Controller
     }
 
     /**
+     * @param ApiResource $customerStripe
      * @param User $user
      * @param ApiResource $charge
      * @param Request $request
      */
-    private function createOrder(User $user, ApiResource $charge, Request $request)
+    private function createOrder(ApiResource $customerStripe, User $user, ApiResource $charge)
     {
-        //création et insertion de la commande en ligne
-        $order = Order::make([
+        //Utilise une transaction pour s'assurer qu'on ai pas la moitié des infos enregistrées
+        \DB::transaction(function () use($customerStripe, $user, $charge) {
 
-        ]);
+            //création et insertion de la commande principale
+            $mainOrder = MainOrder::make([
+                'stripe_customer_id' => $customerStripe->id,
+                'order_id' => Uuid::uuid1(),
+                'stripe_charge_id' => $charge->id,
+                'stripe_failure_code' => $charge->failure_code,
+                'stripe_failure_message' => $charge->failure_message,
+                'is_paid' => $charge->paid,
+                'stripe_payment_status' => $charge->status,
+            ]);
 
-        $user->orders()->save($order);
+            //Sauv. le main order sur la table correspondante
+            $user->mainOrders()->save($mainOrder);
+
+            //Récupère tous les carts en sessions
+            $carts = session()->get('cart');
+
+            //Itère sur les carts
+            foreach ($carts as $cart)
+            {
+                //Sauv. le contenu du voyage dans la table itemsOrder
+                $itemOrder = ItemOrder::make([
+                    'voyage_id' => $cart->getVoyage()->id,
+                    'voyage_name' => $cart->getVoyage()->title,
+                    'num_of_passenger' => $cart->getNbVoyageur(),
+                    'prix_unitaire' => $cart->getUnitPrice(),
+                    'prix_final' => ($cart->getNbVoyageur() * $cart->getUnitPrice() ),
+                    'date_voyage' => $cart->getDate(),
+                ]);
+
+                //Lié le mainOrder avec les items
+                $mainOrder->itemsOrder()->save($itemOrder);
+            }
+        });
     }
 }

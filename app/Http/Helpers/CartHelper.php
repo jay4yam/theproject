@@ -45,18 +45,21 @@ class CartHelper
         return $this->finalPrice;
     }
 
+    /**
+     * CartHelper constructor.
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->voyage = Voyage::findOrFail($request->voyageId);
         $this->nbVoyageur = $request->numOfVoyagers;
-        $this->date = strtotime($request->dateDeDepart);
+        $this->date = $request->dateDeDepart;
         $this->prixUnitaire = $request->individualPrice;
         $this->userIp = \Request::ip();
         $this->finalPrice = $this->calculateFinalePrice($request->numOfVoyagers, $request->individualPrice);
         $this->saveToSession();
         $this->saveToCookie();
     }
-
 
     /**
      * @param int $nbVoyageur
@@ -101,7 +104,10 @@ class CartHelper
             session()->pull('cart.'.$request->indexArrayofSessionCart);
     }
 
-
+    /**
+     * @param Request $request
+     * @throws \Exception
+     */
     public static function updateQuantity(Request $request)
     {
         try {
@@ -120,11 +126,11 @@ class CartHelper
             //recalcule le montant final
             $cart->finalPrice = $cart->calculateFinalePrice($request->newQuantity, $cart->prixUnitaire);
 
+            session()->push('cart', $cart);
+
         }catch (\Exception $exception){
             throw new \Exception($exception->getMessage());
         }
-
-        session()->push('cart', $cart);
     }
 
 }
