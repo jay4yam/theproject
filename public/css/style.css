@@ -20894,10 +20894,28 @@ a.roll {
 
 
 
+.flex-middle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
-
+.calendar{
+  background-color: black;
+  color: white;
+  margin: 10px;
+  border-radius: 4px;
+  padding: 10px;
+}
 .col-xs-3{ width: 25%;}
+
+
+.h-bloc-1{
+  background: url('/images/helicopter-bloc-1.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 200px;
+}
 
 @media (max-width: 568px){
   .user-menu-container{ top:0px;}

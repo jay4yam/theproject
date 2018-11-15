@@ -172,6 +172,11 @@
                             {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">Test 1</div>
+                        <div class="col-md-4">Test 2</div>
+                        <div class="col-md-4">Test 3</div>
+                    </div>
                     {{ Form::close() }}
                 </div>
             </div>

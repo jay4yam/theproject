@@ -24,4 +24,9 @@ class ItemOrder extends Model
         return $this->belongsTo(MainOrder::class);
     }
 
+    public function voyage()
+    {
+        return $this->hasOne(Voyage::class, 'id', 'voyage_id');
+    }
+
 }

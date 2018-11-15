@@ -51,9 +51,9 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     Route::get('/contact', 'HomeController@contact')->name('contact');
 
     //Affichage de la page cart-step-1
-    Route::get('/cart/step-1','CartController@showStep1')->name('cart.step1');
+    Route::get('/cart/step-1','CartController@showCart')->name('cart.step1');
     Route::post('/charge', 'CartController@charge')->name('cart.charge');
-    Route::get('/thank', 'CartController@thank')->name('cart.thank');
+    Route::get('/thank/{orderId}', 'CartController@thank')->name('cart.thank');
 
     Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 
