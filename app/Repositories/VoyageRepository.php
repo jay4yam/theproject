@@ -108,7 +108,7 @@ class VoyageRepository
 
         $this->save($voyage, $request);
 
-        //Utilisation de la methode copyForOtherLanguage du Trait LanguageModifyer
+        //Utilisation de la méthode copyForOtherLanguage du Trait LanguageModifyer
         $this->copyForOtherLanguage($voyage);
     }
 
@@ -136,16 +136,18 @@ class VoyageRepository
             $voyage->main_photo = $this->uploadMainImage($request, $voyage);
         }
 
-        //
+        //récupère le compagnie
         $compagnie = Compagnie::findOrFail($request->compagny_id);
+        //test la relation voyage -> compagnie
         if(!$voyage->compagnies()->exists()){
-
+            //.sav si n'existe pas
             $voyage->compagnies()->save($compagnie);
         }
         else{
+            //.update si existe
             $voyage->compagnies()->update(['compagnies_id' => $compagnie->id]);
         }
-
+        //.sauv le voyage
         $voyage->save();
     }
 

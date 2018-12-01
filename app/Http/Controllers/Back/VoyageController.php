@@ -141,7 +141,7 @@ class VoyageController extends Controller
     }
 
     /**
-     * Gestion de l'iupload d'image via dropzone.js
+     * Gestion de l'upload d'image via dropzone.js
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
