@@ -6,6 +6,7 @@ use App\Models\User;
 
 $factory->define(Blog::class, function (Faker $faker) {
     return [
+        'locale' => 'fr',
         'title' => $faker->sentence(10),
         'intro' => $faker->paragraph(2),
         'slug' => 'url-slugee-pour-url-rewritting',

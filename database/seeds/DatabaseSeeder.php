@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
             //CompagniesTableSeeder::class,
             //BlogsTableSeeder::class,
             //CategoriesTableSeeder::class,
-            //BlogsCategoriesTableSeeder::class,
-            //CommentBlogSeeder::class,
-            //TagsTableSeeder::class,
-            //RegionsSeeder::class,
-            //VillesSeeder::class,
+            BlogsCategoriesTableSeeder::class,
+            CommentBlogSeeder::class,
+            TagsTableSeeder::class,
+            RegionsSeeder::class,
+            VillesSeeder::class,
             VoyagesSeeder::class,
         ]);
     }

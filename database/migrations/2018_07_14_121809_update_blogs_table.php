@@ -15,7 +15,7 @@ class UpdateBlogsTable extends Migration
     {
         Schema::table('blogs', function (Blueprint $table){
             $table->string('locale')->after('id');
-            $table->integer('parent_id')->after('locale');
+            $table->integer('parent_id')->after('locale')->nullable();
         });
     }
 

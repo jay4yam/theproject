@@ -6,6 +6,8 @@ use App\Models\Voyage;
 $factory->define(Voyage::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
+        'parent_id' => 0,
+        'locale' =>'fr',
         'subtitle' => $faker->sentence(4),
         'intro' => $faker->paragraph(),
         'description' => $faker->paragraph(10),

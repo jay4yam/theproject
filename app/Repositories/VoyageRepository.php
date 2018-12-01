@@ -107,6 +107,9 @@ class VoyageRepository
         $voyage = new Voyage();
 
         $this->save($voyage, $request);
+
+        //Utilisation de la methode copyForOtherLanguage du Trait LanguageModifyer
+        $this->copyForOtherLanguage($voyage);
     }
 
     /**
@@ -125,19 +128,25 @@ class VoyageRepository
         $voyage->price = $request->price;
         $voyage->is_discounted = $request->is_discounted;
         $voyage->discount_price = $request->is_discounted ? $request->discount_price: 0;
-        $voyage->main_photo = 'default.jpg';
         $voyage->duree_du_vol = $request->duree_du_vol;
         $voyage->ville_id = $request->ville_id;
 
-        $voyage->save();
-
+        //Test si il y a une photo dans la requete
         if($request->has('main_photo')) {
             $voyage->main_photo = $this->uploadMainImage($request, $voyage);
-            $voyage->save();
         }
 
-        //Utilisation de la methode copyForOtherLanguage du Trait LanguageModifyer
-        $this->copyForOtherLanguage($voyage);
+        //
+        $compagnie = Compagnie::findOrFail($request->compagny_id);
+        if(!$voyage->compagnies()->exists()){
+
+            $voyage->compagnies()->save($compagnie);
+        }
+        else{
+            $voyage->compagnies()->update(['compagnies_id' => $compagnie->id]);
+        }
+
+        $voyage->save();
     }
 
     /**
@@ -147,30 +156,22 @@ class VoyageRepository
      */
     public function update(Request $request, $id)
     {
+        //1. recupère le voyage à updater
         $voyage = $this->voyage->findOrFail($id);
+
+        //2. utilise la methode prive save() pour sauv. le model
+        $this->save($voyage, $request);
 
         if($voyage->parent_id != 0){
             $voyage->parent_id = $request->parent_id;
+            $voyage->save();
         }
-        $voyage->title = $request->title;
-        $voyage->subtitle = $request->subtitle;
-        $voyage->intro = $request->intro;
-        $voyage->description = $request->description;
-        $voyage->is_public = $request->is_public;
-        $voyage->price = $request->price;
-        $voyage->is_discounted = $request->is_discounted;
-        $voyage->discount_price = $request->is_discounted ? $request->discount_price: 0;
-        $voyage->main_photo = $this->uploadMainImage($request, $voyage);
-        $voyage->duree_du_vol = $request->duree_du_vol;
-        $voyage->ville_id = $request->ville_id;
-
-        $voyage->save();
-
-        $compagnie = Compagnie::findOrFail($request->compagny_id);
-
-        $voyage->compagnies()->update(['compagnies_id' => $compagnie->id]);
     }
 
+    /**
+     * Supprime un voyage
+     * @param $id
+     */
     public function delete($id)
     {
         $voyages = $this->getAllVoyageLanguageById($id);

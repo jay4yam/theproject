@@ -30,16 +30,18 @@
                                 <p>
                                     {{ $item->voyage->subtitle }}<br>
                                 </p>
-                                <p class="pt-20">
-                                Ce coyage sera assuré par :
-                                </p>
-                                <h6>{{ strtoupper($item->voyage->compagnies->first()->raison_sociale) }}</h6>
-                                <p>
-                                    {{ $item->voyage->compagnies->first()->adresse }}<br>
-                                    {{ $item->voyage->compagnies->first()->code_postal }} {{ $item->voyage->compagnies->first()->ville }}<br>
-                                    Tel. {{ $item->voyage->compagnies->first()->telephone }}<br>
-                                    email. {{ $item->voyage->compagnies->first()->mail_resa }}<br>
-                                </p>
+                                <div>
+                                    <p class="pt-20">
+                                        Ce coyage sera assuré par :
+                                    </p>
+                                    <h6><a href="{{ route('compagnie.front.show', ['id' => $item->voyage->compagnies->first()->id]) }}">{{ strtoupper($item->voyage->compagnies->first()->raison_sociale) }}</a></h6>
+                                    <p>
+                                        {{ $item->voyage->compagnies->first()->adresse }}<br>
+                                        {{ $item->voyage->compagnies->first()->code_postal }} {{ $item->voyage->compagnies->first()->ville }}<br>
+                                        Tel. {{ $item->voyage->compagnies->first()->telephone }}<br>
+                                        email. {{ $item->voyage->compagnies->first()->mail_resa }}<br>
+                                    </p>
+                                </div>
                             </div>
                             <div class="col-md-3 flex-middle">
                                 <div class="calendar">

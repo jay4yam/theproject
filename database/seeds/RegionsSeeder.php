@@ -12,13 +12,6 @@ class RegionsSeeder extends Seeder
      */
     public function run()
     {
-        $array = ['France', 'Italie', 'Mexique', 'USA'];
-
-        for ($i = 0; $i < count($array); $i++)
-        {
-            Region::create([
-                'name' => $array[$i],
-            ]);
-        }
+        factory(Region::class)->create();
     }
 }

@@ -32,7 +32,7 @@ class CreatePivotTableCompagniesVoyages extends Migration
     public function down()
     {
         Schema::table('compagnies_voyages', function (Blueprint $table){
-            $table->dropForeign('compagnies_voyages_compagny_id_foreign');
+            $table->dropForeign('compagnies_voyages_compagnies_id_foreign');
             $table->dropForeign('compagnies_voyages_voyages_id_foreign');
 
             $table->dropColumn('compagnies_id');

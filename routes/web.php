@@ -47,6 +47,11 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     Route::get('/voyages/ville', 'VoyageController@filterVille')->name('front.voyage.ville');
     Route::get('/voyages/price', 'VoyageController@filterPrice')->name('front.voyage.price');
 
+    /**
+     * Affichage page compagnie
+     */
+    Route::get('/compagnie/{id}', 'CompagnieController@show')->name('compagnie.front.show');
+
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');
 
@@ -69,7 +74,7 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 
     Route::get('/', 'AdminController@index')->name('back.index');
 
-    //Listing des routes pour 'CRUD' sur les "Compagnies"
+    //Listing des routes pour 'CRUD' sur les "compagnies"
     Route::resource('/compagnies', 'CompagnyController');
 
     //Listing des routes pour 'CRUD' sur les "Utilisateurs"
