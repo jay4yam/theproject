@@ -45,6 +45,7 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('front.voyage.show');
     //vue filtre par ville
     Route::get('/voyages/ville', 'VoyageController@filterVille')->name('front.voyage.ville');
+    Route::get('/voyages/ville/{id}/{ville}', 'VoyageController@showVille')->name('front.voyage.show.ville');
     Route::get('/voyages/price', 'VoyageController@filterPrice')->name('front.voyage.price');
 
     /**

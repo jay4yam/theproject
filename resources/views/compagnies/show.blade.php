@@ -12,8 +12,8 @@
                         <img src="/storage/{{ $compagny->logo }}"><br>
                         <h1 class="d-none d-lg-inline-block shadow">{{ $compagny->raison_sociale }}</h1>
                         <h6 class="font-italic shadow">{{ $compagny->baseline }}</h6>
-                        <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="" data-target="#modal-cart">
-                            {{ __('voyage.acheter') }}
+                        <a href="#voyages" class="add-to-cart button button-primary">
+                            {{ __('compagnie.liste_voyage') }}
                         </a>
                     </div>
                 </div>
@@ -45,7 +45,8 @@
     <section class="section-70 section-md-bottom-80 programme-voyage">
         <div class="container">
             <h3>Liste des voyages</h3>
-                @include('voyages._voyages', ['allVoyages' => $compagny->voyages()->get()])
+            <a name="voyages"></a>
+                @include('compagnies._voyages', ['allVoyages' => $compagny->voyages()->get()])
         </div>
     </section>
 

@@ -51,10 +51,10 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
+                        </div>
                     <div class="row">
-                        <div class="col-md-4 h-bloc-1">
-                            test1
+                        <div class="col-md-4">
+                           {!! QrCode::size('240')->generate('Transformez-moi en QrCode !') !!}
                         </div>
                         <div class="col-md-4">Test2</div>
                         <div class="col-md-4">Test3</div>
@@ -62,6 +62,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 @endsection
