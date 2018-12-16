@@ -173,9 +173,18 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Test 1</div>
-                        <div class="col-md-4">Test 2</div>
-                        <div class="col-md-4">Test 3</div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/100pour100-secure.png') }}" width="40%">
+                            <p>Paiement 100% sécurisé</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/site-de-confiance.png') }}" width="40%">
+                            <p>Achat garanti</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/site-prefere.png') }}" width="40%">
+                            <p>100% satisfait</p>
+                        </div>
                     </div>
                     {{ Form::close() }}
                 </div>

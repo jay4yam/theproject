@@ -44,6 +44,13 @@
                                 </div>
                             </div>
                             <div class="col-md-3 flex-middle">
+                                @php
+                                $qrCode = 'order_id :'.$mainOrder->order_id.'\n';
+                                $qrCode .= 'Customer name:'.$mainOrder->user->profile->fullName.'\n';
+                                $qrCode .= 'Customer firstName:'.$mainOrder->user->profile->firstName.'\n';
+                                $qrCode .= 'Customer Email:'.$mainOrder->user->email.'\n';
+                                @endphp
+                                <div>{!! QrCode::encoding('UTF-8')->size('200')->generate($qrCode) !!}</div>
                                 <div class="calendar">
                                     <i class="fa fa-3x fa-calendar-check-o" aria-hidden="true" style="float:left;"></i>
                                     Départ prévu le:<br>
@@ -53,11 +60,21 @@
                         @endforeach
                         </div>
                     <div class="row">
+                        <div class="col-md-12">Vous allez recevoir toutes les instructions par mail</div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
-                           {!! QrCode::size('240')->generate('Transformez-moi en QrCode !') !!}
+                            <img src="{{ asset('images/100pour100-secure.png') }}" width="40%">
+                            <p>Paiement 100% sécurisé</p>
                         </div>
-                        <div class="col-md-4">Test2</div>
-                        <div class="col-md-4">Test3</div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/site-de-confiance.png') }}" width="40%">
+                            <p>Achat garanti</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/site-prefere.png') }}" width="40%">
+                            <p>100% satisfait</p>
+                        </div>
                     </div>
                     </div>
                 </div>
