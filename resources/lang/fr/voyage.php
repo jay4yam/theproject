@@ -30,5 +30,7 @@ return [
         'search' => 'Recherche',
         'destination' => 'Votre Destination',
         'price_range' => 'Filtrer par prix',
-        'filter' =>  'filtrer'
+        'filter' =>  'filtrer',
+        'budget' => 'Votre Budget',
+        'recherche' => 'Recherche'
     ];

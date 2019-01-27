@@ -3,6 +3,10 @@
                 'activeVoyageCss' => 'active'
                 ])
 
+@section('dedicated_css')
+    <link rel="stylesheet" href="{{ asset('/css/jquery-ui-theme.css') }}">
+@endsection
+
 @section('content')
     @if(request('ville'))
         @php $ville = \App\Models\Ville::findOrFail(request('ville')) @endphp

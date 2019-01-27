@@ -34,7 +34,7 @@
                                     <p class="pt-20">
                                         Ce coyage sera assuré par :
                                     </p>
-                                    <h6><a href="{{ route('compagnie.front.show', ['id' => $item->voyage->compagnies->first()->id]) }}">{{ strtoupper($item->voyage->compagnies->first()->raison_sociale) }}</a></h6>
+                                    <h6><a href="{{ route('compagnie.front.show', ['id' => $item->voyage->compagnies->first()->id, 'companyName' => str_slug($item->voyage->compagnies->first()->raison_sociale)]) }}">{{ strtoupper($item->voyage->compagnies->first()->raison_sociale) }}</a></h6>
                                     <p>
                                         {{ $item->voyage->compagnies->first()->adresse }}<br>
                                         {{ $item->voyage->compagnies->first()->code_postal }} {{ $item->voyage->compagnies->first()->ville }}<br>
@@ -60,7 +60,7 @@
                         @endforeach
                         </div>
                     <div class="row">
-                        <div class="col-md-12">Vous allez recevoir toutes les instructions par mail</div>
+                        <div class="col-md-12">Vous allez recevoir toutes les instructions pour réaliser votre voyage en hélicoptère par mail</div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">

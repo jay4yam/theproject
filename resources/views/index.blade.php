@@ -17,27 +17,27 @@
                         <h1 class="text-white">Vivez une expérience unique</h1>
                         <p class="h6 text-white">Découvrez des paysages uniques d'un point de vue extraordinaire</p>
                         <!-- Form-->
-                        <form class="rd-mailform form-inline-search">
+                        {{ Form::open(['route' => ['front.voyage.ville'], 'method' => 'get', 'id' => 'ajaxsearch', 'class' => 'form-inline-search']) }}
+                        <div class="form-blog-search">
                             <div class="form-wrap form-wrap-xs form-inline-item">
-                                <label class="form-label" for="index-destination">Your Destination</label>
-                                <input class="form-input" id="index-destination" type="text" name="destination">
-                            </div>
-                            <div class="form-wrap form-wrap-xs form-inline-item form-inline-item-xs">
-                                <label class="form-label" for="index-arrival">Arrival</label>
-                                <input class="form-input" id="index-arrival" type="text" name="destination">
-                            </div>
-                            <div class="form-wrap form-wrap-xs form-inline-item form-inline-item-xs">
-                                <label class="form-label" for="index-departure">Departure</label>
-                                <input class="form-input" id="index-departure" type="text" name="departure">
+                                <label class="form-label form-search-label form-label-sm" for="tours-destination">{{ __('voyage.destination') }}</label>
+                                <input class="form-search-input input-sm form-input" id="tours-destination" type="text">
+                                <div class="spinner"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+                                <button class="form-search-submit">
+                                <span>
+                                    <img class="img-responsive center-block" src="/images/icons/icon-34-16x21.png" width="16" height="21" alt="">
+                                </span>
+                                </button>
                             </div>
                             <div class="form-wrap form-wrap-xs form-inline-item">
-                                <label class="form-label" for="index-budget">Your Budget ($)</label>
+                                <label class="form-label" for="index-budget">{{ __('voyage.budget') }}</label>
                                 <input class="form-input" id="index-budget" type="text" name="budget">
                             </div>
                             <div class="form-inline-item button-wrap">
-                                <button class="button button-primary" type="submit">Search</button>
+                                <button class="button button-primary" type="submit">{{ __('voyage.recherche') }}</button>
                             </div>
-                        </form>
+                        </div>
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -366,4 +366,88 @@
     </section>
 
     @include('partials._modal-add-to-cart')
+@endsection
+
+@section('dedicated_js')
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function split(val) {
+                return val.split(/,\s*/);
+            }
+
+            function extractLast(term) {
+                return split(term).pop();
+            }
+
+            //Autocomplete en ajax
+            $('#tours-destination').autocomplete({
+                minLength: 0,
+                //la source est une url qui renvois la liste des voyage
+                source: function (request, response) {
+                    //utilisation d'une requête ajax pour recup la liste
+                    $.ajax({
+                        url: '/ajax/voyage-get-list-voyage',
+                        dataType: 'json',
+                        //recupère la liste via la variable 'data' qui est un tableau
+                        success: function (data) {
+                            //il faut utiliser la fonction native $.map pour itérer sur le tableau
+                            var array = $.map(data, function (item) {
+                                return {
+                                    label: item.label,
+                                    value: item.value
+                                };
+                            });
+
+                            //traitement de la réponse pour avoir le multi select
+                            response($.ui.autocomplete.filter(array, extractLast(request.term)));
+                        }
+                    });
+                },
+                //affiche le spinner lors de la recherche
+                search: function (event, ui) {
+                    $('.spinner').show();
+                },
+                //masque le spinner lors de la fin de la recherche
+                response: function (event, ui) {
+                    $('.spinner').hide();
+                },
+                //
+                focus: function (event, ui) {
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+
+                    //récupère la valeur ville_id
+                    var ville_id = ui.item.value.split('-')[0];
+
+                    //cree in input hidden qui sera ajouter au form pour le submit
+                    var input = '<input class="checkbox-custom" id="ville_id" name="ville[]" value="' + ville_id + '" type="hidden">';
+
+                    //ajoute l'input au form
+                    $('#ajaxsearch').append(input);
+
+                    return false;
+                }
+            }).on('keydown', function (event) {
+                // si dans l'input l'utilisateur tape sur "enter", on soumet automatiquement le formulaire
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    $('#ajaxsearch').submit();
+                }
+            });
+        });
+    </script>
 @endsection

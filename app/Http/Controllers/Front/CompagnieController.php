@@ -15,7 +15,7 @@ class CompagnieController extends Controller
         $this->compagnyRepository = $companyRepository;
     }
 
-    public function show($locale, $id)
+    public function show($locale, $id, $companyName)
     {
         $compagny = $this->compagnyRepository->getById($id);
 

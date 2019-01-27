@@ -30,5 +30,7 @@ return [
     'search' => 'Search',
     'destination' => 'Your Destination',
     'price_range' => 'Price Range',
-    'filter' =>  'filter'
+    'filter' =>  'filter',
+    'budget' => 'Your Budget',
+    'recherche' => 'Search'
 ];

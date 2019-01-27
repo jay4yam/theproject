@@ -30,7 +30,9 @@
                             <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">{{ __('voyage.compagnie') }}</p>
                             @foreach($voyage->compagnies as $compagnie)
                             <p class="text-big text-ubold text-black text-uppercase">
-                                {{ $compagnie->raison_sociale }}
+                                <a href="{{ route('compagnie.front.show', ['id' => $compagnie->id, 'companyName' => str_slug($compagnie->raison_sociale)]) }}">
+                                    {{ $compagnie->raison_sociale }}
+                                </a>
                             </p>
                             @endforeach
                         </div>
