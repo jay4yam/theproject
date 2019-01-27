@@ -28,6 +28,7 @@
                     <div class="row row-40 justify-content-sm-center list-inline-dashed-vertival">
                         <div class="col-sm-6 col-md-5 col-lg-3">
                             <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">{{ __('voyage.compagnie') }}</p>
+                            {{ dd($voyage) }}
                             @foreach($voyage->compagnies as $compagnie)
                             <p class="text-big text-ubold text-black text-uppercase">
                                 <a href="{{ route('compagnie.front.show', ['id' => $compagnie->id, 'companyName' => str_slug($compagnie->raison_sociale)]) }}">
