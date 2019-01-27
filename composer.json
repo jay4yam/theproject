@@ -13,7 +13,9 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "simplesoftwareio/simple-qrcode": "^2.0",
+        "stripe/stripe-php": "^6.24"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
