@@ -52,6 +52,7 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
      * Affichage page compagnie
      */
     Route::get('/compagnie/{id}/{companyName}', 'CompagnieController@show')->name('compagnie.front.show');
+    Route::post('/compagnie/contact/form', 'CompagnieController@contactCompagnie')->name('compagnie.contact.form');
 
     //Affichage de la page contact
     Route::get('/contact', 'HomeController@contact')->name('contact');

@@ -156,13 +156,13 @@
                                     <div class="col-xs-3">
                                         <i class="fab fa-cc-visa fa-2x"></i>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-3">
                                         <i class="fab fa-cc-mastercard fa-2x"></i>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-3">
                                         <i class="fab fa-cc-paypal fa-2x"></i>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-3">
                                         <i class="far fa-lock fa-2x"></i>
                                     </div>
                                 </div>

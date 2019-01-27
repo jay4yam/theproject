@@ -47,4 +47,9 @@ class Compagnie extends Model
     {
         return $this->belongsToMany(Voyage::class, 'compagnies_voyages', 'compagnies_id',  'voyages_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

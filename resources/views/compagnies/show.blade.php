@@ -31,7 +31,7 @@
                             <p class="text-extra-small text-silver-chalice font-italic text-uppercase text-spacing-200">
                                 {{ $compagny->adresse }}<br>
                                 {{ $compagny->code_postal }} - {{ $compagny->ville }}<br>
-                                {{ $compagny->telephone }} - {{ $compagny->email }}
+                                {{ $compagny->telephone }} - <a href="#contactcompagnie">{{ $compagny->email }}</a>
                             </p>
                         </div>
                         </div>
@@ -149,18 +149,36 @@
                 </div>
             </div>
         </div>
+        <a name="contactcompagnie"></a>
     </section>
 
-    <!-- Prix et call to action -->
+    <!-- call to action compagnie -->
     <section class="section-top-50 section-bottom-80">
-        <div class="container">
-            <h3>{{ __('voyage.book.this.flight') }}</h3>
-            <p class="text-small text-spacing-200 font-italic"></p>
-            <a href="#" class="add-to-cart button button-primary" data-toggle="modal" data-content="" data-target="#modal-cart">
-                {{ __('voyage.acheter') }}
-            </a>
+        <div class="container ">
+            <div class="row text-center">
+                <div class="col-md-6 offset-md-3 box">
+                    @if(session()->has('message'))
+                        <h5>{{ session()->get('message') }}</h5>
+                    @else
+                        <h5>{{ __('compagnie.contact') }}</h5>
+                        {{ Form::open(['route' => 'compagnie.contact.form'] ) }}
+                            {{ Form::hidden('compagnie_id', $compagny->id) }}
+                            <div class="form-group">
+                                {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'votre@email']) }}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'votre message', 'required' => 'required']) }}
+                            </div>
+                            <div>
+                                {{ Form::submit('envoyer', ['class' => ' button button-primary']) }}
+                            </div>
+                        {{ Form::close() }}
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 
     @include('partials._modal-add-to-cart')
+
 @endsection

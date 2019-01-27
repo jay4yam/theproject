@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'liste_voyage'  => 'Voir la liste des voyages',
-    'contact'       =>  'Contactez-nous'
+    'liste_voyage'  => 'See all tours',
+    'contact'       =>  'Contact us'
 ];
 
 
