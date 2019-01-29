@@ -49,7 +49,7 @@ class CartRepository
         $user = null;
         //1. recupère le mail
         $mail = $request->email;
-        $user = User::where('email', '=', $mail)->firstOrFail();
+        $user = User::where('email', '=', $mail)->first();
 
         if (!$user) {
             \DB::transaction(function () use ($stripeCustomer, $request, &$user) {
