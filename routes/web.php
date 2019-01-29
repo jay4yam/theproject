@@ -108,4 +108,6 @@ Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::post('/add-voyage-to-cart', 'CartController@addVoyageToCart')->name('add.to.cart.voyage');
     Route::get('/removefromcart','CartController@removeFromCart');
     Route::get('/update-quantity', 'CartController@updateQuantity' );
+    //requete ajax pour recup les infos de chaque commandes
+    Route::get('/items-order-info', 'CommandeController@ajaxGetItemsOrderInfo');
 });

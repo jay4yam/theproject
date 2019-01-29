@@ -47,30 +47,36 @@ class CartRepository
     public function createEasyCopterCustomer($stripeCustomer, Request $request)
     {
         $user = null;
-        \DB::transaction(function () use ($stripeCustomer, $request, &$user){
+        //1. recupère le mail
+        $mail = $request->email;
+        $user = User::where('email', '=', $mail)->firstOrFail();
 
-            //Tentative de création d'un utilisateur
-            $user = User::create([
-                'email' => $request->email,
-                'password' => bcrypt(str_random(10)),
-                'role' => 'guest'
-            ]);
+        if (!$user) {
+            \DB::transaction(function () use ($stripeCustomer, $request, &$user) {
 
-            //Tentative de création du profile d'un utilisateur
-            $profile = Profile::make([
-                'firstName' => $request->firstname,
-                'fullName' => $request->name,
-                'phoneNumber' => $request->telephone,
-                'address' => $request->adresse,
-                'birthDate' => Carbon::now(),
-                'postalCode' => $request->code_postal,
-                'city' => $request->ville,
-                'country' => 'default_country'
-            ]);
+                //Tentative de création d'un utilisateur
+                $user = User::create([
+                    'email' => $request->email,
+                    'password' => bcrypt(str_random(10)),
+                    'role' => 'guest'
+                ]);
 
-            //Sauv. le user et son profil
-            $user->profile()->save($profile);
-        });
+                //Tentative de création du profile d'un utilisateur
+                $profile = Profile::make([
+                    'firstName' => $request->firstname,
+                    'fullName' => $request->name,
+                    'phoneNumber' => $request->telephone,
+                    'address' => $request->adresse,
+                    'birthDate' => Carbon::now(),
+                    'postalCode' => $request->code_postal,
+                    'city' => $request->ville,
+                    'country' => 'default_country'
+                ]);
+
+                //Sauv. le user et son profil
+                $user->profile()->save($profile);
+            });
+        }
 
         //retourne l'utilisateur
         return $user;

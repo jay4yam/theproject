@@ -8,6 +8,8 @@ class ItemOrder extends Model
 {
     protected $table = 'items_order';
 
+    protected $dates = ['date_voyage'];
+
     protected $fillable = [
         'voyage_id',
         'voyage_name',
@@ -17,6 +19,7 @@ class ItemOrder extends Model
         'date_voyage',
         'main_order_id',
     ];
+
 
 
     public function mainOrder()
