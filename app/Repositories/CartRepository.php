@@ -46,10 +46,11 @@ class CartRepository
      */
     public function createEasyCopterCustomer($stripeCustomer, Request $request)
     {
+        //1. set une variable user à null
         $user = null;
-        //1. recupère le mail
-        $mail = $request->email;
-        $user = User::where('email', '=', $mail)->first();
+
+        //2. test si un utilisateur est déjà inscrit
+        $user = User::where('email', '=', $request->email)->first();
 
         if (!$user) {
             \DB::transaction(function () use ($stripeCustomer, $request, &$user) {
@@ -78,7 +79,7 @@ class CartRepository
             });
         }
 
-        //retourne l'utilisateur
+        //retourne l'utilisateur trouvé ou crée sur la plateforme
         return $user;
     }
 
