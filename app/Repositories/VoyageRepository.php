@@ -164,12 +164,21 @@ class VoyageRepository
         $voyage = $this->voyage->findOrFail($id);
 
         //2. utilise la methode prive save() pour sauv. le model
-        $this->save($voyage, $request);
+        $voyage->locale = $request->localize;
+        $voyage->parent_id = $request->parent_id;
+        $voyage->title = $request->title;
+        $voyage->subtitle = $request->subtitle;
+        $voyage->intro = $request->intro;
+        $voyage->description = $request->description;
+        $voyage->is_public = $request->is_public;
+        $voyage->price = $request->price;
+        $voyage->is_discounted = $request->is_discounted;
+        $voyage->discount_price = $request->is_discounted ? $request->discount_price: 0;
+        $voyage->duree_du_vol = $request->duree_du_vol;
+        $voyage->ville_id = $request->ville_id;
 
-        if($voyage->parent_id != 0){
-            $voyage->parent_id = $request->parent_id;
-            $voyage->save();
-        }
+        //3. sauv. le modèle
+        $voyage->save();
     }
 
     /**

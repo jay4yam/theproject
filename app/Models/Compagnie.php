@@ -48,6 +48,14 @@ class Compagnie extends Model
         return $this->belongsToMany(Voyage::class, 'compagnies_voyages', 'compagnies_id',  'voyages_id');
     }
 
+    public function localizedvoyages()
+    {
+        return $this->belongsToMany(Voyage::class, 'compagnies_voyages', 'compagnies_id',  'voyages_id')->localize();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function messages()
     {
         return $this->hasMany(Message::class);

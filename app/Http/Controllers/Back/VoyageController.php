@@ -135,7 +135,8 @@ class VoyageController extends Controller
 
             return back();
         }
-            flash()->error('voyage supprimé');
+
+        flash()->error('voyage supprimé');
 
         return back();
     }

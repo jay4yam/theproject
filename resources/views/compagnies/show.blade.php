@@ -34,7 +34,6 @@
                                 {{ $compagny->telephone }} - <a href="#contactcompagnie">{{ $compagny->email }}</a>
                             </p>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -46,15 +45,14 @@
         <div class="container">
             <h3>Liste des voyages</h3>
             <a name="voyages"></a>
-                @include('compagnies._voyages', ['allVoyages' => $compagny->voyages()->get()])
+                @include('compagnies._voyages', ['allVoyages' => $compagny->localizedvoyages()->get()])
         </div>
     </section>
-
 
     <!-- Testimonials -->
     <section class="section parallax-container bg-black" data-parallax-img="/images/backgrounds/background-34-1920x900.jpg">
         <div class="parallax-content">
-            <div class="container section-70 section-md-bottom-80 testi-compagny">
+            <div class="container section-70 section-md-bottom-80">
                 <h3 class="text-white">Testimonials 3</h3>
                 <p class="text-white">Feel free to browse our most popular testimonials</p>
                 <div class="owl-carousel owl-dots-white owl-navs-white owl-carusel-inset-left-right owl-dots-lg-reveal owl-navs-lg-veil" data-items="1" data-md-items="2" data-lg-items="3" data-stage-padding="5" data-loop="false" data-margin="60" data-mouse-drag="false" data-dots="true" data-nav="true">
@@ -133,7 +131,6 @@
                 </div>
             </div>
         </div>
-        <a name="contactcompagnie"></a>
     </section>
 
     <!-- call to action compagnie -->

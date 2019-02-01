@@ -1,5 +1,5 @@
 <div id="grid-view" class="row row-30 row-offset-1 justify-content-sm-center justify-content-md-start justify-content-lg-center">
-@foreach($allVoyages as $voyage)
+@foreach($allVoyages->load('region', 'ville') as $voyage)
     <!-- Box voyage grid -->
         <div class="col-md-6 col-lg-3">
             <div class="box-offer box-offer-xs">

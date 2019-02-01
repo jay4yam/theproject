@@ -52,37 +52,37 @@
                             <fieldset>
                                 <div class="form-inline">
                                     <div class="{!! $errors->has('name') ? 'has-error' : '' !!}">
-                                    {{ Form::text('name', null, ['class' => 'form-control marginform', 'placeholder' => 'nom']) }}
+                                    {{ Form::text('name', @Auth::user()->profile->fullName, ['class' => 'form-control marginform', 'placeholder' => 'nom']) }}
                                     {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
                                     </div>
                                     <div class="{!! $errors->has('firstname') ? 'has-error' : '' !!}">
-                                    {{ Form::text('firstname', null, ['class' => 'form-control marginform', 'placeholder' => 'prenom']) }}
+                                    {{ Form::text('firstname', @Auth::user()->profile->firstName, ['class' => 'form-control marginform', 'placeholder' => 'prenom']) }}
                                     {!! $errors->first('firstname', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>
                                 <div class="form-inline">
                                     <div class="{!! $errors->has('telephone') ? 'has-error' : '' !!}">
-                                    {{ Form::text('telephone', null, ['class' => 'form-control marginform', 'placeholder' => 'telephone']) }}
+                                    {{ Form::text('telephone', @Auth::user()->profile->phoneNumber, ['class' => 'form-control marginform', 'placeholder' => 'telephone']) }}
                                     {!! $errors->first('telephone', '<small class="help-block">:message</small>') !!}
                                     </div>
                                     <div class="{!! $errors->has('email') ? 'has-error' : '' !!}">
-                                    {{ Form::email('email', null, ['class' => 'form-control marginform', 'placeholder' => 'email']) }}
+                                    {{ Form::email('email', @Auth::user()->email, ['class' => 'form-control marginform', 'placeholder' => 'email']) }}
                                     {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>
                                 <div class="form-inline-item">
                                     <div class="{!! $errors->has('adresse') ? 'has-error' : '' !!}">
-                                    {{ Form::text('adresse', null, ['class' => 'form-control marginform w95', 'placeholder' => 'Adresse']) }}
+                                    {{ Form::text('adresse', @Auth::user()->profile->address, ['class' => 'form-control marginform w95', 'placeholder' => 'Adresse']) }}
                                     {!! $errors->first('adresse', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>
                                 <div class="form-inline">
                                     <div class="{!! $errors->has('code_postal') ? 'has-error' : '' !!}">
-                                    {{ Form::text('code_postal', null, ['class' => 'form-control marginform', 'placeholder' => 'Code postal']) }}
+                                    {{ Form::text('code_postal', @Auth::user()->profile->postalCode, ['class' => 'form-control marginform', 'placeholder' => 'Code postal']) }}
                                     {!! $errors->first('code_postal', '<small class="help-block">:message</small>') !!}
                                     </div>
                                     <div class="{!! $errors->has('ville') ? 'has-error' : '' !!}">
-                                    {{ Form::text('ville', null, ['class' => 'form-control marginform', 'placeholder' => 'Ville']) }}
+                                    {{ Form::text('ville', @Auth::user()->profile->city, ['class' => 'form-control marginform', 'placeholder' => 'Ville']) }}
                                     {!! $errors->first('ville', '<small class="help-block">:message</small>') !!}
                                     </div>
                                 </div>

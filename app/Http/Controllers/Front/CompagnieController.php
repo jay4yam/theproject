@@ -27,8 +27,6 @@ class CompagnieController extends Controller
     {
         $compagny = $this->compagnyRepository->getById($id);
 
-        $compagny->load('voyages');
-
         return view('compagnies.show', compact('compagny'));
     }
 

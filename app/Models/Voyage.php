@@ -9,7 +9,20 @@ class Voyage extends Model
 {
     protected $table ='voyages';
 
-    protected $fillable = ['parent_id', 'title', 'subtitle', 'intro',  'description', 'main_photo', 'price', 'discount_price', 'is_discounted', 'is_public','duree_du_vol', 'ville_id'];
+    protected $fillable = [
+        'parent_id',
+        'title',
+        'subtitle',
+        'intro',
+        'description',
+        'main_photo',
+        'price',
+        'discount_price',
+        'is_discounted',
+        'is_public',
+        'duree_du_vol',
+        'ville_id',
+        'locale'];
 
     /**
      * Retourne les voyages en fonction de la valeur de la variable locale
