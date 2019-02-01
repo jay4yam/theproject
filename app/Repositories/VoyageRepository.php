@@ -136,6 +136,9 @@ class VoyageRepository
             $voyage->main_photo = $this->uploadMainImage($request, $voyage);
         }
 
+        //.sauv le voyage
+        $voyage->save();
+
         //récupère le compagnie
         $compagnie = Compagnie::findOrFail($request->compagny_id);
         //test la relation voyage -> compagnie
@@ -147,8 +150,7 @@ class VoyageRepository
             //.update si existe
             $voyage->compagnies()->update(['compagnies_id' => $compagnie->id]);
         }
-        //.sauv le voyage
-        $voyage->save();
+
     }
 
     /**

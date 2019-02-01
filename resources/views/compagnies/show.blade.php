@@ -50,27 +50,11 @@
         </div>
     </section>
 
-    <!-- Slider Images -->
-    <section>
-        <div class="owl-carousel owl-carusel-inset-bottom owl-nav-type-3 owl-dots-primary" data-lightgallery="group" data-items="1" data-md-items="2" data-lg-items="3" data-xl-items="5" data-stage-padding="20" data-loop="true" data-margin="6" data-mouse-drag="false" data-dots="true" data-nav="true">
-            <!-- Thumbnail Rayen-->
-                    <div class="owl-item">
-                        <a class="thumbnail-rayen" data-lightgallery="item" href="/storage/voyages/min/">
-                    <span class="figure">
-                        <img class="img-responsive center-block" width="310" src="/storage/voyages/" alt="">
-                        <span class="figcaption">
-                            <span class="icon icon-xl fa fa-search-plus text-white"></span>
-                        </span>
-                    </span>
-                        </a>
-                    </div>
-        </div>
-    </section>
 
     <!-- Testimonials -->
     <section class="section parallax-container bg-black" data-parallax-img="/images/backgrounds/background-34-1920x900.jpg">
         <div class="parallax-content">
-            <div class="container section-70 section-md-bottom-80">
+            <div class="container section-70 section-md-bottom-80 testi-compagny">
                 <h3 class="text-white">Testimonials 3</h3>
                 <p class="text-white">Feel free to browse our most popular testimonials</p>
                 <div class="owl-carousel owl-dots-white owl-navs-white owl-carusel-inset-left-right owl-dots-lg-reveal owl-navs-lg-veil" data-items="1" data-md-items="2" data-lg-items="3" data-stage-padding="5" data-loop="false" data-margin="60" data-mouse-drag="false" data-dots="true" data-nav="true">
@@ -164,7 +148,7 @@
                         {{ Form::open(['route' => 'compagnie.contact.form'] ) }}
                             {{ Form::hidden('compagnie_id', $compagny->id) }}
                             <div class="form-group">
-                                {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'votre@email']) }}
+                                {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'votre@email', 'required' => 'required']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'votre message', 'required' => 'required']) }}

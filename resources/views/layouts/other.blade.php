@@ -59,9 +59,6 @@
                     <div class="rd-navbar-nav-wrap">
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
-                            <li class="{{ @$activeHomeCss }}">
-                                <a href="{{ url(App::getLocale().'/') }}">Home</a>
-                            </li>
                             <li class="{{ @$activeVoyageCss }}">
                                 <a href="/{{ App::getLocale() }}/voyages">Voyages</a>
                             </li>
@@ -111,6 +108,9 @@
                             </li>
                             <li class="{{ @$activeContactCss }}">
                                 <a href="/{{ App::getLocale() }}/contact">Contact</a>
+                            </li>
+                            <li class="language_selector">
+                                @include('partials._language_selector')
                             </li>
                         </ul>
                     </div>
@@ -255,11 +255,26 @@
 <script src="{{ asset('js/core.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="{{ asset('js/cart.js') }}"></script>
-<script>
+<script type="text/javascript">
     cartJs.AddToCart();
     cartJs.ResponseAfterSubmit();
     cartJs.RemoveFromCart();
     cartJs.UpdateQuantity();
+
+    $(document).ready(function () {
+        var language_Selector = $('.language_selector');
+        language_Selector.on('mouseover', function (e) {
+            e.preventDefault();
+            var langueDiv = $('.languages_items');
+            langueDiv.css({'display':'block', 'width':'25px'});
+        });
+
+        language_Selector.on('mouseout', function (e) {
+            e.preventDefault();
+            var langueDiv = $('.languages_items');
+            langueDiv.css({'display':'none'});
+        });
+    });
 </script>
 <!-- dedicated Javascript for a specific view -->
 @yield('dedicated_js')

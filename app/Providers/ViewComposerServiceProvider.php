@@ -21,6 +21,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer(['back.blog.edit', 'back.blog.create'], 'App\Http\ViewComposers\AllCategoriesComposer');
         View::composer('voyages.index', 'App\Http\ViewComposers\VoyagesComposer');
         View::composer('index', 'App\Http\ViewComposers\last6product4homeComposer');
+        View::composer('partials._language_selector', 'App\Http\ViewComposers\LanguageSelectorComposer');
     }
 
     /**

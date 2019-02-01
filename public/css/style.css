@@ -20930,3 +20930,14 @@ a.roll {
   .cart-form {margin: 30px 0px;}
 
 }
+
+.testi-compagny .text-white{
+  text-align: center;
+}
+
+.languages_items{
+  position: absolute;
+  display: none;
+  z-index: 9999;
+  padding-top: 20px;
+}

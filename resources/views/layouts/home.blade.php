@@ -54,9 +54,6 @@
                         <div class="rd-navbar-nav-wrap">
                             <!-- RD Navbar Nav-->
                             <ul class="rd-navbar-nav">
-                                <li class="active">
-                                    <a href="/{{ App::getLocale() }}">Home</a>
-                                </li>
                                 <li>
                                     <a href="/{{ App::getLocale() }}/voyages">Voyages</a>
                                 </li>
@@ -113,6 +110,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ url(App::getLocale().'/contact') }}">contact</a>
+                                </li>
+                                <li class="language_selector">
+                                    @include('partials._language_selector')
                                 </li>
                             </ul>
                         </div>
@@ -301,6 +301,21 @@
         cartJs.ResponseAfterSubmit();
         cartJs.RemoveFromCart();
         cartJs.UpdateQuantity();
+
+        $(document).ready(function () {
+            var language_Selector = $('.language_selector');
+            language_Selector.on('mouseover', function (e) {
+                e.preventDefault();
+                var langueDiv = $('.languages_items');
+                langueDiv.css({'display':'block', 'width':'25px'});
+            });
+
+            language_Selector.on('mouseout', function (e) {
+                e.preventDefault();
+                var langueDiv = $('.languages_items');
+                langueDiv.css({'display':'none'});
+            });
+        });
     </script>
     @yield('dedicated_js')
 </body>

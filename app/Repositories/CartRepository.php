@@ -86,10 +86,11 @@ class CartRepository
     /**
      * @param \Stripe\ApiResource $customerStripe
      * @param Request $request
-     * @return \Stripe\ApiResource
+     * @return mixed
      */
     public function createChargeOnStripe(ApiResource $customerStripe, Request $request)
     {
+        $charge = null;
         try {
             $charge = Charge::create([
                 'customer' => $customerStripe->id,
@@ -98,7 +99,7 @@ class CartRepository
                 'description' => $request->voyage
             ]);
         }catch (\Exception $exception){
-            print ($exception->getMessage());
+            return $exception->getMessage();
         }
         return $charge;
     }
