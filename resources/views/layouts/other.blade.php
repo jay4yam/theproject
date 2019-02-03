@@ -61,6 +61,8 @@
                         <ul class="rd-navbar-nav">
                             <li class="{{ @$activeVoyageCss }}">
                                 <a href="/{{ App::getLocale() }}/voyages">Voyages</a>
+                                <!-- RD Navbar Megamenu-->
+                                @include('partials._megamenu_voyage')
                             </li>
                             <li class="{{ @$activeBlogCss }}">
                                 <a href="/{{ App::getLocale() }}/blog">

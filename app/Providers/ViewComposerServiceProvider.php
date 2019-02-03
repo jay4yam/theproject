@@ -22,6 +22,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('voyages.index', 'App\Http\ViewComposers\VoyagesComposer');
         View::composer('index', 'App\Http\ViewComposers\last6product4homeComposer');
         View::composer('partials._language_selector', 'App\Http\ViewComposers\LanguageSelectorComposer');
+        View::composer('partials._megamenu_voyage', 'App\Http\ViewComposers\MegaMenuComposer');
     }
 
     /**

@@ -49,7 +49,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group flex-column {!! $errors->has('is_public') ? 'has-error' : '' !!}">
                                             {{ Form::label('is_public', 'EST VISIBLE :') }}
-                                            {{ Form::select('is_public', [false => 'non', true => 'oui'], '' ,['value' => old('is_public'),'class' => 'form-control',]) }}
+                                            {{ Form::select('is_public', [false => 'non', true => 'oui'], '' ,['value' => old('is_public'),'class' => 'form-control', 'placeholder' => 'Sélection de la visibilité']) }}
                                             {!! $errors->first('is_public', '<small class="help-block">:message</small>') !!}
                                         </div>
 
@@ -61,7 +61,7 @@
 
                                         <div class="form-group flex-column {!! $errors->has('is_discounted') ? 'has-error' : '' !!}">
                                             {{ Form::label('is_discounted', 'REMISE :') }}
-                                            {{ Form::select('is_discounted', [false => 'non', true => 'oui'], '',['value'=> old('is_discounted'), 'class' => 'form-control',]) }}
+                                            {{ Form::select('is_discounted', [false => 'non', true => 'oui'], '',['value'=> old('is_discounted'), 'class' => 'form-control', 'placeholder' => 'Prix est il remisé']) }}
                                             {!! $errors->first('is_discounted', '<small class="help-block">:message</small>') !!}
                                         </div>
 
@@ -94,13 +94,13 @@
 
                                         <div class="form-group flex-column {!! $errors->has('ville_id') ? 'has-error' : '' !!}">
                                             {{ Form::label('ville_id', 'VILLE :') }}
-                                            {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), '' ,['value'=> old('ville_id') , 'class' => 'form-control',]) }}
+                                            {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), '' ,['value'=> old('ville_id') , 'class' => 'form-control', 'placeholder' => 'Sélection de la ville']) }}
                                             {!! $errors->first('ville_id', '<small class="help-block">:message</small>') !!}
                                         </div>
 
                                         <div class="form-group flex-column {!! $errors->has('compagny_id') ? 'has-error' : '' !!}">
                                             {{ Form::label('compagny_id', 'COMPAGNIE :') }}
-                                            {{ Form::select('compagny_id', \App\Models\Compagnie::pluck('raison_sociale','id'), '' ,['value'=> old('compagny_id') , 'class' => 'form-control',]) }}
+                                            {{ Form::select('compagny_id', \App\Models\Compagnie::pluck('raison_sociale','id'), '' ,['value'=> old('compagny_id') , 'class' => 'form-control', 'placeholder' => 'Sélection de la compagnie']) }}
                                             {!! $errors->first('compagny_id', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>

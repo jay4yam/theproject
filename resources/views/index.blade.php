@@ -21,7 +21,7 @@
                         <div class="form-blog-search">
                             <div class="form-wrap form-wrap-xs form-inline-item">
                                 <label class="form-label form-search-label form-label-sm" for="tours-destination">{{ __('voyage.destination') }}</label>
-                                <input class="form-search-input input-sm form-input" id="tours-destination" type="text">
+                                <input class="form-search-input input-sm form-input" id="tours-destination" type="text" required>
                                 <div class="spinner"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
                                 <button class="form-search-submit">
                                 <span>
@@ -30,8 +30,8 @@
                                 </button>
                             </div>
                             <div class="form-wrap form-wrap-xs form-inline-item">
-                                <label class="form-label" for="index-budget">{{ __('voyage.budget') }}</label>
-                                <input class="form-input" id="index-budget" type="text" name="budget">
+                                <label class="form-label" for="price_min">{{ __('voyage.budget') }}</label>
+                                <input class="form-input" id="price_min" type="text" name="price_min">
                             </div>
                             <div class="form-inline-item button-wrap">
                                 <button class="button button-primary" type="submit">{{ __('voyage.recherche') }}</button>

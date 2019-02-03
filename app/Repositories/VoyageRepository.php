@@ -268,8 +268,18 @@ class VoyageRepository
      */
     public function getVoyagesByPrice(Request $request)
     {
-        $priceArray = [ $request->price_min, $request->price_max ];
 
-        return $this->voyage->localize()->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
+        //1. si les deux request 'price min' et 'price max' sont passés dans le form
+        if(isset($request->price_min) && isset($request->price_max)){
+            $priceArray = [ $request->price_min, $request->price_max ];
+
+            return $this->voyage->localize()->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
+        }
+
+        //1. si les deux request 'price min' et 'price max' sont passés dans le form
+        if(isset($request->price_min) && !isset($request->price_max)){
+            return $this->voyage->localize()->isPublic()->with('ville', 'region')->where('price', '>', $request->price_min)->paginate(9);
+        }
+
     }
 }

@@ -15779,10 +15779,6 @@ html:not(.lt-ie10) .not-animated {
     margin-top: 0;
     max-width: 1200px;
     background-color: #fff;
-    background-image: url(../images/mega-menu-1200x400.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
     z-index: 4;
     padding: 55px 55px 90px; }
     .rd-navbar-static .rd-navbar-megamenu ul a,
@@ -15900,27 +15896,23 @@ html:not(.lt-ie10) .not-animated {
   .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown {
-    background: #000; }
-  .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu,
-  .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu,
-  .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu {
-    background-image: url(../images/mega-menu-1200x563.jpg); }
+    background: #aaa; }
     .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu li > a:hover, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu li > a:hover,
     .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu li > a:hover,
     .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu li > a:hover {
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); }
+      color: #ff9f1c; }
   .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown p.text-black, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu p.text-black, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown p.text-black, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu p.text-black,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown p.text-black,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu p.text-black,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown p.text-black,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu p.text-black {
-    color: #fff; }
+    color: #000; }
   .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown li > a, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu li > a, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown li > a, .rd-navbar-static.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu li > a,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-dropdown li > a,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu li > a,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown li > a,
   .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu li > a {
-    color: #fff;
+    color: #aaa;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease; }
@@ -15929,7 +15921,7 @@ html:not(.lt-ie10) .not-animated {
     .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-stuck .rd-navbar-megamenu li > a:hover,
     .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-dropdown li > a:hover,
     .rd-navbar-fullwidth.rd-navbar-transparent.rd-navbar--is-clone .rd-navbar-megamenu li > a:hover {
-      color: #ff9f1c; }
+      color: #ff9f1c;; }
   .rd-navbar-static.rd-navbar-dark-stuck.rd-navbar--is-stuck .rd-navbar-dropdown,
   .rd-navbar-fullwidth.rd-navbar-dark-stuck.rd-navbar--is-stuck .rd-navbar-dropdown {
     border: 1px solid #333; }
@@ -20940,4 +20932,37 @@ a.roll {
   display: none;
   z-index: 9999;
   padding-top: 20px;
+}
+
+.menu-ville{
+  color: #ffa000;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.bg-decorative{
+  height: 50%;
+  padding: 10px;
+  margin: 10px 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  text-shadow: black 1px 1px;
+}
+
+.bg-decorative a{
+  font-size: 20px;
+  color:#FFFFFF;
+}
+
+.bg-decorative a:hover{
+  color:#ffa000;
+}
+
+.bg-decorative .price{
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 20px;
 }
