@@ -20962,7 +20962,9 @@ a.roll {
 
 .bg-decorative .price{
   position: absolute;
-  bottom: 10px;
-  right: 15px;
+  bottom: 0px;
+  right: 0px;
   font-size: 20px;
+  padding: 1px 5px;
+  background-color: #ff9f1c;
 }
