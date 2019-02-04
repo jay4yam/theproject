@@ -9,6 +9,7 @@
 namespace App\Http\ViewComposers;
 use App\Models\Region;
 use App\Models\Voyage;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 
 class MegaMenuComposer
@@ -29,7 +30,7 @@ class MegaMenuComposer
     private function getMenuItems()
     {
         //Mise en cache du menu
-        $value = \Cache::remember('menuItems', '1440', function (){
+        $value = \Cache::remember('menuItems-'.App::getLocale(), '1440', function (){
             //1. recupère toutes les régions avec les villes et les voyages
             $regions = $this->region->with('villes','voyages')->orderBy('id', 'asc')->limit(2)->get(['id', 'name']);
 
@@ -59,9 +60,11 @@ class MegaMenuComposer
 
                                 //10. si le voyages n'est pas vide
                                 if ($voyage->is_public) {
-
-                                    //11. enregistre le titre et l'id du voyage à l'indice du tableau
-                                    $objet[$region->name][$ville->name][] = ['id' => $voyage->id, 'title' => $voyage->title];
+                                    //11. enregistre les voyages pour la langue de l'utilisteur
+                                    if($voyage->locale == App::getLocale()) {
+                                        //12. enregistre le titre et l'id du voyage à l'indice du tableau
+                                        $objet[$region->name][$ville->name][] = ['id' => $voyage->id, 'title' => $voyage->title];
+                                    }
                                 }
                             }
                         }
@@ -81,7 +84,7 @@ class MegaMenuComposer
      */
     private function decorativeMegaMenu()
     {
-        $value = \Cache::remember('menuDecorativesItems', '1440', function () {
+        $value = \Cache::remember('menuDecorativesItems'.App::getLocale(), '1440', function () {
             $array = array();
 
             $array[] = $this->voyage->with('ville', 'region')->findOrFail(1);

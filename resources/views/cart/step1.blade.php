@@ -48,7 +48,7 @@
                     <div class="row">
                         <!-- Formulaire -->
                         <div class="col-md-6">
-                            <h5>Vos informations</h5>
+                            <h5>{{ __('panier.H5_vos_informations') }}</h5>
                             <fieldset>
                                 <div class="form-inline">
                                     <div class="{!! $errors->has('name') ? 'has-error' : '' !!}">
@@ -90,16 +90,16 @@
                         </div>
                         <!-- Recap panier -->
                         <div class="col-md-6">
-                            <h5>Vos vols ou voyages</h5>
+                            <h5>{{ __('panier.H5_vos_vols') }}</h5>
                             <table id="carttable" class="table table-hover table-sm" style="text-align: center">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>voyage</th>
-                                    <th>Nom</th>
-                                    <th>Nb Voyageur</th>
-                                    <th>Prix Unitaire</th>
-                                    <th>Prix Final</th>
-                                    <th>Supprimer</th>
+                                    <th>{{ __('panier.voyage') }}</th>
+                                    <th>{{ __('panier.nom') }}</th>
+                                    <th>{{ __('panier.num_of_traveler') }}</th>
+                                    <th>{{ __('panier.unit_price') }}</th>
+                                    <th>{{ __('panier.final_price') }}</th>
+                                    <th>{{ __('panier.supprimer') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -132,7 +132,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="2"></td>
-                                    <td colspan="2" style="text-align: right">Prix Total TTC</td>
+                                    <td colspan="2" style="text-align: right">{{ __('panier.prix_total_ttc') }}</td>
                                     <td id="finalPrice"><b>{{ $finalPrice }} €</b></td>
                                     {{ Form::hidden('finalPrice', $finalPrice) }}
                                     <td></td>
@@ -142,7 +142,7 @@
                             <div class="cart-form">
                                 <div class="form-row">
                                     <label for="card-element">
-                                        Credit or debit card
+                                        {{ __('panier.card') }}
                                     </label>
                                     <div id="card-element" class="form-control">
                                         <!-- A Stripe Element will be inserted here. -->
@@ -169,21 +169,21 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-center pt-20">
-                            {{ Form::button('Valider votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
+                            {{ Form::button('Validez votre commande', ['type' => 'submit', 'class' => 'button button-primary']) }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <img src="{{ asset('images/100pour100-secure.png') }}" width="40%">
-                            <p>Paiement 100% sécurisé</p>
+                            <p>{{ __('panier.100pc_secure') }}</p>
                         </div>
                         <div class="col-md-4">
                             <img src="{{ asset('images/site-de-confiance.png') }}" width="40%">
-                            <p>Achat garanti</p>
+                            <p>{{ __('panier.achat_garanti') }}</p>
                         </div>
                         <div class="col-md-4">
                             <img src="{{ asset('images/site-prefere.png') }}" width="40%">
-                            <p>100% satisfait</p>
+                            <p>{{ __('panier.100pc_satisfait') }}</p>
                         </div>
                     </div>
                     {{ Form::close() }}
