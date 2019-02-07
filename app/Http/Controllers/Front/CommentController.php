@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\MainOrder;
 use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,9 +24,9 @@ class CommentController extends Controller
     }
 
     /**
-     * Ajoute un commentaire
      * @param $locale
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function addComment($locale, Request $request)
     {
@@ -41,5 +42,19 @@ class CommentController extends Controller
         }
 
         return redirect()->back();
+    }
+
+
+    public function addTestimonials($locale, $order_id)
+    {
+        //1. essayer de recupérer le voyage correspondant
+        $mainOrder = MainOrder::with('itemsOrder')->where('order_id', '=', $order_id)->first();
+
+        return view('testimonials.create', compact('mainOrder'));
+    }
+
+    public function postTestimonials(Request $request)
+    {
+        dd($request->all());
     }
 }

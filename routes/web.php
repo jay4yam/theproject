@@ -64,7 +64,8 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
 
     Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 
-
+    Route::get('/add/testimonials/{order_id}', 'CommentController@addTestimonials')->name('add.testimonials');
+    Route::post('/post/testimonials', 'CommentController@postTestimonials')->name('post.testimonials');
 
 });
 

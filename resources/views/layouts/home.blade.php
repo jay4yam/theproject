@@ -41,13 +41,13 @@
                             <!-- RD Navbar Brand-->
                             <div class="rd-navbar-brand rd-navbar-brand-desktop">
                                 <a class="brand-name" href="/{{ App::getLocale() }}/">
-                                    <img width="148" height="30" src="/images/logo-light-148x30.png" alt="">
+                                    <img width="150" src="/images/new-logo-hell-white.png" alt="">
                                 </a>
                             </div>
                             <!-- RD Navbar Brand-->
                             <div class="rd-navbar-brand rd-navbar-brand-mobile">
                                 <a class="brand-name" href="/{{ App::getLocale() }}/">
-                                    <img width="148" height="30" src="/images/logo-dark-148x30.png" alt="">
+                                    <img width="148" height="30" src="/images/new-logo-hell-white.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -129,7 +129,10 @@
                 <div class="row justify-content-sm-center">
                     <div class="col-md-8 col-lg-12">
                         <div class="row row-40 justify-content-sm-center">
-                            <div class="col-md-6 col-lg-3 col-xl-4 order-lg-1"><a class="brand-logo" href="index.html"><img width="148" height="30" src="/images/logo-dark-148x30.png" alt=""></a>
+                            <div class="col-md-6 col-lg-3 col-xl-4 order-lg-1">
+                                <a class="brand-logo" href="/{{ App::getLocale() }}">
+                                    <img width="148" src="/images/new-logo-hell-black.png" alt="">
+                                </a>
                                 <p class="text-small inset-xl-right-80"> {{ __('home.footerbaseline') }}</p>
                             </div>
                             <div class="col-md-6 col-lg-3 col-xl-2 order-lg-4">

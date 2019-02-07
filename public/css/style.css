@@ -12125,6 +12125,13 @@ html .page .offset-top-530 {
     -webkit-box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
     box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
     will-change: transform; }
+  .quote-boxed-img-testi {
+    display: inline-block;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    -webkit-box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
+    will-change: transform; }
   .quote-boxed .text-small + .text-small {
     margin-top: 8px; }
   .quote-boxed * + .list-inline {
@@ -20967,4 +20974,61 @@ a.roll {
   font-size: 20px;
   padding: 1px 5px;
   background-color: #ff9f1c;
+}
+
+.quote-boxed-img-testi {
+  display: inline-block;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  -webkit-box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 23px 0 rgba(0, 0, 0, 0.4);
+  will-change: transform; }
+
+.man_style, .own_style, .woman_style{
+  text-align: center;
+  padding: 40px;
+}
+
+
+.man_style{ background-color: #90defb; border-radius: 5px 0 0 0;}
+.own_style{ background: linear-gradient(to right, #90defb 0%,#ffbff1 100%);}
+.woman_style{ background-color: #ffbff1; border-radius: 0 5px 0 0;}
+
+.img-voyage-testi{
+  text-align: center;
+  padding: 70px;
+  background-size: cover;
+  color: #FFFFFF;
+}
+.img-voyage-testi h5{
+  color: #FFFFFF;
+  text-shadow: black 2px 2px;
+  font-size: 16px;
+}
+
+.testimonials{
+  padding: 0;
+  width: 80%;
+  background-color: #FFF;
+}
+
+.testimonials .row{ margin: 0;}
+.testimonials form{
+  width: 100%;
+}
+
+.testimonials input, .testimonials textarea{
+  width: 95%;
+}
+
+.btn-without-width{
+  min-width: 0;
+}
+
+.no-padding{
+  padding:0;
+}
+
+.ptnb-10{
+  padding: 10px 0 0 0;
 }
