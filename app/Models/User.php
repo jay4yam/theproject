@@ -79,4 +79,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comments::class);
     }
+
+
+    /**
+     * Relation entre la table user et la table itemOrder via la table mainOrder
+     */
+    public function voyagesAchetes()
+    {
+        return $this->hasManyThrough(
+            ItemOrder::class,
+            MainOrder::class,
+            'user_id',
+            'main_order_id',
+            'id',
+            'id'
+        );
+    }
 }

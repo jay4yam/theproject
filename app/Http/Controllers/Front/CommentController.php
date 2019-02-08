@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Mail\SendAddTestimonialsMail;
+use App\Models\ItemOrder;
 use App\Models\MainOrder;
+use App\Models\User;
 use App\Repositories\CommentRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -45,6 +50,12 @@ class CommentController extends Controller
     }
 
 
+    /**
+     * Affiche la page a laquelle l'internaute accède après l'envois du mail le lendemain de son voyage
+     * @param $locale
+     * @param $order_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function addTestimonials($locale, $order_id)
     {
         //1. essayer de recupérer le voyage correspondant
@@ -53,6 +64,10 @@ class CommentController extends Controller
         return view('testimonials.create', compact('mainOrder'));
     }
 
+    /**
+     * Gère l'insertion du commentaire
+     * @param Request $request
+     */
     public function postTestimonials(Request $request)
     {
         dd($request->all());

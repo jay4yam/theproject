@@ -21,15 +21,13 @@ class ItemOrder extends Model
     ];
 
 
-
     public function mainOrder()
     {
-        return $this->belongsTo(MainOrder::class);
+        return $this->belongsTo(MainOrder::class, 'main_order_id');
     }
 
     public function voyage()
     {
         return $this->hasOne(Voyage::class, 'id', 'voyage_id');
     }
-
 }
