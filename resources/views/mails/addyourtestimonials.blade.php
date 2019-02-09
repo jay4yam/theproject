@@ -271,7 +271,7 @@
                             <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
                                 <tr>
                                     <td class="button-td button-td-primary" style="border-radius: 4px; background: #FDA62E;">
-                                        <a class="button-a button-a-primary" href="{{ route('add.testimonials', ['locale' => App::getLocale(), 'order_id' => $itemOrder->mainOrder->order_id]) }}" style="background: #FDA62E; border: 1px solid #FDA62E; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Ajoutez un commentaire</a>
+                                        <a class="button-a button-a-primary" href="{{ route('add.testimonials', ['locale' => App::getLocale(), 'order_id' => $itemOrder->mainOrder->order_id, 'voyage_id' => $itemOrder->voyage_id]) }}" style="background: #FDA62E; border: 1px solid #FDA62E; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Ajoutez un commentaire</a>
                                     </td>
                                 </tr>
                             </table>

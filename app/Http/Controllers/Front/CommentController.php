@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Mail\SendAddTestimonialsMail;
-use App\Models\ItemOrder;
 use App\Models\MainOrder;
-use App\Models\User;
 use App\Repositories\CommentRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -54,12 +49,33 @@ class CommentController extends Controller
      * Affiche la page a laquelle l'internaute accède après l'envois du mail le lendemain de son voyage
      * @param $locale
      * @param $order_id
+     * @param $voyage_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addTestimonials($locale, $order_id)
+    public function addTestimonials($locale, $order_id, $voyage_id)
     {
-        //1. essayer de recupérer le voyage correspondant
-        $mainOrder = MainOrder::with('itemsOrder')->where('order_id', '=', $order_id)->first();
+        if(\Auth::check()) {
+            try {
+                //1. essayer de recupérer le voyage correspondant
+                $mainOrder = MainOrder::with(array('itemsOrder' => function ($query) use ($voyage_id) {
+                    $query->where('voyage_id', '=', $voyage_id);
+                }))->where('order_id', '=', $order_id)->first();
+
+                //Test si l'utilisateur qui tente de commenter le voyage est bien le propriétaire du voyage
+                if(\Auth::id() != $mainOrder->user->id){
+                    return view('errors.404')->with(['message' => 'vous ne pouvez pas commenter ce voyage']);
+                }
+
+            } catch (\Exception $exception) {
+                return view('errors.404')->with(['message' => $exception->getMessage()]);
+            }
+        }else {
+            $url = \request()->path();
+
+            session()->put('testimonials', $url);
+
+            return redirect()->route('login');
+        }
 
         return view('testimonials.create', compact('mainOrder'));
     }

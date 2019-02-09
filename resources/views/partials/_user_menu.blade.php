@@ -5,9 +5,10 @@
     </div>
     <div class="user-login">
         @guest
-        <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('login') }}">Login</a>
         @else
-        <a href="{{ route('users.edit', ['id' => Auth::user()->id]) }}">{{ Auth::user()->profile->firstName }}</a>
+            <a href="{{ route('users.edit', ['id' => Auth::user()->id]) }}">{{ Auth::user()->profile->firstName }}</a>
+            <a href="#" alt="logout" title="logout">x</a>
         @endguest
     </div>
 </div>
