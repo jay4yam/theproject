@@ -8,7 +8,7 @@ class Comments extends Model
 {
     protected $table = 'comments';
 
-    protected $fillable = ['user_id', 'content'];
+    protected $fillable = ['user_id', 'content', 'reply_to', 'commentable_id', 'commentable_type', 'genre_avatar', 'main_order_id', 'user_name_for_comment'];
 
     /**
      * Relation morph avec les tables 'blogs' et 'voyage'

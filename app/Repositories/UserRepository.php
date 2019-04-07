@@ -8,14 +8,15 @@
 
 namespace App\Repositories;
 
-use App\Models\Compagnie;
 use App\Models\Profile;
 use App\Models\User;
+use App\Traits\uploadAvatar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserRepository
 {
+    use uploadAvatar;
+
     /**
      * @var User
      */
@@ -157,36 +158,5 @@ class UserRepository
             $user->avatar = $this->uploadMainImage($request, $user);
             $user->save();
         }
-    }
-
-
-    /**
-     * Gère l'upload le fichier image
-     * @param Request $request
-     * @param User $user
-     * @return mixed
-     * @throws \Exception
-     */
-    private function uploadMainImage(Request $request, User $user)
-    {
-        $path = '';
-
-        //test si il y une image dans la requete
-        if($request->file('avatar'))
-        {
-            try {
-
-                $path = $request->file('avatar')->store('public/users/'.$user->id);
-
-            }catch (\Exception $exception){
-                //si exception : message d'erreur
-                throw new \Exception($exception->getMessage());
-            }
-
-            $array = explode('/', $path);
-            return $array[1].'/'.$array[2].'/'.$array[3];
-        }
-
-        return $path;
     }
 }

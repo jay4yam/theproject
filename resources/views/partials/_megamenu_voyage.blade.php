@@ -7,7 +7,9 @@
                 <div class="row">
                     @foreach($array as $ville => $voyages)
                         <div class="col-6" style="padding: 10px 0;">
-                        <h5 class="menu-ville">{{ $ville }}</h5>
+                            <h5 class="menu-ville">
+                                <a href="{{ route('front.voyage.ville', ['ville[]' => $arrayVille[$ville]]) }}">{{ $ville }}</a>
+                            </h5>
                             <ul>
                             @foreach($voyages as $voyage)
                                 <li>

@@ -61,7 +61,7 @@ class VoyageRepository
      */
     public function getById($id)
     {
-        return $this->voyage->findOrFail($id)->load('ville', 'region', 'compagnies');
+        return $this->voyage->findOrFail($id)->load('ville', 'region', 'compagnies', 'comments');
     }
 
     /**

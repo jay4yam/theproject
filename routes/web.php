@@ -79,6 +79,7 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 
     //Listing des routes pour 'CRUD' sur les "compagnies"
     Route::resource('/compagnies', 'CompagnyController');
+    Route::get('/compagnie/scrapp', 'CompagnyController@getScrapeInfo');
 
     //Listing des routes pour 'CRUD' sur les "Utilisateurs"
     Route::resource('/users', 'UserController');

@@ -31,7 +31,7 @@ class BlogTest extends TestCase
     }
 
     /**
-     * Test acces blog en etant logge
+     * Test accès blog en étant logge
      */
     public function testAccessLogged()
     {

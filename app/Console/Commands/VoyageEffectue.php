@@ -22,7 +22,7 @@ class VoyageEffectue extends Command
      *
      * @var string
      */
-    protected $description = 'Envois un mail pour demander à l\'utilisateur de commenter son vol de la la veille';
+    protected $description = 'Envois un mail pour demander à l\'utilisateur de commenter son vol de la veille';
 
     /**
      * Create a new command instance.
@@ -50,7 +50,9 @@ class VoyageEffectue extends Command
             //si la date de son voyage était hier
             if($itemOrder->date_voyage->eq(Carbon::yesterday())){
                 //On envoie un mail en utilisant la relation mainOrder et la relation user de mainOrder pour trouver le mail de l'utilisateur
-                Mail::to($itemOrder->mainOrder->user->email)->bcc('jay.ayamee@gmail.com')->send(new SendAddTestimonialsMail($itemOrder));
+                Mail::to($itemOrder->mainOrder->user->email)
+                    ->bcc('jay.ayamee@gmail.com')
+                    ->send(new SendAddTestimonialsMail($itemOrder));
             }
         }
     }

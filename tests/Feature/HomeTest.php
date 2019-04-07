@@ -45,7 +45,7 @@ class HomeTest extends TestCase
     }
 
     /**
-     * Test l'affiage de la home avec les produits
+     * Test l'affichage de la home avec les produits
      */
     public function testHomeProducts()
     {

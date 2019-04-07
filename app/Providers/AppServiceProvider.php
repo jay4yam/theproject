@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'blog' => 'App\Models\Blog',
+            'voyage' => 'App\Models\Voyage'
         ]);
     }
 

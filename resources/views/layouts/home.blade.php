@@ -97,14 +97,15 @@
                                 <div class="col-md-7">
                                     <div class="modal-body-column-content">
                                         <div class="team-member">
-                                            <div class="team-member-img-wrap d-md-none"><img class="rounded-circle img-responsive center-block" src="/images/users/user-01-100x100.jpg" width="100" height="100" alt=""></div>
+                                            <div class="team-member-img-wrap d-md-none">
+                                                <img class="rounded-circle img-responsive center-block" src="/images/users/user-01-100x100.jpg" width="100" height="100" alt="">
+                                            </div>
                                             <div class="team-member-title text-small text-ubold text-uppercase text-spacing-200 text-black">James Smith</div>
                                             <div class="team-member-description text-spacing-300 font-italic text-uppercase text-silver-chalice">Taxi driver & traveler</div>
                                             <div class="team-member-scroll-section">
                                                 <p class="text-small font-italic text-silver-chalice text-left">I’d like to send you a sincere "thank you" for all of your assistance during my recent trip to Colorado. It was invaluable to me and I realize and appreciate it greatly. Your professionalism and efficiency were comforting and reassuring in any weather and environment. Moreover, none of the additional services I ordered at this traveling agency has been a failure yet. Everyone in the team of SunTravel knows how to do their work, and I think that’s why they are still among the leaders of traveling business. Every suggestion your staff made was excellent, as you considered my travel budget, time constraints, and personal likes and dislikes. I would definitely work with your agency again, especially with Kent, as he made my trip easy and stress-free. It was a real delight to work with you.</p>
                                             </div>
                                         </div>
-                                        <!-- List Inline-->
                                         <ul class="list-inline list-primary list-inline-13">
                                             <li class="text-center"><a class="icon fa fa-facebook text-black" href="#"></a></li>
                                             <li class="text-center"><a class="icon fa fa-twitter text-black" href="#"></a></li>

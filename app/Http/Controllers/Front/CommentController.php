@@ -83,9 +83,19 @@ class CommentController extends Controller
     /**
      * Gère l'insertion du commentaire
      * @param Request $request
+     * @return resource
      */
     public function postTestimonials(Request $request)
     {
-        dd($request->all());
+        try {
+            // enregistre le témoignage
+            $this->commentRepository->storeTestimonials($request);
+
+        }catch (\Exception $exception){
+            return view('errors.404')->with(['message' => $exception->getMessage()]);
+        }
+
+        //On renvois vers la page du voyage
+        return redirect()->route('front.voyage.show', ['locale' => \App::getLocale(), 'id' => $request->voyage_id, 'slug' => 'test#testimonials']);
     }
 }

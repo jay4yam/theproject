@@ -109,4 +109,12 @@ class Voyage extends Model
     {
         return $this->belongsToMany(Compagnie::class, 'compagnies_voyages', 'voyages_id',  'compagnies_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comments::class, 'commentable');
+    }
 }

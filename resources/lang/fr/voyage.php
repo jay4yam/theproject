@@ -32,5 +32,7 @@ return [
         'price_range' => 'Filtrer par prix',
         'filter' =>  'filtrer',
         'budget' => 'Votre Budget',
-        'recherche' => 'Recherche'
+        'recherche' => 'Recherche',
+        'temoignages' => 'Vos témoignages',
+        'slogan_temoignages' => 'Vos plus jolies histoires de voyages en hélicoptère'
     ];

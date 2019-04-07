@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Back;
 use App\Http\Requests\CreateCompanyStep1;
 use App\Http\Requests\CreateCompanyStep1Request;
 use App\Http\Requests\CreateCompanyStep2Request;
-use App\Models\Compagnie;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\CompanyRepository;
+use Goutte\Client;
 
 class CompagnyController extends Controller
 {
@@ -59,7 +58,7 @@ class CompagnyController extends Controller
 
     /**
      * Sauv. le step 1 de la creation de compagnie aérienne
-     * @param CreateCompanyStep1 $request
+     * @param CreateCompanyStep1Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateCompanyStep1Request $request)
@@ -125,5 +124,15 @@ class CompagnyController extends Controller
         flash()->success('Enregistrement effectué avec succes');
 
         return redirect()->route('compagnies.index');
+    }
+
+    public function getScrapeInfo()
+    {
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://www.azurhelico.com/fr/vols-panoramiques-helicoptere-cote-d-azur.html');
+        $crawler->filter('table > tr')->each(function ($node) {
+            print $node->text()."\n";
+        });
+        dd($crawler);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\ItemOrder;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -15,9 +15,9 @@ class SendAddTestimonialsMail extends Mailable
 
     /**
      * SendAddTestimonialsMail constructor.
-     * @param Model $itemOrder
+     * @param ItemOrder $itemOrder
      */
-    public function __construct($itemOrder)
+    public function __construct(ItemOrder $itemOrder)
     {
         $this->itemOrder = $itemOrder;
     }

@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <!-- Contact Us V2-->
+    <!-- Testimonials Us V2-->
     <section class="section-80 bg-wild-wand">
         <div class="container">
             <p class="testimonials-p">

@@ -8,6 +8,7 @@
 
 namespace App\Http\ViewComposers;
 use App\Models\Region;
+use App\Models\Ville;
 use App\Models\Voyage;
 use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
@@ -97,6 +98,30 @@ class MegaMenuComposer
     }
 
     /**
+     * Retourne un tableau de ville avec le nom comme clé, et l'id comme valeur
+     * @return mixed
+     */
+    private function getVilleArray()
+    {
+        //1. crée un cache pour ce tableau de ville, pas la peine de refaire la requête tous les jours
+        $arrayVille = \Cache::remember('getArrayVille', '360', function (){
+            //2. init. un tableau
+            $array = array();
+
+            //3. itère sur la liste des villes
+            Ville::all(['id', 'name'])->each(function ($item) use(&$array){
+                //4. rempli le tableau au format villeName => id
+                $array[$item->name] = $item->id;
+            });
+
+            //5. retourne le tableau
+            return $array;
+        });
+
+        return $arrayVille;
+    }
+
+    /**
      * Bind data to the view.
      *
      * @param  View  $view
@@ -104,6 +129,6 @@ class MegaMenuComposer
      */
     public function compose(View $view)
     {
-        $view->with(['items' => self::getMenuItems(), 'decoratives' => self::decorativeMegaMenu()]);
+        $view->with(['items' => self::getMenuItems(), 'decoratives' => self::decorativeMegaMenu(), 'arrayVille' => self::getVilleArray()]);
     }
 }
