@@ -25,9 +25,7 @@ class VoyageEffectue extends Command
     protected $description = 'Envois un mail pour demander à l\'utilisateur de commenter son vol de la veille';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
+     * VoyageEffectue constructor.
      */
     public function __construct()
     {
