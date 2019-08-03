@@ -15,6 +15,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">#id</th>
+                                <th scope="col">Date Commande</th>
                                 <th scope="col">Customer</th>
                                 <th scope="col">Status Transaction</th>
                                 <th scope="col">Paiement commande</th>
@@ -27,6 +28,7 @@
                             @foreach($mainOrders as $order)
                                 <tr>
                                     <td scope="row">{{ $order->id }}</td>
+                                    <td>{{ $order->created_at->format('d M y') }}</td>
                                     <td>{{ $order->user->email }}</td>
                                     <td>{{ $order->stripe_payment_status }}</td>
                                     <td>{{ $order->is_paid ? 'oui' : 'non'  }}</td>
