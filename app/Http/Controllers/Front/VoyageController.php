@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Http\Helpers\FilterVoyages;
 use App\Repositories\VoyageRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class VoyageController extends Controller
 {
@@ -24,7 +27,7 @@ class VoyageController extends Controller
 
     /**
      * Retourne la vue contenant tous les voyages
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function allVoyages()
     {
@@ -47,7 +50,7 @@ class VoyageController extends Controller
      * @param $locale
      * @param $id
      * @param $lug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function showVoyage($locale, $id, $lug)
     {
@@ -62,9 +65,7 @@ class VoyageController extends Controller
             });
 
         }catch (\Exception $exception){
-
             flash()->error($exception->getMessage());
-
             return back();
         }
 
@@ -72,20 +73,35 @@ class VoyageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  Request  $request
+     * @param  FilterVoyages  $filterVoyages
+     * @return Factory|View
      */
-    public function filterVille(Request $request)
+    public function filterVille(Request $request, FilterVoyages $filterVoyages)
     {
-        $allVoyages = $this->voyageRepository->getVoyagesByCity($request);
+        try{
+            $allVoyages = $filterVoyages->getVoyagesByCity($request);
+        }catch (\Exception $exception){
+            flash()->error($exception->getMessage());
 
+            return back();
+        }
         return view('voyages.index', compact('allVoyages'));
     }
 
-    public function filterPrice(Request $request)
+    /**
+     * @param  Request  $request
+     * @param  FilterVoyages  $filterVoyages
+     * @return Factory|View
+     */
+    public function filterPrice(Request $request, FilterVoyages $filterVoyages)
     {
-        $allVoyages = $this->voyageRepository->getVoyagesByPrice($request);
-
+        try {
+            $allVoyages = $filterVoyages->getVoyagesByPrice($request);
+        }catch (\Exception $exception){
+            flash()->error($exception->getMessage());
+            return back();
+        }
         return view('voyages.index', compact('allVoyages'));
     }
 }

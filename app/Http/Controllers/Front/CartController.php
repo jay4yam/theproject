@@ -7,6 +7,8 @@ use App\Http\Requests\ChargeRequest;
 use App\Http\Controllers\Controller;
 use App\Models\MainOrder;
 use App\Repositories\CartRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Stripe\Stripe;
 
 class CartController extends Controller
@@ -27,7 +29,7 @@ class CartController extends Controller
 
     /**
      * Affiche la premiere étape du panier
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function showCart()
     {
@@ -68,12 +70,19 @@ class CartController extends Controller
 
     /**
      * Page de remerciement
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $locale
+     * @param $orderId
+     * @return Factory|View
      */
     public function thank($locale, $orderId)
     {
         $mainOrder = MainOrder::with('itemsOrder', 'user')->where('order_id', '=', $orderId)->first();
 
-        return view('cart.thank', compact('mainOrder'));
+        $qrCode = 'order_id :'.$mainOrder->order_id.'\n';
+        $qrCode .= 'Customer name:'.$mainOrder->user->profile->fullName.'\n';
+        $qrCode .= 'Customer firstName:'.$mainOrder->user->profile->firstName.'\n';
+        $qrCode .= 'Customer Email:'.$mainOrder->user->email.'\n';
+
+        return view('cart.thank', compact('mainOrder', 'qrCode'));
     }
 }

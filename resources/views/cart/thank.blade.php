@@ -23,7 +23,7 @@
                         </div>
                         @foreach($mainOrder->itemsOrder as $item)
                             <div class="col-md-4 pt-20">
-                                <img src="/storage/voyages/thumbnails/{{ $item->voyage->main_photo }}">
+                                <img src="/storage/voyages/thumbnails/{{ $item->voyage->main_photo }}" alt="{{$item->voyage->title}}">
                             </div>
                             <div class="col-md-5 pt-20" style="text-align: left;">
                                 <h6>{{ $item->voyage->title }}</h6>
@@ -44,12 +44,6 @@
                                 </div>
                             </div>
                             <div class="col-md-3 flex-middle">
-                                @php
-                                $qrCode = 'order_id :'.$mainOrder->order_id.'\n';
-                                $qrCode .= 'Customer name:'.$mainOrder->user->profile->fullName.'\n';
-                                $qrCode .= 'Customer firstName:'.$mainOrder->user->profile->firstName.'\n';
-                                $qrCode .= 'Customer Email:'.$mainOrder->user->email.'\n';
-                                @endphp
                                 <div>{!! QrCode::encoding('UTF-8')->size('200')->generate($qrCode) !!}</div>
                                 <div class="calendar">
                                     <i class="fa fa-3x fa-calendar-check-o" aria-hidden="true" style="float:left;"></i>
@@ -64,15 +58,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="{{ asset('images/100pour100-secure.png') }}" width="40%">
+                            <img src="{{ asset('images/100pour100-secure.png') }}" width="40%" alt="secure payment">
                             <p>Paiement 100% sécurisé</p>
                         </div>
                         <div class="col-md-4">
-                            <img src="{{ asset('images/site-de-confiance.png') }}" width="40%">
+                            <img src="{{ asset('images/site-de-confiance.png') }}" width="40%" alt="guaranteed purchase">
                             <p>Achat garanti</p>
                         </div>
                         <div class="col-md-4">
-                            <img src="{{ asset('images/site-prefere.png') }}" width="40%">
+                            <img src="{{ asset('images/site-prefere.png') }}" width="40%" alt="100% satisfied">
                             <p>100% satisfait</p>
                         </div>
                     </div>

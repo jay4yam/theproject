@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Back;
 use App\Http\Requests\VoyageCreateRequest;
 use App\Http\Requests\VoyageUpdateRequest;
 use App\Repositories\VoyageRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class VoyageController extends Controller
 {
@@ -26,7 +29,7 @@ class VoyageController extends Controller
 
     /**
      * retourne la vue avec la liste des voyages
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|RedirectResponse|View
      */
     public function index()
     {
@@ -48,7 +51,7 @@ class VoyageController extends Controller
     /**
      * Affiche la vue edit voyage
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit($id)
     {
@@ -60,7 +63,7 @@ class VoyageController extends Controller
 
     /**
      * Affiche la vue create voyage
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -70,7 +73,7 @@ class VoyageController extends Controller
     /**
      * request pour ajout d'un nouveau voyage
      * @param VoyageCreateRequest $request
-     * @return $this|\Illuminate\Http\RedirectResponse
+     * @return $this|RedirectResponse
      */
     public function store(VoyageCreateRequest $request)
     {
@@ -94,7 +97,7 @@ class VoyageController extends Controller
      * Request user pour maj 'voyage'
      * @param VoyageUpdateRequest $request
      * @param $id
-     * @return $this|\Illuminate\Http\RedirectResponse
+     * @return $this|RedirectResponse
      */
     public function update(VoyageUpdateRequest $request, $id)
     {

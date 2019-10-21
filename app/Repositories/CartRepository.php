@@ -105,10 +105,11 @@ class CartRepository
     }
 
     /**
-     * @param ApiResource $customerStripe
-     * @param User $user
-     * @param ApiResource $charge
+     * @param  ApiResource  $customerStripe
+     * @param  User  $user
+     * @param  ApiResource  $charge
      * @return MainOrder
+     * @throws \Throwable
      */
     public function createEasyCopterOrder(ApiResource $customerStripe, User $user, ApiResource $charge)
     {

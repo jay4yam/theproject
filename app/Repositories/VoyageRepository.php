@@ -12,6 +12,7 @@ namespace App\Repositories;
 use App\Models\Compagnie;
 use App\Models\Voyage;
 use App\Traits\LanguageModifyer;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -39,7 +40,7 @@ class VoyageRepository
 
     /**
      * Renvois la liste des voyages
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function allPublicVoyages()
     {
@@ -48,7 +49,7 @@ class VoyageRepository
 
     /**
      * Renvois la liste des voyages
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function allVoyages()
     {
@@ -158,7 +159,7 @@ class VoyageRepository
      * @param Request $request
      * @param $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id):void
     {
         //1. recupère le voyage à updater
         $voyage = $this->voyage->findOrFail($id);
@@ -185,7 +186,7 @@ class VoyageRepository
      * Supprime un voyage
      * @param $id
      */
-    public function delete($id)
+    public function delete($id):void
     {
         $voyages = $this->getAllVoyageLanguageById($id);
 
@@ -245,41 +246,5 @@ class VoyageRepository
         }
 
         return $voyage->main_photo;
-    }
-
-    /**
-     * Retourne la liste des voyages filtrés par ville
-     * @param Request $request
-     * @return mixed
-     */
-    public function getVoyagesByCity(Request $request)
-    {
-        $ville = $request->ville;
-
-        $voyages = $this->voyage->localize()->isPublic()->with('ville', 'region')->whereIn('ville_id', $ville)->paginate(9);
-
-        return $voyages;
-    }
-
-    /**
-     * Renvois la liste des voyages classés par prix
-     * @param Request $request
-     * @return mixed
-     */
-    public function getVoyagesByPrice(Request $request)
-    {
-
-        //1. si les deux request 'price min' et 'price max' sont passés dans le form
-        if(isset($request->price_min) && isset($request->price_max)){
-            $priceArray = [ $request->price_min, $request->price_max ];
-
-            return $this->voyage->localize()->isPublic()->with('ville', 'region')->whereBetween('price', $priceArray)->paginate(9);
-        }
-
-        //1. si les deux request 'price min' et 'price max' sont passés dans le form
-        if(isset($request->price_min) && !isset($request->price_max)){
-            return $this->voyage->localize()->isPublic()->with('ville', 'region')->where('price', '>', $request->price_min)->paginate(9);
-        }
-
     }
 }
