@@ -9,6 +9,44 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Voyage[] $localizedvoyages
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Voyage[] $voyages
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie query()
+ * @property int $id
+ * @property string $raison_sociale
+ * @property string $adresse
+ * @property string $code_postal
+ * @property string $ville
+ * @property string $telephone
+ * @property string $email
+ * @property string $mail_resa
+ * @property string $num_licence
+ * @property string $baseline
+ * @property string $intro
+ * @property string $presentation
+ * @property string $logo
+ * @property string $background_image
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereAdresse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereBackgroundImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereBaseline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereCodePostal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereIntro($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereMailResa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereNumLicence($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie wherePresentation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereRaisonSociale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereTelephone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Compagnie whereVille($value)
  */
 class Compagnie extends Model
 {

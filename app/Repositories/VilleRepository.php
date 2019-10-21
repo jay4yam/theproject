@@ -10,10 +10,15 @@ namespace App\Repositories;
 
 
 use App\Models\Ville;
+use App\Interfaces\EloquentInterface;
+use App\Traits\VoyageImageUpload;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class VilleRepository
+class VilleRepository implements EloquentInterface
 {
+    use VoyageImageUpload;
+
     /**
      * @var Ville
      */
@@ -29,11 +34,10 @@ class VilleRepository
     }
 
     /**
-     * Retourne la ville via son id
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @return mixed
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->ville->findOrFail($id);
     }
@@ -62,7 +66,7 @@ class VilleRepository
         $ville->description = $request->description;
 
         if($request->has('main_photo')){
-            $ville->main_photo = $this->uploadMainImage($request, $ville);
+            $ville->main_photo = $this->uploadImage($request, $ville);
         }
 
         $ville->region_id = $request->region_id;
@@ -71,11 +75,11 @@ class VilleRepository
     }
 
     /**
-     * Met à jour une ville
-     * @param Request $request
+     * @param  Request  $request
      * @param $id
+     * @throws \Exception
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $ville = $this->getById($id);
 
@@ -85,41 +89,11 @@ class VilleRepository
         $ville->description = $request->description;
 
         if($request->has('main_photo')){
-            $ville->main_photo = $this->uploadMainImage($request, $ville);
+            $ville->main_photo = $this->uploadImage($request, $ville);
         }
 
         $ville->region_id = $request->region_id;
 
         $ville->save();
-    }
-
-    /**
-     * Gère l'upload le fichier image
-     * @param Request $request
-     * @param Blog $article
-     * @return mixed
-     * @throws \Exception
-     */
-    private function uploadMainImage(Request $request, Ville $ville)
-    {
-        $path = '';
-
-        //test si il y une image dans la requete
-        if($request->file('main_photo'))
-        {
-            try {
-
-                $path = $request->file('main_photo')->store('public/villes/'.$ville->id);
-
-            }catch (\Exception $exception){
-                //si exception : message d'erreur
-                throw new \Exception($exception->getMessage());
-            }
-
-            $array = explode('/', $path);
-            return $array[1].'/'.$array[2].'/'.$array[3];
-        }
-
-        return $path;
     }
 }

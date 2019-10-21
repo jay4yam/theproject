@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Back;
 use App\Http\Requests\VilleCreateRequest;
 use App\Http\Requests\VilleUpdateRequest;
 use App\Repositories\VilleRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class VilleController extends Controller
 {
@@ -27,7 +29,7 @@ class VilleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -46,7 +48,7 @@ class VilleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -56,8 +58,8 @@ class VilleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  VilleCreateRequest  $request
+     * @return Response
      */
     public function store(VilleCreateRequest $request)
     {
@@ -74,12 +76,11 @@ class VilleController extends Controller
         return redirect()->route('villes.index');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -98,11 +99,9 @@ class VilleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  VilleUpdateRequest  $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function update(VilleUpdateRequest $request, $id)
     {
@@ -123,10 +122,7 @@ class VilleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function destroy($id)
     {

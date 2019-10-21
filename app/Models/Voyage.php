@@ -5,6 +5,55 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
+/**
+ * App\Models\Voyage
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comments[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Compagnie[] $compagnies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Region[] $region
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Seo[] $seo
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \App\Models\Ville $ville
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage isPublic()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage langues()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage localize()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage query()
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $locale
+ * @property int $parent_id
+ * @property string $title
+ * @property string $subtitle
+ * @property string $intro
+ * @property string $description
+ * @property string $main_photo
+ * @property float $price
+ * @property float|null $discount_price
+ * @property int $is_discounted
+ * @property int $is_public
+ * @property string $duree_du_vol
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $ville_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereDiscountPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereDureeDuVol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereIntro($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereIsDiscounted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereIsPublic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereMainPhoto($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereSubtitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voyage whereVilleId($value)
+ */
 class Voyage extends Model
 {
     protected $table ='voyages';

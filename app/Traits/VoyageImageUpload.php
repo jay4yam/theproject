@@ -4,6 +4,7 @@
 namespace App\Traits;
 
 
+use App\Models\Ville;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -60,5 +61,35 @@ trait VoyageImageUpload
         }
 
         return $voyage->main_photo;
+    }
+
+    /**
+     * Gère l'upload le fichier image
+     * @param Request $request
+     * @param Ville $ville
+     * @return mixed
+     * @throws \Exception
+     */
+    private function uploadImage(Request $request, Ville $ville)
+    {
+        $path = '';
+
+        //test si il y une image dans la requete
+        if($request->file('main_photo'))
+        {
+            try {
+
+                $path = $request->file('main_photo')->store('public/villes/'.$ville->id);
+
+            }catch (\Exception $exception){
+                //si exception : message d'erreur
+                throw new \Exception($exception->getMessage());
+            }
+
+            $array = explode('/', $path);
+            return $array[1].'/'.$array[2].'/'.$array[3];
+        }
+
+        return $path;
     }
 }
