@@ -12,6 +12,7 @@ namespace App\Repositories;
 use App\Models\Compagnie;
 use App\Models\Voyage;
 use App\Traits\LanguageModifyer;
+use App\Traits\VoyageImageUpload;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ use Intervention\Image\Facades\Image;
 class VoyageRepository
 {
 
-    use LanguageModifyer;
+    use LanguageModifyer, VoyageImageUpload;
 
     /**
      * @var Voyage
@@ -48,21 +49,21 @@ class VoyageRepository
     }
 
     /**
-     * Renvois la liste des voyages
-     * @return LengthAwarePaginator
-     */
-    public function allVoyages()
-    {
-        return $this->voyage->localize()->with('ville', 'region', 'compagnies')->orderBy('created_at', 'desc')->paginate(9);
-    }
-
-    /**
      * @param $id
      * @return Model
      */
     public function getById($id)
     {
         return $this->voyage->findOrFail($id)->load('ville', 'region', 'compagnies', 'comments');
+    }
+
+    /**
+     * Renvois la liste des voyages
+     * @return LengthAwarePaginator
+     */
+    public function allVoyages()
+    {
+        return $this->voyage->localize()->with('ville', 'region', 'compagnies')->orderBy('created_at', 'desc')->paginate(9);
     }
 
     /**
@@ -100,8 +101,8 @@ class VoyageRepository
     }
 
     /**
-     * Gère l'enregistrement d'un nouveau voyage
-     * @param Request $request
+     * @param  Request  $request
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -114,10 +115,11 @@ class VoyageRepository
     }
 
     /**
-     * @param Voyage $voyage
-     * @param Request $request
+     * @param  Voyage  $voyage
+     * @param  Request  $request
+     * @throws \Exception
      */
-    private function save(Voyage $voyage, Request $request)
+    private function save(Voyage $voyage, Request $request):void
     {
         $voyage->locale = $request->localize;
         $voyage->parent_id = 0;
@@ -194,57 +196,5 @@ class VoyageRepository
         {
             $voyage->delete();
         }
-    }
-
-    /**
-     * Gère l'upload le fichier image
-     * @param Request $request
-     * @param Voyage $voyage
-     * @return mixed
-     * @throws \Exception
-     */
-    private function uploadMainImage(Request $request, Voyage $voyage)
-    {
-        //test si il y une image dans la requete
-        if($request->file('main_photo'))
-        {
-            //on essaye d'upload le fichier
-            try {
-                $path = $request->file('main_photo')->store('public/voyages/'.$voyage->id);
-            }catch (\Exception $exception){
-                //si exception : message d'erreur
-                throw new \Exception($exception->getMessage());
-            }
-
-            //split la chaîne en tableau
-            $array = explode('/', $path);
-
-            try {
-                //recupere l'image qui vient d'etre uploadee
-                $imgThumbNailList = Image::make('storage/' . $array[1] . '/' . $array[2] . '/' . $array[3]);
-                //redimensionne l'image
-                $imgThumbNailList->fit(270,240);
-
-                //defini le chemin du fichier
-                if( ! is_dir('storage/voyages/thumbnails/' . $array[2]))
-                {
-                    mkdir('storage/voyages/thumbnails/' . $array[2]);
-                }
-
-                $pathList = 'storage/voyages/thumbnails/' . $array[2] . '/' . $array[3];
-
-                //sauv. le nouveau thumbnail
-                $imgThumbNailList->save($pathList);
-
-            }catch (\Exception $exception){
-                throw new \Exception($exception->getMessage());
-            }
-
-            //il faut supprimer /public/ de la chaine path, sinon on a une erreur dans le front
-            //donc finalement on ne renvois que le nom du fichier
-            return $array[2] . '/' .$array[3];
-        }
-
-        return $voyage->main_photo;
     }
 }
