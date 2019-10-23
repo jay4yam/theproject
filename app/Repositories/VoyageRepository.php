@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 
+use App\Interfaces\EloquentInterface;
 use App\Models\Compagnie;
 use App\Models\Voyage;
 use App\Traits\LanguageModifyer;
@@ -20,7 +21,7 @@ use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
 
-class VoyageRepository
+class VoyageRepository implements EloquentInterface
 {
 
     use LanguageModifyer, VoyageImageUpload;
@@ -52,7 +53,7 @@ class VoyageRepository
      * @param $id
      * @return Model
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->voyage->findOrFail($id)->load('ville', 'region', 'compagnies', 'comments');
     }
@@ -61,7 +62,7 @@ class VoyageRepository
      * Renvois la liste des voyages
      * @return LengthAwarePaginator
      */
-    public function allVoyages()
+    public function getAll()
     {
         return $this->voyage->localize()->with('ville', 'region', 'compagnies')->orderBy('created_at', 'desc')->paginate(9);
     }
@@ -93,7 +94,7 @@ class VoyageRepository
     {
         $villeId = $voyage->ville->id;
 
-        $otherVoyages = $this->allVoyages()->filter(function ($item) use ($villeId) {
+        $otherVoyages = $this->getAll()->filter(function ($item) use ($villeId) {
             return $item->ville_id == $villeId;
         });
 
@@ -161,7 +162,7 @@ class VoyageRepository
      * @param Request $request
      * @param $id
      */
-    public function update(Request $request, $id):void
+    public function update(Request $request, int $id):void
     {
         //1. recupère le voyage à updater
         $voyage = $this->voyage->findOrFail($id);

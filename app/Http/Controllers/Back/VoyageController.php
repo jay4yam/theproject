@@ -36,7 +36,7 @@ class VoyageController extends Controller
         //on essaye de recup la liste de tous les voyages pagines
         try {
 
-            $allVoyages = $this->voyageRepository->allVoyages();
+            $allVoyages = $this->voyageRepository->getAll();
 
         }catch (\Exception $exception){
 
