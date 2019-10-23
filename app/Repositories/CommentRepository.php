@@ -84,9 +84,9 @@ class CommentRepository
     }
 
     /**
-     * Sauv. un témoignage sur un voyage
-     * @param Comments $testimonial
-     * @param Request $request
+     * @param  Comments  $testimonial
+     * @param  Request  $request
+     * @throws \Exception
      */
     private function saveTestimonials(Comments $testimonial, Request $request){
         //sauv. les attributs du model en provenance du form

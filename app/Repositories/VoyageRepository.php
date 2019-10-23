@@ -104,7 +104,7 @@ class VoyageRepository
      * @param  Request  $request
      * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(Request $request):void
     {
         $voyage = new Voyage();
 

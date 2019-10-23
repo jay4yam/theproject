@@ -9,10 +9,11 @@
 namespace App\Repositories;
 
 
+use App\Interfaces\EloquentInterface;
 use App\Models\Region;
 use Illuminate\Http\Request;
 
-class RegionRepository
+class RegionRepository implements EloquentInterface
 {
     protected $region;
 
@@ -33,13 +34,14 @@ class RegionRepository
      * @param $id
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->region->findOrFail($id);
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -49,8 +51,9 @@ class RegionRepository
     }
 
     /**
-     * @param Region $region
-     * @param Request $request
+     * @param  Region  $region
+     * @param  Request  $request
+     * @throws \Exception
      */
     private function save(Region $region, Request $request)
     {
@@ -69,7 +72,7 @@ class RegionRepository
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $region = $this->getById($id);
 

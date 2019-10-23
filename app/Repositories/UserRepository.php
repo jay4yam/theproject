@@ -8,12 +8,16 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\EloquentInterface;
 use App\Models\Profile;
 use App\Models\User;
 use App\Traits\uploadAvatar;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class UserRepository
+class UserRepository implements EloquentInterface
 {
     use uploadAvatar;
 
@@ -41,16 +45,16 @@ class UserRepository
     /**
      * Retourne un utilisateur via son id
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @return Collection|Model
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->user->findOrFail($id);
     }
 
     /**
      * Retourne la liste de tous les utilisateurs
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function getAll()
     {
@@ -61,7 +65,7 @@ class UserRepository
      * Gère l'enregistrement d'un nouvel utilisateur
      * @param $request
      */
-    public function store($request)
+    public function store(Request $request)
     {
         $user = new User();
 
@@ -103,8 +107,9 @@ class UserRepository
      * Met à jour les infos de l'utilisateur et crée un profil si il n'existe pas
      * @param $id
      * @param $request
+     * @throws \Exception
      */
-    public function update($id, $request)
+    public function update(Request $request, int $id)
     {
         //recup l'utilisateur à updater
         $user = $this->getById($id);

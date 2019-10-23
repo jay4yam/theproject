@@ -9,13 +9,14 @@
 namespace App\Repositories;
 
 
+use App\Interfaces\EloquentInterface;
 use App\Models\Blog;
 use App\Traits\LanguageModifyer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use \Intervention\Image\Facades\Image;
 
-class BlogRepository
+class BlogRepository implements EloquentInterface
 {
     use LanguageModifyer;
 
@@ -38,7 +39,7 @@ class BlogRepository
      * @param $id
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->blog->findOrFail($id);
     }
@@ -118,7 +119,7 @@ class BlogRepository
      * @param Request $request
      * @param $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $article = $this->blog->findOrFail($id);
 

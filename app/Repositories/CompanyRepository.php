@@ -7,10 +7,11 @@
  */
 namespace App\Repositories;
 
+use App\Interfaces\EloquentInterface;
 use App\Models\Compagnie;
 use Illuminate\Http\Request;
 
-class CompanyRepository
+class CompanyRepository implements EloquentInterface
 {
     /**
      * @var Compagnie
@@ -31,7 +32,7 @@ class CompanyRepository
      * @param $id
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->compagnie->findOrFail($id);
     }
@@ -87,7 +88,7 @@ class CompanyRepository
      * @param $request
      * @param $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $compagnie = $this->getById($id);
 
