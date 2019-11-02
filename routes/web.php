@@ -106,7 +106,7 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
  */
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
     Route::get('/voyage-get-list-voyage', 'VoyageFrontController@getVoyagesListForAutocomplete');
-    Route::get('/voyage-info', 'VoyageFrontController@getVoyagesInfoForCart');
+    Route::get('/voyage-info', 'CartController@getVoyagesInfoForCart');
     Route::post('/add-voyage-to-cart', 'CartController@addVoyageToCart')->name('add.to.cart.voyage');
     Route::get('/removefromcart','CartController@removeFromCart');
     Route::get('/update-quantity', 'CartController@updateQuantity' );

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Helpers\CartHelper;
+use App\Http\Requests\VoyageIdRequest;
 use App\Models\Voyage;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
@@ -22,6 +26,25 @@ class CartController extends Controller
     /*************************************/
 
     /**
+     * Retourne les infos d'un voyage
+     * @param VoyageIdRequest $request
+     * @return ResponseFactory|JsonResponse|Response
+     */
+    public function getVoyagesInfoForCart(VoyageIdRequest $request)
+    {
+        try {
+            $voyageId = $request->id;
+
+            $voyage = $this->voyage->findOrFail($voyageId, ['id', 'price', 'is_discounted', 'discount_price', 'title', 'main_photo']);
+
+        }catch (\Exception $exception){
+            return response(['fail' => $exception->getMessage()]);
+        }
+
+        return response()->json(['success' => true, 'voyage' => $voyage]);
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -34,8 +57,8 @@ class CartController extends Controller
             //recupere le voyage via son id
             $voyage = $this->voyage->findOrFail($voyageId);
 
-            //cree un nouvel objet 'cart'
-            $cart = new CartHelper($request);
+            //nouvelle instance cartHelper
+            $cart = new CartHelper($request, $voyage);
 
             //recupere le tableau de session cart
             $array = session()->get('cart');
@@ -43,7 +66,7 @@ class CartController extends Controller
             //se déplacer à la fin car la fonction pull de saveTosession, ajoute toujours au dernier index du tableau
             end($array);
 
-            //retourne la clé du tableau "cart' pour savoir a quel index du tableau se situe le nouveau 'cart' ajouter en sessions
+            //retourne la clé du tableau "cart' pour savoir à quel index du tableau se situe le nouveau 'cart' ajouté en session
             $cle = key( $array );
 
         }catch (\Exception $exception){

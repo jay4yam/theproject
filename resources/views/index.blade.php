@@ -73,7 +73,7 @@
                                 <div class="pull-left">
                                     <div class="box-offer-title text-ubold">
                                         <a class="text-black" href="{{ url()->route('front.voyage.show', ['locale' => App::getLocale(), 'id' => $voyage->id, 'slug' => str_slug($voyage->title)]) }}" title="{{ $voyage->title }}">
-                                            {{ str_limit($voyage->title, 26) }}
+                                            {{ Illuminate\Support\Str::limit($voyage->title, 26) }}
                                         </a>
                                     </div>
                                 </div>

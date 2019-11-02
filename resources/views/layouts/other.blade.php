@@ -261,11 +261,6 @@
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="{{ asset('js/cart.js') }}"></script>
 <script type="text/javascript">
-    cartJs.AddToCart();
-    cartJs.ResponseAfterSubmit();
-    cartJs.RemoveFromCart();
-    cartJs.UpdateQuantity();
-
     $(document).ready(function () {
         var language_Selector = $('.language_selector');
         language_Selector.on('mouseover', function (e) {

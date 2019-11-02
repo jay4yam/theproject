@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 
 class CartHelper
 {
-    protected $one =1;
-
     protected $voyage;
     public function getVoyage()
     {
@@ -47,18 +45,19 @@ class CartHelper
 
     /**
      * CartHelper constructor.
-     * @param Request $request
+     * @param  Request  $request
+     * @param  Voyage  $voyage
+     * @throws \Exception
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Voyage $voyage)
     {
-        $this->voyage = Voyage::findOrFail($request->voyageId);
+        $this->voyage = $voyage;
         $this->nbVoyageur = $request->numOfVoyagers;
         $this->date = $request->dateDeDepart;
         $this->prixUnitaire = $request->individualPrice;
         $this->userIp = \Request::ip();
         $this->finalPrice = $this->calculateFinalePrice($request->numOfVoyagers, $request->individualPrice);
         $this->saveToSession();
-        $this->saveToCookie();
     }
 
     /**
@@ -80,27 +79,13 @@ class CartHelper
     }
 
     /**
-     * Sauv. Le panier en cookie
-     */
-    public function saveToCookie()
-    {
-        try{
-
-            cookie()->make('cart', serialize($this), 3600);
-
-        }catch (\Exception $exception){
-            throw new \Exception($exception->getMessage());
-        }
-    }
-
-    /**
      * Supprime un voyage du panier
      * @param Request $request
      * @throws \Exception
      */
     public static function deleteVoyageFromCart(Request $request)
     {
-            //essaye de supprimer l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
+            //supprime l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
             session()->pull('cart.'.$request->indexArrayofSessionCart);
     }
 

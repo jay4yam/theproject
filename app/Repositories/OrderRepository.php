@@ -12,6 +12,7 @@ namespace App\Repositories;
 use App\Models\ItemOrder;
 use App\Models\MainOrder;
 use App\Models\Voyage;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class OrderRepository
 {
@@ -24,7 +25,7 @@ class OrderRepository
 
     /**
      * Renvoie la liste des dernieres commandes
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function getAll()
     {

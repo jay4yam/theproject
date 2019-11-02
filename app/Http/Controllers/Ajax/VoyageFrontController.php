@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Ajax;
 
+use App\Http\Requests\VoyageIdRequest;
 use App\Models\Voyage;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\CartHelper;
+use Symfony\Component\HttpFoundation\Response;
 
 class VoyageFrontController extends Controller
 {
@@ -43,24 +47,5 @@ class VoyageFrontController extends Controller
         }
 
         return $array;
-    }
-
-    /**
-     * Retourne les infos d'un voyage
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function getVoyagesInfoForCart(Request $request)
-    {
-        try {
-            $voyageId = $request->id;
-
-            $voyage = $this->voyage->findOrFail($voyageId);
-
-        }catch (\Exception $exception){
-            return response(['fail' => $exception->getMessage()]);
-        }
-
-        return response()->json(['success' => true, 'voyage' => $voyage]);
     }
 }

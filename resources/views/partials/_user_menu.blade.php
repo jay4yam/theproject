@@ -17,7 +17,6 @@
 @php
     $visibility = 'none';
     $cart = [];
-    //session()->forget('cart');
 @endphp
 @if( session()->has('cart') && count(session()->get('cart')) > 0)
     @php

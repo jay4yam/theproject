@@ -3,7 +3,7 @@
     le 5/06/2018 by JayBen
  */
 
-var cartJs = {
+const cartJs = {
 
     // cibling bouton add to cart
     cart: $('.add-to-cart'),
@@ -11,34 +11,34 @@ var cartJs = {
     // cibling bouton submit cart
     buttonSubmit: $('#buttonToSubmit'),
 
+    ZeModal: $('#voyage-info-container'),
+
     voyage: '',
 
-    // Fonction ajax qui recupère les infos du voyage
-    // Pour injecter dans la modal d'ajout au panier
-    // Modal dans laquelle l'internaute va choisir sa date de départ
-    AddToCart:function () {
+    // Affiche la modal du cart
+    showModal:function () {
         this.cart.on('click', function () {
-            var that = $(this);
-            var id = that.data('content');
-            var button = $('#buttonToSubmit');
-            var price = $('#individual_price');
+            const that = $(this);
+            const id = that.data('content');
+            const button = $('#buttonToSubmit');
+            const price = $('#individual_price');
 
+            //fonction ajax qui récupère les informations du voyage
             $.ajax({
                 'type': 'get',
                 'url' : '/ajax/voyage-info/',
                 'data': { id:id },
                 'beforeSend':function () {
-                    var ZeModal = $('#voyage-info-container');
-                    ZeModal.html('<img src="/images/spinner.gif">');
-                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/\')');
+                    //affiche le spinner
+                    cartJs.ZeModal.html('<img src="/images/spinner.gif" alt="">');
+                    cartJs.ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/\')');
                 },
                 'success':function (data) {
-
                     //insère le voyage id dans l'input hidden
                     $('#voyage_id').val(data.voyage.id);
 
                     //recupère le prix du voyage
-                    var individualPrice = data.voyage.price;
+                    let individualPrice = data.voyage.price;
 
                     //si le prix est discounte
                     if(data.voyage.is_discounted) {
@@ -52,10 +52,10 @@ var cartJs = {
                     button.fadeIn("slow");
 
                     //affiche la titre du voyage
-                    var modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
+                    let modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
 
                     //init. le container
-                    var ZeModal = $('#voyage-info-container');
+                    let ZeModal = $('#voyage-info-container');
 
                     //modifie le bg du container
                     ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
@@ -68,18 +68,19 @@ var cartJs = {
     },
 
     // Fonction ajax qui soumet les infos du formulaire
-    ResponseAfterSubmit:function () {
+    addToCart:function () {
 
         this.buttonSubmit.on('click', function(e){
             e.preventDefault();
 
-            var voyageId = $('#voyage_id').val();
-            var numOfVoyagers = $('select[name="nb_passager"]').find(':selected').text();
-            var dateDeDepart = $('input[name="date_souhaitee"]').val();
-            var _token = $('input[name="_token"]').val();
-            var individualPrice = $('#individual_price').val();
-            var table = $('#carttable');
-            var finalPrice = $('#finalPrice');
+            const voyageId = $('#voyage_id').val();
+            const numOfVoyagers = $('select[name="nb_passager"]').find(':selected').text();
+            const dateDeDepart = $('input[name="date_souhaitee"]').val();
+            const _token = $('input[name="_token"]').val();
+            const individualPrice = $('#individual_price').val();
+            const table = $('#carttable');
+            const finalPrice = $('#finalPrice');
+            const voyage_counter = $('.voyage-counter');
 
             $.ajax({
                 type:'POST',
@@ -95,9 +96,9 @@ var cartJs = {
                    // affiche le nombre de voyage
                    $('#details').html(data.numOfVoyage+' - voyage');
                    //affiche le picto nb de voyage
-                   $('.voyage-counter').css('display', 'block');
+                   voyage_counter.css('display', 'block');
                    //insère le nombre de voyage dans le picto
-                   $('.voyage-counter').html(data.numOfVoyage);
+                   voyage_counter.html(data.numOfVoyage);
 
                    //Ligne <tr> d'un tableau qui sera rajoutée à la fin du tableau ou dans le tableau
                    var tr = '<tr>';
@@ -115,13 +116,13 @@ var cartJs = {
 
                        //Si le tableau n'à pas déjà de lignes '<tr></tr>'
                    if(table[0].tBodies[0].children.length === 0){
-                       $('#carttable tbody').after(tr);
+                        $('#carttable tbody').after(tr);
                    }else{
                        //si il en a, on ajoute la nouvelle ligne à la fin
-                   $('#carttable tbody tr:last').after(tr);
+                        $('#carttable tbody tr:last').after(tr);
                    }
 
-                   var newFinalPrice = cartJs.UpdatePrice();
+                   let newFinalPrice = cartJs.UpdatePrice();
                    finalPrice.html(newFinalPrice+' €');
                }
             });
@@ -129,7 +130,7 @@ var cartJs = {
     },
 
     //Gère la suppréssion d'un voyage du panier
-    RemoveFromCart:function () {
+    removeFromCart:function () {
         //au click sur le bouton delete dans une des lignes 'tr' du tableau
         $(document).on('click', '.deletefromcart' , function (e) {
             //empeche la propagation
@@ -169,7 +170,7 @@ var cartJs = {
     },
 
     //Gère les events du changement de quantité de voyageur pour un vol
-    UpdateQuantity:function () {
+    updateQuantity:function () {
         var button = $('.updatevoyageur');
         var finalPrice = $('#finalPrice');
 
@@ -211,3 +212,8 @@ var cartJs = {
         return finalPrice;
     }
 };
+
+cartJs.showModal();
+cartJs.addToCart();
+cartJs.removeFromCart();
+cartJs.updateQuantity();
