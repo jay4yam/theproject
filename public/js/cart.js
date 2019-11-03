@@ -15,7 +15,9 @@ const cartJs = {
 
     voyage: '',
 
-    // Affiche la modal du cart
+    _token: $('input[name="_token"]').val(),
+
+    // Affiche la modal du cart dès lors que un utilisateur click sur l'ajout au panier
     showModal:function () {
         this.cart.on('click', function () {
             const that = $(this);
@@ -55,28 +57,27 @@ const cartJs = {
                     let modal = '<h6 class="pt100">'+ data.voyage.title +'</h6>';
 
                     //init. le container
-                    let ZeModal = $('#voyage-info-container');
+                    //let ZeModal = $('#voyage-info-container');
 
                     //modifie le bg du container
-                    ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
+                    cartJs.ZeModal.css('background', 'url(\'/storage/voyages/thumbnails/'+ data.voyage.main_photo +'\')');
 
                     //injecte le contenu
-                    ZeModal.html(modal);
+                    cartJs.ZeModal.html(modal);
                 }
             });
         });
     },
 
-    // Fonction ajax qui soumet les infos du formulaire
+    // Fonction ajax qui envoie les infos du formulaire dès l'ajout au panier
     addToCart:function () {
 
-        this.buttonSubmit.on('click', function(e){
+        cartJs.buttonSubmit.on('click', function(e){
             e.preventDefault();
 
             const voyageId = $('#voyage_id').val();
             const numOfVoyagers = $('select[name="nb_passager"]').find(':selected').text();
             const dateDeDepart = $('input[name="date_souhaitee"]').val();
-            const _token = $('input[name="_token"]').val();
             const individualPrice = $('#individual_price').val();
             const table = $('#carttable');
             const finalPrice = $('#finalPrice');
@@ -84,11 +85,10 @@ const cartJs = {
 
             $.ajax({
                 type:'POST',
-                headers: {'X-CSRF-TOKEN': _token  },
+                headers: { 'X-CSRF-TOKEN': cartJs._token  },
                 url: '/ajax/add-voyage-to-cart',
                 data: { voyageId:voyageId, numOfVoyagers:numOfVoyagers, dateDeDepart:dateDeDepart, individualPrice:individualPrice }
-            }).done(function (data) {
-               if(data.success){
+            }).success(function (data) {
                    //masque la modal d'ajout au panier
                    $('#modal-cart').modal('hide');
                    //affiche le bouton "cart" dans le menu utilisateur
@@ -101,9 +101,9 @@ const cartJs = {
                    voyage_counter.html(data.numOfVoyage);
 
                    //Ligne <tr> d'un tableau qui sera rajoutée à la fin du tableau ou dans le tableau
-                   var tr = '<tr>';
+                   let tr = '<tr>';
                        tr += '<td>';
-                       tr += '<img src="/storage/voyages/thumbnails/'+ data.voyage.main_photo +'" height="50"></td>';
+                       tr += '<img src="/storage/voyages/thumbnails/'+ data.voyage.main_photo +'" width="50"></td>';
                        tr += '<td>'+ data.voyage.title+'</td>';
                        tr += '<td>'+ dateDeDepart +'</td>';
                        tr += '<td><input type="number" class="updatevoyageur" value="'+ numOfVoyagers +'" data-target="'+ data.cart.cle +'"></td>';
@@ -114,7 +114,7 @@ const cartJs = {
                        tr += '<i class="fas fa-trash"></i></a>';
                        tr += '</td></tr>';
 
-                       //Si le tableau n'à pas déjà de lignes '<tr></tr>'
+                       //Si le tableau n'à pas de ligne '<tr></tr>'
                    if(table[0].tBodies[0].children.length === 0){
                         $('#carttable tbody').after(tr);
                    }else{
@@ -124,7 +124,6 @@ const cartJs = {
 
                    let newFinalPrice = cartJs.UpdatePrice();
                    finalPrice.html(newFinalPrice+' €');
-               }
             });
         })
     },
@@ -135,10 +134,11 @@ const cartJs = {
         $(document).on('click', '.deletefromcart' , function (e) {
             //empeche la propagation
             e.preventDefault();
+            let that = $(this);
             // Récupère la ligne entiere
-            var item = $(this)[0].closest('tr');
+            let item = that[0].closest('tr');
             //Récupère la valeur qui correspond au nombre d'item dans la session cart
-            var sessionArrayNum = $(this).attr('data-target');
+            let sessionArrayNum = that.attr('data-target');
 
             //Requête ajax de suppréssion d'article dans le panier
             $.ajax({
@@ -148,7 +148,7 @@ const cartJs = {
                 beforeSend:function(){
                     $('#cart-spinner').show();
                 }
-            }).done(function (data) {
+            }).success(function (data) {
                 $('#cart-spinner').hide();
                 //efface la ligne du tableau carttable
                 item.remove();
@@ -162,8 +162,8 @@ const cartJs = {
                     $('.user-menu-cart').fadeOut();
                 }
 
-                var finalPrice = $('#finalPrice');
-                var newFinalPrice = cartJs.UpdatePrice();
+                let finalPrice = $('#finalPrice');
+                let newFinalPrice = cartJs.UpdatePrice();
                 finalPrice.html(newFinalPrice+' €');
             });
         })
@@ -171,15 +171,15 @@ const cartJs = {
 
     //Gère les events du changement de quantité de voyageur pour un vol
     updateQuantity:function () {
-        var button = $('.updatevoyageur');
-        var finalPrice = $('#finalPrice');
+        let button = $('.updatevoyageur');
+        let finalPrice = $('#finalPrice');
 
         $(document).on('change', '.updatevoyageur', function () {
-            var that = $(this);
-            var sessionArrayNum = that.attr('data-target');
-            var newQuantity = that.val();
-            var individualString = $('#individualPrice-'+sessionArrayNum).html();
-            var individualPrice = individualString.split(' ');
+            let that = $(this);
+            let sessionArrayNum = that.attr('data-target');
+            let newQuantity = that.val();
+            let individualString = $('#individualPrice-'+sessionArrayNum).html();
+            let individualPrice = individualString.split(' ');
 
             $.ajax({
                 type:'get',
@@ -190,9 +190,9 @@ const cartJs = {
                 }
             }).success(function () {
                 $('#cart-spinner').hide();
-                var tdFinalePrice = $('#finalPrice-'+sessionArrayNum);
+                let tdFinalePrice = $('#finalPrice-'+sessionArrayNum);
                 tdFinalePrice.html( newQuantity * individualPrice[0] +' €');
-                var newFinalPrice = cartJs.UpdatePrice();
+                let newFinalPrice = cartJs.UpdatePrice();
                 finalPrice.html(newFinalPrice+' €');
             })
         });
@@ -200,6 +200,9 @@ const cartJs = {
     },
 
     //fonction privee qui calcul et modifie le prix final
+    /**
+     * @return {number}
+     */
     UpdatePrice:function () {
         var tdPrices = $("td[id*='finalPrice-']");
         var finalPrice = 0;

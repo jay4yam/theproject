@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Helpers\CartHelper;
+use App\Http\Requests\AddToCartAjaxRequest;
 use App\Http\Requests\VoyageIdRequest;
 use App\Models\Voyage;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -48,14 +49,14 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addVoyageToCart(Request $request)
+    public function addVoyageToCart(AddToCartAjaxRequest $request)
     {
         try {
             //init. voyageId
             $voyageId = $request->voyageId;
 
             //recupere le voyage via son id
-            $voyage = $this->voyage->findOrFail($voyageId);
+            $voyage = $this->voyage->findOrFail($voyageId, ['id', 'title', 'main_photo', 'price', 'discount_price']);
 
             //nouvelle instance cartHelper
             $cart = new CartHelper($request, $voyage);
@@ -67,15 +68,21 @@ class CartController extends Controller
             end($array);
 
             //retourne la clé du tableau "cart' pour savoir à quel index du tableau se situe le nouveau 'cart' ajouté en session
-            $cle = key( $array );
+            $cle = key($array);
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             //si il y a une erreur on renvois fail à la fonction 'ajax'
-            return response()->json(['fail' => true, 'message' => $exception->getMessage() ]);
+            return response()->json(['fail' => true, 'message' => $exception->getMessage()]);
         }
 
-        //sinon on renvois des datas en json à la fonction ajax.
-        return response()->json(['success' => true, 'cart' => ['cle' => $cle] ,'voyage' => $voyage, 'numOfVoyage' => count( session()->get('cart'))]);
+        //sinon on renvois les datas en json à la fonction ajax.
+        return response()
+            ->json([
+                'success' => true,
+                'cart' => ['cle' => $cle],
+                'voyage' => $voyage,
+                'numOfVoyage' => count(session()->get('cart'))
+            ]);
     }
 
     /**
