@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MainOrder;
 use App\Repositories\CartRepository;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Stripe\Stripe;
 
@@ -40,8 +41,9 @@ class CartController extends Controller
 
     /**
      * Gère le click sur le bouton validation paiement
-     * @param ChargeRequest $request
-     * @return \Illuminate\Http\RedirectResponse|string
+     * @param  ChargeRequest  $request
+     * @return RedirectResponse|string
+     * @throws \Throwable
      */
     public function charge(ChargeRequest $request)
     {
