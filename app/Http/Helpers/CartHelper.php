@@ -73,7 +73,7 @@ class CartHelper
     /**
      * Sauv. le panier en session
      */
-    public function saveToSession()
+    private function saveToSession()
     {
         session()->push('cart', $this);
     }
@@ -85,8 +85,8 @@ class CartHelper
      */
     public static function deleteVoyageFromCart(Request $request)
     {
-            //supprime l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
-            session()->pull('cart.'.$request->indexArrayofSessionCart);
+        //supprime l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
+        session()->pull('cart.'.$request->indexArrayofSessionCart);
     }
 
     /**

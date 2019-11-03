@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Helpers\CartHelper;
 use App\Http\Requests\AddToCartAjaxRequest;
+use App\Http\Requests\RemoveCartAjaxRequest;
+use App\Http\Requests\UpdateCartAjaxRequest;
 use App\Http\Requests\VoyageIdRequest;
 use App\Models\Voyage;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -15,8 +17,15 @@ use Symfony\Component\HttpFoundation\Response;
 class CartController extends Controller
 {
 
+    /**
+     * @var Voyage
+     */
     protected $voyage;
 
+    /**
+     * CartController constructor.
+     * @param  Voyage  $voyage
+     */
     public function __construct(Voyage $voyage)
     {
         $this->voyage = $voyage;
@@ -91,7 +100,7 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeFromCart(Request $request)
+    public function removeFromCart(RemoveCartAjaxRequest $request)
     {
         try {
             //Supprime un voyage du tableau 'cart' en session
@@ -112,7 +121,7 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateQuantity(Request $request)
+    public function updateQuantity(UpdateCartAjaxRequest $request)
     {
         try{
             //on essaye d'updater la quantité du nombre de voyageur d'un des voyages du panier
