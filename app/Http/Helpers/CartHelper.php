@@ -43,21 +43,41 @@ class CartHelper
         return $this->finalPrice;
     }
 
+    protected $cartKey;
+    public function getCartKey(){
+        return $this->cartKey;
+    }
+
     /**
-     * CartHelper constructor.
      * @param  Request  $request
      * @param  Voyage  $voyage
-     * @throws \Exception
      */
-    public function __construct(Request $request, Voyage $voyage)
+    public function save(Request $request, Voyage $voyage)
     {
         $this->voyage = $voyage;
+
         $this->nbVoyageur = $request->numOfVoyagers;
+
         $this->date = $request->dateDeDepart;
+
         $this->prixUnitaire = $request->individualPrice;
+
         $this->userIp = \Request::ip();
-        $this->finalPrice = $this->calculateFinalePrice($request->numOfVoyagers, $request->individualPrice);
+
+        $this->finalPrice = self::calculateFinalePrice($request->numOfVoyagers, $request->individualPrice);
+
+        $this->cartKey = self::setKey();
+
         $this->saveToSession();
+    }
+
+    /**
+     * retourne l'index à laquelle se trouve le nouveau produit ajouter au panier et sauv. en session
+     * @return int
+     */
+    private function setKey(){
+
+        return session()->get('cart') ? count(session()->get('cart')) : 0;
     }
 
     /**
@@ -83,7 +103,7 @@ class CartHelper
      * @param Request $request
      * @throws \Exception
      */
-    public static function deleteVoyageFromCart(Request $request)
+    public function deleteVoyageFromCart(Request $request)
     {
         //supprime l'indice du tableau 'cart' qui contient le voyage que l'on veut supprimer
         session()->pull('cart.'.$request->indexArrayofSessionCart);
@@ -93,7 +113,7 @@ class CartHelper
      * @param Request $request
      * @throws \Exception
      */
-    public static function updateQuantity(Request $request)
+    public function updateQuantity(Request $request)
     {
         try {
             //recupere le tableau 'cart' en session
@@ -102,7 +122,7 @@ class CartHelper
             //supprime le 'cart' du panier
             session()->pull('cart.' . $request->sessionArray);
 
-            //récupère le cart en fonction de la cleé
+            //récupère le cart en fonction de la clé
             $cart = $cartArray[$request->sessionArray];
 
             //modifie le nombre de voyageur

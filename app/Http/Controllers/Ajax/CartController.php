@@ -21,14 +21,17 @@ class CartController extends Controller
      * @var Voyage
      */
     protected $voyage;
+    protected $cart;
 
     /**
      * CartController constructor.
      * @param  Voyage  $voyage
+     * @param CartHelper $cart
      */
-    public function __construct(Voyage $voyage)
+    public function __construct(Voyage $voyage, CartHelper $cart)
     {
         $this->voyage = $voyage;
+        $this->cart = $cart;
     }
 
     /**************************************/
@@ -43,6 +46,7 @@ class CartController extends Controller
     public function getVoyagesInfoForCart(VoyageIdRequest $request)
     {
         try {
+
             $voyageId = $request->id;
 
             $voyage = $this->voyage->findOrFail($voyageId, ['id', 'price', 'is_discounted', 'discount_price', 'title', 'main_photo']);
@@ -55,8 +59,10 @@ class CartController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * Ajoute le voyage au panier
+     * @param AddToCartAjaxRequest $request
+     * @param CartHelper $cart
+     * @return JsonResponse
      */
     public function addVoyageToCart(AddToCartAjaxRequest $request)
     {
@@ -67,17 +73,8 @@ class CartController extends Controller
             //recupere le voyage via son id
             $voyage = $this->voyage->findOrFail($voyageId, ['id', 'title', 'main_photo', 'price', 'discount_price']);
 
-            //nouvelle instance cartHelper
-            $cart = new CartHelper($request, $voyage);
-
-            //recupere le tableau de session cart
-            $array = session()->get('cart');
-
-            //se déplacer à la fin car la fonction pull de saveTosession, ajoute toujours au dernier index du tableau
-            end($array);
-
-            //retourne la clé du tableau "cart' pour savoir à quel index du tableau se situe le nouveau 'cart' ajouté en session
-            $cle = key($array);
+            //Sauv. du cart en session
+            $this->cart->save($request, $voyage);
 
         } catch (\Exception $exception) {
             //si il y a une erreur on renvois fail à la fonction 'ajax'
@@ -88,8 +85,8 @@ class CartController extends Controller
         return response()
             ->json([
                 'success' => true,
-                'cart' => ['cle' => $cle],
-                'voyage' => $voyage,
+                'cartKey' => $this->cart->getCartKey(),
+                'voyage' => $this->cart->getVoyage(),
                 'numOfVoyage' => count(session()->get('cart'))
             ]);
     }
@@ -98,13 +95,13 @@ class CartController extends Controller
      * Supprime un des voyages du panier
      * Repond à un click de l'utilisateur sur le bouton 'deletefromcart'
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function removeFromCart(RemoveCartAjaxRequest $request)
     {
         try {
             //Supprime un voyage du tableau 'cart' en session
-            CartHelper::deleteVoyageFromCart($request);
+            $this->cart->deleteVoyageFromCart($request);
 
         }catch (\Exception $exception){
 
@@ -118,14 +115,14 @@ class CartController extends Controller
 
     /**
      * Response à la Mise à jour de la quantité d'un voyage par l'utilisateur
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param UpdateCartAjaxRequest $request
+     * @return JsonResponse
      */
     public function updateQuantity(UpdateCartAjaxRequest $request)
     {
         try{
             //on essaye d'updater la quantité du nombre de voyageur d'un des voyages du panier
-            CartHelper::updateQuantity($request);
+            $this->cart->updateQuantity($request);
 
         }catch (\Exception $exception){
             //si il y a une erreur on renvois un message d'erreur

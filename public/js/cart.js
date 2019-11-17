@@ -102,17 +102,14 @@ const cartJs = {
 
                    //Ligne <tr> d'un tableau qui sera rajoutée à la fin du tableau ou dans le tableau
                    let tr = '<tr>';
-                       tr += '<td>';
-                       tr += '<img src="/storage/voyages/thumbnails/'+ data.voyage.main_photo +'" width="50"></td>';
+                       tr += '<td><img src="/storage/voyages/thumbnails/'+ data.voyage.main_photo +'" width="50"></td>';
                        tr += '<td>'+ data.voyage.title+'</td>';
                        tr += '<td>'+ dateDeDepart +'</td>';
-                       tr += '<td><input type="number" class="updatevoyageur" value="'+ numOfVoyagers +'" data-target="'+ data.cart.cle +'"></td>';
-                       tr += '<td id="individualPrice-'+ data.cart.cle +'">'+ individualPrice +' €</td>';
-                       tr += '<td id="finalPrice-'+ data.cart.cle +'">'+ numOfVoyagers * individualPrice +' €</td>';
-                       tr += '<td>';
-                       tr += '<a href="#" data-target="'+ data.cart.cle +'" class="deletefromcart">';
-                       tr += '<i class="fas fa-trash"></i></a>';
-                       tr += '</td></tr>';
+                       tr += '<td><input type="number" class="updatevoyageur" value="'+ numOfVoyagers +'" data-target="'+ data.cartKey +'"></td>';
+                       tr += '<td id="individualPrice-'+ data.cartKey +'">'+ individualPrice +' €</td>';
+                       tr += '<td id="finalPrice-'+ data.cartKey +'">'+ numOfVoyagers * individualPrice +' €</td>';
+                       tr += '<td><a href="#" data-target="'+ data.cartKey+'" class="deletefromcart"><i class="fas fa-trash"></i></a></td>';
+                       tr += '</tr>';
 
                        //Si le tableau n'à pas de ligne '<tr></tr>'
                    if(table[0].tBodies[0].children.length === 0){
@@ -204,12 +201,12 @@ const cartJs = {
      * @return {number}
      */
     UpdatePrice:function () {
-        var tdPrices = $("td[id*='finalPrice-']");
-        var finalPrice = 0;
+        const tdPrices = $("td[id*='finalPrice-']");
+        let finalPrice = 0;
         tdPrices.each(function (event, item) {
-            var htmlValue = $(item).html();
-            var arrayValue = htmlValue.split(' ');
-            var value = arrayValue[0];
+            let htmlValue = $(item).html();
+            let arrayValue = htmlValue.split(' ');
+            let value = arrayValue[0];
             finalPrice += parseFloat(value);
         });
         return finalPrice;
