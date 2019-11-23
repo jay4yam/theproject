@@ -19,7 +19,7 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
 
     //Applique la valeur de la variable langue 'locale' au site
-    App::setLocale( $locale );
+    //App::setLocale( $locale );
 
     /**
      * Affiche la home page

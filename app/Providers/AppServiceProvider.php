@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -21,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
             'blog' => 'App\Models\Blog',
             'voyage' => 'App\Models\Voyage'
         ]);
+
+        User::observe(UserObserver::class);
     }
 
     /**

@@ -65,7 +65,8 @@ class CartController extends Controller
             session()->forget('cart');
 
         }catch (\Exception $exception){
-            return $exception->getMessage();
+            flash()->error( $exception->getMessage());
+            return back()->withInput();
         }
         return redirect()->to(\App::getLocale().'/thank/'.$order->order_id);
     }
