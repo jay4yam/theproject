@@ -272,8 +272,7 @@
         <tr>
             <td style="padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 15px; text-align: center; color: #888888;">
                 EasyCopter<br><span class="unstyle-auto-detected-links">
-                    123 Fake Street, SpringField, OR, 97477 US<br>(123) 456-7890
-                </span>
+                114 Allée du Claus - GJV - 06370 Mouans-Sartoux - France
                 <br><br>
             </td>
         </tr>

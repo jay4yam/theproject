@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Requests\ChargeRequest;
 
 use App\Http\Controllers\Controller;
+use App\Mail\mainOrderMailable;
 use App\Models\MainOrder;
 use App\Repositories\CartRepository;
 use Illuminate\Contracts\View\Factory;
@@ -61,8 +62,6 @@ class CartController extends Controller
 
             //Enregistre la commande dans la table commande
             $order = $this->cartRepository->createEasyCopterOrder($customerStripe, $user, $charge);
-
-            session()->forget('cart');
 
         }catch (\Exception $exception){
             flash()->error( $exception->getMessage());

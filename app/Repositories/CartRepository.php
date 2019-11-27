@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Mail\mainOrderMailable;
 use App\Mail\StripeError;
 use App\Models\ItemOrder;
 use App\Models\MainOrder;
@@ -152,7 +153,7 @@ class CartRepository
             \DB::transaction(function () use ($customerStripe, $user, $charge, &$mainOrder) {
 
                 //création et insertion de la commande principale
-                /*$mainOrder = MainOrder::create([
+                $mainOrder = MainOrder::make([
                     'stripe_customer_id' => $customerStripe->id,
                     'order_id' => Uuid::uuid1()->toString(),
                     'stripe_charge_id' => $charge->id,
@@ -161,18 +162,17 @@ class CartRepository
                     'is_paid' => $charge->paid,
                     'stripe_payment_status' => $charge->status,
                 ]);
-                */
 
                 //Sauv. le main order sur la table correspondante
                 $user->mainOrders()->save($mainOrder);
 
                 //Récupère tous les carts en sessions
-                //$carts = session()->get('cart');
+                $carts = session()->get('cart');
 
                 //Itère sur les carts
                 foreach ($carts as $cart) {
                     //Sauv. le contenu du voyage dans la table itemsOrder
-                    $itemOrder = ItemOrder::create([
+                    $itemOrder = ItemOrder::make([
                         'voyage_id' => $cart->getVoyage()->id,
                         'voyage_name' => $cart->getVoyage()->title,
                         'num_of_passenger' => $cart->getNbVoyageur(),
@@ -195,6 +195,8 @@ class CartRepository
 
             throw new \Exception('Erreur de débit carte bancaire customer');
         }
+
+        \Mail::queue(new mainOrderMailable($mainOrder));
 
         //supprime les items en session
         session()->forget('cart');

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
     <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
-    <title>EasyCopter, Deposez un commentaire sur votre vol</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+    <title>EasyCopter: Récapitulatif de votre commande</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
 
     <!-- Web Font / @font-face : BEGIN -->
     <!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
@@ -213,136 +213,90 @@
 -->
 <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #FFFFFF;">
 <center style="width: 100%; background-color: #FFFFFF;">
-    <!--[if mso | IE]>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFFFFF;">
-        <tr>
-            <td>
-    <![endif]-->
-
-    <!-- Visually Hidden Preheader Text : BEGIN -->
-    <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-        (Optional) This text will appear in the inbox preview, but not the email body. It can be used to supplement the email subject line or even summarize the email's contents.
-        Extended text preheaders (~490 characters) seems like a better UX for anyone using a screenreader or voice-command apps like Siri to dictate the contents of an email.
-        If this text is not included, email clients will automatically populate it using the text (including image alt text) at the start of the email's body.
-    </div>
-    <!-- Visually Hidden Preheader Text : END -->
-
-    <!-- Create white space after the desired preview text so email clients don’t pull other distracting text into the inbox preview. Extend as necessary. -->
-    <!-- Preview Text Spacing Hack : BEGIN -->
-    <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
-    </div>
-    <!-- Preview Text Spacing Hack : END -->
-
-    <!-- Email Body : BEGIN -->
-    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto;" class="email-container">
-        <!-- Email Header : BEGIN -->
+        <tbody>
         <tr>
             <td style="padding: 20px 0; text-align: center">
-                <img src="{{ asset('images/new-logo-hell-black.png') }}" width="150" alt="logo easyCopter" border="0" style="height: auto; background: #ffffff; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #FFFFFF;">
+                <img src="{{ asset('images/new-logo-hell-black.png') }}" width="150" alt="logo easyCopter" style="height: auto; background: #ffffff; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #FFFFFF;">
             </td>
         </tr>
-        <!-- Email Header : END -->
-
-        <!-- Hero Image, Flush : BEGIN -->
-        <tr>
-            <td style="background-color: #ffffff;">
-                <img src="{{ asset('/storage/voyages/'.$itemOrder->voyage->main_photo) }} " width="300" alt="alt_text" border="0" style="width: 100%; max-width: 600px; height: auto; background: #FFFFFF; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #FFFFFF; margin: auto; display: block;" class="g-img">
+        <tr style="padding: 20px 0; text-align: center">
+            <td>
+                <h1>Merci pour votre commande</h1>
             </td>
         </tr>
-        <!-- Hero Image, Flush : END -->
-
-        <!-- 1 Column Text + Button : BEGIN -->
+        </tbody>
+    </table>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="50%" style="background-color: #FFFFFF;">
+        <tbody>
+        <tr style="text-align: center">
+            <td><h3>Vos Informations</h3></td>
+        </tr>
         <tr>
-            <td style="background-color: #ffffff;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <td>
+                <table>
                     <tr>
-                        <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
-                            <h1 style="text-align:center;margin: 0 0 10px; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">Deposez un commentaire</h1>
-                            <h2 style="text-align:center;margin: 0 0 10px; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">pour votre voyage du {{ $itemOrder->date_voyage->format('d M Y') }}</h2>
-                            <p style="margin: 0 0 10px;">
-                                {{ $itemOrder->voyage->title }}
-                            </p>
-                        </td>
+                        <td>Prénom : </td>
+                        <td>{{ ucfirst($mainOrder->user->profile->firstName) }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 0 20px 20px;">
-                            <!-- Button : BEGIN -->
-                            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
-                                <tr>
-                                    <td class="button-td button-td-primary" style="border-radius: 4px; background: #FDA62E;">
-                                        <a class="button-a button-a-primary" href="{{ route('add.testimonials', ['locale' => App::getLocale(), 'order_id' => $itemOrder->mainOrder->order_id, 'voyage_id' => $itemOrder->voyage_id]) }}" style="background: #FDA62E; border: 1px solid #FDA62E; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Ajoutez un commentaire</a>
-                                    </td>
-                                </tr>
-                            </table>
-                            <!-- Button : END -->
-                        </td>
+                        <td>Nom :</td>
+                        <td>{{ ucfirst($mainOrder->user->profile->fullName) }}</td>
                     </tr>
-
+                    <tr>
+                        <td>Adresse :</td>
+                        <td>{{ ucfirst($mainOrder->user->profile->address) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Code Postal :</td>
+                        <td>{{ ucfirst($mainOrder->user->profile->postalCode) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ville :</td>
+                        <td>{{ ucfirst($mainOrder->user->profile->city) }}</td>
+                    </tr>
                 </table>
             </td>
         </tr>
-        <!-- 1 Column Text + Button : END -->
-
-        <!-- Clear Spacer : BEGIN -->
-        <tr>
-            <td aria-hidden="true" height="40" style="font-size: 0px; line-height: 0px;">
-                &nbsp;
-            </td>
-        </tr>
-        <!-- Clear Spacer : END -->
-
+        </tbody>
     </table>
-    <!-- Email Body : END -->
-
-    <!-- Email Footer : BEGIN -->
-    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto;" class="email-container">
-        <tr>
-            <td style="padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 15px; text-align: center; color: #888888;">
-                EasyCopter<br><span class="unstyle-auto-detected-links">
-                114 Allée du Claus - GJV - 06370 Mouans-Sartoux - France
-                <br><br>
-            </td>
-        </tr>
-    </table>
-    <!-- Email Footer : END -->
-
-    <!-- Full Bleed Background Section : BEGIN -->
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #000000;">
-        <tr>
-            <td>
-                <div align="center" style="max-width: 600px; margin: auto;" class="email-container">
-                    <!--[if mso]>
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+    <br><br>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="50%" style="background-color: #FFFFFF;">
+        <tbody>
+            <tr>
+                <td>
+                    <table style="border: 1px solid black">
+                        <thead style="background-color: #1a1a1a; color: white ">
                         <tr>
-                            <td>
-                                <![endif]-->
-                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                    <tr>
-                                        <td style="padding: 20px; text-align: center; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #ffffff;">
-                                            <p style="margin: 0;">
-                                                Aidez la communauté easyCopter à choisir son vol<br>
-                                                Renseignez votre expérience et faites nous rêver...
-                                            </p>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <!--[if mso]>
-                            </td>
+                            <th></th>
+                            <th>Nom du voyage & Date de départ</th>
+                            <th>Nombre de Voyageur(s)</th>
+                            <th>Prix Unitaire</th>
+                            <th>Prix Total</th>
                         </tr>
-                    </table>
-                    <![endif]-->
-                </div>
-            </td>
-        </tr>
-    </table>
-    <!-- Full Bleed Background Section : END -->
+                        </thead>
+                        <tbody>
 
-    <!--[if mso | IE]>
-    </td>
-    </tr>
+                            @foreach($mainOrder->itemsOrder as $item)
+                                <tr style="text-align: center; border: 1px solid black">
+                                    <td style="border: 1px solid black">
+                                        <img alt="{{ $item->voyage->title }}" src="/storage/voyages/thumbnails/{{ $item->voyage->main_photo }}" width="50">
+                                    </td>
+                                    <td style="border: 1px solid black">
+                                        {{ $item->voyage->title }}<br>
+                                        le {{ date( "d M Y", strtotime( $item->date_voyage ) ) }}
+                                    </td>
+                                    <td style="border: 1px solid black">{{ $item->num_of_passenger }}</td>
+                                    <td style="border: 1px solid black">{{ $item->prix_unitaire }} €</td>
+                                    <td style="border: 1px solid black">{{ $item->prix_final }} €</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
     </table>
-    <![endif]-->
 </center>
 </body>
 </html>

@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Mail\mainOrderMailable;
+use App\Models\MainOrder;
+
 Auth::routes();
 
 
@@ -19,7 +23,12 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     $locale = Request::segment( 1 ) ? Request::segment( 1 ) : 'fr';
 
     //Applique la valeur de la variable langue 'locale' au site
-    //App::setLocale( $locale );
+    App::setLocale( $locale );
+
+    Route::get('orderMail', function () {
+        $mainOrder = MainOrder::find(17);
+        return new App\Mail\mainOrderMailable($mainOrder);
+    });
 
     /**
      * Affiche la home page
