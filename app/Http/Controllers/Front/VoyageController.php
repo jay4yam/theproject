@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Helpers\FilterVoyages;
+use App\Models\Ville;
 use App\Repositories\VoyageRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
@@ -73,6 +74,23 @@ class VoyageController extends Controller
     }
 
     /**
+     * Retourne les voyages pour une seule ville
+     * @param $locale
+     * @param $id
+     * @param $ville
+     * @param  FilterVoyages  $filterVoyages
+     * @return Factory|View
+     */
+    public function showVille($locale, $ville, $id,FilterVoyages $filterVoyages)
+    {
+        $allVoyages = $filterVoyages->getVoyagesForACity($id);
+
+        $ville = Ville::findOrFail($id);
+
+        return view('voyages.city', compact('allVoyages', 'ville'));
+    }
+
+    /**
      * @param  Request  $request
      * @param  FilterVoyages  $filterVoyages
      * @return Factory|View
@@ -80,7 +98,7 @@ class VoyageController extends Controller
     public function filterVille(Request $request, FilterVoyages $filterVoyages)
     {
         try{
-            $allVoyages = $filterVoyages->getVoyagesByCity($request);
+            $allVoyages = $filterVoyages->getVoyagesByCities($request);
         }catch (\Exception $exception){
             flash()->error($exception->getMessage());
 

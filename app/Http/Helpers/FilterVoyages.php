@@ -21,7 +21,7 @@ class FilterVoyages
      * @param Request $request
      * @return mixed
      */
-    public function getVoyagesByCity(Request $request)
+    public function getVoyagesByCities(Request $request)
     {
         $ville = $request->ville;
 
@@ -50,5 +50,17 @@ class FilterVoyages
             return $this->voyage->localize()->isPublic()->with('ville', 'region')->where('price', '>', $request->price_min)->paginate(9);
         }
 
+    }
+
+    /**
+     * Retourne la liste des voyages d'une ville
+     * @param $id
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getVoyagesForACity($id){
+
+        $voyages = $this->voyage->localize()->isPublic()->with('ville', 'region')->where('ville_id', '=', $id)->paginate(9);
+
+        return $voyages;
     }
 }

@@ -25,11 +25,6 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     //Applique la valeur de la variable langue 'locale' au site
     App::setLocale( $locale );
 
-    Route::get('orderMail', function () {
-        $mainOrder = MainOrder::find(17);
-        return new App\Mail\mainOrderMailable($mainOrder);
-    });
-
     /**
      * Affiche la home page
      */
@@ -50,12 +45,14 @@ Route::group(['prefix' => '{locale}', 'namespace' => 'Front', 'middleware' => 'l
     /**
      * Affichage des pages voyages
      */
-    Route::get('/voyages', 'VoyageController@allVoyages')->name('front.voyage.index');
+    Route::get('/voyages-en-helicoptere', 'VoyageController@allVoyages')->name('front.voyage.index');
     Route::get('/voyage/{id}/{slug}', 'VoyageController@showVoyage')->name('front.voyage.show');
+
     //vue filtre par ville
-    Route::get('/voyages/ville', 'VoyageController@filterVille')->name('front.voyage.ville');
-    Route::get('/voyages/ville/{id}/{ville}', 'VoyageController@showVille')->name('front.voyage.show.ville');
-    Route::get('/voyages/price', 'VoyageController@filterPrice')->name('front.voyage.price');
+    Route::get('/voyages/filter', 'VoyageController@filterVille')->name('front.voyage.ville');
+    Route::get('/price', 'VoyageController@filterPrice')->name('front.voyage.price');
+
+    Route::get('/helicoptere/{ville}/{id}', 'VoyageController@showVille')->name('front.voyage.show.ville');
 
     /**
      * Affichage page compagnie

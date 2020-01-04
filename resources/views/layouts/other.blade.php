@@ -60,7 +60,7 @@
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
                             <li class="{{ @$activeVoyageCss }}">
-                                <a href="/{{ App::getLocale() }}/voyages">Voyages</a>
+                                <a href="/{{ App::getLocale() }}/voyages-en-helicoptere">Vols en Hélicoptères</a>
                                 <!-- RD Navbar Megamenu-->
                                 @include('partials._megamenu_voyage')
                             </li>

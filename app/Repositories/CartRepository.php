@@ -37,12 +37,12 @@ class CartRepository
     {
         try {
             $token = $request->stripeToken;
-            $customer = Customer::create([
+            $stripeCustomer = Customer::create([
                 'email' => $request->email,
                 'source' => $token
             ]);
 
-            return $customer;
+            return $stripeCustomer;
 
         }catch (\Exception $e){
             //log l'erreur
@@ -134,7 +134,7 @@ class CartRepository
             //envoie un email pour signaler erreur
             Mail::to('jay.ayamee@gmail.com')->sendNow( new StripeError( $e->getMessage() ) );
 
-            throw new \Exception('Erreur de débit carte bancaire customer');
+            throw new \Exception('Erreur de débit carte bancaire');
         }
 
     }

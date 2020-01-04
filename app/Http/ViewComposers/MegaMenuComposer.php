@@ -44,7 +44,7 @@ class MegaMenuComposer
                 //4. test si la region a des villes // si la relation n'est pas vide
                 if($region->villes->count() != 0) {
 
-                    //5. init les indices du tableau via le nom de ville
+                    //5. init les indices du tableau avec le nom de ville
                     $objet[$region->name] = array();
 
                     //6. itère sur le tableau des villes

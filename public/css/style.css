@@ -20826,7 +20826,7 @@ a.roll {
   float: left;
 }
 
-.parallax-content h2, .parallax-content h3{
+.parallax-content h1, .parallax-content h2, .parallax-content h3{
   text-shadow: 2px 2px #000;
 }
 

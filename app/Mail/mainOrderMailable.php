@@ -17,7 +17,6 @@ class mainOrderMailable extends Mailable
     /**
      * Create a new message instance.
      * @param  MainOrder  $mainOrder
-     * @param $qrCode
      */
     public function __construct(MainOrder $mainOrder)
     {

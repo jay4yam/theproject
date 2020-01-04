@@ -19,7 +19,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('partials._categories_name', 'App\Http\ViewComposers\BlogCategoriesListingComposer');
         View::composer('partials._three_articles_same_cat', 'App\Http\ViewComposers\ThreeArticlesSameCatComposer');
         View::composer(['back.blog.edit', 'back.blog.create'], 'App\Http\ViewComposers\AllCategoriesComposer');
-        View::composer('voyages.index', 'App\Http\ViewComposers\VoyagesComposer');
+        View::composer(['voyages.index', 'voyages.city'], 'App\Http\ViewComposers\VoyagesComposer');
         View::composer('index', 'App\Http\ViewComposers\last6product4homeComposer');
         View::composer('partials._language_selector', 'App\Http\ViewComposers\LanguageSelectorComposer');
         View::composer('partials._megamenu_voyage', 'App\Http\ViewComposers\MegaMenuComposer');
