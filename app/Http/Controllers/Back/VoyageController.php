@@ -50,13 +50,13 @@ class VoyageController extends Controller
 
     /**
      * Affiche la vue edit voyage
-     * @param $id
+     * @param $voyage
      * @return Factory|View
      */
-    public function edit($id)
+    public function edit($voyage)
     {
         //1. recupère le voyage et toutes les langues via l'id du voyage principale
-        $voyages = $this->voyageRepository->getAllVoyageLanguageById($id);
+        $voyages = $this->voyageRepository->getAllVoyageLanguageById($voyage);
 
         return view('back.voyage.edit', compact('voyages'));
     }
@@ -96,13 +96,13 @@ class VoyageController extends Controller
     /**
      * Request user pour maj 'voyage'
      * @param VoyageUpdateRequest $request
-     * @param $id
+     * @param $voyage
      * @return $this|RedirectResponse
      */
-    public function update(VoyageUpdateRequest $request, $id)
+    public function update(VoyageUpdateRequest $request, $voyage)
     {
         try {
-            $this->voyageRepository->update($request, $id);
+            $this->voyageRepository->update($request, $voyage);
 
         }catch (\Exception $exception){
 
@@ -114,23 +114,23 @@ class VoyageController extends Controller
         flash()->success('Voyage mis à jour avec succès');
 
         //si le parent_id est différents alors il faut rediriger vers la page parente
-        if($request->parent_id != $id && $request->parent_id !=0){
-            return redirect()->route('voyages.edit', ['id' => $this->voyageRepository->getById($request->parent_id)]);
+        if($request->parent_id != $voyage && $request->parent_id !=0){
+            return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($request->parent_id)]);
         }
 
-        return redirect()->route('voyages.edit', ['id' => $this->voyageRepository->getById($id)]);
+        return redirect()->route('voyages.edit', ['voyage' => $this->voyageRepository->getById($voyage)]);
     }
 
     /**
      * Supprime un voyage de la base, (supprime aussi tous les voyages fils dans toutes les langues
-     * @param $id
+     * @param $voyage
      * @return $this|string
      */
-    public function destroy($id)
+    public function destroy($voyage)
     {
         try {
 
-            $this->voyageRepository->delete($id);
+            $this->voyageRepository->delete($voyage);
 
         }catch (\Exception $exception){
 

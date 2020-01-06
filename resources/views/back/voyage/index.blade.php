@@ -41,7 +41,7 @@
                                     <tr>
                                         <td scope="row">{{ $voyage->id }}</td>
                                         <td>
-                                            <a href="{{ url()->route('voyages.edit', ['id' => $voyage->id]) }}">
+                                            <a href="{{ url()->route('voyages.edit', ['voyage' => $voyage->id]) }}">
                                                 {{ $voyage->title }}
                                             </a>
                                         </td>
@@ -55,7 +55,7 @@
                                         <td> {{ $voyage->ville->name }}</td>
                                         <td> {{ $voyage->price }} €</td>
                                         <td>
-                                            <a href="{{ url()->route('voyages.edit', ['id' => $voyage->id]) }}">
+                                            <a href="{{ url()->route('voyages.edit', ['voyage' => $voyage->id]) }}">
                                                 <button class="btn btn-info pull-left">
                                                     <i class="fas fa-edit"></i></i>
                                                 </button>

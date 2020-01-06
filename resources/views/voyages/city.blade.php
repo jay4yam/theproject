@@ -8,19 +8,17 @@
 @endsection
 
 @section('content')
-    @if(request('id'))
-        <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/storage/{{ $ville->first()->main_photo }}">
-            <div class="parallax-content">
-                <div class="bg-overlay-darker">
-                    <div class="container section-34 section-md-100 section-lg-top-170 section-lg-bottom-165">
-                        <h1 class="d-none d-lg-inline-block">{{ $ville->name }}</h1>
-                        <h2>{{ $ville->title }}</h2>
-                        <h6 class="font-italic">{{ $ville->subtitle }}</h6>
-                    </div>
+    <section class="section parallax-container bg-black section-height-mac context-dark" data-parallax-img="/storage/{{ $ville->main_photo }}">
+        <div class="parallax-content">
+            <div class="bg-overlay-darker">
+                <div class="container section-34 section-md-100 section-lg-top-170 section-lg-bottom-165">
+                    <h1 class="d-none d-lg-inline-block">{{ $ville->name }}</h1>
+                    <h2>{{ $ville->title }}</h2>
+                    <h6 class="font-italic">{{ $ville->subtitle }}</h6>
                 </div>
             </div>
-        </section>
-    @endif
+        </div>
+    </section>
 
     <!-- Tours Grid Variant 2-->
     <section class="section-80 section-md-bottom-70 bg-wild-wand">

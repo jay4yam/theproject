@@ -82,7 +82,6 @@ class VoyageRepository implements EloquentInterface
                          return $arrayVoyage[$voyage->locale] = $voyage->load('ville', 'region');
                     });
         return $arrayVoyage;
-        //return $this->voyage->findOrFail($id)->load('ville', 'region');
     }
 
     /**
@@ -159,8 +158,9 @@ class VoyageRepository implements EloquentInterface
 
     /**
      * Met à jour un 'voyage'
-     * @param Request $request
+     * @param  Request  $request
      * @param $id
+     * @throws \Exception
      */
     public function update(Request $request, int $id):void
     {
@@ -181,17 +181,22 @@ class VoyageRepository implements EloquentInterface
         $voyage->duree_du_vol = $request->duree_du_vol;
         $voyage->ville_id = $request->ville_id;
 
+        //Test si il y a une photo dans la requete
+        if($request->has('main_photo')) {
+            $voyage->main_photo = $this->uploadMainImage($request, $voyage);
+        }
+
         //3. sauv. le modèle
         $voyage->save();
     }
 
     /**
      * Supprime un voyage
-     * @param $id
+     * @param $voyage
      */
-    public function delete($id):void
+    public function delete($voyage):void
     {
-        $voyages = $this->getAllVoyageLanguageById($id);
+        $voyages = $this->getAllVoyageLanguageById($voyage);
 
         foreach ($voyages as $voyage)
         {

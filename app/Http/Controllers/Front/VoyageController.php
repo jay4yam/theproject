@@ -74,7 +74,7 @@ class VoyageController extends Controller
     }
 
     /**
-     * Retourne les voyages pour une seule ville
+     * Retourne tous les voyages pour une seule ville
      * @param $locale
      * @param $id
      * @param $ville

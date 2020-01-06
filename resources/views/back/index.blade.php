@@ -45,12 +45,12 @@
                                         {{ $prixFinal }} €
                                     </td>
                                     <td>
-                                        <a href="{{ url()->route('voyages.edit', ['id' => $order->id]) }}">
+                                        <a href="{{ url()->route('voyages.edit', ['voyage' => $order->itemsOrder->first()->voyage_id]) }}">
                                             <button class="btn btn-info pull-left">
                                                 <i class="fas fa-edit"></i></i>
                                             </button>
                                         </a>
-                                        <form class='delete' action="{{ route('voyages.destroy', ['voyage' => $order->id]) }}" method="post">
+                                        <form class='delete' action="{{ route('voyages.destroy', ['voyage' => $order->itemsOrder->first()->voyage_id]) }}" method="post">
                                             {{ csrf_field() }}
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button class="btn btn-danger pull-right">
