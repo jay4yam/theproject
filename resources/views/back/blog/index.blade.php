@@ -53,7 +53,20 @@
                                         </td>
                                         <td>{{ $article->created_at->format('d M Y') }}</td>
                                         <td>{{ $article->user->profile->firstName }}</td>
-                                        <td> options </td>
+                                        <td>
+                                            <a href="{{ url()->route('blogs.edit', ['blog' => $article->id]) }}">
+                                                <button class="btn btn-info pull-left">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </a>
+                                            <form class='delete' action="{{ route('blogs.destroy', ['blog' => $article->id]) }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button class="btn btn-danger pull-right">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

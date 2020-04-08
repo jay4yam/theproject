@@ -78,10 +78,10 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($blog)
     {
         //on essaye de récupérer un article via son id
         try {

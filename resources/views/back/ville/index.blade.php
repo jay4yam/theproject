@@ -37,7 +37,7 @@
                                     <tr>
                                         <td scope="row">{{ $ville->id }}</td>
                                         <td scope="row">
-                                            <a href="{{ route('villes.edit', ['id' => $ville->id]) }}">
+                                            <a href="{{ route('villes.edit', ['ville' => $ville->id]) }}">
                                                 {{ str_limit($ville->name, 60) }}<br>
                                             </a>
                                         </td>

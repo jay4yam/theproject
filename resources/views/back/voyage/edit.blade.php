@@ -120,10 +120,13 @@
                                                     {{ Form::select('ville_id', \App\Models\Ville::pluck('name', 'id'), @$voyage->ville->id ,['class' => 'form-control', 'placeholder' => 'Sélection de la ville']) }}
                                                     {!! $errors->first('ville_id', '<small class="help-block">:message</small>') !!}
                                                 </div>
-
                                                 <div class="form-group flex-column {!! $errors->has('compagny_id') ? 'has-error' : '' !!}">
                                                     {{ Form::label('compagny_id', 'COMPAGNIE :') }}
-                                                    {{ Form::select('compagny_id', \App\Models\Compagnie::pluck('raison_sociale','id'), $voyage->compagnies(['id'])->first()['id'] ,['value'=> old('compagny_id') , 'class' => 'form-control', 'placeholder' => 'Sélection de la compagnie']) }}
+                                                    {{ Form::select('compagny_id', \App\Models\Compagnie::pluck('raison_sociale','id'),
+                                                                                    @$voyage->compagnies(['id'])->first()->id,
+                                                                                    ['value'=> old('compagny_id') ,
+                                                                                    'class' => 'form-control',
+                                                                                    'placeholder' => 'Sélection de la compagnie']) }}
                                                     {!! $errors->first('compagny_id', '<small class="help-block">:message</small>') !!}
                                                 </div>
                                             </div>

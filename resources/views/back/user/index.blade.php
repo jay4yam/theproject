@@ -40,9 +40,9 @@
                                 <tbody>
                                 @foreach($allUsers as $user)
                                     <tr>
-                                        <td scope="row">{{ $user->id }}</td>
+                                        <td>{{ $user->id }}</td>
                                         <td>
-                                            <a href="{{ url()->route('users.edit', ['id' => $user->id]) }}">{{ $user->email }}</a>
+                                            <a href="{{ url()->route('users.edit', ['user' => $user->id]) }}">{{ $user->email }}</a>
                                         </td>
                                         <td> {{ $user->profile->phoneNumber }}</td>
                                         <td> {{ $user->profile->city }}</td>

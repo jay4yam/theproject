@@ -57,7 +57,7 @@
                                         <td>
                                             <a href="{{ url()->route('voyages.edit', ['voyage' => $voyage->id]) }}">
                                                 <button class="btn btn-info pull-left">
-                                                    <i class="fas fa-edit"></i></i>
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                             </a>
                                             <form class='delete' action="{{ route('voyages.destroy', ['voyage' => $voyage->id]) }}" method="post">

@@ -80,6 +80,9 @@
                                     <li><a href="/{{ App::getLocale() }}/admin/compagnies/create">Ajouter</a></li>
                                 </ul>
                             </li>
+                            <li class="{{ @$seoCssActive }}">
+                                <a href="{{ route('scrap.index') }}">Scrap</a>
+                            </li>
                             <li class="{{ @$userCssActive }}"><a href="/{{ App::getLocale() }}/admin/users">Utilisateurs</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-navbar-dropdown">

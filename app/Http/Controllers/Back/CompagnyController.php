@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Requests\CreateCompanyStep1;
+use App\Http\Helpers\ScrapHelper;
 use App\Http\Requests\CreateCompanyStep1Request;
 use App\Http\Requests\CreateCompanyStep2Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadScrapFileRequest;
 use App\Repositories\CompanyRepository;
+use App\Traits\uploadCSV;
 use Goutte\Client;
 
 class CompagnyController extends Controller
 {
-
     /**
      * @var CompanyRepository
      */
-    protected $companyRepository;
+    protected CompanyRepository $companyRepository;
 
     /**
      * CompagnyController constructor.
@@ -32,7 +33,7 @@ class CompagnyController extends Controller
      */
     public function index()
     {
-        //on essaye de récuperer toutes les compagnies
+        //on essaye de récupérer toutes les compagnies
         try {
 
             $allCompagnies = $this->companyRepository->getAll();
@@ -82,14 +83,14 @@ class CompagnyController extends Controller
 
     /**
      * Renvois la vue de finalisation de l'inscription
-     * @param int $id
+     * @param int $compagny
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($compagny)
     {
         //On essaye de recuperer une compagnie via son id
         try {
-            $compagnie = $this->companyRepository->getById($id);
+            $compagnie = $this->companyRepository->getById($compagny);
 
         }catch (\Exception $exception) {
             //Si il y une exception on redirige vers la page précédente avec un message d'erreur
@@ -126,13 +127,4 @@ class CompagnyController extends Controller
         return redirect()->route('compagnies.index');
     }
 
-    public function getScrapeInfo()
-    {
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://www.azurhelico.com/fr/vols-panoramiques-helicoptere-cote-d-azur.html');
-        $crawler->filter('table > tr')->each(function ($node) {
-            print $node->text()."\n";
-        });
-        dd($crawler);
-    }
 }

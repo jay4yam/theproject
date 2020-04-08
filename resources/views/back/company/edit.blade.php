@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <!-- Destinations-->
+    <!-- compagnie edit -->
     <section class="section-80 bg-wild-wand">
         <div class="container container-custom">
             <div class="row justify-content-sm-center">
@@ -17,7 +17,7 @@
                     <div class="box box-search bg-default d-block">
                         <div class="box-search-wrap">
                             <!-- RD Search Form-->
-                            <h1 class="admin">Finalisez l'insertion</h1>
+                            <h1 class="admin">Editer > {{ $compagnie->raison_sociale }}</h1>
                         </div>
                         <div class="box-search-body nopt text-left">
 
@@ -144,6 +144,52 @@
                             <div class="form-group align-center pt-45">
                                 <button class="button button-primary" title="enregistrer" type="submit">
                                     Enregistrer
+                                </button>
+                            </div>
+                            {{ Form::close() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- upload file for scrap website -->
+    <section class="section-80 bg-wild-wand">
+        <div class="container container-custom">
+            <div class="row justify-content-sm-center">
+                <div class="col-md-10 col-lg-12">
+                    <!-- Box-->
+                    <div class="box box-search bg-default d-block">
+                        <div class="box-search-wrap">
+                            <!-- RD Search Form-->
+                            <h1 class="admin">File upload</h1>
+                        </div>
+                        <div class="box-search-body nopt text-left">
+                            <div class="row">
+                                @if( is_dir('storage/csv/'.$compagnie->id) )
+                                    @foreach(File::allFiles('storage/csv/'.$compagnie->id) as $file)
+                                        <div class="col-6 file-min pt-5 pb-5">
+                                            <i class="far fa-file-excel fa-5x"></i> {{ $file->getFilename() }}<br>
+                                            <a href="#" class="delete-file" data-target="/compagny/scrapp/{{ $compagnie->id }}/{{ $file->getFilename() }}">x remove</a>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            {{ Form::open(['route' => ['scrap.upload'], 'files' => true, 'method' => 'POST', 'class' => 'createform']) }}
+                            {{ Form::hidden('compagny_id', $compagnie->id) }}
+                            <div class="col-md-12">
+                                <div class="form-group flex-column {!! $errors->has('scrapfile') ? 'has-error' : '' !!}">
+                                    {{ Form::label('scrapfile', 'FILE CSV  :') }}
+                                    {{ Form::file('scrapfile', ['class' => 'form-control']) }}
+                                    {!! $errors->first('scrapfile', '<small class="help-block">:message</small>') !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group align-center pt-45">
+                                <button class="button button-primary" title="enregistrer" type="submit">
+                                    Upload
                                 </button>
                             </div>
                             {{ Form::close() }}

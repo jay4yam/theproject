@@ -83,7 +83,15 @@ Route::group(['prefix' => '/fr/admin', 'namespace' => 'Back', 'middleware' => 'a
 
     //Listing des routes pour 'CRUD' sur les "compagnies"
     Route::resource('/compagnies', 'CompagnyController');
-    Route::get('/compagnie/scrapp', 'CompagnyController@getScrapeInfo');
+
+    //Listing des routes pour le scrap des url
+    Route::resource('/scrap', 'ScrapController');
+
+    //Gère l'upload d'un csv pour scrapper le site
+    Route::post('scrapfile/upload', 'ScrapController@uploadScrapeFile')->name('scrap.upload');
+
+    //Gère le scrapp des voyages pour une compagnie
+    Route::get('/scrapfile/scrapping', 'ScrapController@scrapeData')->name('scrap.scraping');
 
     //Listing des routes pour 'CRUD' sur les "Utilisateurs"
     Route::resource('/users', 'UserController');

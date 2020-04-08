@@ -44,13 +44,26 @@
                                                 <img class="img-back img-responsive" src="/storage/{{ $compagny->logo }}">
                                             </td>
                                             <td>
-                                                <a href="{{ url()->route('compagnies.edit', ['compagnie' => $compagny->id]) }}">
+                                                <a href="{{ url()->route('compagnies.edit', ['compagny' => $compagny->id]) }}">
                                                     {{ $compagny->raison_sociale }}
                                                 </a>
                                             </td>
                                             <td>{{ $compagny->email }}</td>
                                             <td>{{ $compagny->telephone }}</td>
-                                            <td> options </td>
+                                            <td style="width: 11%;">
+                                                <a href="{{ url()->route('compagnies.edit', ['compagny' => $compagny->id]) }}">
+                                                    <button class="btn btn-info pull-left">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                </a>
+                                                <form class='delete' action="{{ route('compagnies.destroy', ['compagny' => $compagny->id]) }}">
+                                                    {{ csrf_field() }}
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button class="btn btn-danger pull-right">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
