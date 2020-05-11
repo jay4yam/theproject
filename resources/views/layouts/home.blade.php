@@ -235,13 +235,14 @@
                         <!-- List Inline-->
                         <ul class="list-inline list-inline-8">
                             <li>
-                                <p class="text-extra-small"><a class="text-gray" href="privacy.html">{{ __('home.privacyPolicy') }}</a></p>
+                                <p class="text-extra-small"><a class="text-gray" href="#">{{ __('home.privacyPolicy') }}</a></p>
                             </li>
                             <li>
-                                <p class="text-extra-small"><a class="text-gray" href="terms-of-use.html">{{ __('home.termsOfUse') }}</a></p>
+                                <p class="text-extra-small"><a class="text-gray" href="#">{{ __('home.termsOfUse') }}</a></p>
                             </li>
                             <li>
-                                <p class="text-extra-small"><a class="text-gray" href="{{ url()->route('contact', ['locale' => App::getLocale()]) }}">{{ __('home.contact') }}</a></p>
+                                <p class="text-extra-small">
+                                    <a class="text-gray" href="{{ url()->route('contact', ['locale' => App::getLocale()]) }}">{{ __('home.contact') }}</a></p>
                             </li>
                         </ul>
                     </div>

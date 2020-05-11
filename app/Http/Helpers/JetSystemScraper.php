@@ -6,14 +6,14 @@ namespace App\Http\Helpers;
 
 use App\Interfaces\iScrap;
 use Goutte\Client;
-use Mockery\Exception;
+use Symfony\Component\DomCrawler\Crawler;
 
 class JetSystemScraper implements iScrap
 {
 
     protected Client $client;
     protected string $url;
-    protected \Symfony\Component\DomCrawler\Crawler $crawler;
+    protected Crawler $crawler;
     public int $responseCode;
     protected int $compagny_id;
 
