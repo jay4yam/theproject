@@ -76,33 +76,33 @@
                                         <div class="col-lg-4">
                                             <p class="rd-megamenu-header text-big text-black text-ubold">Pages 1</p>
                                             <ul class="rd-megamenu-list">
-                                                <li><a href="/press.html">Press</a></li>
-                                                <li><a href="/services.html">Services</a></li>
-                                                <li><a href="/pricing.html">Pricing</a></li>
-                                                <li><a href="/destinations.html">Destinations</a></li>
-                                                <li><a href="/signup.html">Sign Up</a></li>
-                                                <li><a href="/signup-variant-2.html">Sign Up v2</a></li>
+                                                <li><a href="#">Press</a></li>
+                                                <li><a href="#">Services</a></li>
+                                                <li><a href="#">Pricing</a></li>
+                                                <li><a href="#">Destinations</a></li>
+                                                <li><a href="#">Sign Up</a></li>
+                                                <li><a href="#">Sign Up v2</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-4">
                                             <p class="rd-megamenu-header text-big text-black text-ubold">Pages 2</p>
                                             <ul class="rd-megamenu-list">
-                                                <li><a href="/login.html">Login</a></li>
-                                                <li><a href="/forgot-password.html">Forgot Password</a></li>
-                                                <li><a href="/privacy.html">Privacy Policy</a></li>
-                                                <li><a href="/terms-of-use.html">Terms Of Use</a></li>
-                                                <li><a href="/sitemap.html">Sitemap</a></li>
-                                                <li><a href="/search-results.html">Search Results</a></li>
+                                                <li><a href="#">Login</a></li>
+                                                <li><a href="#">Forgot Password</a></li>
+                                                <li><a href="#">Privacy Policy</a></li>
+                                                <li><a href="#">Terms Of Use</a></li>
+                                                <li><a href="#">Sitemap</a></li>
+                                                <li><a href="#">Search Results</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-4">
                                             <p class="rd-megamenu-header text-big text-black text-ubold">Pages 3</p>
                                             <ul class="rd-megamenu-list">
-                                                <li><a href="/404.html">404</a></li>
-                                                <li><a href="/503.html">503</a></li>
-                                                <li><a href="/comingsoon.html">Coming Soon</a></li>
-                                                <li><a href="/maintenance.html">Maintenance</a></li>
-                                                <li><a href="/underconstruction.html">Under Construction</a></li>
+                                                <li><a href="#">404</a></li>
+                                                <li><a href="#">503</a></li>
+                                                <li><a href="#">Coming Soon</a></li>
+                                                <li><a href="#">Maintenance</a></li>
+                                                <li><a href="#">Under Construction</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -241,10 +241,10 @@
                     <!-- List Inline-->
                     <ul class="list-inline list-inline-8">
                         <li>
-                            <p class="text-extra-small"><a class="text-gray" href="/privacy.html">{{ __('home.privacyPolicy') }}</a></p>
+                            <p class="text-extra-small"><a class="text-gray" href="#">{{ __('home.privacyPolicy') }}</a></p>
                         </li>
                         <li>
-                            <p class="text-extra-small"><a class="text-gray" href="/terms-of-use.html">{{ __('home.termsOfUse') }}</a></p>
+                            <p class="text-extra-small"><a class="text-gray" href="#">{{ __('home.termsOfUse') }}</a></p>
                         </li>
                         <li>
                             <p class="text-extra-small"><a class="text-gray" href="{{ url()->route('contact', ['locale' => App::getLocale()]) }}">{{ __('home.contact') }}</a></p>
